@@ -40,7 +40,7 @@ export default function Home() {
 
             <div className="flex flex-col gap-[24px] justify-center items-center">
               <h1 className=" text-white text-5xl font-bold">
-                Up to 70% off Shipping Labels
+                {t('SubHeader')}
               </h1>
               <Button
                 variant="destructive"
@@ -56,17 +56,15 @@ export default function Home() {
         <div className="w-[100%] bg-white">
           <div className={`flex flex-col gap-10 w-[90%] mx-auto my-10 `}>
             <div className="flex flex-col justify-center gap-5">
-              <h1 className=" text-myBlue text-lg font-bold">Membership Plans</h1>
-              <h1 className=" text-black text-3xl font-bold">2 Ways to Save on Shipping</h1>
+              <h1 className=" text-myBlue text-lg font-bold">{t('MembershipHeader')}</h1>
+              <h1 className=" text-black text-3xl font-bold">{t('2ways')}</h1>
               <div className="text-[#5A5A5A] text-base">
                 <ul>
                   <li>
-                    - Heavily discounted rates on shipping labels thanks to our
-                    volume accounts with world class carriers and partners
+                    - {t('2WaysLS')}
                   </li>
                   <li>
-                    - Your own local US and Canadian address for fast low cost
-                    cross-border transfers
+                    - {t('2WaysLSTwo')}
                   </li>
                 </ul>
               </div>
@@ -85,18 +83,12 @@ export default function Home() {
           <div className="flex flex-row gap-5 justify-between items-center mx-auto w-[90%] flex-wrap">
             <div className="left flex flex-col justify-start gap-5 lg:w-[50%]">
               <h2 className="text-4xl text-myBlue font-bold">
-                Cross-Border Mailboxes
+                {t('CrossBorder')}
               </h2>
-              <h1 className=" text-black text-lg font-bold">How it Works</h1>
+              <h1 className=" text-black text-lg font-bold">{t('CrossBorder-works')}</h1>
               <div className="text-[#5A5A5A] text-base">
                 <p className="w-[90%] leading-loose">
-                  With our Cross-Border Mailbox service you receive your
-                  packages and documents within their originating country in the
-                  most convenient, fast and economical way. With your ShipLink
-                  address you can make purchases online at your favorite stores,
-                  subscribe to magazines, receive correspondence and much more
-                  without the extra costs of international shipping and
-                  brokerage surcharges for items worth less than $800.
+                  {t('CrossBorder-params')}
                 </p>
               </div>
             </div>
@@ -112,7 +104,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col mt-10 gap-5 mx-auto w-[90%]">
-            <p className="text-xl font-bold">Buy and Receive</p>
+            <p className="text-xl font-bold">{t('Buy')}</p>
             <div className="cardContent">
               <CardsComponents />
             </div>
@@ -124,14 +116,14 @@ export default function Home() {
         <div className={`${styles.sectionFree}`}>
           <div className={`${styles.contentFrame} mx-auto`}>
             <div className="flex flex-col gap-5 justify-center items-center text-center  px-10 py-10 h-[100%]">
-              <h3 className="text-3xl  font-bold text-white">Free Account</h3>
-              <p className="text-base px-4 text-white">Join us for great benefits by getting your Free Account right now! Enjoy exclusive access to our specialized services, unique features and unmatched prices</p>
+              <h3 className="text-3xl  font-bold text-white">{t('Account')}</h3>
+              <p className="text-base px-4 text-white">{t('Account-param')}</p>
               <Button
                 variant="destructive"
                 size="lg"
                 className="rounded"
               >
-                <p className="text-base">Get My Free Account Now</p>
+                <p className="text-base">{t('Account-get')}</p>
               </Button>
             </div>
           </div>
@@ -141,7 +133,7 @@ export default function Home() {
         <div className={`${styles.works} py-20 gap-10 bg-gradient-to-br from-blue-50 to-white`} >
           <div className="w-[90%] ">
             <h2 className="text-4xl text-myBlue font-bold">
-              Shipping Labels
+              {t('Shipping')}
             </h2>
           </div>
           <div className="flex flex-col gap-8 mx-auto w-[90%] lg:flex-row">
@@ -163,7 +155,7 @@ export default function Home() {
             </div>
 
             <div className="right w-full flex flex-col justify-between h-[100%] gap-6">
-              <h3 className="text-xl font-bold text-black">How it Works</h3>
+              <h3 className="text-xl font-bold text-black">{t('worksHead')}</h3>
               <div className="h-full">
                 <ListCardComponents />
               </div>
@@ -181,8 +173,8 @@ export default function Home() {
           <div className={`${styles.contentFrame2} mx-auto my-[20px]`}>
             <div className="flex flex-col gap-5 justify-center items-center text-center px-10 py-16 h-[100%]">
               <div className="py-5 gap-4 flex flex-col">
-                <h3 className="text-3xl text-center font-bold text-white">Sign up</h3>
-                <p className="text-base px-4 text-white">Join us for great benefits by getting your account right now! <br />Enjoy exclusive access to our specialized services, unique features and unmatched prices</p>
+                <h3 className="text-3xl text-center font-bold text-white">{t('Signup')}</h3>
+                <p className="text-base px-4 text-white">{t('SignupP')}</p>
               </div>
               <Button
                 variant="destructive"
@@ -199,7 +191,7 @@ export default function Home() {
         <div className="w-[100%] bg-white">
           <div className={`flex flex-col gap-10 w-[90%] mx-auto my-10 `}>
             <h2 className="text-4xl text-myBlue font-bold">
-              Why Choose ShipLink?
+              {t('whyHead')}
             </h2>
             <div className="bg-gradient-to-r from-blue-900 to-blue-900/90 w-full rounded-sm p-[32px]">
               <WhyCardsComponents />

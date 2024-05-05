@@ -1,10 +1,10 @@
 'use client'
 import { Button } from '../../ui/button'
 import React, { useEffect, useState } from 'react'
+import { Link } from '@/src/navigation'
 import NextLink from 'next/link'
 import styles from './styles.module.scss'
 import { Menu } from 'lucide-react'
-
 import {
     Sheet,
     SheetContent,
@@ -59,22 +59,23 @@ export const HomeNavbar = () => {
             {
                 isTable ? (
                     <div className={`${styles.list} flex text-white flex-row gap-[30px] justify-end items-center`}>
-                        <NextLink passHref href={'/cross-border'} className='cursor-pointer hover:opacity-70'>
+                        <Link passHref href={'/cross-border'} className='cursor-pointer hover:opacity-70'>
                             <p className={`text-base font-extralight ${styles.listItem}`}>Cross-Border Mailbox</p>
-                        </NextLink>
-                        <NextLink passHref href={"/shippingLabels"} className='cursor-pointer hover:opacity-70'>
+                        </Link>
+                        <Link passHref href={"/shippingLabels"} className='cursor-pointer hover:opacity-70'>
                             <p className={`text-base font-extralight ${styles.listItem}`}>Shipping Labels</p>
-                        </NextLink>
+                        </Link>
 
                         <p className={`text-base font-extralight ${styles.listItem}`}>Shipping Supplies</p>
 
-                        <NextLink passHref href={"/aboutUs"} className='cursor-pointer hover:opacity-70'>
+                        <Link passHref href={"/aboutUs"} className='cursor-pointer hover:opacity-70'>
                             <p className={`text-base font-extralight ${styles.listItem}`}>About Us</p>
-                        </NextLink>
-                        {/* <p className={`text-base font-extralight ${styles.listItem}`}>EN</p> */}
+                        </Link>
+
                         <LangSwitcher />
+
                         <div className="flex flex-row gap-[24px]">
-                            <NextLink passHref href={'/auth/signup'} >
+                            <NextLink passHref href={`${process.env.SIGNUP_URL}`} >
                                 <Button
                                     variant='outline'
                                     className="w-[126px] text-white bg-transparent border border-white"
@@ -83,7 +84,7 @@ export const HomeNavbar = () => {
                                 </Button>
                             </NextLink>
 
-                            <NextLink passHref href={'/auth/login'} >
+                            <NextLink passHref href={`${process.env.LOGIN_URL}`} >
                                 <Button
                                     variant='destructive'
                                     className="w-[126px]"
@@ -111,39 +112,39 @@ export const HomeNavbar = () => {
             <Sheet open={open} onOpenChange={setOpen}>
                 <SheetContent>
                     <div className={`flex text-black flex-col gap-[10px] justify-start items-start w-full`}>
-                        <NextLink href={'/cross-border'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                        <Link href={'/cross-border'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
                                 <p className={`text-sm text-left font-extralight`}>Cross-Border Mailbox</p>
                             </Button>
-                        </NextLink>
-                        <NextLink href={'/shippingLabels'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                        </Link>
+                        <Link href={'/shippingLabels'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
                                 <p className={`text-sm text-left font-extralight`}>Shipping Labels</p>
                             </Button>
-                        </NextLink>
+                        </Link>
 
-                        <NextLink href={'#'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                        <Link href={'#'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
                                 <p className={`text-sm text-left font-extralight`}>Shipping Supplies</p>
                             </Button>
-                        </NextLink>
-                        <NextLink href={'/aboutUs'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                        </Link>
+                        <Link href={'/aboutUs'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
                                 <p className={`text-sm text-left font-extralight`}>About Us</p>
                             </Button>
-                        </NextLink>
+                        </Link>
                         <Button
                             variant="ghost"
                             className=" text-left flex flex-row justify-start"
@@ -160,7 +161,7 @@ export const HomeNavbar = () => {
 
                             {
                                 <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">
-                                    <NextLink href={'/auth/signup'} passHref className='w-full'>
+                                    <NextLink href={`${process.env.SIGNUP_URL}`} passHref className='w-full'>
                                         <Button
                                             variant='redOutline'
                                             className="w-[100%]"
@@ -169,7 +170,7 @@ export const HomeNavbar = () => {
                                         </Button>
                                     </NextLink>
 
-                                    <NextLink href={'/auth/login'} passHref className='w-full'>
+                                    <NextLink href={`${process.env.LOGIN_URL}`} passHref className='w-full'>
                                         <Button
                                             variant='destructive'
                                             className="w-[100%]"

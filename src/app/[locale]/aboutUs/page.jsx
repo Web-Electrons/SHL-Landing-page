@@ -1,10 +1,11 @@
 'use client'
 import React from 'react'
 import styles from '../styles.module.scss'
-import { CardData } from '@/components/home/CardData'
-import { Separator } from '@/components/ui/separator'
+
+import { Separator } from '@/src/components/ui/separator'
 import Image from 'next/image'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/src/components/ui/button'
+import { CardData } from '@/src/components/home/CardData'
 export default function Home() {
   return (
     <>

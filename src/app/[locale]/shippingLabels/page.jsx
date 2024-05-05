@@ -1,12 +1,7 @@
 'use client'
 import React from 'react'
 import styles from '../styles.module.scss'
-import { CardData } from '@/components/home/CardData'
-import { Separator } from '@/components/ui/separator'
-import Image from 'next/image'
-import { CardCrossBorder } from '@/components/home/CardCrossBorder'
-import { ShippingLabels } from '@/components/home/ShippingLabels'
-import { Button } from '@/components/ui/button'
+import { ShippingLabels } from '@/src/components/home/ShippingLabels'
 export default function Home() {
     return (
         <>

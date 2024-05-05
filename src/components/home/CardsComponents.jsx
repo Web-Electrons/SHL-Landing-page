@@ -1,6 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import { useTranslations } from "next-intl";
+
 export const CardsComponents = () => {
+
+    const t = useTranslations("default");
     return (
         <div className="wrap flex flex-col gap-[30px] justify-between w-[100%] h-max md:flex-row">
             <div className="p-6 bg-white rounded-md shadow-md  w-[90%] ">
@@ -16,8 +20,8 @@ export const CardsComponents = () => {
                     </div>
 
                     <div className="gap-[16px] flex flex-col ">
-                        <h3 className='font-bold text-xl'>1. Register</h3>
-                        <p className='text-base text-[#5A5A5A]'>Register for free and get your new shipping address to receive your purchases online.</p>
+                        <h3 className='font-bold text-xl'>1. {t('ls1Head')}</h3>
+                        <p className='text-base text-[#5A5A5A]'>{t('ls1')}</p>
                     </div>
                 </div>
             </div>
@@ -35,8 +39,8 @@ export const CardsComponents = () => {
                     </div>
 
                     <div className="gap-[16px] flex flex-col ">
-                        <h3 className='font-bold text-xl'>2. Shop</h3>
-                        <p className='text-base text-[#5A5A5A]'>Shop at your favorite online store and use your new local shipping address</p>
+                        <h3 className='font-bold text-xl'>2. {t('ls2Head')}</h3>
+                        <p className='text-base text-[#5A5A5A]'>{t('ls2')}</p>
                     </div>
                 </div>
             </div>
@@ -53,8 +57,8 @@ export const CardsComponents = () => {
                     </div>
 
                     <div className="gap-[16px] flex flex-col ">
-                        <h3 className='font-bold text-xl'>3. Pick up or Receive</h3>
-                        <p className='text-base text-[#5A5A5A]'>Pick up your purchases at your ShipLink Mailbox branch or Receive them at your door via our cross-border transfer service</p>
+                        <h3 className='font-bold text-xl'>3. {t('ls3Head')}e</h3>
+                        <p className='text-base text-[#5A5A5A]'>{t('ls3')}</p>
                     </div>
                 </div>
             </div>

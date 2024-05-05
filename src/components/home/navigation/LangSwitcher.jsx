@@ -1,50 +1,38 @@
 'use client'
 import React, { useTransition, ChangeEvent, useState } from 'react'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../../ui/dropdown-menu'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+    DropdownMenuCheckboxItem
+} from "../../ui/dropdown-menu";
 import { Button } from '../../ui/button'
 import { ChevronDown } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { useLocale, useTranslations } from 'next-intl'
-
+import i18n from '@/src/i18n';
+import { useTranslations, useLocale } from 'next-intl';
 export const LangSwitcher = () => {
-    // const { i18n } = useTranslations()
-    // const [selectedLang, setSelectedLang] = useState("")
-    // console.log("🚀 ~ LangSwitcher ~ selectedLang:", selectedLang)
+    const t = useLocale()
+    const [selectedLang, setSelectedLang] = useState(t.toUpperCase())
+    const router = useRouter()
+    console.log("🚀 ~ LangSwitcher ~  t :", t)
 
-
-    // const currentLocale = i18n.language;
-    const router = useRouter();
-    const currentPathName = usePathname;
-
-    const onSelectChange = (e) => {
-        console.log("🚀 ~ onSelectChange ~ e:", e)
-        // const newLocale = e.target.value;
-        // const days = 30;
-        // const date = new Date();
-        // date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        // const expires = `expires=${date.toUTCString()}`;
-        // document.cookie = `NEXT_LOCALE=${newLocale};${expires};path=/`;
-
-        // if (
-        //     currentLocale === i18nConfig.defaultLocale &&
-        //     !i18nConfig.prefixDefault
-        // ) {
-        //     router.push('/' + newLocale + currentPathName);
-        // } else {
-        //     router.push(
-        //         currentPathName.replace(`/${currentLocale}`, `/${newLocale}`)
-        //     );
-        // }
-        // router.refresh();
+    const onSelectChange = (lang) => () => {
+        setSelectedLang(t.toUpperCase())
+        t 
+        const newPath = `/${lang}`
+        router.replace(newPath)
     }
+
     return (
-        <DropdownMenu modal={true}>
+        <DropdownMenu modal={true} >
             <DropdownMenuTrigger asChild >
                 <Button
                     variant="ghost"
-                    className=" text-left flex flex-row justify-start"
+                    className=" text-left flex flex-row justify-start h-[30px] gap-2"
                 >
-                    <p className={`text-sm text-left font-extralight`}>EN</p>
+                    <p className={`text-sm text-left font-extralight`}>{selectedLang}</p>
                     <ChevronDown
                         width={15}
                         height={15}
@@ -52,26 +40,30 @@ export const LangSwitcher = () => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent >
-                <DropdownMenuItem
-                    onClick={onSelectChange("EN")}
-                    className="text-center w-full justify-center"
+                <DropdownMenuCheckboxItem
+                    checked={"EN"}
+                    onCheckedChange={onSelectChange("en")}
+                    className="text-center w-full "
                 >
                     English
-                </DropdownMenuItem >
-                <DropdownMenuItem
-                    onClick={onSelectChange("FR")}
-                    className="text-center w-full justify-center"
+                </DropdownMenuCheckboxItem >
+                <DropdownMenuCheckboxItem
+                    checked={"FR"}
+                    onCheckedChange={onSelectChange("fr")}
+                    className="text-center w-full "
                 >
-                    Francis
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                    onClick={onSelectChange("ES")}
-                    className="text-center w-full justify-center"
+                    Français
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                    checked={"ES"}
+                    onCheckedChange={onSelectChange("es")}
+                    className="text-center w-full "
                 >
-                    Espanol
-                </DropdownMenuItem>
+                    Español
+                </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
         </DropdownMenu>
+
 
     )
 }

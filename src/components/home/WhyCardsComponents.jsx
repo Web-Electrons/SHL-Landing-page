@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
+import { useTranslations } from "next-intl";
 export const WhyCardsComponents = () => {
+    const t = useTranslations("default");
     return (
         <div className="flex flex-row justify-center gap-10 flex-wrap">
             <div className="flex flex-row justify-center items-center gap-[16px] p-[20px] w-[450px] rounded bg-white/5 ">
@@ -15,11 +17,11 @@ export const WhyCardsComponents = () => {
                 </div>
                 <div className="right text-white w-full flex flex-col gap-4">
                     <p className='text-lg font-bold'>
-                        Website
+                        {t('why1')}
                     </p>
 
                     <p className='font-extralight text-base'>
-                        With our advanced website platform you can buy, track and control in real time, all in one place.
+                        {t('why1-params')}
                     </p>
                 </div>
             </div>
@@ -36,11 +38,12 @@ export const WhyCardsComponents = () => {
                 </div>
                 <div className="right text-white w-full flex flex-col gap-4">
                     <p className='text-lg font-bold'>
-                        Online Payment
+                        {t('why2')}
                     </p>
 
                     <p className='font-extralight text-base'>
-                        Make your payments online for fast collection at branches and terminals.
+                        {t('why2-params')}
+
                     </p>
                 </div>
             </div>
@@ -57,11 +60,11 @@ export const WhyCardsComponents = () => {
                 </div>
                 <div className="right text-white w-full flex flex-col gap-4">
                     <p className='text-lg font-bold'>
-                        By Weight
+                        {t('why3')}
                     </p>
 
                     <p className='font-extralight text-base'>
-                        You only pay for what it weighs, you do not pay for volumetric weight.
+                        {t('why3-params')}
                     </p>
                 </div>
             </div>
@@ -78,11 +81,11 @@ export const WhyCardsComponents = () => {
                 </div>
                 <div className="right text-white w-full flex flex-col gap-4">
                     <p className='text-lg font-bold'>
-                        ShipLink Points
+                        {t('why4')}
                     </p>
 
                     <p className='font-extralight text-base'>
-                        You accumulate points that you can redeem for discounts on our services.
+                        {t('why4-params')}
                     </p>
                 </div>
             </div>
@@ -99,11 +102,11 @@ export const WhyCardsComponents = () => {
                 </div>
                 <div className="right text-white w-full flex flex-col gap-4">
                     <p className='text-lg font-bold'>
-                        Branches
+                        {t('why5')}
                     </p>
 
                     <p className='font-extralight text-base'>
-                        Several terminals and branches in the US and Canada at your disposal
+                        {t('why5-params')}
                     </p>
                 </div>
             </div>
@@ -120,11 +123,11 @@ export const WhyCardsComponents = () => {
                 </div>
                 <div className="right text-white w-full flex flex-col gap-4">
                     <p className='text-lg font-bold'>
-                        Tiered Rate
+                        {t('why6')}
                     </p>
 
                     <p className='font-extralight text-base'>
-                        The heavier your package, the cheaper your rate per pound.
+                        {t('why6-params')}
                     </p>
                 </div>
             </div>

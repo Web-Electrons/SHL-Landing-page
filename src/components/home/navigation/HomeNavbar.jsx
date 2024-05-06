@@ -32,6 +32,8 @@ export const HomeNavbar = () => {
     const [isSolidBackground, setIsSolidBackground] = useState(false);
     const [open, setOpen] = useState(false)
     // const { data: session } = useSession()
+    const login = 'https://slc.webelectron.com/auth/login'
+    const signup = 'https://slc.webelectron.com/auth/signup'
 
     const isTable = useMediaQuery({ query: "(min-width: 900px)" });
     useEffect(() => {
@@ -75,7 +77,7 @@ export const HomeNavbar = () => {
                         <LangSwitcher />
 
                         <div className="flex flex-row gap-[24px]">
-                            <NextLink passHref href={`${process.env.SIGNUP_URL}`} >
+                            <NextLink passHref href={`${signup}`} >
                                 <Button
                                     variant='outline'
                                     className="w-[126px] text-white bg-transparent border border-white"
@@ -84,7 +86,7 @@ export const HomeNavbar = () => {
                                 </Button>
                             </NextLink>
 
-                            <NextLink passHref href={`${process.env.LOGIN_URL}`} >
+                            <NextLink passHref href={`${login}`} >
                                 <Button
                                     variant='destructive'
                                     className="w-[126px]"
@@ -161,7 +163,7 @@ export const HomeNavbar = () => {
 
                             {
                                 <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">
-                                    <NextLink href={`${process.env.SIGNUP_URL}`} passHref className='w-full'>
+                                    <NextLink href={`${signup}`} passHref className='w-full'>
                                         <Button
                                             variant='redOutline'
                                             className="w-[100%]"
@@ -170,7 +172,7 @@ export const HomeNavbar = () => {
                                         </Button>
                                     </NextLink>
 
-                                    <NextLink href={`${process.env.LOGIN_URL}`} passHref className='w-full'>
+                                    <NextLink href={`${login}`} passHref className='w-full'>
                                         <Button
                                             variant='destructive'
                                             className="w-[100%]"

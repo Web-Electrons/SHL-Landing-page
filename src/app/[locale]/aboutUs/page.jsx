@@ -6,6 +6,7 @@ import { Separator } from '@/src/components/ui/separator'
 import Image from 'next/image'
 import { Button } from '@/src/components/ui/button'
 import { CardData } from '@/src/components/home/CardData'
+import header from '../../../public/assets/home/AboutUsHeading.png'
 export default function Home() {
   return (
     <>
@@ -19,7 +20,7 @@ export default function Home() {
             </div>
             <Image
               priority
-              src={"/assets/home/AboutUsHeading.png"}
+              src={header}
               width={1200}
               height={1200}
               alt='About Us Heading Image'

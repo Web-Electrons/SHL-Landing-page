@@ -19,10 +19,10 @@ export const LangSwitcher = () => {
     console.log("🚀 ~ LangSwitcher ~  t :", t)
 
     const onSelectChange = (lang) => () => {
-        setSelectedLang(t.toUpperCase())
-        t 
-        const newPath = `/${lang}`
-        router.replace(newPath)
+        const newSelectedLang = lang.toUpperCase();
+        setSelectedLang(newSelectedLang);
+        const newPath = `/${lang}`;
+        router.replace(newPath);
     }
 
     return (

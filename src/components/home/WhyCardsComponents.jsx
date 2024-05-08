@@ -1,6 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 import { useTranslations } from "next-intl";
+
+import Web from '../../public/assets/home/web.png';
+import Icon1 from '../../public/assets/home/icon1.png';
+import Icon2 from '../../public/assets/home/icon2.png';
+import Icon3 from '../../public/assets/home/icon3.png';
+import Icon4 from '../../public/assets/home/icon4.png';
+import Icon5 from '../../public/assets/home/icon5.png';
+
 export const WhyCardsComponents = () => {
     const t = useTranslations("default");
     return (
@@ -8,7 +16,7 @@ export const WhyCardsComponents = () => {
             <div className="flex flex-row justify-center items-center gap-[16px] p-[20px] w-[450px] rounded bg-white/5 ">
                 <div className="left w-[100px]">
                     <Image
-                        src={'/assets/home/web.png'}
+                        src={Web}
                         height={70}
                         width={70}
                         alt='web'
@@ -29,7 +37,7 @@ export const WhyCardsComponents = () => {
             <div className="flex flex-row justify-center items-center gap-[16px] p-[20px] w-[450px] rounded bg-white/5 ">
                 <div className="left w-[100px]">
                     <Image
-                        src={'/assets/home/icon1.png'}
+                        src={Icon1}
                         height={70}
                         width={70}
                         alt='web'
@@ -51,7 +59,7 @@ export const WhyCardsComponents = () => {
             <div className="flex flex-row justify-center items-center gap-[16px] p-[20px] w-[450px] rounded bg-white/5 ">
                 <div className="left w-[100px]">
                     <Image
-                        src={'/assets/home/icon2.png'}
+                        src={Icon2}
                         height={70}
                         width={70}
                         alt='web'
@@ -72,7 +80,7 @@ export const WhyCardsComponents = () => {
             <div className="flex flex-row justify-center items-center gap-[16px] p-[20px] w-[450px] rounded bg-white/5 ">
                 <div className="left w-[100px]">
                     <Image
-                        src={'/assets/home/icon3.png'}
+                        src={Icon3}
                         height={70}
                         width={70}
                         alt='web'
@@ -93,7 +101,7 @@ export const WhyCardsComponents = () => {
             <div className="flex flex-row justify-center items-center gap-[16px] p-[20px] w-[450px] rounded bg-white/5 ">
                 <div className="left w-[100px]">
                     <Image
-                        src={'/assets/home/icon4.png'}
+                        src={Icon4}
                         height={70}
                         width={70}
                         alt='web'
@@ -114,7 +122,7 @@ export const WhyCardsComponents = () => {
             <div className="flex flex-row justify-center items-center gap-[16px] p-[20px] w-[450px] rounded bg-white/5 ">
                 <div className="left w-[100px]">
                     <Image
-                        src={'/assets/home/icon5.png'}
+                        src={Icon5}
                         height={70}
                         width={70}
                         alt='web'

@@ -1,6 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 
+import Img1 from '../../public/assets/home/about/img1.png';
+import Img2 from '../../public/assets/home/about/img2.png';
+import Img3 from '../../public/assets/home/about/img3.png';
+import Img4 from '../../public/assets/home/about/img4.png';
+
+
 export const CardData = () => {
     return (
         <>
@@ -8,7 +14,7 @@ export const CardData = () => {
 
                 <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
                     <Image
-                        src={'/assets/home/about/img1.png'}
+                        src={Img1}
                         width={50}
                         height={50}
                         alt='icon'
@@ -22,7 +28,7 @@ export const CardData = () => {
                 <div className="">
                     <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
                         <Image
-                            src={'/assets/home/about/img2.png'}
+                            src={Img2}
                             width={50}
                             height={50}
                             alt='icon'
@@ -36,7 +42,7 @@ export const CardData = () => {
                 <div className="">
                     <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
                         <Image
-                            src={'/assets/home/about/img3.png'}
+                            src={Img3}
                             width={50}
                             height={50}
                             alt='icon'
@@ -50,7 +56,7 @@ export const CardData = () => {
                 <div className="">
                     <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
                         <Image
-                            src={'/assets/home/about/img4.png'}
+                            src={Img4}
                             width={50}
                             height={50}
                             alt='icon'

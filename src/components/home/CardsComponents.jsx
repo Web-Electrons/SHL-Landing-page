@@ -1,6 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import { useTranslations } from "next-intl";
+import Register from '../../public/assets/home/Register.png';
+import Shop from '../../public/assets/home/Shop.png';
+import Pickup from '../../public/assets/home/Pickup.png';
 
 export const CardsComponents = () => {
 
@@ -14,7 +17,7 @@ export const CardsComponents = () => {
                             width={56}
                             height={56}
                             alt='Icons'
-                            src={'/assets/home/Register.png'}
+                            src={Register}
                             style={{ width: "56px", height: "56px" }}
                         />
                     </div>
@@ -33,7 +36,7 @@ export const CardsComponents = () => {
                             width={56}
                             height={56}
                             alt='Icons'
-                            src={'/assets/home/Shop.png'}
+                            src={Shop}
                             style={{ width: "56px", height: "56px" }}
                         />
                     </div>
@@ -51,7 +54,7 @@ export const CardsComponents = () => {
                             width={56}
                             height={56}
                             alt='Icons'
-                            src={'/assets/home/Pickup.png'}
+                            src={Pickup}
                             style={{ width: "56px", height: "56px" }}
                         />
                     </div>

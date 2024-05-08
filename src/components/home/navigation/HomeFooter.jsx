@@ -2,6 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import { ChevronRight, Mail } from 'lucide-react'
 
+import Fb from '../../../public/assets/home/Socials/fb.png'
+import Ig from '../../../public/assets/home/Socials/ig.png'
+import Xicon from '../../../public/assets/home/Socials/x.png'
+
+
 export const HomeFooter = () => {
     return (
         <div className="conten w-[100%]">
@@ -21,21 +26,21 @@ export const HomeFooter = () => {
                             <p className='text-base font-regular text-[#5A5A5A]'>Follow Us</p>
                             <div className="flex flex-row gap-5">
                                 <Image
-                                    src={'/assets/home/Socials/fb.png'}
+                                    src={Fb}
                                     width={40}
                                     height={40}
                                     alt='facebook'
                                     style={{ width: '25px', height: '25px' }}
                                 />
                                 <Image
-                                    src={'/assets/home/Socials/x.png'}
+                                    src={Xicon}
                                     width={40}
                                     height={40}
                                     alt='facebook'
                                     style={{ width: '25px', height: '25px' }}
                                 />
                                 <Image
-                                    src={'/assets/home/Socials/ig.png'}
+                                    src={Ig}
                                     width={40}
                                     height={40}
                                     alt='facebook'

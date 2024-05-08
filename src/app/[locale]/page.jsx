@@ -10,7 +10,7 @@ import { SubsCardsComponents } from "@/src/components/home/SubsCardsComponents";
 import { HomeNavbar } from "@/src/components/home/navigation/HomeNavbar";
 import { HomeFooter } from "@/src/components/home/navigation/HomeFooter";
 import { useTranslations } from "next-intl";
-
+import CrossImg from '../../public/assets/home/Section2.png'
 
 // import { CardsComponents } from "@/components/home/CardsComponents";
 // import { ListCardComponents } from "@/components/home/ListCardComponents";
@@ -98,7 +98,7 @@ export default function Home() {
                 width={500}
                 height={500}
                 alt="mailbox"
-                src={"/assets/home/Section2.png"}
+                src={CrossImg}
                 style={{ width: "720px", height: "444px" }}
               />
             </div>

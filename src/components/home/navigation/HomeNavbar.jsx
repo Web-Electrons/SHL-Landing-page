@@ -32,8 +32,8 @@ export const HomeNavbar = () => {
     const [isSolidBackground, setIsSolidBackground] = useState(false);
     const [open, setOpen] = useState(false)
     // const { data: session } = useSession()
-    const login = 'https://slc.webelectron.com/auth/login'
-    const signup = 'https://slc.webelectron.com/auth/signup'
+    const login = 'https://client.shiplink.ca/auth/login'
+    const signup = 'https://client.shiplink.ca/auth/signup'
 
     const isTable = useMediaQuery({ query: "(min-width: 900px)" });
     useEffect(() => {

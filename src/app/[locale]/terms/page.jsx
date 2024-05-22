@@ -9,7 +9,7 @@ export default function page() {
                         <h1 className=" text-myBlue text-lg font-bold">Term</h1>
                         <h1 className=" text-black text-3xl font-bold">Terms and Conditions</h1>
                         <div className="text-[#5A5A5A] text-base">
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam tenetur eveniet non error nesciunt dolore!</p>
+                            <p>Lorem dolor sit, amet consectetur adipisicing elit. Quisquam tenetur eveniet non error nesciunt dolore!</p>
                         </div>
                         <div className="left flex flex-col justify-start gap-2">
                             <h2 className='text-black font-bold text-2xl'>1. Acceptance of Terms</h2>

@@ -7,8 +7,11 @@ import { Button } from '../ui/button'
 import free from '../../public/assets/subscription/free.svg'
 import premium from '../../public/assets/subscription/premium.svg'
 import business from '../../public/assets/subscription/business.svg'
+import { useTranslations } from "next-intl";
 
 export const SubsCardsComponents = () => {
+    
+    const t = useTranslations("default");
 
     return (
         <>
@@ -16,7 +19,7 @@ export const SubsCardsComponents = () => {
             <div className="flex flex-row gap-10 w-full h-full flex-wrap  justify-center">
                 <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex">
                     <SubsMenu
-                        title={"Free"}
+                        title={t("free")}
                         price={"$0"}
                         icon={
                             <Image
@@ -28,45 +31,45 @@ export const SubsCardsComponents = () => {
                     >
                         <CardItems
                             type={'landing'}
-                            title={'Personal Dashboard'}
+                            title={t("perso")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Your US ShipLink Address'}
+                            title={t("US")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Your Canadian ShipLink Address'}
+                            title={t("CA")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'SLA to SLA Cross-Border Services'}
+                            title={t("SLAtSLA")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Package Forwarding Services'}
+                            title={t("PFS")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Self Pick-Up at ShipLink Terminals'}
+                            title={t("Selfpick")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Consolidation Services'}
+                            title={t("cs")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Discounted Shipping Labels'}
+                            title={t("DSL")}
                         />
                     </SubsMenu>
                     <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
-                        Subscribe
+                    {t("Subscribe")}
                     </Button>
                 </div>
                 <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex">
                     <SubsMenu
                         month={"/month"}
-                        title={"Premium"}
+                        title={t("Premium")}
                         price={"$9.99"}
                         icon={<Image
                             src={premium}
@@ -77,49 +80,49 @@ export const SubsCardsComponents = () => {
                     >
                         <CardItems
                             type={'landing'}
-                            title={'Personal Dashboard'}
+                            title={t("perso")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Your US ShipLink Address'}
+                            title={t("US")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Your Canadian ShipLink Address'}
+                            title={t("CA")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'SLA to SLA Cross-Border Services'}
+                            title={t("SLAtSLA")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Package Forwarding Services'}
+                            title={t("PFS")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Self Pick-Up at ShipLink Terminals'}
+                            title={t("Selfpick")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Consolidation Services'}
+                            title={t("cs")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Level 2 Discount Shipping Labels'}
+                            title={t("Lv2")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Pallet Reception'}
+                            title={t("PR")}
                         />
                     </SubsMenu>
                     <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
-                        Subscribe
+                    {t("Subscribe")}
                     </Button>
                 </div>
                 <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex">
                     <SubsMenu
                         month={"/month"}
-                        title={"Business"}
+                        title={t("business")}
                         price={"$99.99"}
                         icon={<Image
                             src={business}
@@ -130,47 +133,47 @@ export const SubsCardsComponents = () => {
                     >
                         <CardItems
                             type={'landing'}
-                            title={'Personal Dashboard'}
+                            title={t("perso")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Your US ShipLink Address'}
+                            title={t("US")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Your Canadian ShipLink Address'}
+                            title={t("CA")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'SLA to SLA Cross-Border Services'}
+                            title={t("SLAtSLA")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Package Forwarding Services'}
+                            title={t("PFS")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Self Pick-Up at ShipLink Terminals'}
+                            title={t("Selfpick")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Consolidation Services'}
+                            title={t("cs")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Level 3 Discount Shipping Labels'}
+                            title={t("Lv3")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Pallet Reception'}
+                            title={t("PR")}
                         />
                         <CardItems
                             type={'landing'}
-                            title={'Account Manager'}
+                            title={t("AM")}
                         />
                     </SubsMenu>
                     <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
-                        Subscribe
+                    {t("Subscribe")}
                     </Button>
                 </div>
             </div>

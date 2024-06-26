@@ -1,6 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import { useTranslations } from "next-intl";
+
 export const CardCrossBorder = () => {
+    const t = useTranslations("default");
+    
     return (
 
         <div className="flex flex-col gap-10 justify-center items-center w-[100%] ">

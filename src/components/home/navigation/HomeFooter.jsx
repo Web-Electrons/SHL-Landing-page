@@ -1,13 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
 import { ChevronRight, Mail } from 'lucide-react'
-
+import { useTranslations } from "next-intl";
 import Fb from '../../../public/assets/home/Socials/fb.png'
 import Ig from '../../../public/assets/home/Socials/ig.png'
 import Xicon from '../../../public/assets/home/Socials/x.png'
 
 
 export const HomeFooter = () => {
+
+    const t = useTranslations("default");
+    
     return (
         <div className="conten w-[100%]">
             <div className="wrap py-11 w-[90%] mx-auto flex flex-row justify-between gap-10">
@@ -15,7 +18,7 @@ export const HomeFooter = () => {
                     <div className="">
                         <h3 className='font-[800] text-3xl font-[Poppins] text-red-700'>Shiplink</h3>
                         <div className="flex flex-col py-4 gap-[16px]">
-                            <p className='text-base font-regular text-[#5A5A5A]'>Email Support</p>
+                            <p className='text-base font-regular text-[#5A5A5A]'>{t("emsup")}</p>
                             <div className="flex flex-row gap-3 items-center">
                                 <Mail width={20} height={20} />
                                 <div className="text-base">Support@Shiplink.com</div>
@@ -23,7 +26,7 @@ export const HomeFooter = () => {
                         </div>
 
                         <div className="flex flex-col py-4 gap-[16px]">
-                            <p className='text-base font-regular text-[#5A5A5A]'>Follow Us</p>
+                            <p className='text-base font-regular text-[#5A5A5A]'>{t("Foll")}</p>
                             <div className="flex flex-row gap-5">
                                 <Image
                                     src={Fb}
@@ -57,37 +60,37 @@ export const HomeFooter = () => {
                     <div className="flex flex-col gap-5">
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>About</p>
+                            <p>{t("abo")}</p>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>Support</p>
+                            <p>{t("sup")}</p>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>Membership</p>
+                            <p>{t("memb")}</p>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>How it works</p>
+                            <p>{t("hiw")}</p>
                         </div>
                     </div>
                     <div className="flex flex-col gap-5">
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>Shipping Calculator</p>
+                            <p>{t("Sc")}</p>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>Prohibited Items</p>
+                            <p>{t("proit")}</p>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>Contact</p>
+                            <p>{t("cont")}</p>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>Info</p>
+                            <p>{t("info")}</p>
                         </div>
                     </div>
                 </div>
@@ -100,9 +103,9 @@ export const HomeFooter = () => {
                     </p>
                     <div className=" flex flex-row gap-4 font-regular">
 
-                        <p>Terms and Conditions</p>
+                        <p>{t("Terms")}</p>
                         <p> | </p>
-                        <p>Privacy Policy</p>
+                        <p>{t("priv")}</p>
                     </div>
                 </div>
             </div>

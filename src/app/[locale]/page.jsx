@@ -34,7 +34,7 @@ export default function Home() {
                 variant="destructive"
                 className="rounded w-[182px] py-5 px-10"
               >
-                <p className="text-lg">Learn More</p>
+                <p className="text-lg">{t('Learn')}</p>
               </Button>
             </div>
 
@@ -46,7 +46,7 @@ export default function Home() {
                 variant="destructive"
                 className="rounded w-[182px] py-5 px-10"
               >
-                <p className="text-lg">Learn More</p>
+                <p className="text-lg">{t('Learn')}</p>
               </Button>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function Home() {
               <div className="py-5 mt-3 flex flex-col gap-5 justify-center items-center">
                 <SubsCardsComponents />
                 <Button variant="secondary" size="lg" className="rounded px-10 mt-10">
-                  <p className="text-base">More on Plans and Pricing</p>
+                  <p className="text-base">{t('PaP')}</p>
                 </Button>
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function Home() {
             size="lg"
             className="rounded px-10 w-[182px]"
           >
-            <p className="text-base">More Details</p>
+            <p className="text-base">{t('MD')}</p>
           </Button>
 
           <div className={`${styles.contentFrame2} mx-auto my-[20px]`}>
@@ -181,7 +181,7 @@ export default function Home() {
                 size="lg"
                 className="rounded px-20"
               >
-                <p className="text-base">Get My Account</p>
+                <p className="text-base">{t('GMA')}</p>
               </Button>
             </div>
           </div>
@@ -204,9 +204,9 @@ export default function Home() {
           <div className={`flex flex-col gap-10 w-[90%] mx-auto justify-center items-center my-10 `}>
             <div className="flex flex-col justify-center w-full gap-5 text-center">
               <h2 className="text-4xl text-black font-bold">
-                Our World Class Partners and Carriers
+              {t('OWC')}
               </h2>
-              <p>We only work with the world’s most reputable carriers</p>
+              <p>{t('WoW')}</p>
               <div className="py-10 mt-10 w-full">
                 <CarrierList />
               </div>

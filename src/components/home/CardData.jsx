@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-
+import { useTranslations } from "next-intl";
 import Img1 from '../../public/assets/home/about/img1.png';
 import Img2 from '../../public/assets/home/about/img2.png';
 import Img3 from '../../public/assets/home/about/img3.png';
@@ -8,6 +8,9 @@ import Img4 from '../../public/assets/home/about/img4.png';
 
 
 export const CardData = () => {
+
+    const t = useTranslations("default");
+    
     return (
         <>
             <div className=" flex flex-row gap-5 justify-between w-full">

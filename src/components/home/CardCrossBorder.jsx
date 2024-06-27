@@ -1,9 +1,12 @@
 import React from 'react'
 import Image from 'next/image'
 import { useTranslations } from "next-intl";
+import Register from '../../public/assets/home/Register.png';
+import Shop from '../../public/assets/home/Shop.png';
+import Pickup from '../../public/assets/home/Pickup.png';
+
 
 export const CardCrossBorder = () => {
-    const t = useTranslations("default");
     
     return (
 
@@ -11,7 +14,7 @@ export const CardCrossBorder = () => {
             <div className="flex flex-col justify-center gap-5 p-5 w-[80%] rounded-md shadow-lg bg-white ">
                 <div className="flex flex-row gap-5 items-center ">
                     <Image
-                        src={'/assets/home/crossBorder/1.png'}
+                        src={Register}
                         width={100}
                         height={100}
                         alt='Cross Border Image'
@@ -20,13 +23,13 @@ export const CardCrossBorder = () => {
                     <h4 className='font-bold text-xl text-black'>Register</h4>
                 </div>
                 <div className="text-[#5A5A5A]">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam asperiores quidem maxime aliquid officiis facilis. Error qui nesciunt cum earum fuga, cupiditate ab aperiam sequi, sapiente similique corrupti. Harum, hic?</p>
+                    <p>Register for free and get your new shipping address to receive your purchases online.</p>
                 </div>
             </div>
             <div className="flex flex-col gap-5 p-5 w-[80%] rounded-md shadow-lg bg-white ">
                 <div className="flex flex-row gap-5 items-center">
                     <Image
-                        src={'/assets/home/crossBorder/2.png'}
+                        src={Shop}
                         width={100}
                         height={100}
                         alt='Cross Border Image'
@@ -35,13 +38,13 @@ export const CardCrossBorder = () => {
                     <h4 className='font-bold text-xl text-black'>Shop</h4>
                 </div>
                 <div className="text-[#5A5A5A]">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam asperiores quidem maxime aliquid officiis facilis. Error qui nesciunt cum earum fuga, cupiditate ab aperiam sequi, sapiente similique corrupti. Harum, hic?</p>
+                    <p>Shop at your favorite online store and use your new local shipping address</p>
                 </div>
             </div>
             <div className="flex flex-col gap-5 p-5 w-[80%] rounded-md shadow-lg bg-white ">
                 <div className="flex flex-row gap-5 items-center">
                     <Image
-                        src={'/assets/home/crossBorder/3.png'}
+                        src={Pickup}
                         width={100}
                         height={100}
                         alt='Cross Border Image'
@@ -50,7 +53,7 @@ export const CardCrossBorder = () => {
                     <h4 className='font-bold text-xl text-black'> Pick up or Receive</h4>
                 </div>
                 <div className="text-[#5A5A5A]">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam asperiores quidem maxime aliquid officiis facilis. Error qui nesciunt cum earum fuga, cupiditate ab aperiam sequi, sapiente similique corrupti. Harum, hic?</p>
+                    <p>Pick up your purchases at your ShipLink Mailbox branch or Receive them at your door via our cross-border transfer service</p>
                 </div>
             </div>
         </div>

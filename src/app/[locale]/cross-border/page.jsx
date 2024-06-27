@@ -7,7 +7,12 @@ import { Separator } from '@/src/components/ui/separator'
 import Image from 'next/image'
 import { CardCrossBorder } from '@/src/components/home/CardCrossBorder'
 import { Button } from '@/src/components/ui/button'
+import NextLink from 'next/link'
+
 export default function Home() {
+
+    const signup = 'https://client.shiplink.ca/auth/signup'
+
     return (
         <>
             <div className={styles.container}>
@@ -33,7 +38,8 @@ export default function Home() {
                         <div className="mt-10">
                             <CardCrossBorder />
                         </div>
-                        <div className="mt-20 mx-auto text-center items-center">
+                        <div className="mt-20 mx-auto text-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+                        <NextLink passHref href={`${signup}`} >
                             <Button
                                 variant="destructive"
                                 size="lg"
@@ -41,6 +47,7 @@ export default function Home() {
                             >
                                 <p className="text-base">Get My Account</p>
                             </Button>
+                            </NextLink>
                         </div>
                     </div>
                 </div>

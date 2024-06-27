@@ -50,9 +50,9 @@ export const HomeNavbar = () => {
     }, []);
 
     return (
-        <div className={`w-full flex flex-row px-10 h-[70px] justify-between items-center transition-colors duration-100 z-50 ${isSolidBackground ? 'bg-gradient-to-r from-red-700 to-red-800' : 'bg-gradient-to-r from-red-700 to-transparent transition-colors duration-100'} fixed`}>
+        <div className={`w-full flex flex-row px-10 h-[70px] justify-between items-center transition-colors delay-300 duration-300 ease-in-out z-50 ${isSolidBackground ? 'bg-gradient-to-r from-red-700 to-red-800' : 'bg-gradient-to-r from-red-700 to-transparent transition-colors delay-300 duration-300 ease-in-out'} fixed`}>
             <div className="">
-                <NextLink passHref href={'/'} className='cursor-pointer hover:opacity-70'>
+                <NextLink passHref href={'/'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                     <div className="">
                         <p className='text-2xl font-bold text-white'>Shiplink</p>
                     </div>
@@ -61,16 +61,16 @@ export const HomeNavbar = () => {
             {
                 isTable ? (
                     <div className={`${styles.list} flex text-white flex-row gap-[30px] justify-end items-center`}>
-                        <Link passHref href={'/cross-border'} className='cursor-pointer hover:opacity-70'>
+                        <Link passHref href={'/cross-border'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight ${styles.listItem}`}>Cross-Border Mailbox</p>
                         </Link>
-                        <Link passHref href={"/shippingLabels"} className='cursor-pointer hover:opacity-70'>
+                        <Link passHref href={"/shippingLabels"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight ${styles.listItem}`}>Shipping Labels</p>
                         </Link>
 
                         <p className={`text-base font-extralight ${styles.listItem}`}>Shipping Supplies</p>
 
-                        <Link passHref href={"/aboutUs"} className='cursor-pointer hover:opacity-70'>
+                        <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight ${styles.listItem}`}>About Us</p>
                         </Link>
 

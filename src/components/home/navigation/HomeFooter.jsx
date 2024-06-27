@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 import Fb from '../../../public/assets/home/Socials/fb.png'
 import Ig from '../../../public/assets/home/Socials/ig.png'
 import Xicon from '../../../public/assets/home/Socials/x.png'
-
+import NextLink from 'next/link'
+import { Link } from '@/src/navigation'
 
 export const HomeFooter = () => {
 
@@ -60,7 +61,9 @@ export const HomeFooter = () => {
                     <div className="flex flex-col gap-5">
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
+                            <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p>{t("abo")}</p>
+                            </Link>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
@@ -101,11 +104,12 @@ export const HomeFooter = () => {
                     <p>
                         © 2023  ShipLink.ca
                     </p>
-                    <div className=" flex flex-row gap-4 font-regular">
-
-                        <p>{t("Terms")}</p>
+                    <div className=" flex flex-row gap-4 font-regular ">
+                    <Link passHref href={"/terms"} >
+                        <p className='hover:opacity-70'>{t("Terms")}</p>
+                        </Link>
                         <p> | </p>
-                        <p>{t("priv")}</p>
+                        <p className='hover:opacity-70'>{t("priv")}</p>
                     </div>
                 </div>
             </div>

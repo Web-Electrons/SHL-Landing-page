@@ -8,16 +8,18 @@ import free from '../../public/assets/subscription/free.svg'
 import premium from '../../public/assets/subscription/premium.svg'
 import business from '../../public/assets/subscription/business.svg'
 import { useTranslations } from "next-intl";
+import NextLink from 'next/link'
 
 export const SubsCardsComponents = () => {
     
     const t = useTranslations("default");
+    const signup = 'https://client.shiplink.ca/auth/signup'
 
     return (
         <>
 
             <div className="flex flex-row gap-10 w-full h-full flex-wrap  justify-center">
-                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex">
+                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
                     <SubsMenu
                         title={t("free")}
                         price={"$0"}
@@ -62,11 +64,15 @@ export const SubsCardsComponents = () => {
                             title={t("DSL")}
                         />
                     </SubsMenu>
+                    <div className='w-full'>
+                    <NextLink passHref href={`${signup}`} >
                     <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
                     {t("Subscribe")}
                     </Button>
+                    </NextLink>
+                    </div>
                 </div>
-                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex">
+                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
                     <SubsMenu
                         month={"/month"}
                         title={t("Premium")}
@@ -115,11 +121,15 @@ export const SubsCardsComponents = () => {
                             title={t("PR")}
                         />
                     </SubsMenu>
+                    <div className='w-full'>
+                    <NextLink passHref href={`${signup}`} >
                     <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
                     {t("Subscribe")}
                     </Button>
+                    </NextLink>
+                    </div>
                 </div>
-                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex">
+                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
                     <SubsMenu
                         month={"/month"}
                         title={t("business")}
@@ -172,9 +182,13 @@ export const SubsCardsComponents = () => {
                             title={t("AM")}
                         />
                     </SubsMenu>
+                    <div className='w-full'>
+                    <NextLink passHref href={`${signup}`} >
                     <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
                     {t("Subscribe")}
                     </Button>
+                    </NextLink>
+                    </div>
                 </div>
             </div>
         </>

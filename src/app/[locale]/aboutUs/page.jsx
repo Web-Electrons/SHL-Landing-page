@@ -1,17 +1,21 @@
 'use client'
 import React from 'react'
 import styles from '../styles.module.scss'
-
+import { useTranslations } from "next-intl";
 import { Separator } from '@/src/components/ui/separator'
 import Image from 'next/image'
 import { Button } from '@/src/components/ui/button'
 import { CardData } from '@/src/components/home/CardData'
 import header from '../../../public/assets/home/AboutUsHeading.png'
 export default function Home() {
+
+  const t = useTranslations("default");
+
   return (
     <>
       <div className={styles.container}>
-        <div className="flex flex-col text-center justify-start gap-[32px] pt-[90px] w-full h-[100vh] bg-[#FFFFF]">
+        
+        <div className=" text-center justify-start gap-[32px] pt-[90px] w-full h-full bg-[#FFFFF]">
           <div className="flex flex-col gap-4 justify-start text-left w-[90%] mx-auto pt-10">
             <h1 className=" text-myBlue text-lg font-bold">About Us</h1>
             <h1 className=" text-black text-3xl font-bold">Closer to ShipLink</h1>
@@ -20,6 +24,7 @@ export default function Home() {
             </div>
             <Image
               priority
+              className='rounded-lg'
               src={header}
               width={1200}
               height={1200}
@@ -41,7 +46,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-
+          
             <div className="right w-max flex flex-col gap-5 items-start">
               <div className="flex flex-row gap-3 items-center">
                 <p className='bg-opacity-10 w-[30px] text-center bg-slate-600 rounded px-1 py-1'>1</p>
@@ -58,7 +63,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-
+       
 
         {/* section */}
         <div className="w-[100%] bg-white py-14">
@@ -100,7 +105,7 @@ export default function Home() {
               <Button
                 variant="destructive"
                 size="lg"
-                className="rounded px-20"
+                className="rounded px-20 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
               >
                 <p className="text-base">Contact Us</p>
               </Button>

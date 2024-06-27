@@ -12,6 +12,9 @@ import { HomeFooter } from "@/src/components/home/navigation/HomeFooter";
 import { useTranslations } from "next-intl";
 import CrossImg from '../../public/assets/home/Section2.png'
 import Frame3 from '../../public/assets/home/Frame3.png'
+import hero from '../../public/assets/home/Banner.png'
+import NextLink from 'next/link'
+import { Link } from '@/src/navigation'
 // import { CardsComponents } from "@/components/home/CardsComponents";
 // import { ListCardComponents } from "@/components/home/ListCardComponents";
 // import { WhyCardsComponents } from "@/components/home/WhyCardsComponents";
@@ -22,34 +25,33 @@ import Frame3 from '../../public/assets/home/Frame3.png'
 export default function Home() {
 
   const t = useTranslations("default");
+  const signup = 'https://client.shiplink.ca/auth/signup'
 
   return (
     <>
       <div className={styles.container}>
-        <div className={`${styles.header} flex flex-col gap-5 `}>
-          <div className="flex flex-col text-center justify-center items-center gap-[32px] h-[80%]">
-            <div className="flex flex-col gap-[24px] justify-center items-center">
-              <h1 className=" text-white text-5xl font-bold">{t('Header')}</h1>
+      <div class="relative bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden">
+      <div class="absolute inset-0">
+              <Image
+                alt="mailbox"
+                src={hero}
+              />
+      <div class="absolute inset-0 bg-black opacity-30"></div>
+      </div>
+      <div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
+    <h1 class="text-5xl font-bold leading-tight mb-4">{t('Header')}</h1>
+    <p class="text-3xl font-bold leading-tight mb-4">{t('SubHeader')}</p>
+    <NextLink passHref href={'#hiw'} >
               <Button
                 variant="destructive"
-                className="rounded w-[182px] py-5 px-10"
+                className="rounded w-[182px] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
               >
                 <p className="text-lg">{t('Learn')}</p>
               </Button>
-            </div>
+              </NextLink>
+  </div>
 
-            <div className="flex flex-col gap-[24px] justify-center items-center">
-              <h1 className=" text-white text-5xl font-bold">
-                {t('SubHeader')}
-              </h1>
-              <Button
-                variant="destructive"
-                className="rounded w-[182px] py-5 px-10"
-              >
-                <p className="text-lg">{t('Learn')}</p>
-              </Button>
-            </div>
-          </div>
+        
         </div>
 
         {/* section */}
@@ -70,7 +72,7 @@ export default function Home() {
               </div>
               <div className="py-5 mt-3 flex flex-col gap-5 justify-center items-center">
                 <SubsCardsComponents />
-                <Button variant="secondary" size="lg" className="rounded px-10 mt-10">
+                <Button variant="secondary" size="lg" className="rounded px-10 mt-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                   <p className="text-base">{t('PaP')}</p>
                 </Button>
               </div>
@@ -79,7 +81,7 @@ export default function Home() {
         </div>
 
         {/* section */}
-        <div className={`${styles.works} py-20 gap-10 bg-gradient-to-br from-blue-50 to-white`} >
+        <div id="hiw" className={`${styles.works} py-20 gap-10 bg-gradient-to-br from-blue-50 to-white`} >
           <div className="flex flex-row gap-5 justify-between items-center mx-auto w-[90%] flex-wrap">
             <div className="left flex flex-col justify-start gap-5 lg:w-[50%]">
               <h2 className="text-4xl text-myBlue font-bold">
@@ -118,13 +120,15 @@ export default function Home() {
             <div className="flex flex-col gap-5 justify-center items-center text-center  px-10 py-10 h-[100%]">
               <h3 className="text-3xl  font-bold text-white">{t('Account')}</h3>
               <p className="text-base px-4 text-white">{t('Account-param')}</p>
+              <NextLink passHref href={`${signup}`} >
               <Button
                 variant="destructive"
                 size="lg"
-                className="rounded"
+                className="rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
               >
-                <p className="text-base">{t('Account-get')}</p>
+                <p className="text-base ">{t('Account-get')}</p>
               </Button>
+              </NextLink>
             </div>
           </div>
         </div>
@@ -161,14 +165,15 @@ export default function Home() {
               </div>
             </div>
           </div>
-
+          <Link passHref href={"/shippingLabels"}>
           <Button
             variant="destructive"
             size="lg"
-            className="rounded px-10 w-[182px]"
+            className="rounded px-10 w-[182px] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
           >
             <p className="text-base">{t('MD')}</p>
           </Button>
+          </Link>
 
           <div className={`${styles.contentFrame2} mx-auto my-[20px]`}>
             <div className="flex flex-col gap-5 justify-center items-center text-center px-10 py-16 h-[100%]">
@@ -176,13 +181,15 @@ export default function Home() {
                 <h3 className="text-3xl text-center font-bold text-white">{t('Signup')}</h3>
                 <p className="text-base px-4 text-white">{t('SignupP')}</p>
               </div>
+              <NextLink passHref href={`${signup}`} >
               <Button
                 variant="destructive"
                 size="lg"
-                className="rounded px-20"
+                className="rounded px-20 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
               >
                 <p className="text-base">{t('GMA')}</p>
               </Button>
+              </NextLink>
             </div>
           </div>
         </div>

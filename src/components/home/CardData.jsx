@@ -9,11 +9,11 @@ import Img4 from '../../public/assets/home/about/img4.png';
 
 export const CardData = () => {
 
-    const t = useTranslations("default");
+
     
     return (
         <>
-            <div className=" flex flex-row gap-5 justify-between w-full">
+            <div className=" flex flex-row gap-10 w-full h-full flex-wrap  justify-evenly">
 
                 <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
                     <Image

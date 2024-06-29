@@ -30,11 +30,12 @@ export default function Home() {
   return (
     <>
       <div className={styles.container}>
-      <div class="relative bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden">
-      <div class="absolute inset-0">
+      <div class=" relative h-screen flex flex-col items-center justify-center text-center text-white ">
+      <div class="flex absolute inset-0">
               <Image
                 alt="mailbox"
                 src={hero}
+                styles={"min-w-full min-h-full absolute object-cover"}
               />
       <div class="absolute inset-0 bg-black opacity-30"></div>
       </div>
@@ -51,8 +52,9 @@ export default function Home() {
               </NextLink>
   </div>
 
-        
+
         </div>
+   
 
         {/* section */}
         <div className="w-[100%] bg-white">

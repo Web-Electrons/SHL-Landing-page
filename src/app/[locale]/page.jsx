@@ -32,9 +32,16 @@ export default function Home() {
         <div class=" relative h-screen flex flex-col items-center justify-center text-center text-white ">
           <div class="flex absolute inset-0">
             <Image
+              width={1600}
+              height={500}
               alt="mailbox"
               src={hero}
-              styles={"min-w-full min-h-full absolute object-cover"}
+              style={{
+                width: "100%",
+                height: "auto",
+                objectFit: "cover",
+                objectPosition: "center",
+              }}
             />
             <div class="absolute inset-0 bg-black opacity-30"></div>
           </div>

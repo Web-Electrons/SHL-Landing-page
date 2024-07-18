@@ -35,7 +35,7 @@ export const HomeNavbar = () => {
     const login = 'https://client.shiplink.ca/auth/login'
     const signup = 'https://client.shiplink.ca/auth/signup'
 
-    const isTable = useMediaQuery({ query: "(min-width: 900px)" });
+    const isTable = useMediaQuery({ query: "(min-width: 1091px)" });
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
@@ -62,16 +62,14 @@ export const HomeNavbar = () => {
                 isTable ? (
                     <div className={`${styles.list} flex text-white flex-row gap-[30px] justify-end items-center`}>
                         <Link passHref href={'/cross-border'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                            <p className={`text-base font-extralight ${styles.listItem}`}>Cross-Border Mailbox</p>
+                            <p className={`text-base font-extralight leading-3 ${styles.listItem}`}>Cross-Border Mailbox</p>
                         </Link>
                         <Link passHref href={"/shippingLabels"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                            <p className={`text-base font-extralight ${styles.listItem}`}>Shipping Labels</p>
+                            <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Labels</p>
                         </Link>
-
-                        <p className={`text-base font-extralight ${styles.listItem}`}>Shipping Supplies</p>
-
+                        <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Supplies</p>
                         <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                            <p className={`text-base font-extralight ${styles.listItem}`}>About Us</p>
+                            <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>About Us</p>
                         </Link>
 
                         <LangSwitcher />
@@ -119,7 +117,7 @@ export const HomeNavbar = () => {
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
-                                <p className={`text-sm text-left font-extralight`}>Cross-Border Mailbox</p>
+                                <p className={`text-sm text-left font-extralight leading-3 line-clamp-1`}>Cross-Border Mailbox</p>
                             </Button>
                         </Link>
                         <Link href={'/shippingLabels'} className='cursor-pointer hover:opacity-70 w-full' passHref>
@@ -157,10 +155,7 @@ export const HomeNavbar = () => {
                                 height={15}
                             />
                         </Button>
-
-
                         <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">
-
                             {
                                 <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">
                                     <NextLink href={`${signup}`} passHref className='w-full'>

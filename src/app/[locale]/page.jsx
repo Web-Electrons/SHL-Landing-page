@@ -26,6 +26,25 @@ export default function Home() {
   const t = useTranslations("default");
   const signup = "https://client.shiplink.ca/auth/signup";
 
+  const OptimizedImage = () => (
+    <div style={{ width: "100%", height: "auto", position: "relative", overflow: "hidden" }}>
+      <Image
+        width={1600}
+        height={500}
+        alt="mailbox"
+        src={hero}
+        style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "cover",
+          objectPosition: "center",
+        }}
+        placeholder="blur" // Menampilkan placeholder sebelum gambar selesai dimuat
+        loading="lazy" // Menggunakan lazy loading
+      />
+    </div>
+  );
+
   return (
     <>
       <div className={styles.container}>

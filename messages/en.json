@@ -74,7 +74,25 @@
         "OWC": "Our World Class Partners and Carriers",
         "WoW": "We only work with the world’s most reputable carriers",
         "Learn": "Learn More"
-
-        
+    },
+    "about": {
+        "Header": "About Us",
+        "Header_Title": "We are the best-in-class platform for national and international shipping services. Our many years of experience, customer satisfaction.",
+        "Helo": "Helo Worlld",
+        "Mission": "Mission",
+        "Mission_param": "We make your shipping experience easier for both personal and business through our services and distribution network, offering convenient and economical solutions through our best-in-class service.",
+        "Other": "Other Important Data",
+        "Other1": "World class business model using industry best practices",
+        "Other2": "Top Rated by customer reviews",
+        "Other3": "Established business with over 10 years of experience",
+        "Other4": "Terminals and Service across all North America",
+        "Service_list1": "National and international shipment labels (USPS, CP, DHL, UPS, etc)",
+        "Service_list2": "Sale of shipping and packaging supplies",
+        "Service_list3": "Cross-Border Mailboxes (Import, Export, Internet Purchases, Courier)",
+        "Service_Param": "We are a comprehensive personal and business solutions service provider, helping you optimize and save on your shipping needs through the following services:",
+        "Service Title": "Our Services",
+        "SubHeader": "Closer to ShipLink",
+        "Vision": "Vision",
+        "Vision_param": "Our team offers customers consistent first-class service, an organization that is close to its customers and builds long term relationships."
     }
 }

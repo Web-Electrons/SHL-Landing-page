@@ -8,8 +8,8 @@ import './globals.scss'
 import { cn } from '@/lib/utils'
 // import { Toaster } from '@/components/ui/toaster'
 import { Toaster } from "@/src/components/ui/toaster"
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 
 export const poppins = Poppins({
@@ -35,28 +35,14 @@ export const metadata = {
 export default function RootLayout({ children, params: { locale } }) {
 
     const messages = getMessages({ locale });
-    
+
     return (
-        <html lang={locale} className="!scrool-smooth">
-            {/* <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline';" /> */}
-            <body
-            
-                className={cn(
-                    "min-h-screen font-sans antialiased",
-                    roboto.variable
-                )}
-            >
-                 <NextIntlClientProvider locale={locale} messages={messages}>
-                <main>
-                    <div className={styles.mains}>
-                        <HomeNavbar/>
-                        {children}
-                        <HomeFooter />
-                    </div>
-                </main>
-                <Toaster />
-                </NextIntlClientProvider>
-            </body>
-        </html>
+        <main>
+            <div className={styles.mains}>
+                <HomeNavbar />
+                {children}
+                <HomeFooter />
+            </div>
+        </main>
     )
 }

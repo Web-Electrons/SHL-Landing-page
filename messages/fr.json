@@ -74,5 +74,25 @@
         "OWC": "Nos partenaires et transporteurs de classe mondiale",
         "WoW": "Nous ne travaillons qu'avec les transporteurs les plus réputés au monde.",
         "Learn": "en savoir plus"
+    },
+    "about": {
+        "Header": "À propos de nous",
+        "Header_Title": "Nous sommes la meilleure plateforme de services d'expédition nationaux et internationaux. Nos nombreuses années d'expérience, la satisfaction du client",
+        "Helo": "Hélo Monde",
+        "Mission": "Mission",
+        "Mission_param": "Nous facilitons votre expérience d'expédition, tant pour les particuliers que pour les entreprises, grâce à nos services et à notre réseau de distribution, offrant des solutions pratiques et économiques grâce à notre service de premier ordre.",
+        "Other": "Autres données importantes",
+        "Other1": "Modèle commercial de classe mondiale utilisant les meilleures pratiques de lindustrie",
+        "Other2": "Mieux notés par les avis clients",
+        "Other3": "Entreprise établie avec plus de 10 ans d'expérience",
+        "Other4": "Terminaux et service partout en Amérique du Nord",
+        "Service_list1": "Étiquettes d'expédition nationales et internationales (USPS, CP, DHL, UPS, etc.)",
+        "Service_list2": "Vente de fournitures d'expédition et d'emballage",
+        "Service_list3": "Boîtes aux lettres transfrontalières (importation, exportation, achats sur Internet, messagerie)",
+        "Service_Param": "Nous sommes un fournisseur de services complets de solutions personnelles et professionnelles, vous aidant à optimiser et à économiser sur vos besoins d'expédition grâce aux services suivants :",
+        "Service_Title": "Nos services",
+        "SubHeader": "Plus proche de ShipLink",
+        "Vision": "Vision",
+        "Vision_param": "Notre équipe offre à nos clients un service constant de première classe, une organisation proche de ses clients et qui construit des relations à long terme."
     }
 }

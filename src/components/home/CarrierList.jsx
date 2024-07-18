@@ -12,7 +12,7 @@ import Carrier6 from '../../public/assets/home/carrier/6.png';
 export const CarrierList = () => {
     return (
         <>
-            <div className="flex flex-row gap-10 justify-between w-full flex-wrap">
+            <div className="flex flex-row gap-10 justify-center w-full flex-wrap">
                 <div className="h-[60px] flex items-center">
                     <Image
                         src={Carrier1}

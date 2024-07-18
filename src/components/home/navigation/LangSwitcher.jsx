@@ -16,15 +16,22 @@ export const LangSwitcher = () => {
     const t = useLocale()
     const [selectedLang, setSelectedLang] = useState(t.toUpperCase())
     const router = useRouter()
-    console.log("🚀 ~ LangSwitcher ~  t :", t)
+    const pathname = usePathname();
+    console.log("🚀 ~ LangSwitcher ~ locale:", t);
 
+    // const onSelectChange = (lang) => () => {
+    //     const newSelectedLang = lang.toUpperCase();
+    //     setSelectedLang(newSelectedLang);
+    //     const newPath = `/${lang}`;
+    //     router.push(newPath)
+    // }
+    
     const onSelectChange = (lang) => () => {
         const newSelectedLang = lang.toUpperCase();
         setSelectedLang(newSelectedLang);
-        const newPath = `/${lang}`;
-        router.replace(newPath);
+        const newPath = pathname.replace(`/${t}`, `/${lang}`);
+        router.replace(newPath, undefined, { shallow: true });
     }
-
     return (
         <DropdownMenu modal={true} >
             <DropdownMenuTrigger asChild >

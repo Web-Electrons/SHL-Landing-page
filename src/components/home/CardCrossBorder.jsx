@@ -9,7 +9,6 @@ import Pickup from '../../public/assets/home/Pickup.png';
 export const CardCrossBorder = () => {
     
     return (
-
         <div className="flex flex-col gap-10 justify-center items-center w-[100%] ">
             <div className="flex flex-col justify-center gap-5 p-5 w-[80%] rounded-md shadow-lg bg-white ">
                 <div className="flex flex-row gap-5 items-center ">

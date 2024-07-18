@@ -8,17 +8,18 @@ import { Button } from "@/src/components/ui/button";
 import { CardData } from "@/src/components/home/CardData";
 import header from "../../../public/assets/home/AboutUsHeading.png";
 export default function Home() {
-  const t = useTranslations("default");
-
+  const t = useTranslations("about");
+  console.log(t("Header")); // Check console to verify the output
   return (
     <>
       <div className={styles.container}>
         <div className=" text-center justify-start gap-[32px] pt-[90px] w-full h-full bg-[#FFFFF]">
           <div className="flex flex-col gap-4 justify-start text-left w-[90%] mx-auto pt-10">
-            <h1 className=" text-myBlue text-lg font-bold">About Us</h1>
+            <h1 className=" text-myBlue text-lg font-bold">{t("Header")}</h1>
             <h1 className=" text-black text-3xl font-bold">
               Closer to ShipLink
             </h1>
+
             <div className="text-[#5A5A5A] text-base">
               <p>
                 We are the best-in-class platform for national and international

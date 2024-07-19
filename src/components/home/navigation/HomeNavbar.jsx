@@ -16,7 +16,6 @@ import {
 import { useMediaQuery } from 'react-responsive'
 import { ChevronDown } from 'lucide-react'
 // import { useSession, signOut } from 'next-auth/react'
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -27,6 +26,8 @@ import {
     DropdownMenuTrigger,
 } from '../../ui/dropdown-menu'
 import { LangSwitcher } from './LangSwitcher'
+import Image from 'next/image'
+import logo from '../../../public/whiteLogo.png'
 
 export const HomeNavbar = () => {
     const [isSolidBackground, setIsSolidBackground] = useState(false);
@@ -41,9 +42,7 @@ export const HomeNavbar = () => {
             const scrollPosition = window.scrollY;
             setIsSolidBackground(scrollPosition > 0);
         };
-
         window.addEventListener('scroll', handleScroll);
-
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -53,16 +52,26 @@ export const HomeNavbar = () => {
         <div className={`w-full flex flex-row px-10 h-[70px] justify-between items-center transition-colors delay-300 duration-300 ease-in-out z-50 ${isSolidBackground ? 'bg-gradient-to-r from-red-700 to-red-800' : 'bg-gradient-to-r from-red-700 to-transparent transition-colors delay-300 duration-300 ease-in-out'} fixed`}>
             <div className="">
                 <NextLink passHref href={'/'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                    <div className="">
-                        <p className='text-2xl font-bold text-white'>Shiplink</p>
+                    <div className=" w-max h-max mx-auto ">
+                        <Image
+                            src={logo}
+                            width={120}
+                            height={120}
+                            alt="shiplink Logo"
+                            className="mx-auto"
+                            style={{ width: "120px", height: "30px" }}
+                        />
                     </div>
+                    {/* <div className="">
+                        <p className='text-2xl font-bold text-white'>ShipLink</p>
+                    </div> */}
                 </NextLink>
             </div>
             {
                 isTable ? (
                     <div className={`${styles.list} flex text-white flex-row gap-[30px] justify-end items-center`}>
                         <Link passHref href={'/cross-border'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                            <p className={`text-base font-extralight leading-3 ${styles.listItem}`}>Cross-Border Mailbox</p>
+                            <p className={`text-base font-extralight leading-3 ${styles.listItem}`}>Free Mailboxes</p>
                         </Link>
                         <Link passHref href={"/shippingLabels"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Labels</p>
@@ -73,7 +82,6 @@ export const HomeNavbar = () => {
                         </Link>
 
                         <LangSwitcher />
-
                         <div className="flex flex-row gap-[24px]">
                             <NextLink passHref href={`${signup}`} >
                                 <Button
@@ -94,7 +102,6 @@ export const HomeNavbar = () => {
                             </NextLink>
                         </div>
                     </div>
-
                 ) : (
                     <div className={`${styles.menu}`}>
                         <Button
@@ -108,7 +115,6 @@ export const HomeNavbar = () => {
                     </div>
                 )
             }
-
             <Sheet open={open} onOpenChange={setOpen}>
                 <SheetContent>
                     <div className={`flex text-black flex-col gap-[10px] justify-start items-start w-full`}>
@@ -117,7 +123,7 @@ export const HomeNavbar = () => {
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
-                                <p className={`text-sm text-left font-extralight leading-3 line-clamp-1`}>Cross-Border Mailbox</p>
+                                <p className={`text-sm text-left font-extralight leading-3 line-clamp-1`}>Free Mailboxes</p>
                             </Button>
                         </Link>
                         <Link href={'/shippingLabels'} className='cursor-pointer hover:opacity-70 w-full' passHref>

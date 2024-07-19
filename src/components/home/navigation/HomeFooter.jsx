@@ -11,7 +11,7 @@ import { Link } from '@/src/navigation'
 export const HomeFooter = () => {
 
     const t = useTranslations("default");
-    
+
     return (
         <div className="conten w-[100%]">
             <div className="wrap py-11 w-[90%] mx-auto flex flex-row justify-between gap-10">
@@ -22,12 +22,17 @@ export const HomeFooter = () => {
                             <p className='text-base font-regular text-[#5A5A5A]'>{t("emsup")}</p>
                             <div className="flex flex-row gap-3 items-center">
                                 <Mail width={20} height={20} />
-                                <div className="text-base">Support@Shiplink.com</div>
+                                <Link
+                                    passHref
+                                    href={"mailto:contact@shiplink.com"}
+                                    className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                    <div className="text-base">contact@shiplink.com</div>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="flex flex-col py-4 gap-[16px]">
-                            <p className='text-base font-regular text-[#5A5A5A]'>{t("Foll")}</p>
+                            {/* <p className='text-base font-regular text-[#5A5A5A]'>{t("Foll")}</p>
                             <div className="flex flex-row gap-5">
                                 <Image
                                     src={Fb}
@@ -50,7 +55,7 @@ export const HomeFooter = () => {
                                     alt='facebook'
                                     style={{ width: '25px', height: '25px' }}
                                 />
-                            </div>
+                            </div> */}
                         </div>
 
 
@@ -62,12 +67,17 @@ export const HomeFooter = () => {
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                            <p>{t("abo")}</p>
+                                <p>{t("abo")}</p>
                             </Link>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>{t("sup")}</p>
+                            <Link
+                                passHref
+                                href={"mailto:support@shiplink.com"}
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("sup")}</p>
+                            </Link>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
@@ -79,22 +89,27 @@ export const HomeFooter = () => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-5">
-                        <div className="item flex flex-row gap-2 items-center">
+                        {/* <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <p>{t("Sc")}</p>
-                        </div>
+                        </div> */}
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <p>{t("proit")}</p>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>{t("cont")}</p>
+                            <Link
+                                passHref
+                                href={"mailto:contact@shiplink.com"}
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("cont")}</p>
+                            </Link>
                         </div>
-                        <div className="item flex flex-row gap-2 items-center">
+                        {/* <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <p>{t("info")}</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -102,14 +117,16 @@ export const HomeFooter = () => {
             <div className="w-full bg-[#2E2E2E] text-white py-[24px] font-regular">
                 <div className="flex flex-row gap-5 justify-evenly w-[90%] mx-auto">
                     <p>
-                        © 2023  ShipLink.ca
+                        © 2024  ShipLink.com
                     </p>
                     <div className=" flex flex-row gap-4 font-regular ">
-                    <Link passHref href={"/terms"} >
-                        <p className='hover:opacity-70'>{t("Terms")}</p>
+                        <Link passHref href={"/terms"} >
+                            <p className='hover:opacity-70'>{t("Terms")}</p>
                         </Link>
                         <p> | </p>
-                        <p className='hover:opacity-70'>{t("priv")}</p>
+                        <Link passHref href={"/privacy"} >
+                            <p className='hover:opacity-70'>{t("priv")}</p>
+                        </Link>
                     </div>
                 </div>
             </div>

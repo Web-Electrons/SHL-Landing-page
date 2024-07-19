@@ -76,7 +76,7 @@ export const HomeNavbar = () => {
                         <Link passHref href={"/shippingLabels"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Labels</p>
                         </Link>
-                        <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Supplies</p>
+                        {/* <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Supplies</p> */}
                         <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>About Us</p>
                         </Link>
@@ -135,14 +135,14 @@ export const HomeNavbar = () => {
                             </Button>
                         </Link>
 
-                        <Link href={'#'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                        {/* <Link href={'#'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
                                 <p className={`text-sm text-left font-extralight`}>Shipping Supplies</p>
                             </Button>
-                        </Link>
+                        </Link> */}
                         <Link href={'/aboutUs'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
                                 variant="ghost"

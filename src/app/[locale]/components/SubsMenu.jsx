@@ -11,7 +11,10 @@ export const SubsMenu = ({ title, icon, price, children, month }) => {
                     </div>
                 </div>
                 <div className="price py-[10px]">
-                    <div className="text-myBlue text-2xl font-bold">{price}</div>
+                    <div className="text-myBlue text-2xl font-bold flex flex-row gap-2 items-center">
+                        {price}
+                        {price !== "$0" ? <span className='text-sm text-gray-500'>/month</span> : month}
+                    </div>
                 </div>
                 <div className="items flex flex-col gap-1">
                     {children}

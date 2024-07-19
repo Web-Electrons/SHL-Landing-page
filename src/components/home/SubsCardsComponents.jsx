@@ -9,12 +9,17 @@ import premium from '../../public/assets/subscription/premium.svg'
 import business from '../../public/assets/subscription/business.svg'
 import { useTranslations } from "next-intl";
 import NextLink from 'next/link'
+import { SentEmail } from './SentEmail'
 
-export const SubsCardsComponents = () => {
-    
+export const SubsCardsComponents = ({
+    buttonP
+}) => {
+
     const t = useTranslations("default");
     const signup = 'https://client.shiplink.ca/auth/signup'
-
+    const handleSentEmail = () => {
+        window.location.href = 'mailto:contact@shiplink.ca';
+    }
     return (
         <>
 
@@ -65,11 +70,11 @@ export const SubsCardsComponents = () => {
                         />
                     </SubsMenu>
                     <div className='w-full'>
-                    <NextLink passHref href={`${signup}`} >
-                    <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
-                    {t("Subscribe")}
-                    </Button>
-                    </NextLink>
+                        <NextLink passHref href={`${signup}`} >
+                            <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
+                                {t("Subscribe")}
+                            </Button>
+                        </NextLink>
                     </div>
                 </div>
                 <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
@@ -122,11 +127,11 @@ export const SubsCardsComponents = () => {
                         />
                     </SubsMenu>
                     <div className='w-full'>
-                    <NextLink passHref href={`${signup}`} >
-                    <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
-                    {t("Subscribe")}
-                    </Button>
-                    </NextLink>
+                        <NextLink passHref href={`${signup}`} >
+                            <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
+                                {t("Subscribe")}
+                            </Button>
+                        </NextLink>
                     </div>
                 </div>
                 <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
@@ -183,14 +188,16 @@ export const SubsCardsComponents = () => {
                         />
                     </SubsMenu>
                     <div className='w-full'>
-                    <NextLink passHref href={`${signup}`} >
-                    <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
-                    {t("Subscribe")}
-                    </Button>
-                    </NextLink>
+                        <NextLink passHref href={`${signup}`} >
+                            <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
+                                {t("Subscribe")}
+                            </Button>
+                        </NextLink>
                     </div>
                 </div>
             </div>
+            <SentEmail teks={buttonP} />
+            
         </>
     )
 }

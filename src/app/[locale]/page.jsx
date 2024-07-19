@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import { Button } from "@/src/components/ui/button";
@@ -26,6 +27,9 @@ export default function Home() {
   const t = useTranslations("default");
   const signup = "https://client.shiplink.ca/auth/signup";
 
+  const handleClick = () => {
+    window.location.href = 'mailto:contact@shiplink.ca';
+  }
   const OptimizedImage = () => (
     <div style={{ width: "100%", height: "auto", position: "relative", overflow: "hidden" }}>
       <Image
@@ -95,14 +99,9 @@ export default function Home() {
                 </ul>
               </div>
               <div className="py-5 mt-3 flex flex-col gap-5 justify-center items-center">
-                <SubsCardsComponents />
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="rounded px-10 mt-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
-                >
-                  <p className="text-base">{t("PaP")}</p>
-                </Button>
+                <SubsCardsComponents
+                  buttonP={t("PaP")}
+                />
               </div>
             </div>
           </div>
@@ -184,11 +183,9 @@ export default function Home() {
                 />
 
                 <div className="p-5 w-[280px] absolute bottom-10 left-10 rounded shadow flex flex-col gap-[20px] bg-white md:w-[390px]">
-                  <h3 className="text-xl  font-bold text-black">Lorem Ipsum</h3>
+                  <h3 className="text-xl  font-bold text-black">{t("HIW_Tittle")}</h3>
                   <p className="text-base text-[#5A5A5A]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Odit tempora accusamus iste in cum expedita sint optio ipsam
-                    laudantium quaerat.
+                    {t("HIW_SubTittle")}
                   </p>
                 </div>
               </div>

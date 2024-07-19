@@ -17,6 +17,7 @@ export const LangSwitcher = () => {
     const [selectedLang, setSelectedLang] = useState(t.toUpperCase())
     const router = useRouter()
     const pathname = usePathname();
+
     console.log("🚀 ~ LangSwitcher ~ locale:", t);
     const onSelectChange = (lang) => () => {
         const newSelectedLang = lang.toUpperCase();
@@ -24,49 +25,7 @@ export const LangSwitcher = () => {
         const newPath = `/${lang}/${pathname.split('/').slice(2).join('/')}`;
         router.replace(newPath)
     }
-    // const onSelectChange = (lang) => () => {
-    //     const newSelectedLang = lang.toUpperCase();
-    //     setSelectedLang(newSelectedLang);
-    //     const newPath = pathname.replace(`/${t}`, `/${lang}`);
-    //     router.replace(newPath, undefined, { shallow: true });
-    // }
 
-    // const onSelectChange = (lang) => () => {
-    //     const newSelectedLang = lang.toUpperCase();
-    //     setSelectedLang(newSelectedLang);
-
-    //     // Menentukan path saat ini yang sesuai dengan bahasa yang sedang dipilih
-    //     const currentLangPath = `/${t}`; // asumsi `t` adalah bahasa saat ini
-    //     const newLangPath = `/${lang}`; // path baru untuk bahasa yang baru dipilih
-
-    //     // Mengganti bagian dari path yang sesuai dengan bahasa yang sedang dipilih
-    //     let newPath;
-    //     if (pathname.startsWith(currentLangPath)) {
-    //         newPath = pathname.replace(currentLangPath, newLangPath);
-    //     } else {
-    //         newPath = `${newLangPath}${pathname}`; // Tambahkan bahasa baru jika tidak ada bahasa saat ini
-    //     }
-
-    //     router.replace(newPath);
-    // }
-
-    // const onSelectChange = (lang) => () => {
-    //     console.log("🚀 ~ onSelectChange ~ lang:", lang)
-    //     const newSelectedLang = lang.toUpperCase();
-    //     setSelectedLang(newSelectedLang);
-    //     const newPath = pathname.replace(`/${t}`, `/${lang}`);
-    //     router.replace(newPath, undefined);
-    // }
-
-    // const onSelectChange = (lang) => () => {
-    //     const newSelectedLang = lang.toUpperCase();
-    //     setSelectedLang(newSelectedLang);
-
-    //     const url = new URL(window.location.href);
-    //     url.pathname = `/${lang}`;
-
-    //     router.replace(url.pathname + url.search, undefined, { shallow: true });
-    // }
     return (
         <DropdownMenu modal={true} >
             <DropdownMenuTrigger asChild >

@@ -37,12 +37,26 @@ export default function RootLayout({ children, params: { locale } }) {
     const messages = getMessages({ locale });
 
     return (
-        <main>
-            <div className={styles.mains}>
-                <HomeNavbar />
-                {children}
-                <HomeFooter />
-            </div>
-        </main>
+        <html lang={locale} className="!scrool-smooth">
+            {/* <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline';" /> */}
+            <body
+
+                className={cn(
+                    "min-h-screen font-sans antialiased",
+                    roboto.variable
+                )}
+            >
+                <NextIntlClientProvider locale={locale} messages={messages}>
+                    <main>
+                        <div className={styles.mains}>
+                            <HomeNavbar />
+                            {children}
+                            <HomeFooter />
+                        </div>
+                    </main>
+                    <Toaster />
+                </NextIntlClientProvider>
+            </body>
+        </html>
     )
 }

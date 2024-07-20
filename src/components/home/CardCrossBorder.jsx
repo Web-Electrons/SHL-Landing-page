@@ -49,7 +49,7 @@ export const CardCrossBorder = () => {
                         alt='Cross Border Image'
                         style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
                     />
-                    <h4 className='font-bold text-xl text-black'> Pick up or Receive</h4>
+                    <h4 className='font-bold text-xl text-black'> Pick up or Doorstep Delivery</h4>
                 </div>
                 <div className="text-[#5A5A5A]">
                     <p>Pick up your purchases at your ShipLink Mailbox branch or Receive them at your door via our cross-border transfer service</p>

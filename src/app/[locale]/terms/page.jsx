@@ -6,7 +6,7 @@ export default function page() {
             <div className={styles.container}>
                 <div className="flex flex-col text-center justify-start gap-[32px] pt-[90px] w-full h-max pb-10 bg-[#FFFFF]">
                     <div className="flex flex-col gap-4 justify-start text-left w-[70%] mx-auto pt-10">
-                        <h1 className=" text-black text-3xl font-bold">Terms and Conditions</h1>
+                        <h1 className=" text-myBlue text-3xl font-bold">Terms and Conditions</h1>
                         <div className="text-[#5A5A5A] text-base">
                             <p>Please read and review carefully our terms and conditions before signing up to our services</p>
                         </div>

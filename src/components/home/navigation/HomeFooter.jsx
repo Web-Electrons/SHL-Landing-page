@@ -95,7 +95,12 @@ export const HomeFooter = () => {
                         </div> */}
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>{t("proit")}</p>
+                            <Link
+                                passHref
+                                href={"/prohibited-items"}
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("proit")}</p>
+                            </Link>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />

@@ -15,7 +15,7 @@ export const HomeFooter = () => {
 
     return (
         <div className="conten w-[100%]">
-            <div className="wrap py-11 w-[90%] mx-auto flex flex-row justify-between gap-10">
+            <div className="wrap py-11 w-[90%] mx-auto flex flex-row justify-between gap-10 flex-wrap">
                 <div className="left">
                     <div className="flex-col flex">
                         <Image

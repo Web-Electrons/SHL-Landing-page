@@ -11,27 +11,26 @@ import icon2 from '../../public/assets/home/labels/icon/2.png';
 import icon3 from '../../public/assets/home/labels/icon/3.png';
 import icon4 from '../../public/assets/home/labels/icon/4.png';
 
-import shippingLabel from '../../public/assets/selectOption.jpg';
-import label from '../../public/assets/label.jpg';
-import track from '../../public/assets/track.jpg';
-import declare from '../../public/assets/declare.jpg';
+import shippingLabel from '../../public/assets/newRates.jpg';
+import label from '../../public/assets/Lebells.jpg';
+import track from '../../public/assets/tracking.jpg';
+import declare from '../../public/assets/shippingLabel.jpg';
 
 
 
 export const ShippingLabels = () => {
     return (
         <>
-
-
-
-
-            <div className="container grid grid-cols-1 gap-8 my-auto lg:grid-cols-2">
+            <div className="container flex flex-col gap-8">
                 <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-2 item sm:grid-cols-2 border-[#E7E8EC] shadow-md border">
                     <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
                         <Image
                             src={declare}
                             alt='image 1'
-                            className="object-cover w-[400px] h-full"
+                            width={1000}
+                            height={1000}
+                            className=' object-cover w-full h-full'
+                            
                         />
                     </div>
                     <div className="p-20 px-2 sm:pr-6 sm:pl-4">

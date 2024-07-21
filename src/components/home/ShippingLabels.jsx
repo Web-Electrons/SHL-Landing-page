@@ -31,7 +31,7 @@ export const ShippingLabels = () => {
                         <Image
                             src={declare}
                             alt='image 1'
-                            className="object-cover w-full h-full"
+                            className="object-cover w-[400px] h-full"
                         />
                     </div>
                     <div className="p-20 px-2 sm:pr-6 sm:pl-4">

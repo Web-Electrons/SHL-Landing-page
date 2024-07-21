@@ -85,7 +85,7 @@ export default function Home() {
         </div>
 
         {/* section */}
-        <div className="w-[100%] bg-white">
+        <div id="membership" className="w-[100%] bg-white">
           <div className={`flex flex-col gap-10 w-[90%] mx-auto my-10 `}>
             <div className="flex flex-col justify-center gap-5">
               <h1 className=" text-myBlue text-lg font-bold">

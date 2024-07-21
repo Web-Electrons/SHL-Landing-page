@@ -7,6 +7,7 @@ import Ig from '../../../public/assets/home/Socials/ig.png'
 import Xicon from '../../../public/assets/home/Socials/x.png'
 import NextLink from 'next/link'
 import { Link } from '@/src/navigation'
+import logo from '../../../public/logo.png'
 
 export const HomeFooter = () => {
 
@@ -16,18 +17,36 @@ export const HomeFooter = () => {
         <div className="conten w-[100%]">
             <div className="wrap py-11 w-[90%] mx-auto flex flex-row justify-between gap-10">
                 <div className="left">
-                    <div className="">
-                        <h3 className='font-[800] text-3xl font-[Poppins] text-red-700'>Shiplink</h3>
-                        <div className="flex flex-col py-4 gap-[16px]">
-                            <p className='text-base font-regular text-[#5A5A5A]'>{t("emsup")}</p>
-                            <div className="flex flex-row gap-3 items-center">
-                                <Mail width={20} height={20} />
-                                <Link
-                                    passHref
-                                    href={"mailto:contact@shiplink.com"}
-                                    className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                                    <div className="text-base">contact@shiplink.com</div>
-                                </Link>
+                    <div className="flex-col flex">
+                        <Image
+                            src={logo}
+                            width={120}
+                            height={120}
+                            alt="shiplink Logo"
+                            className=""
+                            style={{ width: "120px", height: "30px" }}
+                        />
+                        <div className="flex mt-2  flex-row gap-[20px] justify-start">
+                            <div className="address  flex flex-col gap-2">
+                                <strong>ShipLink Services Inc.</strong>
+                                <div className="text-base">
+                                    <p>3020A route Marie-Victorin</p>
+                                    <p>Unit 100</p>
+                                    <p>Varrenes, QC</p>
+                                    <p>J3X OJ5 Canada</p>
+                                </div>
+                            </div>
+                            <div className=" px-3 flex flex-col gap-2">
+                                <p className='text-base font-regular text-[#5A5A5A]'>{t("emsup")}</p>
+                                <div className="flex flex-row gap-3 items-center">
+                                    <Mail width={20} height={20} />
+                                    <Link
+                                        passHref
+                                        href={"mailto:contact@shiplink.com"}
+                                        className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                        <div className="text-base">contact@shiplink.com</div>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
@@ -80,12 +99,24 @@ export const HomeFooter = () => {
                             </Link>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
+
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>{t("memb")}</p>
+                            <Link
+                                passHref
+                                href={"/#membership"}
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("memb")}</p>
+                            </Link>
                         </div>
                         <div className="item flex flex-row gap-2 items-center">
+
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <p>{t("hiw")}</p>
+                            <Link
+                                passHref
+                                href={"/shippingLabels"}
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("hiw")}</p>
+                            </Link>
                         </div>
                     </div>
                     <div className="flex flex-col gap-5">

@@ -9,6 +9,8 @@ import { Button } from '@/src/components/ui/button'
 import NextLink from 'next/link'
 // import { useTranslation } from 'next-i18next'
 import { useTranslations } from 'next-intl'
+import { CrossBorderComponents } from '@/src/components/home/CrossBorder'
+
 export default function Home() {
     const t = useTranslations('default.mailbox')
     const signup = 'https://client.shiplink.ca/auth/signup'
@@ -36,6 +38,8 @@ export default function Home() {
                                 {t('sub_string')}
                             </p>
                         </div>
+
+                        <CrossBorderComponents params={t} />
                     </div>
                 </div>
                 {/* seection */}
@@ -63,8 +67,6 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-
-
             </div>
 
         </>

@@ -26,7 +26,7 @@ export const HomeFooter = () => {
                             className=""
                             style={{ width: "120px", height: "30px" }}
                         />
-                        <div className="flex mt-2 flex-row gap-[30px] flex-wrap sm:justify-center md:justify-center justify-center items-center">
+                        <div className="flex mt-2 flex-row gap-[30px] flex-wrap sm:justify-center md:justify-center">
                             <div className="address flex flex-col gap-2 text-sm">
                                 <strong>ShipLink Services Inc.</strong>
                                 <div className="text-sm">

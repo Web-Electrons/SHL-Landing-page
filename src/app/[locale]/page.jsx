@@ -53,8 +53,12 @@ export default function Home() {
   return (
     <>
       <div className={styles.container}>
-        <div class=" relative h-screen flex flex-col items-center justify-center text-center text-white ">
-          <div class="flex absolute inset-0">
+        <div
+          style={{
+            height: "90dvh",
+          }}
+          class=" relative flex flex-col items-center justify-center text-center text-white ">
+          <div class="flex absolute inset-0 h-max">
             <Image
               width={1600}
               height={500}
@@ -62,14 +66,21 @@ export default function Home() {
               src={hero}
               style={{
                 width: "100%",
-                height: "auto",
+                height: "90dvh",
                 objectFit: "cover",
                 objectPosition: "center",
               }}
             />
-            <div class="absolute inset-0 bg-black opacity-30"></div>
+            <div class="absolute inset-0 bg-black opacity-30 "
+              style={{ width: "100%", height: "90dvh" }}
+            >
+            </div>
           </div>
-          <div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
+          <div
+            style={{
+              height: "90dvh",
+            }}
+            class="relative z-10 flex flex-col justify-center items-center text-center">
             <h1 class="text-5xl font-bold leading-tight mb-4">{t("Header")}</h1>
             <p class="text-3xl font-bold leading-tight mb-4">
               {/* {t("SubHeader")} */}
@@ -255,7 +266,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }

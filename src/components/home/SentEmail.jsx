@@ -13,9 +13,9 @@ export const SentEmail = ({ teks }) => {
             onClick={() => {
                 handleSentEmail()
             }}
-            className="rounded px-10 mt-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+            className="rounded text-wrap h-max px-10 mt-10 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
         >
-            <p className="text-base">{teks}</p>
+            <p className="text-base text-wrap ">{teks}</p>
         </Button>
     )
 }

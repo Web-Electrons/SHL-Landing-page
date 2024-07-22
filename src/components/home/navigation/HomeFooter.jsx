@@ -26,25 +26,25 @@ export const HomeFooter = () => {
                             className=""
                             style={{ width: "120px", height: "30px" }}
                         />
-                        <div className="flex mt-2  flex-row gap-[20px] justify-start">
-                            <div className="address  flex flex-col gap-2">
+                        <div className="flex mt-2 flex-row gap-[30px] flex-wrap sm:justify-center md:justify-center justify-center items-center">
+                            <div className="address flex flex-col gap-2 text-sm">
                                 <strong>ShipLink Services Inc.</strong>
-                                <div className="text-base">
+                                <div className="text-sm">
                                     <p>3020A route Marie-Victorin</p>
                                     <p>Unit 100</p>
                                     <p>Varrenes, QC</p>
                                     <p>J3X OJ5 Canada</p>
                                 </div>
                             </div>
-                            <div className=" px-3 flex flex-col gap-2">
-                                <p className='text-base font-regular text-[#5A5A5A]'>{t("emsup")}</p>
+                            <div className=" flex flex-col gap-2">
+                                <p className='text-sm font-regular text-[#5A5A5A]'>{t("emsup")}</p>
                                 <div className="flex flex-row gap-3 items-center">
-                                    <Mail width={20} height={20} />
+                                    <Mail width={18} height={18} />
                                     <Link
                                         passHref
                                         href={"mailto:contact@shiplink.com"}
                                         className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                                        <div className="text-base">contact@shiplink.com</div>
+                                        <div className="text-sm">contact@shiplink.com</div>
                                     </Link>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@ export const HomeFooter = () => {
                 </div>
 
                 <div className="right flex flex-col gap-3 justify-between w-[30%] md:flex-row">
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-5 text-sm">
                         <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
@@ -119,7 +119,7 @@ export const HomeFooter = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-5 text-sm">
                         {/* <div className="item flex flex-row gap-2 items-center">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <p>{t("Sc")}</p>
@@ -133,7 +133,7 @@ export const HomeFooter = () => {
                                 <p>{t("proit")}</p>
                             </Link>
                         </div>
-                        <div className="item flex flex-row gap-2 items-center">
+                        <div className="item flex flex-row gap-2 items-center text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
                                 passHref
@@ -151,11 +151,11 @@ export const HomeFooter = () => {
             </div>
 
             <div className="w-full bg-[#2E2E2E] text-white py-[24px] font-regular">
-                <div className="flex flex-row gap-5 justify-evenly w-[90%] mx-auto">
+                <div className="flex flex-row gap-5 justify-evenly w-[90%] mx-auto text-sm flex-wrap">
                     <p>
                         © 2024  ShipLink.com
                     </p>
-                    <div className=" flex flex-row gap-4 font-regular ">
+                    <div className=" flex flex-row gap-4 font-regular flex-wrap">
                         <Link passHref href={"/terms"} >
                             <p className='hover:opacity-70'>{t("Terms")}</p>
                         </Link>

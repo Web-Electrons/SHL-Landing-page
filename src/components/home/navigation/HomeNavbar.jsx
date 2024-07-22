@@ -27,29 +27,57 @@ import {
 } from '../../ui/dropdown-menu'
 import { LangSwitcher } from './LangSwitcher'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import logo from '../../../public/whiteLogo.png'
 
 export const HomeNavbar = () => {
     const [isSolidBackground, setIsSolidBackground] = useState(false);
     const [open, setOpen] = useState(false)
     // const { data: session } = useSession()
-    const login = 'https://client.shiplink.ca/auth/login'
-    const signup = 'https://client.shiplink.ca/auth/signup'
+    const login = process.env.NEXT_PUBLIC_LOGIN_URL;
+    const signup = process.env.NEXT_PUBLIC_SIGNUP_URL;
+
+    const pathname = usePathname()
+    console.log("🚀 ~ HomeNavbar ~ pathname:", pathname)
+
+    const isHomeOnly = pathname === '/' || pathname === '/en' || pathname === '/fr' || pathname === '/es'
+    console.log("🚀 ~ HomeNavbar ~ isHomeOnly:", isHomeOnly)
+
+
+
 
     const isTable = useMediaQuery({ query: "(min-width: 1091px)" });
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const scrollPosition = window.scrollY;
+    //         setIsSolidBackground(scrollPosition > 0);
+    //     };
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
+
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY;
             setIsSolidBackground(scrollPosition > 0);
         };
-        window.addEventListener('scroll', handleScroll);
+        if (isHomeOnly) {
+            window.addEventListener('scroll', handleScroll);
+        }
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            if (isHomeOnly) {
+                window.removeEventListener('scroll', handleScroll);
+            }
         };
-    }, []);
+    }, [isHomeOnly]);
 
     return (
-        <div className={`w-full flex flex-row px-10 h-[70px] justify-between items-center transition-colors delay-300 duration-300 ease-in-out z-50 ${isSolidBackground ? 'bg-gradient-to-r from-red-700 to-red-800' : 'bg-gradient-to-r from-red-700 to-transparent transition-colors delay-300 duration-300 ease-in-out'} fixed`}>
+        <div className={`w-full flex flex-row px-10 h-[70px] justify-between items-center transition-colors delay-300 duration-300 ease-in-out z-50
+            ${isSolidBackground && isHomeOnly ? 'bg-gradient-to-r from-red-700 to-red-800' : isHomeOnly ? 'bg-gradient-to-r from-red-700 to-transparent' : 'bg-gradient-to-r from-red-700 to-red-800'} 
+            fixed
+        `}>
             <div className="">
                 <NextLink passHref href={'/'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                     <div className=" w-max h-max mx-auto ">

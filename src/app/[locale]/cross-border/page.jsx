@@ -20,7 +20,9 @@ export default function Home() {
                     <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-10">
                         <h1 className=" text-myBlue text-3xl font-bold">Cross-Border Mailbox</h1>
                         <div className="text-[#5A5A5A] text-base">
-                            <p>Lorem ipsum dolor sit amet consectetur. Massa non lectus dictumst consequat massa molestie ipsum mauris. Id arcu dolor integer et ultrices. Enim ipsum ridiculus a a. Metus adipiscing purus scelerisque tortor tempor pretium turpis rhoncus.</p>
+                            <p>
+                                Discover the ultimate convenience with our Cross-Border Mailbox service. Receive packages and documents directly within their country of origin, saving you time and money. Your ShipLink address opens up a world of possibilities: shop online at your favorite stores, subscribe to magazines, receive important mail, and more. Enjoy all these benefits without worrying about hefty international shipping fees or brokerage surcharges on items under $800.
+                            </p>
                         </div>
 
                         <div className="flex flex-col gap-5">
@@ -39,14 +41,14 @@ export default function Home() {
                             <CardCrossBorder />
                         </div>
                         <div className="mt-20 mx-auto text-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-                        <NextLink passHref href={`${signup}`} >
-                            <Button
-                                variant="destructive"
-                                size="lg"
-                                className="rounded px-20"
-                            >
-                                <p className="text-base">Get My Account</p>
-                            </Button>
+                            <NextLink passHref href={`${signup}`} >
+                                <Button
+                                    variant="destructive"
+                                    size="lg"
+                                    className="rounded px-20"
+                                >
+                                    <p className="text-base">Get My Account</p>
+                                </Button>
                             </NextLink>
                         </div>
                     </div>

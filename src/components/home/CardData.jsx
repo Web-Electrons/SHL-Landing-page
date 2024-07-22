@@ -7,10 +7,12 @@ import Img3 from '../../public/assets/home/about/img3.png';
 import Img4 from '../../public/assets/home/about/img4.png';
 
 
-export const CardData = () => {
+export const CardData = ({
+    param
+}) => {
 
 
-    
+
     return (
         <>
             <div className=" flex flex-row gap-10 w-full h-full flex-wrap  justify-evenly">
@@ -24,7 +26,8 @@ export const CardData = () => {
                         style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
                     />
                     <p className='font-bold '>
-                        World class business model using industry best practices
+                        {param('about.Other1')}
+                        {/* World class business model using industry best practices */}
                     </p>
                 </div>
 
@@ -38,7 +41,8 @@ export const CardData = () => {
                             style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
                         />
                         <p className='font-bold '>
-                            Top Rated by customer reviews
+                            {param('about.Other2')}
+                            {/* Top Rated by customer reviews */}
                         </p>
                     </div>
                 </div>
@@ -52,7 +56,8 @@ export const CardData = () => {
                             style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
                         />
                         <p className='font-bold '>
-                            Established business with over 10 years of experience
+                            {param('about.Other3')}
+                            {/* Established business with over 10 years of experience */}
                         </p>
                     </div>
                 </div>
@@ -66,7 +71,8 @@ export const CardData = () => {
                             style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
                         />
                         <p className='font-bold '>
-                            Terminals and Service across all North America
+                            {param('about.Other4')}
+                            {/* Terminals and Service across all North America */}
                         </p>
                     </div>
                 </div>

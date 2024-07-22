@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense } from "react"
 import styles from './styles.module.scss'
 import { HomeNavbar } from "@/src/components/home/navigation/HomeNavbar"
 import { HomeFooter } from "@/src/components/home/navigation/HomeFooter"
@@ -10,7 +10,6 @@ import { cn } from '@/lib/utils'
 import { Toaster } from "@/src/components/ui/toaster"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-
 
 export const poppins = Poppins({
     subsets: ['latin'],
@@ -46,16 +45,18 @@ export default function RootLayout({ children, params: { locale } }) {
                     roboto.variable
                 )}
             >
-                <NextIntlClientProvider locale={locale} messages={messages}>
-                    <main>
-                        <div className={styles.mains}>
-                            <HomeNavbar />
-                            {children}
-                            <HomeFooter />
-                        </div>
-                    </main>
-                    <Toaster />
-                </NextIntlClientProvider>
+                <Suspense>
+                    <NextIntlClientProvider locale={locale} messages={messages}>
+                        <main>
+                            <div className={styles.mains}>
+                                <HomeNavbar />
+                                {children}
+                                <HomeFooter />
+                            </div>
+                        </main>
+                        <Toaster />
+                    </NextIntlClientProvider>
+                </Suspense>
             </body>
         </html>
     )

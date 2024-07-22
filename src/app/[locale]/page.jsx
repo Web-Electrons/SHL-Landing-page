@@ -24,6 +24,7 @@ import { Link } from "@/src/navigation";
 // import { HomeNavbar } from "@/components/home/navigation/HomeNavbar";
 // import { HomeFooter } from "@/components/home/navigation/HomeFooter";
 export default function Home() {
+  // const t = useTranslations('landingPage');
   const t = useTranslations("default");
   const signup = "https://client.shiplink.ca/auth/signup";
 
@@ -71,7 +72,8 @@ export default function Home() {
           <div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
             <h1 class="text-5xl font-bold leading-tight mb-4">{t("Header")}</h1>
             <p class="text-3xl font-bold leading-tight mb-4">
-              {t("SubHeader")}
+              {/* {t("SubHeader")} */}
+              {t("Header")}
             </p>
             <NextLink passHref href={"#hiw"}>
               <Button

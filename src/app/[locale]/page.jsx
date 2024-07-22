@@ -122,7 +122,7 @@ export default function Home() {
 
         {/* section */}
         <div
-          id="hiw"
+          id="cross-border"
           className={`${styles.works} py-20 gap-10 bg-gradient-to-br from-blue-50 to-white`}
         >
           <div className="flex flex-row gap-5 justify-between items-center mx-auto w-[90%] flex-wrap">
@@ -139,7 +139,6 @@ export default function Home() {
                 </p>
               </div>
             </div>
-
             <div className="right w-max">
               <Image
                 width={500}
@@ -156,6 +155,22 @@ export default function Home() {
               <CardsComponents />
             </div>
           </div>
+
+          {/* <Button
+            variant="destructive"
+            className="rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+          >
+            <p className="text-base">{t("MD")}</p>
+          </Button> */}
+          <Link passHref href={"/cross-border"}>
+            <Button
+              variant="destructive"
+              size="lg"
+              className="rounded px-10 w-[182px] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+            >
+              <p className="text-base">{t("MD")}</p>
+            </Button>
+          </Link>
         </div>
 
         {/* section */}

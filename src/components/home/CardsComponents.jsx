@@ -61,7 +61,7 @@ export const CardsComponents = () => {
                     </div>
 
                     <div className="gap-[16px] flex flex-col ">
-                        <h3 className='font-bold text-xl'>3. {t('ls3Head')}e</h3>
+                        <h3 className='font-bold text-xl'>3. {t('ls3Head')}</h3>
                         <p className='text-base text-[#5A5A5A]'>{t('ls3')}</p>
                     </div>
                 </div>

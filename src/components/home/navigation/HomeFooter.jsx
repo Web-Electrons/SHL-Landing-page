@@ -15,7 +15,7 @@ export const HomeFooter = () => {
 
     return (
         <div className="conten w-[100%]">
-            <div className="wrap py-11 w-[90%] mx-auto flex flex-row justify-between gap-10 flex-wrap">
+            <div className="wrap py-6 pt-10 w-[100%] px-[40px] mx-auto flex flex-row justify-between gap-10 flex-wrap">
                 <div className="left">
                     <div className="flex-col flex">
                         <Image
@@ -50,8 +50,8 @@ export const HomeFooter = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col py-4 gap-[16px]">
-                            {/* <p className='text-base font-regular text-[#5A5A5A]'>{t("Foll")}</p>
+                        {/* <div className="flex flex-col py-4 gap-[16px]">
+                          <p className='text-base font-regular text-[#5A5A5A]'>{t("Foll")}</p>
                             <div className="flex flex-row gap-5">
                                 <Image
                                     src={Fb}
@@ -74,10 +74,8 @@ export const HomeFooter = () => {
                                     alt='facebook'
                                     style={{ width: '25px', height: '25px' }}
                                 />
-                            </div> */}
-                        </div>
-
-
+                            </div> 
+                        </div> */}
                     </div>
                 </div>
 

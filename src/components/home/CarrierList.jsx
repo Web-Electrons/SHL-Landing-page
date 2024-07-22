@@ -19,7 +19,7 @@ export const CarrierList = () => {
                         width={200}
                         height={200}
                         alt='carrier'
-                        style={{ width: "250px", height: "34px", objectFit: 'contain' }}
+                        style={{ width: "100%", height: "34px", objectFit: 'contain' }}
                     />
                 </div>
                 <div className="h-[60px] flex items-center">

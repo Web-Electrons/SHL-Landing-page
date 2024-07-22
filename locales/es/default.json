@@ -112,6 +112,20 @@
             "Shipping": "Etiquetas de envío",
             "Shipping_Sub": "Cómo funciona",
             "SubHeader": "Obtenga entrega transfronteriza y en todo el mundo"
+        },
+        "mailbox": {
+            "CTA": "Obtener mi cuenta",
+            "item1": "Registro",
+            "item1_string": "Regístrate gratis y obtén tu nueva dirección de envío para recibir tus compras online.",
+            "item2": "Comercio",
+            "item2_string": "Compre en su tienda en línea favorita y use su nueva dirección de envío local",
+            "item3": "Recogida o entrega a domicilio",
+            "item3_string": "Recoja sus compras en su sucursal ShipLink Mailbox o recíbalas en su puerta a través de nuestro servicio de transferencia transfronteriza",
+            "Start_buy": "¡Comienza a Comprar y Recibir con nosotros!",
+            "sub_string": "Con nuestro servicio de Buzón Transfronterizo recibes tus paquetes y documentos dentro de su país de origen de la forma más cómoda, rápida y económica. Con tu dirección ShipLink puedes realizar compras en línea en tus tiendas favoritas, suscribirte a revistas, recibir correspondencia y mucho más sin los costos adicionales de envío internacional y recargos por corretaje para artículos con un valor inferior a $800.",
+            "sub_title": "Cómo funciona",
+            "tilte_string": "Descubra la máxima comodidad con nuestro servicio de Buzón Transfronterizo. Reciba paquetes y documentos directamente dentro de su país de origen, ahorrándole tiempo y dinero. Su dirección ShipLink abre un mundo de posibilidades: compre en línea en sus tiendas favoritas, suscríbase a revistas, reciba correo importante y más. Disfrute de todos estos beneficios sin preocuparse por las elevadas tarifas de envío internacional o los recargos por corretaje en artículos de menos de $800.",
+            "Title": "Buzón transfronterizo"
         }
     }
 }

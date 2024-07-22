@@ -18,7 +18,9 @@ import declare from '../../public/assets/shippingLabel.jpg';
 
 
 
-export const ShippingLabels = () => {
+export const ShippingLabels = ({
+    params
+}) => {
     return (
         <>
             <div className="container flex flex-col gap-8">
@@ -30,7 +32,7 @@ export const ShippingLabels = () => {
                             width={1000}
                             height={1000}
                             className=' object-cover w-full h-full'
-                            
+
                         />
                     </div>
                     <div className="p-20 px-2 sm:pr-6 sm:pl-4">
@@ -42,9 +44,12 @@ export const ShippingLabels = () => {
                                 height={40}
                             />
                         </p>
+                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">{params('ship.Ship1')}</p>
+                        <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal ">
+                            {/* Get an accurate and instant shipping quote by simply entering your package details such as weight, dimensions, and destination. Our system will provide you with a range of shipping options tailored to your needs. */}
+                            {params('ship.Ship1_param')}
+                        </p>
 
-                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">Get an Instant Quote</p>
-                        <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal ">Get an accurate and instant shipping quote by simply entering your package details such as weight, dimensions, and destination. Our system will provide you with a range of shipping options tailored to your needs.</p>
 
                     </div>
                 </div>
@@ -64,9 +69,11 @@ export const ShippingLabels = () => {
                             height={40}
                         /></p>
 
-                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug ">Select Service and Carrier</p>
-                        <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Choose the service and carrier that best fits your shipping requirements from our list of trusted partners. We offer a variety of services to ensure your package reaches its destination on time and in perfect condition.</p>
-
+                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug ">{params('ship.Ship2')}</p>
+                        <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
+                            {/* Choose the service and carrier that best fits your shipping requirements from our list of trusted partners. We offer a variety of services to ensure your package reaches its destination on time and in perfect condition. */}
+                            {params('ship.Ship2_param')}
+                        </p>
                     </div>
                 </div>
                 <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-2 item sm:grid-cols-2 border-[#E7E8EC] shadow-md border">
@@ -85,9 +92,10 @@ export const ShippingLabels = () => {
                             height={40}
                         /></p>
 
-                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">Print Label, Stick it On, and Ship</p>
+                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">{params("ship.Ship3")}</p>
                         <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
-                            After selecting your service and carrier, print your shipping label directly from our platform. Securely attach the label to your package, ensuring all information is clearly visible
+                            {/* After selecting your service and carrier, print your shipping label directly from our platform. Securely attach the label to your package, ensuring all information is clearly visible */}
+                            {params("ship.Ship3_param")}
                         </p>
 
                     </div>
@@ -107,9 +115,10 @@ export const ShippingLabels = () => {
                             width={40}
                             height={40}
                         /></p>
-                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">Track it</p>
+                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">{params("ship.Ship3")}</p>
                         <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
-                            Stay updated with real-time tracking information. Our platform allows you to monitor the status of your shipment from dispatch to delivery.
+                            {/* Stay updated with real-time tracking information. Our platform allows you to monitor the status of your shipment from dispatch to delivery. */}
+                            {params("ship.Ship4_param")}
                         </p>
 
                     </div>

@@ -8,8 +8,6 @@ import header from "../../../public/assets/home/AboutUsHeading.png";
 import { useTranslations } from "next-intl";
 export default function Home() {
   const t = useTranslations("default");
-  console.log("🚀 ~ Home ~ t:", t)
-  console.log(t("Header")); // Check console to verify the output
   return (
     <>
       <div className={styles.container}>

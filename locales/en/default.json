@@ -112,6 +112,20 @@
             "Shipping": "Shipping Labels",
             "Shipping_Sub": "How it Works",
             "SubHeader": "Get delivery Cross-Border and Worldwide"
+        },
+        "mailbox": {
+            "CTA": "Get My Account",
+            "item1": "Register",
+            "item1_string": "Register for free and get your new shipping address to receive your purchases online.",
+            "item2": "Shop",
+            "item2_string": "Shop at your favorite online store and use your new local shipping address",
+            "item3": "Pick up or Doorstep Delivery",
+            "item3_string": "Pick up your purchases at your ShipLink Mailbox branch or Receive them at your door via our cross-border transfer service",
+            "Start_buy": "Start Buy and Receive with us !",
+            "sub_string": "With our Cross-Border Mailbox service you receive your packages and documents within their originating country in the most convenient, fast and economical way. With your ShipLink address you can make purchases online at your favorite stores, subscribe to magazines, receive correspondence and much more without the extra costs of international shipping and brokerage surcharges for items worth less than $800 USD",
+            "sub_title": "How it Works",
+            "tilte_string": "Discover the ultimate convenience with our Cross-Border Mailbox service. Receive packages and documents directly within their country of origin, saving you time and money. Your ShipLink address opens up a world of possibilities: shop online at your favorite stores, subscribe to magazines, receive important mail, and more. Enjoy all these benefits without worrying about hefty international shipping fees or brokerage surcharges on items under $800 USD.",
+            "Title": "Cross-Border Mailbox"
         }
     }
 }

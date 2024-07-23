@@ -193,7 +193,10 @@
             "item9_list": "Interdit dans la plupart des pays du Moyen-Orient"
         },
         "terms": {
+            "free_text": "En vous inscrivant aux services logistiques Shiplink, vous reconnaissez que vous avez lu, compris et accepté d'être lié par ces termes et conditions.",
             "item1": "Acceptation des conditions",
+            "item10": "Amendements",
+            "item10_text": "Shiplink se réserve le droit de modifier ces termes et conditions à tout moment. Les utilisateurs seront informés de tout changement et l'utilisation continue des services Shiplink constitue l'acceptation des conditions révisées.",
             "item1_text": "En vous inscrivant aux services logistiques ShipLink, vous acceptez de respecter les termes et conditions décrits dans les présentes. Ces conditions régissent votre utilisation de la plateforme et des services ShipLink. Si vous n'êtes pas d'accord avec l'une de ces conditions, vous ne pouvez pas utiliser nos services.",
             "item2": "Description du service",
             "item2_text": "ShipLink fournit des services logistiques comprenant, mais sans s'y limiter, le transport de marchandises, l'entreposage et la gestion des stocks. Les spécificités des services fournis seront détaillées dans le contrat de service entre ShipLink et le client.",
@@ -203,6 +206,14 @@
             "item4_text": "Les utilisateurs acceptent de payer tous les frais associés aux services fournis par ShipLink, comme indiqué dans le contrat de service. Les conditions de paiement seront spécifiées dans le contrat de service et peuvent inclure des frais initiaux, des frais récurrents et des frais supplémentaires pour des services spécifiques.",
             "item5": "Conditions d'expédition",
             "item5_text": "ShipLink transportera les marchandises conformément aux conditions convenues décrites dans le contrat de service. Les utilisateurs sont responsables de s'assurer que les expéditions sont conformes à toutes les lois et réglementations en vigueur, y compris les exigences douanières pour les expéditions internationales.",
+            "item6": "Responsabilité",
+            "item6_text": "ShipLink fera preuve d'un soin raisonnable dans la manipulation et le transport des expéditions, mais n'est pas responsable de toute perte, dommage ou retard causé par des facteurs indépendants de sa volonté, y compris, mais sans s'y limiter, des catastrophes naturelles, des grèves ou des actions gouvernementales.",
+            "item7": "Assurance",
+            "item7_text": "Les utilisateurs peuvent choisir de souscrire une assurance pour leurs envois moyennant des frais supplémentaires. Shiplink n'est pas responsable de toute perte ou dommage aux expéditions qui ne sont pas couverts par une assurance.",
+            "item8": "Résiliation",
+            "item8_text": "Chaque partie peut résilier le contrat de service moyennant un préavis écrit si l'autre partie viole une disposition importante du contrat. En cas de résiliation, tous frais ou obligations impayés deviendront dus et payables",
+            "item9": "Loi applicable",
+            "item9_text": "Ces termes et conditions doivent être régis et interprétés conformément aux lois du Québec, Canada. sans égard à ses dispositions en matière de conflit de lois.",
             "title": "Termes et conditions",
             "title_text": "Veuillez lire et examiner attentivement nos termes et conditions avant de vous inscrire à nos services."
         }

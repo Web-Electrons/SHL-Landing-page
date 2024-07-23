@@ -193,7 +193,10 @@
             "item9_list": "Prohibited to most countries in the Middle East"
         },
         "terms": {
+            "free_text": "By signing up for Shiplink logistics services, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions.",
             "item1": "Acceptance of Terms",
+            "item10": "Amendments",
+            "item10_text": "Shiplink reserves the right to amend these terms and conditions at any time. Users will be notified of any changes, and continued use of Shiplink services constitutes acceptance of the revised terms.",
             "item1_text": "By signing up for ShipLink logistics services, you agree to abide by the terms and conditions outlined herein. These terms govern your use of ShipLink platform and services. If you do not agree with any of these terms, you may not use our services.",
             "item2": "Service Description",
             "item2_text": "ShipLink provides logistics services including but not limited to freight transportation, warehousing, and inventory management. The specifics of the services provided will be detailed in the service agreement between ShipLink and the customer.",
@@ -203,6 +206,14 @@
             "item4_text": "Users agree to pay all fees associated with the services provided by ShipLink as outlined in the service agreement. Payment terms will be specified in the service agreement and may include upfront fees, recurring charges, and additional fees for specific services.",
             "item5": "Shipment Terms",
             "item5_text": "ShipLink will transport goods in accordance with the agreed-upon terms outlined in the service agreement. Users are responsible for ensuring that shipments comply with all relevant laws and regulations, including customs requirements for international shipments.",
+            "item6": "Liability",
+            "item6_text": "ShipLink will exercise reasonable care in handling and transporting shipments but is not liable for any loss, damage, or delay caused by factors beyond its control, including but not limited to acts of nature, strikes, or governmental actions.",
+            "item7": "Insurance",
+            "item7_text": "Users may opt to purchase insurance coverage for their shipments at an additional cost. Shiplink is not liable for any loss or damage to shipments that are not covered by insurance.",
+            "item8": "Termination",
+            "item8_text": "Either party may terminate the service agreement upon written notice if the other party breaches any material provision of the agreement. Upon termination, any outstanding fees or obligations will become due and payable",
+            "item9": "Governing Law",
+            "item9_text": "These terms and conditions shall be governed by and construed in accordance with the laws of Quebec, Canada. without regard to its conflict of law provisions.",
             "title": "Terms and Conditions",
             "title_text": "Please read and review carefully our terms and conditions before signing up to our services"
         }

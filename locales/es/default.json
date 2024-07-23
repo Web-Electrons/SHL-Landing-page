@@ -192,8 +192,11 @@
             "item9": "ARTÍCULOS RELACIONADOS CON PORNOGRAFÍA Y SEXO",
             "item9_list": "Prohibido en la mayoría de los países de Medio Oriente."
         },
-        "terms": {
+        "terms":{
+            "free_text": "Al suscribirse a los servicios de logística de Shiplink, usted reconoce que ha leído, comprendido y aceptado estar sujeto a estos términos y condiciones.",
             "item1": "Aceptación de los términos",
+            "item10": "Enmiendas",
+            "item10_text": "Shiplink se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Los usuarios serán notificados de cualquier cambio y el uso continuado de los servicios de Shiplink constituye la aceptación de los términos revisados.",
             "item1_text": "Al suscribirse a los servicios de logística de ShipLink, acepta cumplir con los términos y condiciones descritos en este documento. Estos términos rigen su uso de la plataforma y los servicios de ShipLink. Si no está de acuerdo con alguno de estos términos, no podrá utilizar nuestros servicios.",
             "item2": "Descripción del servicio",
             "item2_text": "ShipLink brinda servicios de logística que incluyen, entre otros, transporte de carga, almacenamiento y gestión de inventario. Los detalles de los servicios prestados se detallarán en el acuerdo de servicio entre ShipLink y el cliente.",
@@ -203,6 +206,14 @@
             "item4_text": "Los usuarios aceptan pagar todas las tarifas asociadas con los servicios proporcionados por ShipLink como se describe en el acuerdo de servicio. Los términos de pago se especificarán en el acuerdo de servicio y pueden incluir tarifas iniciales, cargos recurrentes y tarifas adicionales para servicios específicos.",
             "item5": "Términos de envío",
             "item5_text": "ShipLink transportará mercancías de acuerdo con los términos acordados descritos en el acuerdo de servicio. Los usuarios son responsables de garantizar que los envíos cumplan con todas las leyes y regulaciones pertinentes, incluidos los requisitos aduaneros para envíos internacionales.",
+            "item6": "Responsabilidad",
+            "item6_text": "ShipLink ejercerá un cuidado razonable en el manejo y transporte de los envíos, pero no es responsable de ninguna pérdida, daño o retraso causado por factores fuera de su control, incluidos, entre otros, actos de la naturaleza, huelgas o acciones gubernamentales.",
+            "item7": "Seguro",
+            "item7_text": "Los usuarios podrán optar por contratar una cobertura de seguro para sus envíos con un coste adicional. Shiplink no es responsable de ninguna pérdida o daño a los envíos que no estén cubiertos por el seguro.",
+            "item8": "Terminación",
+            "item8_text": "Cualquiera de las partes puede rescindir el acuerdo de servicio mediante notificación por escrito si la otra parte incumple alguna disposición sustancial del acuerdo. Tras la terminación, cualquier tarifa u obligación pendiente será exigible y pagadera.",
+            "item9": "Ley que rige",
+            "item9_text": "Estos términos y condiciones se regirán e interpretarán de conformidad con las leyes de Quebec, Canadá. sin tener en cuenta sus disposiciones sobre conflicto de leyes.",
             "title": "Términos y condiciones",
             "title_text": "Lea y revise atentamente nuestros términos y condiciones antes de suscribirse a nuestros servicios."
         }

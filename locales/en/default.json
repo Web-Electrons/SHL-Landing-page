@@ -134,8 +134,8 @@
             "card3_text": "After successful payment, your package is either ready to pickup or processed for shipment to your destination. The tracking code will immediately be available and can easily be tracking directly with the carrier or through your ShipLink Dashboard"
         },
         "privacy": {
-            "list1": "Introduction",
-            "list1_text": "At SHIPLINK, we respect your privacy and are committed to protecting your personal data. This policy outlines how we handle your personal data when you visit our website, your privacy rights, and how the law protects you.",
+            "list1": " Introduction",
+            "list1_text": "At ShipLink, we respect your privacy and are committed to protecting your personal data. This policy outlines how we handle your personal data when you visit our website, your privacy rights, and how the law protects you.",
             "list2": " Important Information and Who We Are",
             "list2_item1": "Purpose of This Privacy Policy",
             "list2_item1_text": "This Privacy Policy provides information on how SHIPLINK collects and processes your personal data through your use of our website, including any data you may provide when you contact us or purchase our services. Our website is not intended for children, and we do not knowingly collect data related to children. It is important to read this Privacy Policy together with any other privacy notices we may provide on specific occasions to understand how and why we are using your data. This policy supplements other notices and is not intended to override them.",
@@ -144,7 +144,7 @@
             "list2_item3": "Contact Details",
             "list2_item3_text": "Data Privacy Manager",
             "list2_item4": "Changes to the Privacy Policy and Your Duty to Inform Us of Changes",
-            "list2_item4_text": "This Privacy Policy was last updated on [insert date]. We reserve the right to update it as necessary. Any significant changes will be communicated via a pop-up notice on our website. It is crucial that the personal data we hold about you is accurate and current. Please inform us of any changes to your personal data during your relationship with us.",
+            "list2_item4_text": "This Privacy Policy was last updated on 2024-07-23. We reserve the right to update it as necessary. Any significant changes will be communicated via a pop-up notice on our website. It is crucial that the personal data we hold about you is accurate and current. Please inform us of any changes to your personal data during your relationship with us.",
             "list2_item5": "Third-party Links",
             "list2_item5_text": "Our website may contain links to third-party websites, plug-ins, and applications. Clicking on those links may allow third parties to collect or share data about you. We do not control these third-party websites and are not responsible for their privacy statements. We encourage you to read the privacy policies of every website you visit.",
             "list3": "The Data We Collect About You",
@@ -163,11 +163,33 @@
             "list7": "Promotional Offers From Us",
             "list7_text": "We may use your Identity, Contact, Technical, Usage, and Profile Data to form a view on what we think you may want or need, or what may be of interest to you. This is how we decide which services and offers may be relevant for you (we call this marketing).\nYou will receive marketing communications from us if you have requested information from us or purchased services from us, and you have not opted out of receiving",
             "list8": "Third-party Marketing",
-            "list8_text": "We will get your express opt-in consent before we share your personal data with any company outside SHIPLINK for marketing purposes.",
+            "list8_text": "We will get your express opt-in consent before we share your personal data with any company outside ShipLink for marketing purposes.",
             "list9": "Opting Out",
             "list9_text": "You can ask us or third parties to stop sending you marketing messages at any time by logging into the website and checking or unchecking relevant boxes to adjust your marketing preferences or by following the opt-out links on any marketing message sent to you or by contacting us at any time.\nWhere you opt out of receiving these marketing messages, this will not apply to personal data provided to us as a result of a service purchase, warranty registration, service experience, or other transactions.",
-            "Privacy_title": "Privacy policy",
-            "Sub_title": "Welcome to ShipLink Privacy Policy."
+            "Privacy_title": "Privacy policy"
+        },
+        "prohibited": {
+            "detail": "Detail on Prohibited items",
+            "detail_text": "ShipLink prohibits the shipment of any items that are banned by the laws, regulations, or statutes of any federal, state, or local government of any country through which the shipment may pass. Items requiring a special license for transport are also prohibited. Additionally, Shiplink prohibits items that could damage equipment, personnel, or other packages.\nCountry-specific restrictions apply.\nThe above list is not exhaustive; please check country-specific restrictions here.\nIf you have further questions, please contact customer service at",
+            "item1": "ANIMALS / PLANTS / FOOD",
+            "item1_list": "Live Animals or Insects.\nAnimal Carcasses\nFurs\nLive plants and plant materials\nFungi / Mushroom / Plant Spores\nPlant Seeds\nPerishable items\nFresh food or items that require refrigeration",
+            "item2": "HIGH VALUE ITEMS",
+            "item2_list": "Antiques (breakable and/or fragile)\nPrecious metals and stones\nJewelry\nBullion",
+            "item3": "UNIDENTIFIABLE ITEMS",
+            "item3_list": "Substances or chemicals\nLiquids\nNon-prescription medications\nVitamins or supplements\nFood items",
+            "item3_text": "Including but not limited to items listed below without manufacturer label",
+            "item4": "HAZARDOUS MATERIALS",
+            "item4_list": "Asbestos\nWastes as defined in the IATA regulation\nGarbage\nDisinterred human remains\nCorrosives\nCombustible material\nPropane Tanks\nLithium Batteries*\nLoose Lithium Metal Batteries\nSteel Products*\nHigh Powered Magnets\nHigh Powered Magnets\nHuman remains, including ashes\nEmbryos\nAirbags",
+            "item5": "MONETARY ITEMS",
+            "item5_list": "Cash/Currency/Credit or Debit Cards\nChecks/Money Orders/Gift Cards\nBank Issued Statements/Documents/Bank Notes\nBlank Magnetic / Chip cards\nLottery Tickets or any gambling devices that are prohibited by law\nGovernment Issued Personal Identification\nLaminators / Holographic Card Tape",
+            "item6": "MILITARY ITEMS",
+            "item6_list": "Mounted or non-mounted optics\nNight vision and related items\nInfrared and Thermal imagers\nRange finders\nLaw enforcement tactical gear\nMilitary tactical gear\nTraining equipment\nMilitary or Law enforcement uniforms\nIDs and badges, including imitations",
+            "item7": "WEAPONS",
+            "item7_list": "Firearms, firearm parts, accessories (real or replica)\nGuns, gun parts, accessories (real or replica)\nAirbows, Airguns\nAmmunition\nAmmunition accessories\nAll Firearm parts and accessories\nHarpoons\nReloading kits and accessories\nStun Guns\nTasers\nToy Guns\nPaintball Guns\nPepper Spray\nHunting Knives over 5″ in Length\nSwords & Bayonets\nSwitch Blades\nFireworks\nAir Soft Guns\nBB Guns",
+            "item8": "ALCOHOL, DRUGS, AND TOBACCO PRODUCTS",
+            "item8_list": "Illegal Narcotics\nPrescription Drugs and Devices\nAlcohol\nElectronic cigarette cartridges\nCBD Products\nKAVA\nKratom\nCigarettes\nLighters\nVaping Products\nE-Cigarettes\nE-liquids\nCigars\nChewing Tobacco\nControlled Substances\nCannabis\nNitrates\nDrug Paraphernalia\nDouble Scorpio",
+            "item9": "PORNOGRAPHY & SEX RELATED ITEMS",
+            "item9_list": "Prohibited to most countries in the Middle East"
         }
     }
 }

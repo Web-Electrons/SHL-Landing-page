@@ -13,7 +13,7 @@ export default function Privacy() {
                     <div className="flex flex-col gap-4 justify-start text-left w-[70%] mx-auto pt-10">
                         <h1 className=" text-myBlue text-3xl font-bold">{t("Privacy_title")}</h1>
                         <p className="w-[90%] leading-loose">
-                            {t('Sub_title')}
+                            {/* {t('Sub_title')} */}
                         </p>
                         <div className="left flex flex-col justify-start gap-2">
                             <h2 className='text-black font-bold text-2xl'>1. {t("list1")}</h2>

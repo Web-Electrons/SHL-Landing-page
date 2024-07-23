@@ -1,7 +1,18 @@
 import React from 'react'
 import styles from '../styles.module.scss'
 import Link from 'next/link'
-export default function page() {
+import { useTranslations } from 'next-intl'
+export default function Prohibited() {
+    const t = useTranslations('default.prohibited')
+    const list1 = t('item1_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list2 = t('item2_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list3 = t('item3_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list4 = t('item4_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list5 = t('item5_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list6 = t('item6_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list7 = t('item7_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list8 = t('item8_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
+    const list9 = t('item9_list').split('\n').map((item, index) => <li key={index}>{item}</li>);
     return (
         <>
             <div className={styles.container}>
@@ -11,91 +22,48 @@ export default function page() {
                     </div>
                     <div className="flex flex-row gap-9 text-left w-[80%] mx-auto pt-10 justify-center items-start flex-wrap">
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>ANIMALS / PLANTS / FOOD</h2>
+                            <h2 className='text-black font-bold text-2xl'>{t('item1')}</h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
                                     <ul className='list-disc list-inside px-4'>
-                                        <li className=''>Live Animals or Insects.</li>
-                                        <li>
-                                            Animal Carcasses
-                                        </li>
-                                        <li>
-                                            Furs
-                                        </li>
-                                        <li>
-                                            Live plants and plant materials
-                                        </li>
-                                        <li>
-                                            Fungi / Mushroom / Plant Spores
-                                        </li>
-                                        <li>
-                                            Plant Seeds
-                                        </li>
-                                        <li>
-                                            Perishable items
-                                        </li>
-                                        <li>
-                                            Fresh food or items that require refrigeration
-                                        </li>
+                                        {list1}
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>HIGH VALUE ITEMS</h2>
+                            <h2 className='text-black font-bold text-2xl'>{t('item2')}</h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
                                     <ul className='list-disc list-inside px-4'>
-                                        <li>
-                                            Antiques (breakable and/or fragile)
-                                        </li>
-                                        <li>
-                                            Precious metals and stones
-                                        </li>
-                                        <li>
-                                            Jewelry
-                                        </li>
-                                        <li>
-                                            Bullion
-                                        </li>
+                                        {list2}
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>UNIDENTIFIABLE ITEMS</h2>
+                            <h2 className='text-black font-bold text-2xl'>{t('item3')}</h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
-                                    Including but not limited to items listed below without manufacturer label
+                                    {t('item3_text')}
                                 </div>
                             </div>
                             <div className="w-[90%] leading-loose">
                                 <ul className='list-disc list-inside px-4'>
-                                    <li>
-                                        Substances or chemicals
-                                    </li>
-                                    <li>
-                                        Liquids
-                                    </li>
-                                    <li>
-                                        Non-prescription medications
-
-                                    </li>
-                                    <li>
-                                        Vitamins or supplements
-                                    </li>
-                                    <li>
-                                        Food items
-                                    </li>
+                                    {list3}
                                 </ul>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>HAZARDOUS MATERIALS
+                            <h2 className='text-black font-bold text-2xl'>
+                                {/* HAZARDOUS MATERIALS */}
+                                {t('item4')}
                             </h2>
-
                             <div className="w-[90%] leading-loose">
                                 <ul className='list-disc list-inside px-4'>
+                                    {list4}
+                                </ul>
+                                {/* <ul className='list-disc list-inside px-4'>
                                     <li>
                                         Asbestos
                                     </li>
@@ -149,81 +117,46 @@ export default function page() {
                                             Learn more about hazmat here!
                                         </Link>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </div>
                         </div>
 
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>MONETARY ITEMS</h2>
+                            <h2 className='text-black font-bold text-2xl'>
+                                {t('item5')}
+                            </h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
                                     <ul className='list-disc list-inside px-4'>
-                                        <li className=''>
-                                            Cash/Currency/Credit or Debit Cards
-                                        </li>
-                                        <li className=''>
-                                            Checks/Money Orders/Gift Cards
-                                        </li>
-                                        <li className=''>
-                                            Bank Issued Statements/Documents/Bank Notes
-                                        </li>
-                                        <li className=''>
-                                            Blank Magnetic / Chip cards
-                                        </li>
-                                        <li className=''>
-                                            Lottery Tickets or any gambling devices that are prohibited by law
-                                        </li>
-                                        <li className=''>
-                                            Government Issued Personal Identification
-                                        </li>
-                                        <li className=''>
-                                            Laminators / Holographic Card Tape
-                                        </li>
+                                        {list5}
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>MILITARY ITEMS</h2>
+                            <h2 className='text-black font-bold text-2xl'>
+                                {t('item6')}
+                                {/* MILITARY ITEMS */}
+                            </h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
                                     <ul className='list-disc list-inside px-4'>
-                                        <li className=''>
-                                            Mounted or non-mounted optics (scopes)
-                                        </li>
-                                        <li className=''>
-                                            Night vision and related items
-                                        </li>
-                                        <li className=''>
-                                            Infrared/Thermal imagers/cameras
-                                        </li>
-                                        <li className=''>
-                                            Range finders
-                                        </li>
-                                        <li className=''>
-                                            Law enforcement tactical gear or training apparatus
-                                        </li>
-                                        <li className=''>
-                                            Military tactical gear or training apparatus
-                                        </li>
-                                        <li className=''>
-                                            Training equipment
-                                        </li>
-                                        <li className=''>
-                                            Law enforcement uniforms, IDs and badges (genuine or imitations)
-                                        </li>
-                                        <li className=''>
-                                            Military uniforms, IDs and badges (genuine or imitations)
-                                        </li>
+                                        {list6}
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>WEAPONS</h2>
+                            <h2 className='text-black font-bold text-2xl'>
+                                {t('item7')}
+                            </h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
                                     <ul className='list-disc list-inside px-4'>
+                                        {list7}
+                                    </ul>
+                                    {/* <ul className='list-disc list-inside px-4'>
+
                                         <li className=''>
                                             Firearms, firearm parts, accessories (real or replica)
                                         </li>
@@ -284,15 +217,21 @@ export default function page() {
                                         <li className=''>
                                             BB Guns
                                         </li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>ALCOHOL, DRUGS, AND TOBACCO PRODUCTS</h2>
+                            <h2 className='text-black font-bold text-2xl'>
+                                {/* ALCOHOL, DRUGS, AND TOBACCO PRODUCTS */}
+                                {t('item8')}
+                            </h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
                                     <ul className='list-disc list-inside px-4'>
+                                        {list8}
+                                    </ul>
+                                    {/* <ul className='list-disc list-inside px-4'>
                                         <li className=''>
                                             Illegal Narcotics
                                         </li>
@@ -369,15 +308,21 @@ export default function page() {
                                         <li className=''>
                                             Harpoons
                                         </li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2 w-[350px]">
-                            <h2 className='text-black font-bold text-2xl'>PORNOGRAPHY & SEX RELATED ITEMS</h2>
+                            <h2 className='text-black font-bold text-2xl'>
+                                {/* PORNOGRAPHY & SEX RELATED ITEMS */}
+                                {t('item9')}
+                            </h2>
                             <div className="text-[#5A5A5A] text-base">
                                 <div className="w-[90%] leading-loose">
                                     <ul className='list-disc list-inside px-4'>
+                                        {list9}
+                                    </ul>
+                                    {/* <ul className='list-disc list-inside px-4'>
                                         <li className=''>
                                             Prohibited to most countries in the Gulf / Middle East
                                         </li>
@@ -390,14 +335,18 @@ export default function page() {
                                                 contact@shiplink.com
                                             </Link>
                                         </li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
                             </div>
                         </div>
                         <div className="left flex flex-col justify-start gap-2">
-                            <h2 className='text-black font-bold text-2xl'>Detail on Prohibited items</h2>
+                            <h2 className='text-black font-bold text-2xl'>
+                                {t('detail')}
+                                {/* Detail on Prohibited items */}
+                            </h2>
                             <div className="text-[#5A5A5A] text-base">
-                                <p className="w-[90%] leading-loose">
+                                {t('detail_text')}
+                                {/* <p className="w-[90%] leading-loose">
                                     Shiplink prohibits the shipment of any items that are banned by the laws, regulations, or statutes of any federal, state, or local government of any country through which the shipment may pass. Items requiring a special license for transport are also prohibited. Additionally, Shiplink prohibits items that could damage equipment, personnel, or other packages.
                                 </p>
                                 <ul className='list-disc list-inside px-4 my-4'>
@@ -407,7 +356,7 @@ export default function page() {
                                     The above list is not exhaustive; please check country-specific restrictions here.
                                     <br />
                                     If you have further questions, please contact customer service at
-                                </p>
+                                </p> */}
                                 <Link
                                     className='text-myBlue underline'
                                     href={"mailto:support@shiplink.com."}>

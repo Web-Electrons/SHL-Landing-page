@@ -134,8 +134,8 @@
             "card3_text": "Después del pago exitoso, su paquete estará listo para ser recogido o procesado para su envío a su destino. El código de seguimiento estará disponible de inmediato y podrá rastrearse fácilmente directamente con el transportista o a través de su panel de ShipLink."
         },
         "privacy": {
-            "list1": "Introducción",
-            "list1_text": "En SHIPLINK, respetamos su privacidad y nos comprometemos a proteger sus datos personales. Esta política describe cómo manejamos sus datos personales cuando visita nuestro sitio web, sus derechos de privacidad y cómo lo protege la ley.",
+            "list1": " Introducción",
+            "list1_text": "En ShipLink, respetamos su privacidad y estamos comprometidos a proteger sus datos personales. Esta política describe cómo manejamos sus datos personales cuando visita nuestro sitio web, sus derechos de privacidad y cómo lo protege la ley.",
             "list2": " Información importante y quiénes somos",
             "list2_item1": "Propósito de esta Política de Privacidad",
             "list2_item1_text": "Esta Política de Privacidad proporciona información sobre cómo SHIPLINK recopila y procesa sus datos personales a través del uso de nuestro sitio web, incluidos los datos que pueda proporcionar cuando se comunique con nosotros o compre nuestros servicios. Nuestro sitio web no está destinado a niños y no recopilamos conscientemente datos relacionados con niños. Es importante leer esta Política de Privacidad junto con cualquier otro aviso de privacidad que podamos proporcionar en ocasiones específicas para comprender cómo y por qué utilizamos sus datos. Esta política complementa otros avisos y no pretende anularlos.",
@@ -144,7 +144,7 @@
             "list2_item3": "Detalles de contacto",
             "list2_item3_text": "Gerente de Privacidad de Datos",
             "list2_item4": "Cambios en la Política de Privacidad y su deber de informarnos sobre los cambios",
-            "list2_item4_text": "Esta Política de Privacidad se actualizó por última vez el [insertar fecha]. Nos reservamos el derecho de actualizarlo según sea necesario. Cualquier cambio significativo se comunicará mediante un aviso emergente en nuestro sitio web. Es fundamental que los datos personales que tenemos sobre usted sean precisos y estén actualizados. Por favor, infórmenos de cualquier cambio en sus datos personales durante su relación con nosotros.",
+            "list2_item4_text": "Esta Política de Privacidad se actualizó por última vez el 2024-07-23. Nos reservamos el derecho de actualizarlo según sea necesario. Cualquier cambio significativo se comunicará mediante un aviso emergente en nuestro sitio web. Es fundamental que los datos personales que tenemos sobre usted sean precisos y estén actualizados. Por favor, infórmenos de cualquier cambio en sus datos personales durante su relación con nosotros.",
             "list2_item5": "Enlaces de terceros",
             "list2_item5_text": "Nuestro sitio web puede contener enlaces a sitios web, complementos y aplicaciones de terceros. Hacer clic en esos enlaces puede permitir que terceros recopilen o compartan datos sobre usted. No controlamos estos sitios web de terceros y no somos responsables de sus declaraciones de privacidad. Le recomendamos que lea las políticas de privacidad de cada sitio web que visite.",
             "list3": "Los datos que recopilamos sobre usted",
@@ -155,7 +155,7 @@
             "list4_list": "Interacciones directas: puede proporcionar datos de identidad, de contacto y financieros completando formularios o comunicándose con nosotros por correo postal, teléfono, correo electrónico o de otro modo. Esto incluye los datos personales que usted proporciona cuando solicita nuestros servicios, crea una cuenta en nuestro sitio web, se suscribe a nuestros servicios, proporciona información de envío, solicita marketing, participa en un concurso, promoción o encuesta, o nos da su opinión. \nInteracciones directas: puede proporcionar datos de identidad, contacto y financieros completando formularios o comunicándose con nosotros por correo postal, teléfono, correo electrónico o de otro modo. Esto incluye los datos personales que usted proporciona cuando solicita nuestros servicios, crea una cuenta en nuestro sitio web, se suscribe a nuestros servicios, proporciona información de envío, solicita marketing, participa en un concurso, promoción o encuesta, o nos da su opinión. \nTerceros o fuentes disponibles públicamente: podemos recibir datos personales sobre usted de varios terceros y fuentes públicas, como proveedores de análisis (por ejemplo, Google), redes de publicidad (por ejemplo, Facebook), proveedores de información de búsqueda (por ejemplo, Google) y proveedores de servicios técnicos, de pago y de entrega (por ejemplo, PayPal).",
             "list4_text": "Utilizamos varios métodos para recopilar datos suyos y sobre usted, que incluyen:",
             "list5": "Cómo utilizamos sus datos personales",
-            "list5_list": "Cuando necesitemos ejecutar el contrato que estamos a punto de celebrar o hemos celebrado con usted. \nCuando sea necesario para nuestros intereses legítimos (o los de un tercero) y sus intereses y derechos fundamentales no prevalezcan sobre esos intereses. \nCuando necesitemos cumplir con una obligación legal o reglamentaria.",
+            "list5_list": "Cuando necesitemos ejecutar el contrato que estamos a punto de celebrar o hemos celebrado con usted. \nCuando sea necesario para nuestros intereses legítimos (o los de un tercero) y sus intereses y derechos fundamentales no prevalezcan sobre esos intereses. Cuando necesitemos cumplir con una obligación legal o reglamentaria.",
             "list5_text": "Sólo utilizaremos tus datos personales cuando la ley nos lo permita. Lo más habitual es que utilicemos sus datos personales en las siguientes circunstancias:",
             "list5_text_bottom": "Generalmente, no nos basamos en el consentimiento como base legal para procesar sus datos personales excepto en relación con el envío de comunicaciones de marketing directo de terceros por correo electrónico o mensaje de texto. Tiene derecho a retirar su consentimiento para el marketing en cualquier momento poniéndose en contacto con nosotros.",
             "list6": "Marketing",
@@ -163,11 +163,33 @@
             "list7": "Ofertas promocionales de nuestra parte",
             "list7_text": "Podemos utilizar su identidad, contacto, datos técnicos, de uso y de perfil para formarnos una opinión sobre lo que creemos que puede querer o necesitar, o lo que puede ser de su interés. Así es como decidimos qué servicios y ofertas pueden ser relevantes para usted (a esto lo llamamos marketing).\nRecibirá nuestras comunicaciones de marketing si nos ha solicitado información o nos ha comprado servicios y no ha optado por no recibirlas.",
             "list8": "Comercialización de terceros",
-            "list8_text": "Obtendremos su consentimiento expreso antes de compartir sus datos personales con cualquier empresa fuera de SHIPLINK con fines de marketing.",
+            "list8_text": "Obtendremos su consentimiento expreso antes de compartir sus datos personales con cualquier empresa fuera de ShipLink con fines de marketing.",
             "list9": "Optar por no participar",
             "list9_text": "Puede solicitarnos a nosotros o a terceros que dejemos de enviarle mensajes de marketing en cualquier momento iniciando sesión en el sitio web y marcando o desmarcando las casillas correspondientes para ajustar sus preferencias de marketing o siguiendo los enlaces de exclusión voluntaria en cualquier mensaje de marketing que se le envíe o comunicándose con nosotros en cualquier momento.\nCuando opte por no recibir estos mensajes de marketing, esto no se aplicará a los datos personales que nos proporcione como resultado de la compra de un servicio, registro de garantía, experiencia de servicio u otras transacciones.",
-            "Privacy_title": "Política de privacidad",
-            "Sub_title": "Bienvenido a la Política de privacidad de ShipLink."
+            "Privacy_title": "Política de privacidad"
+        },
+        "prohibited": {
+            "detail": "Detalle sobre artículos prohibidos",
+            "detail_text": "ShipLink prohíbe el envío de cualquier artículo que esté prohibido por las leyes, regulaciones o estatutos de cualquier gobierno federal, estatal o local de cualquier país por el que pueda pasar el envío. También están prohibidos los artículos que requieran una licencia especial para su transporte. Además, Shiplink prohíbe artículos que puedan dañar el equipo, el personal u otros paquetes. Se aplican restricciones específicas de cada país. \nLa lista de arriba no es exhaustiva; consulte las restricciones específicas del país aquí. Si tiene más preguntas, comuníquese con el servicio de atención al cliente al",
+            "item1": "ANIMALES / PLANTAS / ALIMENTOS",
+            "item1_list": "Animales o insectos vivos. \nCadáveres de animales \nPieles \nPlantas vivas y materiales vegetales \nHongos/hongos/esporas de plantas \nSemillas de plantas \nArtículos perecederos \nAlimentos frescos o artículos que requieren refrigeración",
+            "item2": "ARTÍCULOS DE ALTO VALOR",
+            "item2_list": "Antigüedades (rompibles y/o frágiles) \nPiedras y metales preciosos \nJoyería \nLingotes",
+            "item3": "ARTÍCULOS NO IDENTIFICABLES",
+            "item3_list": "Sustancias o químicos\nLíquidos\nMedicamentos sin receta\nVitaminas o suplementos\nAlimentos",
+            "item3_text": "Incluyendo, entre otros, los artículos enumerados a continuación sin etiqueta del fabricante.",
+            "item4": "MATERIALES PELIGROSOS",
+            "item4_list": "Asbesto \nResiduos tal como se define en la regulación IATA \nBasura \nRestos humanos desenterrados \nCorrosivos \nMaterial combustible \nTanques de propano \nBaterías de litio* \nBaterías sueltas de metal de litio \nProductos de acero* \nImanes de alta potencia \nImanes de alta potencia \nRestos humanos, incluidas cenizas \nEmbriones \nBolsas de aire",
+            "item5": "PARTIDAS MONETARIAS",
+            "item5_list": "Efectivo/moneda/tarjetas de crédito o débito \nCheques/giros postales/tarjetas de regalo \nEstados de cuenta/documentos/billetes emitidos por bancos \nTarjetas magnéticas/con chip en blanco \nBilletes de lotería o cualquier dispositivo de juego prohibido por ley \nIdentificación personal emitida por el gobierno\nLaminadoras / Cinta para Tarjetas Holográficas",
+            "item6": "ARTÍCULOS MILITARES",
+            "item6_list": "Ópticas montadas o no montadas Visión nocturna y artículos relacionados Cámaras termográficas e infrarrojas Telémetros Equipo táctico de aplicación de la ley Equipo táctico militar Equipo de entrenamiento Uniformes militares o de aplicación de la ley Identificaciones e insignias, incluidas imitaciones",
+            "item7": "ARMAS",
+            "item7_list": "Armas de fuego, repuestos y accesorios para armas de fuego (reales o réplicas) Armas, repuestos y accesorios para armas (reales o réplicas) Arcos de aire comprimido, municiones para armas de aire comprimido Accesorios para municiones Todas las piezas y accesorios para armas de fuego Arpones Kits y accesorios de recarga Pistolas paralizantes Tasers Pistolas de juguete Pistolas de paintball Spray de pimienta Cuchillos de caza 5″ de largo Espadas y bayonetas Cuchillas de cambio Fuegos artificiales Pistolas de aire comprimido Pistolas de aire comprimido",
+            "item8": "ALCOHOL, DROGAS Y PRODUCTOS DE TABACO",
+            "item8_list": "Stupéfiants illégaux\nMédicaments et appareils sur ordonnance\nAlcool\nCartouches de cigarettes électroniques\nProduits CBD\nKAVA\nKratom\nCigarettes\nBriquets\nProduits de vapotage\nCigarettes électroniques\nE-liquides\nCigares\nMâcher du tabac\nSubstances contrôlées\nCannabis\nNitrates\nAttirail de drogue\nDouble Scorpion",
+            "item9": "ARTÍCULOS RELACIONADOS CON PORNOGRAFÍA Y SEXO",
+            "item9_list": "Prohibido en la mayoría de los países de Medio Oriente."
         }
     }
 }

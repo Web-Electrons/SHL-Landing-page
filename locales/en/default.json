@@ -116,16 +116,22 @@
         "mailbox": {
             "CTA": "Get My Account",
             "item1": "Register",
-            "item1_string": "Register for free and get your new shipping address to receive your purchases online.",
+            "item1_string": "Register for free and get your new US and Canada shipping addresses to receive your purchases online.",
             "item2": "Shop",
-            "item2_string": "Shop at your favorite online store and use your new local shipping address",
+            "item2_string": "Shop at your favorite online stores and use your new local shipping address",
             "item3": "Pick up or Doorstep Delivery",
-            "item3_string": "Pick up your purchases at your ShipLink Mailbox branch or Receive them at your door via our cross-border transfer service",
-            "Start_buy": "Start Buy and Receive with us !",
+            "item3_string": "Pick up your purchases at your selected ShipLink Mailbox location or Receive them at your doorstep via our cross-border or Forwarding.",
+            "Start_buy": "Get started - Buy and Receive with us !",
             "sub_string": "With our Cross-Border Mailbox service you receive your packages and documents within their originating country in the most convenient, fast and economical way. With your ShipLink address you can make purchases online at your favorite stores, subscribe to magazines, receive correspondence and much more without the extra costs of international shipping and brokerage surcharges for items worth less than $800 USD",
             "sub_title": "How it Works",
             "tilte_string": "Discover the ultimate money saving convenience with our Cross-Border Mailbox and Forwarding services. Receive packages and documents directly within their country of origin. Your ShipLink address opens up a world of possibilities: shop online at your favorite stores, subscribe to magazines, receive important mail, and more. With your ShipLink address, you can make purchases online without the extra costs of international shipping and surcharges applied by retailers. You can pickup in person or use our seamless forwarding service. There are no brokerage fee or taxes from Canada to USA for items worth less than $800 USD.",
-            "Title": "Cross-Border Mailbox & Forwarding"
+            "Title": "Cross-Border Mailbox & Forwarding",
+            "card1": "Declare Content",
+            "card1_text": "If you are using our Forwarding service, Declare the content of your package for efficient customs processing. Our platform has a simple easy to use interface that will guide you through the process to ship out quickly",
+            "card2": "Select Cross Border or Forwarding Service",
+            "card2_text": "Select the service that best suits your shipping needs. Choose from a range of trusted carriers and services to ensure your package arrives at its destination safely and on time. After selecting a service, you will be able to see the shipping rates and transit times for each carrier. You can then select the option that best suits your needs.",
+            "card3": "Paid and Ship",
+            "card3_text": "After successful payment, your package is either ready to pickup or processed for shipment to your destination. The tracking code will immediately be available and can easily be tracking directly with the carrier or through your ShipLink Dashboard"
         },
         "privacy": {
             "list1": "Introduction",

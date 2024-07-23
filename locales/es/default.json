@@ -116,16 +116,22 @@
         "mailbox": {
             "CTA": "Obtener mi cuenta",
             "item1": "Registro",
-            "item1_string": "Regístrate gratis y obtén tu nueva dirección de envío para recibir tus compras online.",
+            "item1_string": "Regístrate gratis y obtén tus nuevas direcciones de envío en EE. UU. y Canadá para recibir tus compras en línea.",
             "item2": "Comercio",
-            "item2_string": "Compre en su tienda en línea favorita y use su nueva dirección de envío local",
+            "item2_string": "Compre en sus tiendas en línea favoritas y use su nueva dirección de envío local",
             "item3": "Recogida o entrega a domicilio",
-            "item3_string": "Recoja sus compras en su sucursal ShipLink Mailbox o recíbalas en su puerta a través de nuestro servicio de transferencia transfronteriza",
-            "Start_buy": "¡Comienza a Comprar y Recibir con nosotros!",
+            "item3_string": "Recoja sus compras en la ubicación de su buzón de ShipLink seleccionada o recíbalas en la puerta de su casa a través de nuestro servicio transfronterizo o de reenvío.",
+            "Start_buy": "Comience: ¡Compre y reciba con nosotros!",
             "sub_string": "Con nuestro servicio de Buzón Transfronterizo recibes tus paquetes y documentos dentro de su país de origen de la forma más cómoda, rápida y económica. Con tu dirección ShipLink puedes realizar compras en línea en tus tiendas favoritas, suscribirte a revistas, recibir correspondencia y mucho más sin los costos adicionales de envío internacional y recargos por corretaje para artículos con un valor inferior a $800.",
             "sub_title": "Cómo funciona",
             "tilte_string": "Descubra la máxima comodidad para ahorrar dinero con nuestro buzón de correo transfronterizo y servicios de reenvío. Reciba paquetes y documentos directamente dentro de su país de origen. Su dirección ShipLink abre un mundo de posibilidades: compre en línea en sus tiendas favoritas, suscríbase a revistas, reciba correo importante y más. Con su dirección de ShipLink, puede realizar compras en línea sin los costos adicionales de envío internacional y los recargos aplicados por los minoristas. Puede recogerlo en persona o utilizar nuestro servicio de reenvío sin interrupciones desde Canadá. a EE. UU. para artículos con un valor inferior a $800 USD.",
-            "Title": "Buzón transfronterizo y reenvío"
+            "Title": "Buzón transfronterizo y reenvío",
+            "card1": "Declarar contenido",
+            "card1_text": "Si está utilizando nuestro servicio de reenvío, declare el contenido de su paquete para un procesamiento aduanero eficiente. Nuestra plataforma tiene una interfaz sencilla y fácil de usar que lo guiará a través del proceso para realizar envíos rápidamente.",
+            "card2": "Seleccione servicio transfronterizo o de reenvío",
+            "card2_text": "Selecciona el servicio que mejor se adapta a tus necesidades de envío. Elija entre una variedad de transportistas y servicios confiables para garantizar que su paquete llegue a su destino de manera segura y puntual. Después de seleccionar un servicio, podrá ver las tarifas de envío y los tiempos de tránsito de cada transportista. Luego podrás seleccionar la opción que mejor se adapte a tus necesidades.",
+            "card3": "Pagado y enviado",
+            "card3_text": "Después del pago exitoso, su paquete estará listo para ser recogido o procesado para su envío a su destino. El código de seguimiento estará disponible de inmediato y podrá rastrearse fácilmente directamente con el transportista o a través de su panel de ShipLink."
         },
         "privacy": {
             "list1": "Introducción",

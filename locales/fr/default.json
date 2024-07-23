@@ -116,16 +116,22 @@
         "mailbox": {
             "CTA": "Obtenir mon compte",
             "item1": "Registre",
-            "item1_string": "Inscrivez-vous gratuitement et obtenez votre nouvelle adresse de livraison pour recevoir vos achats en ligne.",
+            "item1_string": "Inscrivez-vous gratuitement et obtenez vos nouvelles adresses de livraison aux États-Unis et au Canada pour recevoir vos achats en ligne.",
             "item2": "Boutique",
-            "item2_string": "Achetez dans votre boutique en ligne préférée et utilisez votre nouvelle adresse de livraison locale",
+            "item2_string": "Achetez dans vos magasins en ligne préférés et utilisez votre nouvelle adresse de livraison locale",
             "item3": "Cueillette ou livraison à domicile",
-            "item3_string": "Récupérez vos achats dans votre agence ShipLink Mailbox ou recevez-les à votre porte via notre service de transfert transfrontalier",
-            "Start_buy": "Commencez à acheter et recevoir avec nous !",
+            "item3_string": "Récupérez vos achats à l'emplacement de votre boîte aux lettres ShipLink sélectionné ou recevez-les à votre porte via notre service transfrontalier ou de transfert.",
+            "Start_buy": "Commencez - Achetez et recevez avec nous !",
             "sub_string": "Avec notre service Cross-Border Mailbox, vous recevez vos colis et documents dans leur pays d'origine de la manière la plus pratique, la plus rapide et la plus économique. Avec votre adresse ShipLink, vous pouvez effectuer des achats en ligne dans vos magasins préférés, vous abonner à des magazines, recevoir de la correspondance et bien plus encore sans les frais supplémentaires d'expédition internationale et les frais de courtage pour les articles d'une valeur inférieure à 800 $.",
             "sub_title": "Comment ça fonctionne",
             "tilte_string": "Découvrez la commodité ultime en matière d'économies d'argent avec nos services de boîte aux lettres et de transfert transfrontaliers. Recevez des colis et des documents directement dans leur pays d'origine. Votre adresse ShipLink ouvre un monde de possibilités : achetez en ligne dans vos magasins préférés, abonnez-vous à des magazines, recevez courrier important, et plus encore. Avec votre adresse ShipLink, vous pouvez effectuer des achats en ligne sans les frais supplémentaires d'expédition internationale et les suppléments appliqués par les détaillants. Vous pouvez le récupérer en personne ou utiliser notre service d'expédition transparent. Il n'y a pas de frais de courtage ni de taxes en provenance du Canada. aux États-Unis pour les articles d'une valeur inférieure à 800 USD.",
-            "Title": "Boîte aux lettres transfrontalière et transfert"
+            "Title": "Boîte aux lettres transfrontalière et transfert",
+            "card1": "Déclarer du contenu",
+            "card1_text": "Si vous utilisez notre service Réexpédition, Déclarez le contenu de votre colis pour un traitement douanier efficace. Notre plateforme dispose d'une interface simple et facile à utiliser qui vous guidera tout au long du processus d'expédition rapide.",
+            "card2": "Sélectionnez Service transfrontalier ou de transfert",
+            "card2_text": "Sélectionnez le service qui correspond le mieux à vos besoins d'expédition. Choisissez parmi une gamme de transporteurs et de services de confiance pour garantir que votre colis arrive à destination en toute sécurité et à temps. Après avoir sélectionné un service, vous pourrez voir les tarifs d'expédition et les délais de transit pour chaque transporteur. Vous pourrez ensuite sélectionner l’option qui correspond le mieux à vos besoins.",
+            "card3": "Payé et expédié",
+            "card3_text": "Une fois le paiement réussi, votre colis est soit prêt à être récupéré, soit traité pour être expédié vers votre destination. Le code de suivi sera immédiatement disponible et pourra facilement être suivi directement auprès du transporteur ou via votre tableau de bord ShipLink."
         },
         "privacy": {
             "list1": " Introduction",

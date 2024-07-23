@@ -48,13 +48,14 @@ export const CrossBorderComponents = ({
                         </p>
                         <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">
                             {/* {params('ship.Ship1')} */}
-                            Declare Content
+                            {/* Declare Content */}
+                            {params('card1')}
                         </p>
                         <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal ">
                             {/* Get an accurate and instant shipping quote by simply entering your package details such as weight, dimensions, and destination. Our system will provide you with a range of shipping options tailored to your needs. */}
                             {/* {params('ship.Ship1_param')} */}
-
-                            Declare the content of your package to ensure it complies with international shipping regulations. Our platform will guide you through the process, ensuring your shipment is ready for dispatch.
+                            {params('card1_text')}
+                            {/* Declare the content of your package to ensure it complies with international shipping regulations. Our platform will guide you through the process, ensuring your shipment is ready for dispatch. */}
                         </p>
 
 
@@ -79,17 +80,18 @@ export const CrossBorderComponents = ({
 
                         <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug ">
                             {/* {params('ship.Ship2')} */}
-                            Select Cross Border Service
+                            {params('card2')}
                         </p>
                         <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
                             {/* Choose the service and carrier that best fits your shipping requirements from our list of trusted partners. We offer a variety of services to ensure your package reaches its destination on time and in perfect condition. */}
                             {/* {params('ship.Ship2_param')} */}
-                            Select the cross-border service that best suits your shipping needs. Choose from a range of trusted carriers and services to ensure your package arrives at its destination safely and on time.
-                            After selecting Cross Border Service, you will be able to see the shipping rates and transit times for each carrier. You can then select the service that best suits your needs.
+                            {params('card2_text')}
+                            {/* Select the cross-border service that best suits your shipping needs. Choose from a range of trusted carriers and services to ensure your package arrives at its destination safely and on time.
+                            After selecting Cross Border Service, you will be able to see the shipping rates and transit times for each carrier. You can then select the service that best suits your needs. */}
                         </p>
                     </div>
                 </div>
-                <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-2 item sm:grid-cols-2 border-[#E7E8EC] shadow-md border">
+                <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 grid gap-2 item sm:grid-cols-2 border-[#E7E8EC] shadow-md border">
                     <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0">
                         <Image
                             src={image3}
@@ -109,11 +111,12 @@ export const CrossBorderComponents = ({
                         <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">
                             {/* {params("ship.Ship3")} */}
                             Paid and Ship
+                            {params('card3')}
                         </p>
                         <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
                             {/* After selecting your service and carrier, print your shipping label directly from our platform. Securely attach the label to your package, ensuring all information is clearly visible */}
                             {/* {params("ship.Ship3_param")} */}
-                            After Payment Success you package will be process to the your selected warehouse. You will receive a confirmation code with the tracking number to pickup your package from the warehouse location after the package has been delivered.
+                            {params('card3_text')}
                         </p>
 
                     </div>

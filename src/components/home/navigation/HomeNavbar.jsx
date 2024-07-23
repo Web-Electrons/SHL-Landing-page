@@ -35,17 +35,13 @@ export const HomeNavbar = () => {
     const [open, setOpen] = useState(false)
     // const { data: session } = useSession()
     const login = process.env.NEXT_PUBLIC_LOGIN_URL;
+    console.log("🚀 ~ HomeNavbar ~ login:", login)
     const signup = process.env.NEXT_PUBLIC_SIGNUP_URL;
 
     const pathname = usePathname()
     console.log("🚀 ~ HomeNavbar ~ pathname:", pathname)
-
     const isHomeOnly = pathname === '/' || pathname === '/en' || pathname === '/fr' || pathname === '/es'
     console.log("🚀 ~ HomeNavbar ~ isHomeOnly:", isHomeOnly)
-
-
-
-
     const isTable = useMediaQuery({ query: "(min-width: 1091px)" });
     // useEffect(() => {
     //     const handleScroll = () => {

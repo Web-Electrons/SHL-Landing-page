@@ -27,7 +27,7 @@ export const LangSwitcher = () => {
     }
 
     return (
-        <DropdownMenu modal={true} >
+        <DropdownMenu modal={false} >
             <DropdownMenuTrigger asChild >
                 <Button
                     variant="ghost"

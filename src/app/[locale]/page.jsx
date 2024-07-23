@@ -83,8 +83,8 @@ export default function Home() {
             class="relative z-10 flex flex-col justify-center items-center text-center">
             <h1 class="text-5xl font-bold leading-tight mb-4">{t("Header")}</h1>
             <p class="text-3xl font-bold leading-tight mb-4">
-              {/* {t("SubHeader")} */}
-              {t("Header")}
+              {t("SubHeader2")}
+              {/* {t("Header")} */}
             </p>
             <NextLink passHref href={"#hiw"}>
               <Button

@@ -16,9 +16,9 @@ import label from '../../public/assets/Lebells.jpg';
 import track from '../../public/assets/tracking.jpg';
 import declare from '../../public/assets/shippingLabel.jpg';
 
-import image1 from '../../public/assets/crossborder/1.jpg';
-import image2 from '../../public/assets/crossborder/service.jpg';
-import image3 from '../../public/assets/crossborder/success.jpg';
+import image1 from '../../public/assets/home/image1.png';
+import image2 from '../../public/assets/home/image2.png';
+import image3 from '../../public/assets/home/image3.png';
 
 export const CrossBorderComponents = ({
     params

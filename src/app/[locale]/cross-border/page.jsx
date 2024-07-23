@@ -34,11 +34,7 @@ export default function Home() {
                             <h1 className=" text-black text-lg font-bold">
                                 {t('sub_title')}
                             </h1>
-                            <p className='text-[#5A5A5A] text-base'>
-                                {t('sub_string')}
-                            </p>
                         </div>
-
                         <CrossBorderComponents params={t} />
                     </div>
                 </div>

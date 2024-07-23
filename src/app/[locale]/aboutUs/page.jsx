@@ -6,6 +6,7 @@ import { Button } from "@/src/components/ui/button";
 import { CardData } from "@/src/components/home/CardData";
 import header from "../../../public/assets/home/AboutUsHeading.png";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 export default function Home() {
   const t = useTranslations("default");
   return (
@@ -47,8 +48,8 @@ export default function Home() {
         <div
           className={`${styles.works} py-20 gap-10 bg-gradient-to-br from-blue-50 to-white`}
         >
-          <div className="flex flex-row gap-5 justify-between items-center mx-auto w-[90%]">
-            <div className="left w-[50%] flex flex-col justify-start gap-5">
+          <div className="flex flex-row gap-5 justify-between items-center mx-auto w-[90%] flex-wrap">
+            <div className="left  flex flex-col justify-start gap-5 md:w-[50%] sm:w-full">
               <h2 className="text-4xl text-myBlue font-bold">
                 {t("about.Service_Title")}
               </h2>
@@ -64,7 +65,7 @@ export default function Home() {
 
             <div className="right w-max flex flex-col gap-5 items-start">
               <div className="flex flex-row gap-3 items-center">
-                <p className="bg-opacity-10 w-[30px] text-center bg-slate-600 rounded px-1 py-1">
+                <p className="bg-opacity-10 w-[30px] text-center bg-slate-600 rounded px-1 py-1 h-[30px]">
                   1
                 </p>
                 <p>
@@ -72,7 +73,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-row gap-3">
-                <p className="bg-opacity-10  w-[30px] text-center bg-slate-600 rounded px-1 py-1">
+                <p className="bg-opacity-10  w-[30px] text-center bg-slate-600 rounded px-1 py-1 h-[30px]">
                   2
                 </p>
                 <p>
@@ -80,7 +81,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-row gap-3">
-                <p className="bg-opacity-10  w-[30px] text-center bg-slate-600 rounded px-1 py-1">
+                <p className="bg-opacity-10  w-[30px] text-center bg-slate-600 rounded px-1 py-1 h-[30px]">
                   3
                 </p>
                 <p>
@@ -110,28 +111,20 @@ export default function Home() {
 
         {/* section */}
         <div className="vision w-full border-t py-20  ">
-          <div className="flex flex-row gap-5 bg-[#FAFAFA] p-10 w-[90%] mx-auto">
-            <div className="w-[50%] p-5 gap-4 flex flex-col">
+          <div className="flex flex-col md:flex-row gap-5 bg-[#FAFAFA] p-10 w-[90%] mx-auto flex-wrap">
+            <div className="w-full md:w-[40%] p-5 gap-4 flex flex-col">
               <h2 className="text-black font-bold text-2xl">{t('about.Vision')}</h2>
               <p>
                 {t('about.Vision_param')}
-                {/* Our team offers customers consistent first-class service, an
-                organization that is close to its customers and builds long term
-                relationships. */}
               </p>
             </div>
-            <div className="w-[5%] flex ">
-              <div className="border border-solid w-[1px] h-full mx-auto" />
-              {/* <Separator orientation="vertical" className="w-[2px]" /> */}
+            <div className="w-full md:w-[10%] flex items-center md:block">
+              <div className="border border-solid w-full md:w-[1px] md:h-full h-[1px] mx-auto" />
             </div>
-            <div className="w-[50%] p-5 gap-4 flex flex-col">
+            <div className="w-full md:w-[40%] p-5 gap-4 flex flex-col">
               <h2 className="text-black font-bold text-2xl">{t('about.Mission')}</h2>
               <p>
                 {t('about.Mission_param')}
-                {/* We make your shipping experience easier for both personal and
-                business through our services and distribution network, offering
-                convenient and economical solutions through our best-in-class
-                service. */}
               </p>
             </div>
           </div>
@@ -142,16 +135,21 @@ export default function Home() {
             <div className="flex flex-col gap-5 justify-center items-center text-center px-10 py-16 h-[100%]">
               <div className="py-5 gap-4 flex flex-col">
                 <h3 className="text-3xl text-center font-bold text-white">
-                  You have more questions?
+                  {t('about.MoreQuestion')}
                 </h3>
               </div>
-              <Button
-                variant="destructive"
-                size="lg"
-                className="rounded px-20 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+              <Link
+                href={'mailto:contact@shiplink.com'}
+                passHref
               >
-                <p className="text-base">Contact Us</p>
-              </Button>
+                <Button
+                  variant="destructive"
+                  size="lg"
+                  className="rounded px-20 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+                >
+                  <p className="text-base"> {t('about.CTA')}</p>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

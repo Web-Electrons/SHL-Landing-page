@@ -90,7 +90,7 @@
             "Other": "Autres données importantes",
             "Other1": "Modèle commercial de classe mondiale utilisant les meilleures pratiques de lindustrie",
             "Other2": "Mieux notés par les avis clients",
-            "Other3": "Entreprise établie avec plus de 10 ans d'expérience",
+            "Other3": "Management avec plus de 15 ans d'expérience en logistique internationale",
             "Other4": "Terminaux et service partout en Amérique du Nord",
             "Service_list1": "Étiquettes d'expédition nationales et internationales (USPS, CP, DHL, UPS, etc.)",
             "Service_list2": "Vente de fournitures d'expédition et d'emballage",
@@ -99,7 +99,9 @@
             "Service_Title": "Nos services",
             "SubHeader": "Plus proche de ShipLink",
             "Vision": "Vision",
-            "Vision_param": "Notre équipe offre à nos clients un service constant de première classe, une organisation proche de ses clients et qui construit des relations à long terme."
+            "Vision_param": "Notre équipe offre à nos clients un service constant de première classe, une organisation proche de ses clients et qui construit des relations à long terme.",
+            "MoreQuestion": "Vous avez d'autres questions ?",
+            "CTA": "Contactez-nous"
         },
         "ship": {
             "Ship1": "Obtenez un devis instantané",
@@ -216,6 +218,22 @@
             "item9_text": "Ces termes et conditions doivent être régis et interprétés conformément aux lois du Québec, Canada. sans égard à ses dispositions en matière de conflit de lois.",
             "title": "Termes et conditions",
             "title_text": "Veuillez lire et examiner attentivement nos termes et conditions avant de vous inscrire à nos services."
+        },
+        "footer": {
+            "about": "À propos",
+            "contact": "Contact",
+            "info": "Infos",
+            "privacy": "Politique de Confidentialité",
+            "terms": "Termes et Conditions",
+            "follow": "Suivez-nous",
+            "business": "Affaires",
+            "premium": "Premium",
+            "how_it_works": "Comment ça marche",
+            "shipping_calculator": "Calculateur d'Expédition",
+            "prohibited_items": "Articles Interdits",
+            "Shoping_ideas": "Idées de Shopping",
+            "Virtual_mailbox": "Boîte aux Lettres Virtuelle",
+            "shipment_label": "Étiquette d'Expédition"
         }
     }
 }

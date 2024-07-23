@@ -11,13 +11,10 @@ export const CardData = ({
     param
 }) => {
 
-
-
     return (
         <>
             <div className=" flex flex-row gap-10 w-full h-full flex-wrap  justify-evenly">
-
-                <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
+                <div className="flex flex-col gap-5 flex-[1_1_300px] min-h-[150px] border-[#E7E8EC] shadow-md border rounded-md p-5">
                     <Image
                         src={Img1}
                         width={50}
@@ -31,50 +28,48 @@ export const CardData = ({
                     </p>
                 </div>
 
-                <div className="">
-                    <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
-                        <Image
-                            src={Img2}
-                            width={50}
-                            height={50}
-                            alt='icon'
-                            style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
-                        />
-                        <p className='font-bold '>
-                            {param('about.Other2')}
-                            {/* Top Rated by customer reviews */}
-                        </p>
-                    </div>
+
+                <div className="flex flex-col gap-5 flex-[1_1_300px] min-h-[150px] border-[#E7E8EC] shadow-md border rounded-md p-5">
+                    <Image
+                        src={Img2}
+                        width={50}
+                        height={50}
+                        alt='icon'
+                        style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
+                    />
+                    <p className='font-bold '>
+                        {param('about.Other2')}
+                        {/* Top Rated by customer reviews */}
+                    </p>
                 </div>
-                <div className="">
-                    <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
-                        <Image
-                            src={Img3}
-                            width={50}
-                            height={50}
-                            alt='icon'
-                            style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
-                        />
-                        <p className='font-bold '>
-                            {param('about.Other3')}
-                            {/* Established business with over 10 years of experience */}
-                        </p>
-                    </div>
+
+
+                <div className="flex flex-col gap-5 flex-[1_1_300px] min-h-[150px] border-[#E7E8EC] shadow-md border rounded-md p-5">
+                    <Image
+                        src={Img3}
+                        width={50}
+                        height={50}
+                        alt='icon'
+                        style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
+                    />
+                    <p className='font-bold '>
+                        {param('about.Other3')}
+                        {/* Established business with over 10 years of experience */}
+                    </p>
                 </div>
-                <div className="">
-                    <div className="flex flex-col gap-5 w-[305px] h-[100%] border-[#E7E8EC] shadow-md border rounded-md p-5">
-                        <Image
-                            src={Img4}
-                            width={50}
-                            height={50}
-                            alt='icon'
-                            style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
-                        />
-                        <p className='font-bold '>
-                            {param('about.Other4')}
-                            {/* Terminals and Service across all North America */}
-                        </p>
-                    </div>
+
+                <div className="flex flex-col gap-5 flex-[1_1_300px] min-h-[150px] border-[#E7E8EC] shadow-md border rounded-md p-5">
+                    <Image
+                        src={Img4}
+                        width={50}
+                        height={50}
+                        alt='icon'
+                        style={{ width: '50px', height: '50px', objectFit: 'cover', objectPosition: 'center' }}
+                    />
+                    <p className='font-bold '>
+                        {param('about.Other4')}
+                        {/* Terminals and Service across all North America */}
+                    </p>
                 </div>
             </div>
         </>

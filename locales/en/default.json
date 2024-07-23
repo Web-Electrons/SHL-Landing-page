@@ -90,7 +90,7 @@
             "Other": "Other Important Data",
             "Other1": "World class business model using industry best practices",
             "Other2": "Top Rated by customer reviews",
-            "Other3": "Established business with over 10 years of experience",
+            "Other3": "Management with over 15 years of experience in international logistics",
             "Other4": "Terminals and Service across all North America",
             "Service_list1": "National and international shipment labels (USPS, CP, DHL, UPS, etc)",
             "Service_list2": "Sale of shipping and packaging supplies",
@@ -99,7 +99,9 @@
             "Service_Title": "Our Services",
             "SubHeader": "Closer to ShipLink",
             "Vision": "Vision",
-            "Vision_param": "Our team offers customers consistent first-class service, an organization that is close to its customers and builds long term relationships."
+            "Vision_param": "Our team offers customers consistent first-class service, an organization that is close to its customers and builds long term relationships.",
+            "MoreQuestion": "You have more questions?",
+            "CTA": "Contact Us"
         },
         "ship": {
             "Ship1": "Get an Instant Quote",
@@ -125,7 +127,7 @@
             "Start_buy": "Get started - Buy and Receive with us !",
             "sub_string": "With our Cross-Border Mailbox service you receive your packages and documents within their originating country in the most convenient, fast and economical way. With your ShipLink address you can make purchases online at your favorite stores, subscribe to magazines, receive correspondence and much more without the extra costs of international shipping and brokerage surcharges for items worth less than $800 USD",
             "sub_title": "How it Works",
-            "tilte_string": "Discover the ultimate money saving convenience with our Cross-Border Mailbox and Forwarding services. Receive packages and documents directly within their country of origin. Your ShipLink address opens up a world of possibilities: shop online at your favorite stores, subscribe to magazines, receive important mail, and more. With your ShipLink address, you can make purchases online without the extra costs of international shipping and surcharges applied by retailers. You can pickup in person or use our seamless forwarding service. There are no brokerage fee or taxes from Canada to USA for items worth less than $800 USD.",
+            "tilte_string": "Discover the ultimate money saving convenience with our Cross-Border Mailbox and Forwarding services. Receive packages and documents directly within their country of origin. Your ShipLink address opens up a world of possibilities: shop online at your favorite stores, subscribe to magazines, receive important mail, and more. With your ShipLink address, you can make purchases online without the extra costs of international shipping and surcharges applied by retailers. You can pickup in person or use our seamless forwarding service. There are no brokerage fees or taxes from Canada to USA for items worth less than $800 USD.",
             "Title": "Cross-Border Mailbox & Forwarding",
             "card1": "Declare Content",
             "card1_text": "If you are using our Forwarding service, Declare the content of your package for efficient customs processing. Our platform has a simple easy to use interface that will guide you through the process to ship out quickly",
@@ -216,6 +218,22 @@
             "item9_text": "These terms and conditions shall be governed by and construed in accordance with the laws of Quebec, Canada. without regard to its conflict of law provisions.",
             "title": "Terms and Conditions",
             "title_text": "Please read and review carefully our terms and conditions before signing up to our services"
+        },
+        "footer" : {
+            "about": "About",
+            "contact": "Contact",
+            "info": "Info",
+            "privacy": "Privacy Policy",
+            "terms": "Terms and Conditions",
+            "follow": "Follow Us",
+            "business": "Business",
+            "premium": "Premium",
+            "how_it_works": "How it works",
+            "shipping_calculator": "Shipping Calculator",
+            "prohibited_items": "Prohibited Items",
+            "Shoping_ideas" : "Shoping Ideas",
+            "Virtual_mailbox" : "Virtual Mailbox",
+            "shipment_label" : "Shipment Label"
         }
     }
 }

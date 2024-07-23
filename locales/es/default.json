@@ -90,7 +90,7 @@
             "Other": "Otros datos importantes",
             "Other1": "Modelo de negocio de clase mundial que utiliza las mejores prácticas de la industria",
             "Other2": "Mejor valorados por opiniones de clientes",
-            "Other3": "Empresa establecida con más de 10 años de experiencia.",
+            "Other3": "Gerencia con más de 15 años de experiencia en logística internacional",
             "Other4": "Terminales y Servicio en toda Norteamérica",
             "Service_list1": "Etiquetas para envíos nacionales e internacionales (USPS, CP, DHL, UPS, etc)",
             "Service_list2": "Venta de insumos para envío y embalaje.",
@@ -99,7 +99,9 @@
             "Service_Title": "Nuestros servicios",
             "SubHeader": "Más cerca de ShipLink",
             "Vision": "Visión",
-            "Vision_param": "Nuestro equipo ofrece a los clientes un servicio constante de primera clase, una organización cercana a sus clientes y que construye relaciones a largo plazo."
+            "Vision_param": "Nuestro equipo ofrece a los clientes un servicio constante de primera clase, una organización cercana a sus clientes y que construye relaciones a largo plazo.",
+            "MoreQuestion": "¿Tienes más preguntas?",
+            "CTA": "Contacta con nosotros"
         },
         "ship": {
             "Ship1": "Obtenga una cotización instantánea",
@@ -192,7 +194,7 @@
             "item9": "ARTÍCULOS RELACIONADOS CON PORNOGRAFÍA Y SEXO",
             "item9_list": "Prohibido en la mayoría de los países de Medio Oriente."
         },
-        "terms":{
+        "terms": {
             "free_text": "Al suscribirse a los servicios de logística de Shiplink, usted reconoce que ha leído, comprendido y aceptado estar sujeto a estos términos y condiciones.",
             "item1": "Aceptación de los términos",
             "item10": "Enmiendas",
@@ -216,6 +218,22 @@
             "item9_text": "Estos términos y condiciones se regirán e interpretarán de conformidad con las leyes de Quebec, Canadá. sin tener en cuenta sus disposiciones sobre conflicto de leyes.",
             "title": "Términos y condiciones",
             "title_text": "Lea y revise atentamente nuestros términos y condiciones antes de suscribirse a nuestros servicios."
+        },
+        "footer": {
+            "about": "Acerca de",
+            "contact": "Contacto",
+            "info": "Información",
+            "privacy": "Política de Privacidad",
+            "terms": "Términos y Condiciones",
+            "follow": "Síguenos",
+            "business": "Negocios",
+            "premium": "Premium",
+            "how_it_works": "Cómo funciona",
+            "shipping_calculator": "Calculadora de Envíos",
+            "prohibited_items": "Artículos Prohibidos",
+            "Shoping_ideas": "Ideas de Compras",
+            "Virtual_mailbox": "Buzón Virtual",
+            "shipment_label": "Etiqueta de Envío"
         }
     }
 }

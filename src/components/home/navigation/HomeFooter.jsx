@@ -26,7 +26,7 @@ export const HomeFooter = () => {
                             className=""
                             style={{ width: "120px", height: "30px" }}
                         />
-                        <div className="flex mt-2 flex-row gap-[30px] flex-wrap sm:justify-center md:justify-center">
+                        <div className="flex mt-2 flex-row gap-[30px] flex-wrap items-end sm:justify-center md:justify-center">
                             <div className="address flex flex-col gap-2 text-sm">
                                 <strong>ShipLink Services Inc.</strong>
                                 <div className="text-sm">
@@ -36,10 +36,10 @@ export const HomeFooter = () => {
                                     <p>J3X OJ5 Canada</p>
                                 </div>
                             </div>
-                            <div className=" flex flex-col gap-2">
+                            <div className=" flex flex-col ">
                                 <p className='text-sm font-regular text-[#5A5A5A]'>{t("emsup")}</p>
                                 <div className="flex flex-row gap-3 items-center">
-                                    <Mail width={18} height={18} />
+                                    <Mail width={15} height={15} />
                                     <Link
                                         passHref
                                         href={"mailto:contact@shiplink.com"}
@@ -113,8 +113,14 @@ export const HomeFooter = () => {
                                 passHref
                                 href={"/shippingLabels"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                                <p>{t("hiw")}</p>
+                                <p>{t("footer.Shoping_ideas")}</p>
                             </Link>
+                            {/* <Link
+                                passHref
+                                href={"/shippingLabels"}
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("hiw")}</p>
+                            </Link> */}
                         </div>
                     </div>
                     <div className="flex flex-col gap-5 text-sm">
@@ -139,6 +145,27 @@ export const HomeFooter = () => {
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("cont")}</p>
                             </Link>
+                        </div>
+                        <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
+                            <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
+                            <div
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("footer.Virtual_mailbox")}</p>
+                            </div>
+                        </div>
+                        <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
+                            <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
+                            <div
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("footer.shipment_label")}</p>
+                            </div>
+                        </div>
+                        <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
+                            <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
+                            <div
+                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                <p>{t("footer.shipping_calculator")}</p>
+                            </div>
                         </div>
                         {/* <div className="item flex flex-row gap-2 items-center w-[200px]">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />

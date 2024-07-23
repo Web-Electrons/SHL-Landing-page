@@ -110,7 +110,7 @@ export const CrossBorderComponents = ({
 
                         <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">
                             {/* {params("ship.Ship3")} */}
-                            Paid and Ship
+                          
                             {params('card3')}
                         </p>
                         <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">

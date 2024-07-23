@@ -15,8 +15,8 @@ export const HomeFooter = () => {
 
     return (
         <div className="conten w-[100%]">
-            <div className="wrap py-6 pt-10 w-[100%] px-[40px] mx-auto flex flex-row justify-between gap-10 flex-wrap">
-                <div className="left">
+            <div className="wrap py-10 w-[90%]  mx-auto flex flex-row justify-between items-center  gap-10 flex-wrap">
+                <div className="left ml-[2px]">
                     <div className="flex-col flex">
                         <Image
                             src={logo}
@@ -79,7 +79,7 @@ export const HomeFooter = () => {
                     </div>
                 </div>
 
-                <div className="right flex flex-col gap-3 justify-evenly w-[40%] md:flex-row">
+                <div className="right flex flex-col gap-3 justify-end w-[40%] md:flex-row">
                     <div className="flex flex-col gap-5 text-sm">
                         <div className="item flex flex-row gap-2 items-center w-[100px]">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />

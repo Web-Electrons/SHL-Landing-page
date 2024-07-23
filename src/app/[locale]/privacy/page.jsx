@@ -48,11 +48,18 @@ export default function Privacy() {
                             <div className="text-[#5A5A5A] text-base">
                                 <h3 className='text-black font-bold text-xl'>{t('list2_item3')}</h3>
                                 <div className="w-[90%] leading-loose flex flex-col">
+                                    {/* <p>{t('list2_item3_text')}</p> */}
                                     <p>ShipLink Services Inc.</p>
-                                    <p>{t('list2_item3_text')}</p>
-                                    <p>Email: contact@shiplink.ca</p>
-                                    <p>Address: Quebec, Canada.</p>
-                                    <p>Phone: +1-781-491-0874</p>
+                                    <p className='leading-5'>
+                                        3020A route Marie-Victorin
+                                        <br />
+                                        Unit 100
+                                        <br />
+                                        Varennes, QC
+                                        <br />
+                                        J3X 0J5 Canada
+                                    </p>
+                                    <p>Email: contact@shiplink.com</p>
                                 </div>
                             </div>
                             <div className="text-[#5A5A5A] text-base">

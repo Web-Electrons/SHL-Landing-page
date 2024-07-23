@@ -109,12 +109,10 @@ export const HomeFooter = () => {
                         <div className="item flex flex-row gap-2 items-center w-[200px]">
 
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <Link
-                                passHref
-                                href={"/shippingLabels"}
+                            <div
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("footer.Shoping_ideas")}</p>
-                            </Link>
+                            </div>
                             {/* <Link
                                 passHref
                                 href={"/shippingLabels"}

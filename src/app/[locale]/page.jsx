@@ -86,7 +86,7 @@ export default function Home() {
               {t("SubHeader2")}
               {/* {t("Header")} */}
             </p>
-            <NextLink passHref href={"#hiw"}>
+            <NextLink passHref href={"#cross-border"}>
               <Button
                 variant="destructive"
                 className="rounded w-[182px] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"

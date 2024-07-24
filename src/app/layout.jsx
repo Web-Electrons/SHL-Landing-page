@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import './globals.scss'
+import { Loaders } from "../components/ui/loaders";
 export const metadata = {
   title: "ShipLink",
   description: "Worldwide best package forwarding service",

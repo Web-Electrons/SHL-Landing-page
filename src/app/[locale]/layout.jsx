@@ -1,13 +1,10 @@
-import React, { Suspense } from "react"
+import React from "react"
 import styles from './styles.module.scss'
 import { HomeNavbar } from "@/src/components/home/navigation/HomeNavbar"
 import { HomeFooter } from "@/src/components/home/navigation/HomeFooter"
 import { Roboto, Poppins } from 'next/font/google'
-// import localFont from 'next/font/local'
 import './globals.scss'
-import dynamic from "next/dynamic"
 import { cn } from '@/lib/utils'
-// import { Toaster } from '@/components/ui/toaster'
 import { Toaster } from "@/src/components/ui/toaster"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';

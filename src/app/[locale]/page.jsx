@@ -2,31 +2,21 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import { Button } from "@/src/components/ui/button";
-import { CardMembership } from "./components/CardMembership";
 import { CardsComponents } from "@/src/components/home/CardsComponents";
 import { ListCardComponents } from "@/src/components/home/ListCardComponents";
 import { WhyCardsComponents } from "@/src/components/home/WhyCardsComponents";
 import { CarrierList } from "@/src/components/home/CarrierList";
 import { SubsCardsComponents } from "@/src/components/home/SubsCardsComponents";
-import { HomeNavbar } from "@/src/components/home/navigation/HomeNavbar";
-import { HomeFooter } from "@/src/components/home/navigation/HomeFooter";
 import { useTranslations } from "next-intl";
 import CrossImg from "../../public/assets/home/Section2.png";
 import Frame3 from "../../public/assets/home/Frame3.png";
 import hero from "../../public/assets/home/Banner.png";
 import NextLink from "next/link";
 import { Link } from "@/src/navigation";
-// import { CardsComponents } from "@/components/home/CardsComponents";
-// import { ListCardComponents } from "@/components/home/ListCardComponents";
-// import { WhyCardsComponents } from "@/components/home/WhyCardsComponents";
-// import { CarrierList } from "@/components/home/CarrierList";
-// import { SubsCardsComponents } from "@/components/home/SubsCardsComponents";
-// import { HomeNavbar } from "@/components/home/navigation/HomeNavbar";
-// import { HomeFooter } from "@/components/home/navigation/HomeFooter";
+
 export default function Home() {
-  // const t = useTranslations('landingPage');
   const t = useTranslations("default");
-  const signup = "https://client.shiplink.ca/auth/signup";
+  const signup = `${process.env.NEXT_PUBLIC_SIGNUP_URL}`;
 
   const handleClick = () => {
     window.location.href = 'mailto:contact@shiplink.ca';

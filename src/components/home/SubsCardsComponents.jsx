@@ -16,7 +16,7 @@ export const SubsCardsComponents = ({
 }) => {
 
     const t = useTranslations("default");
-    const signup = 'https://client.shiplink.ca/auth/signup'
+    const signup = `${process.env.NEXT_PUBLIC_SIGNUP_URL}`;
     const handleSentEmail = () => {
         window.location.href = 'mailto:contact@shiplink.ca';
     }
@@ -70,7 +70,7 @@ export const SubsCardsComponents = ({
                         />
                     </SubsMenu>
                     <div className='w-full'>
-                        <NextLink passHref href={`${signup}`} >
+                        <NextLink passHref href={`${process.env.NEXT_PUBLIC_SIGNUP_URL}`} >
                             <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
                                 {t("Subscribe")}
                             </Button>
@@ -127,7 +127,7 @@ export const SubsCardsComponents = ({
                         />
                     </SubsMenu>
                     <div className='w-full'>
-                        <NextLink passHref href={`${signup}`} >
+                        <NextLink passHref href={`${process.env.NEXT_PUBLIC_SIGNUP_URL}`} >
                             <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
                                 {t("Subscribe")}
                             </Button>
@@ -188,7 +188,7 @@ export const SubsCardsComponents = ({
                         />
                     </SubsMenu>
                     <div className='w-full'>
-                        <NextLink passHref href={`${signup}`} >
+                        <NextLink passHref href={`${process.env.NEXT_PUBLIC_SIGNUP_URL}`} >
                             <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
                                 {t("Subscribe")}
                             </Button>

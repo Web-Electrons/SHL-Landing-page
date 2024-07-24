@@ -20,7 +20,7 @@ export default function Home() {
             <div className={styles.container}>
                 <div className="flex flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-20">
                     <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-10">
-                        <h1 className=" text-myBlue tex t-3xl font-bold">
+                        <h1 className=" text-myBlue text-3xl font-bold">
                             {t("Title")}
                         </h1>
                         <div className="text-[#5A5A5A] text-base">
@@ -51,7 +51,7 @@ export default function Home() {
                             />
                         </div>
                         <div className="mt-20 mx-auto text-center items-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-                            <NextLink passHref href={`${signup}`} >
+                            <NextLink passHref href={`${process.env.NEXT_PUBLIC_SIGNUP_URL}`} >
                                 <Button
                                     variant="destructive"
                                     size="lg"

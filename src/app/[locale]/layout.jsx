@@ -5,6 +5,7 @@ import { HomeFooter } from "@/src/components/home/navigation/HomeFooter"
 import { Roboto, Poppins } from 'next/font/google'
 // import localFont from 'next/font/local'
 import './globals.scss'
+import dynamic from "next/dynamic"
 import { cn } from '@/lib/utils'
 // import { Toaster } from '@/components/ui/toaster'
 import { Toaster } from "@/src/components/ui/toaster"
@@ -36,28 +37,20 @@ export default function RootLayout({ children, params: { locale } }) {
     const messages = getMessages({ locale });
 
     return (
-        <html lang={locale} className="!scrool-smooth">
-            {/* <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline';" /> */}
-            <body
-
+        <NextIntlClientProvider locale={locale} messages={messages}>
+            <main
                 className={cn(
                     "min-h-screen font-sans antialiased",
                     roboto.variable
                 )}
             >
-                <Suspense>
-                    <NextIntlClientProvider locale={locale} messages={messages}>
-                        <main>
-                            <div className={styles.mains}>
-                                <HomeNavbar />
-                                {children}
-                                <HomeFooter />
-                            </div>
-                        </main>
-                        <Toaster />
-                    </NextIntlClientProvider>
-                </Suspense>
-            </body>
-        </html>
+                <div className={styles.mains}>
+                    <HomeNavbar />
+                    {children}
+                    <HomeFooter />
+                </div>
+            </main>
+            <Toaster />
+        </NextIntlClientProvider>
     )
 }

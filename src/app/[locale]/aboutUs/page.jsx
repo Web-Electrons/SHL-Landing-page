@@ -11,7 +11,7 @@ export default function Home() {
   const t = useTranslations("default");
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.container} >
         <div className=" text-center justify-start gap-[32px] pt-[90px] w-full h-full bg-[#FFFFF]">
           <div className="flex flex-col gap-4 justify-start text-left w-[90%] mx-auto pt-10">
             <h1 className=" text-myBlue text-lg font-bold">{t("about.Header")}</h1>
@@ -23,7 +23,7 @@ export default function Home() {
             <div className="text-[#5A5A5A] text-base">
               <p>
                 {t('about.Header_Title')}
-                {/* We are the best-in-class platform for national and international
+                {/* We are the best-in-className platform for national and international
                 shipping services. Our many years of experience, customer
                 satisfaction. */}
               </p>

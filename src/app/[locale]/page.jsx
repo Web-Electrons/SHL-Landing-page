@@ -57,8 +57,8 @@ export default function Home() {
           style={{
             height: "90dvh",
           }}
-          class=" relative flex flex-col items-center justify-center text-center text-white ">
-          <div class="flex absolute inset-0 h-max">
+          className=" relative flex flex-col items-center justify-center text-center text-white ">
+          <div className="flex absolute inset-0 h-max">
             <Image
               width={1600}
               height={500}
@@ -71,7 +71,7 @@ export default function Home() {
                 objectPosition: "center",
               }}
             />
-            <div class="absolute inset-0 bg-black opacity-30 "
+            <div className="absolute inset-0 bg-black opacity-30 "
               style={{ width: "100%", height: "90dvh" }}
             >
             </div>
@@ -80,9 +80,9 @@ export default function Home() {
             style={{
               height: "90dvh",
             }}
-            class="relative z-10 flex flex-col justify-center items-center text-center">
-            <h1 class="text-5xl font-bold leading-tight mb-4">{t("Header")}</h1>
-            <p class="text-3xl font-bold leading-tight mb-4">
+            className="relative z-10 flex flex-col justify-center items-center text-center">
+            <h1 className="text-5xl font-bold leading-tight mb-4">{t("Header")}</h1>
+            <p className="text-3xl font-bold leading-tight mb-4">
               {t("SubHeader2")}
               {/* {t("Header")} */}
             </p>

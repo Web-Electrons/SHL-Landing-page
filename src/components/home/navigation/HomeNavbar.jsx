@@ -33,26 +33,12 @@ import logo from '../../../public/whiteLogo.png'
 export const HomeNavbar = () => {
     const [isSolidBackground, setIsSolidBackground] = useState(false);
     const [open, setOpen] = useState(false)
-    // const { data: session } = useSession()
     const login = process.env.NEXT_PUBLIC_LOGIN_URL;
-    console.log("🚀 ~ HomeNavbar ~ login:", login)
     const signup = process.env.NEXT_PUBLIC_SIGNUP_URL;
-
     const pathname = usePathname()
-    console.log("🚀 ~ HomeNavbar ~ pathname:", pathname)
     const isHomeOnly = pathname === '/' || pathname === '/en' || pathname === '/fr' || pathname === '/es'
-    console.log("🚀 ~ HomeNavbar ~ isHomeOnly:", isHomeOnly)
+
     const isTable = useMediaQuery({ query: "(min-width: 1091px)" });
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         const scrollPosition = window.scrollY;
-    //         setIsSolidBackground(scrollPosition > 0);
-    //     };
-    //     window.addEventListener('scroll', handleScroll);
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -74,23 +60,16 @@ export const HomeNavbar = () => {
             ${isSolidBackground && isHomeOnly ? 'bg-gradient-to-r from-red-700 to-red-800' : isHomeOnly ? 'bg-gradient-to-r from-red-700 to-transparent' : 'bg-gradient-to-r from-red-700 to-red-800'} 
             fixed
         `}>
-            <div className="">
-                <NextLink passHref href={'/'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                    <div className=" w-max h-max mx-auto ">
-                        <Image
-                            src={logo}
-                            width={120}
-                            height={120}
-                            alt="shiplink Logo"
-                            className="mx-auto"
-                            style={{ width: "120px", height: "30px" }}
-                        />
-                    </div>
-                    {/* <div className="">
-                        <p className='text-2xl font-bold text-white'>ShipLink</p>
-                    </div> */}
-                </NextLink>
-            </div>
+            <NextLink passHref href={'/'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                <Image
+                    src={logo}
+                    width={120}
+                    height={120}
+                    alt="shiplink Logo"
+                    className="mx-auto"
+                    style={{ width: "120px", height: "30px" }}
+                />
+            </NextLink>
             {
                 isTable ? (
                     <div className={`${styles.list} flex text-white flex-row gap-[30px] justify-end items-center`}>
@@ -100,7 +79,7 @@ export const HomeNavbar = () => {
                         <Link passHref href={"/shippingLabels"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Labels</p>
                         </Link>
-                        {/* <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Supplies</p> */}
+
                         <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>About Us</p>
                         </Link>

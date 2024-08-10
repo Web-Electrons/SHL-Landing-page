@@ -32,7 +32,7 @@ export const HomeFooter = () => {
                                 <div className="text-sm">
                                     <p>3020A route Marie-Victorin</p>
                                     <p>Unit 100</p>
-                                    <p>Varenes, QC</p>
+                                    <p>Varennes, QC</p>
                                     <p>J3X OJ5 Canada</p>
                                 </div>
                             </div>

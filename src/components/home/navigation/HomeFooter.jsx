@@ -32,7 +32,7 @@ export const HomeFooter = () => {
                                 <div className="text-sm">
                                     <p>3020A route Marie-Victorin</p>
                                     <p>Unit 100</p>
-                                    <p>Varrenes, QC</p>
+                                    <p>Varenes, QC</p>
                                     <p>J3X OJ5 Canada</p>
                                 </div>
                             </div>
@@ -49,33 +49,6 @@ export const HomeFooter = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* <div className="flex flex-col py-4 gap-[16px]">
-                          <p className='text-base font-regular text-[#5A5A5A]'>{t("Foll")}</p>
-                            <div className="flex flex-row gap-5">
-                                <Image
-                                    src={Fb}
-                                    width={40}
-                                    height={40}
-                                    alt='facebook'
-                                    style={{ width: '25px', height: '25px' }}
-                                />
-                                <Image
-                                    src={Xicon}
-                                    width={40}
-                                    height={40}
-                                    alt='facebook'
-                                    style={{ width: '25px', height: '25px' }}
-                                />
-                                <Image
-                                    src={Ig}
-                                    width={40}
-                                    height={40}
-                                    alt='facebook'
-                                    style={{ width: '25px', height: '25px' }}
-                                />
-                            </div> 
-                        </div> */}
                     </div>
                 </div>
 

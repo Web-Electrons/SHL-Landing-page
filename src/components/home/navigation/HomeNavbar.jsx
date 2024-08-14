@@ -74,7 +74,7 @@ export const HomeNavbar = () => {
                 isTable ? (
                     <div className={`${styles.list} flex text-white flex-row gap-[30px] justify-end items-center`}>
                         <Link passHref href={'/#cross-border'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                            <p className={`text-base font-extralight leading-3 ${styles.listItem}`}>Free Mailboxes</p>
+                            <p className={`text-base font-extralight leading-3 ${styles.listItem}`}>Shipping Addresses</p>
                         </Link>
                         <Link passHref href={"/shippingLabels"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                             <p className={`text-base font-extralight  leading-3 ${styles.listItem}`}>Shipping Labels</p>
@@ -126,7 +126,7 @@ export const HomeNavbar = () => {
                                 variant="ghost"
                                 className="w-full text-left justify-start"
                             >
-                                <p className={`text-sm text-left font-extralight leading-3 line-clamp-1`}>Free Mailboxes</p>
+                                <p className={`text-sm text-left font-extralight leading-3 line-clamp-1`}>Shipping Addresses</p>
                             </Button>
                         </Link>
                         <Link href={'/shippingLabels'} className='cursor-pointer hover:opacity-70 w-full' passHref>

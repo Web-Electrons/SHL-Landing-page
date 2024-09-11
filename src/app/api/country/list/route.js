@@ -6,18 +6,13 @@ const agent = new https.Agent({
 });
 export async function POST(request) {
     try {
-        const {
-            keyword,
-            page,
-            limit,
-            index,
-            token
-        } = await request.json();
+        // const tokenAccess = await getAccessToken(request)
+        const { keyword, page, limit, index, token } = await request.json();
 
         // console.log("token from country", token);
 
         const response = await axios.post(
-            `${process.env.API_URL}/Warehouse/Warehouse_list`,
+            `${process.env.API_URL}/Config/Country_list`,
             {
                 keyword: keyword,
                 page: page,
@@ -33,6 +28,8 @@ export async function POST(request) {
             }
         );
 
+        // console.log("response from api : ", response.data); // Log the response data
+
         if (response.status === 200) {
             const responseData = {
                 status: true,
@@ -40,7 +37,7 @@ export async function POST(request) {
                 total: response.data.total,
                 page_total: response.data.page_total,
                 page_limit: response.data.page_limit,
-                warehouse: response.data.warehouse
+                country: response.data.country
             };
             return NextResponse.json(responseData, { status: 200 });
         } else {

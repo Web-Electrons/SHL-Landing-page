@@ -2,10 +2,14 @@
 import React from 'react'
 import { Button } from '@/src/components/ui/button'
 import { RefreshCcw } from 'lucide-react'
+import { CourrierCard } from './panel/CourrierCard'
+import { ScrollArea } from '@/src/components/ui/scroll-area'
 
 // import Carrier1 from '@/public/logo.png'
 
 export const RatesPanel = () => {
+
+    const [isFastest, setIsFastest] = React.useState(false)
     return (
         <div className="flex flex-col px-[20px]">
             <div className="flex flex-row justify-between">
@@ -24,53 +28,48 @@ export const RatesPanel = () => {
                 <Button
                     size="xs"
                     variant='ghost'
-                    className="border border-gray-300"
+                    onClick={() => setIsFastest(false)}
+                    className={`border border-gray-300 ${isFastest === false ? 'bg-red-100 border-red-600 text-red-800' : ''}`}
                 >
                     Chepest
                 </Button>
                 <Button
                     size="xs"
                     variant='ghost'
-                    className="border border-gray-300"
+                    onClick={() => setIsFastest(true)}
+                    className={`border border-gray-300 ${isFastest === true ? 'bg-red-100 border-red-600 text-red-800' : ''}`}
                 >
                     Fastest
                 </Button>
             </div>
 
 
-            <div className="list mt-3 flex flex-col gap-2">
-                <div className="card border border-gray-300 p-2 rounded">
-                    <div className="flex flex-row justify-between items-center">
-                        <div className="flex flex-row gap-2 items-center">
-                            <img
-                                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRRkMfVDKiEGmlHMh1eDXhG9nadE1H0zGP-g&s'}
-                                alt="Carrier"
-                                className="h-8 w-8 object-center object-cover bg-blue-50 rounded"
-                            />
-                            <div className="flex flex-col">
-                                <p className='text-sm'>Standard Shipping</p>
-                                <p className="text-xs text-gray-500">Estimated delivery: 5-7 days</p>
-                            </div>
-                        </div>
-                        <p className='text-sm'>$10.00</p>
-                    </div>
+            <ScrollArea className="h-[60%] mt-3 ">
+                <div className="list flex flex-col gap-2">
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
+                    <CourrierCard />
                 </div>
-                <div className="card border border-gray-300 p-2 rounded">
-                    <div className="flex flex-row justify-between items-center">
-                        <div className="flex flex-row gap-2 items-center">
-                            <img
-                                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRRkMfVDKiEGmlHMh1eDXhG9nadE1H0zGP-g&s'}
-                                alt="Carrier"
-                                className="h-8 w-8 object-center object-cover bg-blue-50 rounded"
-                            />
-                            <div className="flex flex-col">
-                                <p className='text-sm'>Standard Shipping</p>
-                                <p className="text-xs text-gray-500">Estimated delivery: 5-7 days</p>
-                            </div>
-                        </div>
-                        <p className='text-sm'>$10.00</p>
-                    </div>
-                </div>
+            </ScrollArea>
+
+            <div className="">
+                <Button
+                    variant="destructive"
+                    size="xs"
+                    className="w-full mt-3"
+                >
+                    Start Shipping
+                </Button>
             </div>
         </div>
     )

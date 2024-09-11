@@ -14,9 +14,36 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
+    SelectGroup,
 } from '@/src/components/ui/select';
 import { Input } from '@/src/components/ui/input';
-export const ShippedTo = ({ form }) => {
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from '@/src/components/ui/command';
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/src/components/ui/popover';
+import { CheckIcon } from 'lucide-react';
+import { PopoverClose } from '@radix-ui/react-popover';
+import { ScrollArea } from '@/src/components/ui/scroll-area';
+import { Button } from '@/src/components/ui/button';
+
+export const ShippedTo = ({ form, country_list }) => {
+    console.log("🚀 ~ ShippedTo ~ country_list:", country_list)
+
+    const handleSelectCountry = (country_code, country_name) => {
+        form.setValue('country_code', country_code);
+        form.setValue('country_name', country_name);
+    }
+
+    const [popOverOpen, setPopOverOpen] = React.useState(false);
     return (
         <div className="flex flex-col">
             <p className='font-bold text-xs'>Reshipped to ...</p>
@@ -57,24 +84,25 @@ export const ShippedTo = ({ form }) => {
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent >
-                                            <SelectItem
-                                                className="text-xs"
-                                                value="Canada"
-                                            >
-                                                Canada
-                                            </SelectItem>
-                                            <SelectItem
-                                                className="text-xs"
-                                                value="USA"
-                                            >
-                                                USA
-                                            </SelectItem>
+                                            {
+                                                country_list?.map((item, index) => (
+                                                    <SelectItem
+                                                        key={index}
+                                                        className="text-xs"
+                                                        value={item.country_code}
+                                                    >
+                                                        {item.country_name}
+                                                    </SelectItem>
+                                                ))
+                                            }
+
                                         </SelectContent>
                                     </Select>
                                 </FormControl>
                             </FormItem>
                         )}
                     />
+
                     <FormField
                         control={form.control}
                         name="shipped_to.state"

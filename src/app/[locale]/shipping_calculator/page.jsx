@@ -63,12 +63,12 @@ const formSchema = yup.object().shape({
     mailboxSelected: yup.string()
 })
 
-
 export default function Home() {
 
     const [warehouse, setWarehouse] = useState([])
     console.log("🚀 ~ Home ~ warehouse:", warehouse)
-
+    const [country, setCountry] = useState([])
+    console.log("🚀 ~ Home ~ country:", country)
     const form = useForm({
         resolver: yupResolver(formSchema),
         defaultValues: {
@@ -88,6 +88,28 @@ export default function Home() {
         }
     })
 
+
+    useEffect(() => {
+        const countryList = async () => {
+            try {
+                const response = await axios.post(
+                    `/api/country/list`,
+                    {
+                        keyword: "",
+                        page: 1,
+                        limit: 999,
+                        index: 0,
+                    },
+                )
+                const responseData = response.data.country
+                setCountry(responseData)
+                return responseData || []
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        countryList()
+    }, [])
 
     const warehouseList = useCallback(async () => {
         try {
@@ -254,6 +276,7 @@ export default function Home() {
                                                     <>
                                                         <ShiptoForm
                                                             form={form}
+                                                            country_list={country}
                                                         />
                                                     </>
                                                 )
@@ -271,6 +294,7 @@ export default function Home() {
 
                                         <ShippedTo
                                             form={form}
+                                            country_list={country}
                                         />
 
                                         <Button

@@ -133,10 +133,13 @@ export const HomeFooter = () => {
                         </div>
                         <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <div
+ 
+                            <Link
+                                passHref
+                                href={"/shipping_calculator"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("footer.shipping_calculator")}</p>
-                            </div>
+                            </Link>
                         </div>
                         {/* <div className="item flex flex-row gap-2 items-center w-[200px]">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />

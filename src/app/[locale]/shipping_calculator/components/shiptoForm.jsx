@@ -17,7 +17,7 @@ import {
     SelectValue,
 } from '@/src/components/ui/select';
 
-export const ShiptoForm = ({ form }) => {
+export const ShiptoForm = ({ form, country_list }) => {
     return (
         <div className="flex flex-col">
             <p className='font-bold text-xs'>Reshipped From ...</p>
@@ -58,24 +58,25 @@ export const ShiptoForm = ({ form }) => {
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent >
-                                            <SelectItem
-                                                className="text-xs"
-                                                value="Canada"
-                                            >
-                                                Canada
-                                            </SelectItem>
-                                            <SelectItem
-                                                className="text-xs"
-                                                value="USA"
-                                            >
-                                                USA
-                                            </SelectItem>
+                                            {
+                                                country_list?.map((item, index) => (
+                                                    <SelectItem
+                                                        key={index}
+                                                        className="text-xs"
+                                                        value={item.country_code}
+                                                    >
+                                                        {item.country_name}
+                                                    </SelectItem>
+                                                ))
+                                            }
+
                                         </SelectContent>
                                     </Select>
                                 </FormControl>
                             </FormItem>
                         )}
                     />
+
                     <FormField
                         control={form.control}
                         name="shipped_from.state"

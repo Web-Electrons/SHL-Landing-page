@@ -60,7 +60,7 @@ export const HomeNavbar = () => {
             ${isSolidBackground && isHomeOnly ? 'bg-gradient-to-r from-red-700 to-red-800' : isHomeOnly ? 'bg-gradient-to-r from-red-700 to-transparent' : 'bg-gradient-to-r from-red-700 to-red-800'} 
             fixed
         `}>
-            <NextLink passHref href={'/'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+            <NextLink passHref href={'/#content'} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                 <Image
                     src={logo}
                     width={120}

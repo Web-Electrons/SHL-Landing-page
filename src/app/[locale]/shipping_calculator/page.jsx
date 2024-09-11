@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { ShippingLabels } from '@/src/components/home/ShippingLabels'
 import { Input } from '@/src/components/ui/input';
@@ -27,6 +27,9 @@ import { Tabs, TabsList, TabsTrigger } from '@/src/components/ui/tabs';
 import { ShiptoForm } from './components/shiptoForm';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { RatesPanel } from './components/RatesPanel';
+import { Dimension } from './components/forms/Dimension';
+import { ShippedTo } from './components/forms/ShippedTo';
+import axios from 'axios';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -45,6 +48,7 @@ const formSchema = yup.object().shape({
         zip: yup.string().required(),
         address: yup.string().required(),
         address2: yup.string(),
+        warehouse_code: yup.string(),
     }),
 
     shipped_to: yup.object().shape({
@@ -55,17 +59,20 @@ const formSchema = yup.object().shape({
         address: yup.string().required(),
         address2: yup.string(),
     }),
+
+    mailboxSelected: yup.string()
 })
+
+
 export default function Home() {
+
+    const [warehouse, setWarehouse] = useState([])
+    console.log("🚀 ~ Home ~ warehouse:", warehouse)
 
     const form = useForm({
         resolver: yupResolver(formSchema),
         defaultValues: {
             dimension: {
-                length: 0,
-                width: 0,
-                height: 0,
-                weight: 0,
                 weight_unit: "lbs",
                 dimension_unit: "cm",
             },
@@ -77,15 +84,79 @@ export default function Home() {
                 address: "",
                 address2: "",
             },
+            mailboxSelected: "ca"
         }
     })
 
 
+    const warehouseList = useCallback(async () => {
+        try {
+            const response = await axios.post(
+                `/api/warehouse/list`,
+                {
+                    keyword: "",
+                    page: 1,
+                    limit: 10,
+                    index: 0,
+                },
+            )
+            const responseData = response.data.warehouse
+            const filteredWarehouse = responseData.filter((item) => item.warehouse_code !== "AAA" && item.warehouse_code !== "BBB");
+            setWarehouse(filteredWarehouse)
+            handleAssingData(filteredWarehouse[0])
+            return filteredWarehouse || []
+
+        } catch (error) {
+            console.error(error)
+        }
+    }, [])
+
+    useEffect(() => {
+        warehouseList()
+    }, [])
 
     const [showRates, setShowRates] = useState(false)
     const [tabsName, setTabsName] = useState("mailbox")
-    console.log("🚀 ~ Home ~ tabsName:", tabsName)
 
+    const checkCoutryCode = (code) => {
+        if (code === undefined) {
+            return "ca"
+        } else {
+            console.log("🚀 ~ checkCountryCode ~ code:", code);
+            if (code?.length >= 2) {
+                return code.substring(0, 2).toLowerCase();
+            } else {
+                return code.toLowerCase();
+            }
+        }
+    }
+
+    const selectedData = () => {
+        if (form.watch("shipped_from") === undefined) {
+            return "Select Mailbox"
+        } else {
+            const shipped_from = form.watch("shipped_from")
+            return (
+                `${shipped_from.city}, ${shipped_from.state}, ${shipped_from.zip}, ${shipped_from.country}`
+            )
+        }
+    }
+    const handleAssingData = (data) => {
+        form.setValue("shipped_from.country", data?.country_code)
+        form.setValue("shipped_from.state", data?.province_code)
+        form.setValue("shipped_from.city", data?.city)
+        form.setValue("shipped_from.zip", data?.postal_code)
+        form.setValue("shipped_from.address", data?.address)
+        form.setValue("shipped_from.address2", data?.address2)
+        form.setValue("shipped_from.warehouse_code", data?.warehouse_code)
+        checkCoutryCode(data?.country_code)
+        selectedData()
+    }
+
+    const handleValueChange = (value) => {
+        const data = warehouse.find((item) => item.warehouse_code === value)
+        handleAssingData(data)
+    }
     return (
         <>
             <div className={styles.container}>
@@ -128,7 +199,7 @@ export default function Home() {
                                                 tabsName === "mailbox" ? (
                                                     <FormField
                                                         control={form.control}
-                                                        name="dimension.weight_unit"
+                                                        name="mailboxSelected"
                                                         render={({ field }) => (
                                                             <FormItem
                                                                 className="w-full"
@@ -139,36 +210,40 @@ export default function Home() {
                                                                 >
                                                                     <Select
                                                                         className='text-xs'
-                                                                        onValueChange={field.onChange} defaultValue={field.value}>
+                                                                        // onValueChange={handleValueChange(field.value)}
+                                                                        onValueChange={(value) => handleValueChange(value)}
+                                                                        defaultValue={field.value}>
                                                                         <FormControl>
                                                                             <SelectTrigger className='text-xs  h-[36px]'>
                                                                                 <SelectValue placeholder="Select Mailbox">
                                                                                     <div className="flex flex-row gap-2 items-center ">
                                                                                         <img
                                                                                             // src={`https://flagcdn.com/w640/ca.png`}
-                                                                                            src={`https://flagcdn.com/h80/${field.value}.jpg`}
-                                                                                            srcSet={`https://flagcdn.com/h80/${field.value}.jpg 2x`}
+                                                                                            src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
+                                                                                            srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
                                                                                             alt=""
                                                                                             className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
                                                                                         />
-                                                                                        <p>- {field.value}</p>
+                                                                                        {/* <p>- {field.value}</p> */}
+                                                                                        <p>{selectedData()}</p>
                                                                                     </div>
                                                                                 </SelectValue>
                                                                             </SelectTrigger>
                                                                         </FormControl>
                                                                         <SelectContent >
-                                                                            <SelectItem
-                                                                                className="text-xs"
-                                                                                value="ca"
-                                                                            >
-                                                                                CAD Vareness
-                                                                            </SelectItem>
-                                                                            <SelectItem
-                                                                                className="text-xs"
-                                                                                value="us"
-                                                                            >
-                                                                                USA Moores
-                                                                            </SelectItem>
+
+                                                                            {
+                                                                                warehouse?.map((item, index) => (
+                                                                                    <SelectItem
+                                                                                        key={index}
+                                                                                        className="text-xs"
+                                                                                        value={item?.warehouse_code}
+                                                                                    >
+                                                                                        {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                                                                    </SelectItem>
+                                                                                ))
+                                                                            }
+
                                                                         </SelectContent>
                                                                     </Select>
                                                                 </FormControl>
@@ -185,253 +260,18 @@ export default function Home() {
                                             }
 
                                         </div>
-                                        <div className="flex flex-row gap-2 items-end">
-                                            <FormField
-                                                control={form.control}
-                                                name="dimension.weight"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="font-bold">Package Weight <span className='text-red-600'>*</span></FormLabel>
-                                                        <FormControl>
-                                                            <Input placeholder="0"
-                                                                {...field}
-                                                            />
-                                                        </FormControl>
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <FormField
-                                                control={form.control}
-                                                name="dimension.weight_unit"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        {/* <FormLabel className="font-bold">Package Weight</FormLabel> */}
-                                                        <FormControl>
-                                                            <Select
-                                                                className='text-xs'
-                                                                onValueChange={field.onChange} defaultValue={field.value}>
-                                                                <FormControl>
-                                                                    <SelectTrigger className='text-xs w-[100px] h-[36px]'>
-                                                                        <SelectValue />
-                                                                    </SelectTrigger>
-                                                                </FormControl>
-                                                                <SelectContent >
-                                                                    <SelectItem
-                                                                        className="text-xs"
-                                                                        value="lbs"
-                                                                    >
-                                                                        lbs
-                                                                    </SelectItem>
-                                                                    <SelectItem
-                                                                        className="text-xs"
-                                                                        value="kg"
-                                                                    >
-                                                                        Kg
-                                                                    </SelectItem>
-                                                                </SelectContent>
-                                                            </Select>
-                                                        </FormControl>
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        </div>
 
-                                        <div className="flex flex-col">
-                                            <p className='font-bold text-xs'>Package Dimension <span className='text-red-600'>*</span></p>
-                                            <div className="flex flex-row gap-2 items-end">
-                                                <FormField
-                                                    control={form.control}
-                                                    name="dimension.length"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel className="">Length</FormLabel>
-                                                            <FormControl>
-                                                                <Input placeholder="0"
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="dimension.width"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel className="">Width</FormLabel>
-                                                            <FormControl>
-                                                                <Input placeholder="0"
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="dimension.height"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel className="">Height</FormLabel>
-                                                            <FormControl>
-                                                                <Input placeholder="0"
-                                                                    {...field}
-                                                                />
-                                                            </FormControl>
-                                                        </FormItem>
-                                                    )}
-                                                />
-
-                                                <FormField
-                                                    control={form.control}
-                                                    name="dimension.dimension_unit"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            {/* <FormLabel className="font-bold">Package Weight</FormLabel> */}
-                                                            <FormControl>
-                                                                <Select
-                                                                    className='text-xs'
-                                                                    onValueChange={field.onChange} defaultValue={field.value}>
-                                                                    <FormControl>
-                                                                        <SelectTrigger className='text-xs w-[100px] h-[36px]'>
-                                                                            <SelectValue />
-                                                                        </SelectTrigger>
-                                                                    </FormControl>
-                                                                    <SelectContent >
-                                                                        <SelectItem
-                                                                            className="text-xs"
-                                                                            value="in"
-                                                                        >
-                                                                            in
-                                                                        </SelectItem>
-                                                                        <SelectItem
-                                                                            className="text-xs"
-                                                                            value="cm"
-                                                                        >
-                                                                            cm
-                                                                        </SelectItem>
-                                                                    </SelectContent>
-                                                                </Select>
-                                                            </FormControl>
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                            </div>
+                                        <div className="">
+                                            <Dimension
+                                                form={form}
+                                            />
                                         </div>
 
                                         {/* ReshipedTo */}
-                                        <div className="flex flex-col">
-                                            <p className='font-bold text-xs'>Reshipped to ...</p>
-                                            <FormField
-                                                control={form.control}
-                                                name="shipped_to.address"
-                                                className="w-full"
-                                                render={({ field }) => (
-                                                    <FormItem>
-                                                        <FormLabel className="">Address</FormLabel>
-                                                        <FormControl>
-                                                            <Input
-                                                                placeholder="Address"
-                                                                {...field}
-                                                            />
-                                                        </FormControl>
-                                                    </FormItem>
-                                                )}
-                                            />
-                                            <div className="py-2 flex flex-col gap-2">
-                                                <div className="flex flex-row gap-2 w-full">
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="shipped_to.country"
-                                                        className="w-full"
-                                                        render={({ field }) => (
-                                                            <FormItem
-                                                                className="w-full"
-                                                            >
-                                                                <FormLabel className="">Country <span className='text-red-600'>*</span></FormLabel>
-                                                                <FormControl>
-                                                                    <Select
-                                                                        className='text-xs'
-                                                                        onValueChange={field.onChange} defaultValue={field.value}>
-                                                                        <FormControl>
-                                                                            <SelectTrigger className='text-xs h-[36px]'>
-                                                                                <SelectValue placeholder="Select Country" />
-                                                                            </SelectTrigger>
-                                                                        </FormControl>
-                                                                        <SelectContent >
-                                                                            <SelectItem
-                                                                                className="text-xs"
-                                                                                value="Canada"
-                                                                            >
-                                                                                Canada
-                                                                            </SelectItem>
-                                                                            <SelectItem
-                                                                                className="text-xs"
-                                                                                value="USA"
-                                                                            >
-                                                                                USA
-                                                                            </SelectItem>
-                                                                        </SelectContent>
-                                                                    </Select>
-                                                                </FormControl>
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="shipped_to.state"
-                                                        className="w-full"
-                                                        render={({ field }) => (
-                                                            <FormItem
-                                                                className="w-full"
-                                                            >
-                                                                <FormLabel className="">State / Province <span className='text-red-600'>*</span></FormLabel>
-                                                                <FormControl>
-                                                                    <Input placeholder="State"
-                                                                        {...field}
-                                                                    />
-                                                                </FormControl>
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                </div>
-                                                <div className="flex flex-row gap-2 w-full">
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="shipped_to.city"
-                                                        render={({ field }) => (
-                                                            <FormItem
-                                                                className="w-full"
-                                                            >
-                                                                <FormLabel className="">City <span className='text-red-600'>*</span></FormLabel>
-                                                                <FormControl>
-                                                                    <Input placeholder="City"
-                                                                        {...field}
-                                                                    />
-                                                                </FormControl>
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="shipped_to.zip"
-                                                        render={({ field }) => (
-                                                            <FormItem
-                                                                className="w-full"
-                                                            >
-                                                                <FormLabel className="">Zip/Postal Code <span className='text-red-600'>*</span></FormLabel>
-                                                                <FormControl>
-                                                                    <Input placeholder="Zip/Postal Code"
-                                                                        {...field}
-                                                                    />
-                                                                </FormControl>
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
 
+                                        <ShippedTo
+                                            form={form}
+                                        />
 
                                         <Button
                                             variant="destructive"
@@ -451,8 +291,8 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                {/* <div className={` ${showRates === true ? styles.panel : "hidden"}`}> */}
-                <div className={`${styles.panel} `}>
+                <div className={` ${showRates === true ? styles.panel : "hidden"}`}>
+                    {/* <div className={`${styles.panel} `}> */}
                     <RatesPanel />
                 </div>
             </div>

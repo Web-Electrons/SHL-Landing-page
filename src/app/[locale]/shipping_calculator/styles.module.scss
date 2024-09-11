@@ -5,17 +5,26 @@
     gap: 5px;
 }
 
+// .wrapper {
+//     width: calc(100% - 400px);
+//     background-color: #FFFFFF;
+// }
 .wrapper {
-    width: calc(100% - 400px);
     background-color: #FFFFFF;
+    flex-grow: 1;
+    /* Memungkinkan untuk mengambil ruang yang tersisa */
+    transition: width 0.3s ease;
+    /* Opsional, untuk efek transisi */
 }
 
 .panel {
-    width: 400px;
+    width: 450px;
     padding-top: 90px;
     background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     gap: 5;
     justify-content: start;
+    display: hidden;
+    transition: width 0.3s ease;
 }

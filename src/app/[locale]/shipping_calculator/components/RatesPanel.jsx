@@ -1,21 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { Button } from '@/src/components/ui/button'
+import { RefreshCcw } from 'lucide-react'
 
 // import Carrier1 from '@/public/logo.png'
-import Carrier1 from '../components/courrier/canadian.png'
-import carir from './courrier/canadian.png'
+
 export const RatesPanel = () => {
     return (
         <div className="flex flex-col px-[20px]">
             <div className="flex flex-row justify-between">
-                <p>Rates</p>
+                <p className='text-black text-lg font-bold'>Rates</p>
                 <Button
                     size="xs"
                     variant='ghost'
-                    className="border border-gray-300"
+                    className="border border-gray-300 flex flex-row gap-2"
                 >
-                    Refresh
+                    <RefreshCcw size={16} className='text-red-700' />
+                    <p>Refresh</p>
                 </Button>
             </div>
 
@@ -38,7 +39,7 @@ export const RatesPanel = () => {
 
 
             <div className="list mt-3 flex flex-col gap-2">
-                <div className="card border border-gray-300 p-4 rounded">
+                <div className="card border border-gray-300 p-2 rounded">
                     <div className="flex flex-row justify-between items-center">
                         <div className="flex flex-row gap-2 items-center">
                             <img
@@ -47,15 +48,14 @@ export const RatesPanel = () => {
                                 className="h-8 w-8 object-center object-cover bg-blue-50 rounded"
                             />
                             <div className="flex flex-col">
-                                <p>Standard Shipping</p>
+                                <p className='text-sm'>Standard Shipping</p>
                                 <p className="text-xs text-gray-500">Estimated delivery: 5-7 days</p>
                             </div>
                         </div>
-                        <p>$10.00</p>
+                        <p className='text-sm'>$10.00</p>
                     </div>
-
                 </div>
-                <div className="card border border-gray-300 p-4 rounded">
+                <div className="card border border-gray-300 p-2 rounded">
                     <div className="flex flex-row justify-between items-center">
                         <div className="flex flex-row gap-2 items-center">
                             <img
@@ -64,13 +64,12 @@ export const RatesPanel = () => {
                                 className="h-8 w-8 object-center object-cover bg-blue-50 rounded"
                             />
                             <div className="flex flex-col">
-                                <p>Standard Shipping</p>
+                                <p className='text-sm'>Standard Shipping</p>
                                 <p className="text-xs text-gray-500">Estimated delivery: 5-7 days</p>
                             </div>
                         </div>
-                        <p>$10.00</p>
+                        <p className='text-sm'>$10.00</p>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -29,6 +29,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { RatesPanel } from './components/RatesPanel';
 import { Dimension } from './components/forms/Dimension';
 import { ShippedTo } from './components/forms/ShippedTo';
+import { useToast } from '@/src/components/ui/use-toast';
 import axios from 'axios';
 
 const formSchema = yup.object().shape({
@@ -65,6 +66,7 @@ const formSchema = yup.object().shape({
 
 export default function Home() {
 
+    const { toast } = useToast();
     const [warehouse, setWarehouse] = useState([])
     console.log("🚀 ~ Home ~ warehouse:", warehouse)
     const [country, setCountry] = useState([])
@@ -179,9 +181,69 @@ export default function Home() {
         const data = warehouse.find((item) => item.warehouse_code === value)
         handleAssingData(data)
     }
+
+    const handleSave = async (formData) => {
+        console.log("🚀 ~ handleSave ~ formData:", formData)
+        try {
+            console.log("Before API call");
+            const response = await axios.post(
+                `/api/Calculator/ShippingCalculation`,
+                {
+                    addressFrom: {
+                        country: formData.shipped_from.country,
+                        state: formData.shipped_from.state,
+                        city: formData.shipped_from.city,
+                        zip: formData.shipped_from.zip,
+                        street1: formData.shipped_from.address,
+                        street2: formData.shipped_from.address2,
+                        // warehouse_code: formData.shipped_from.warehouse_code,
+                    },
+                    addressTo: {
+                        country: formData.shipped_to.country,
+                        state: formData.shipped_to.state,
+                        city: formData.shipped_to.city,
+                        zip: formData.shipped_to.zip,
+                        street1: formData.shipped_to.address,
+                        street2: formData.shipped_to.address2,
+                    },
+                    parcels: {
+                        weight: formData.dimension.weight,
+                        mass_unit: formData.dimension.weight_unit,
+                        length: formData.dimension.length,
+                        width: formData.dimension.width,
+                        height: formData.dimension.height,
+                        distance_unit: formData.dimension.dimension_unit,
+                    },
+                },
+            )
+            console.log("🚀 ~ handleSave ~ response:", response)
+            console.log("After API call");
+            if (response.status === true) {
+                const responseData = {
+                    status: response.status,
+                    message: response.data.message,
+                };
+                setShowRates(true)
+                return responseData
+            } else {
+                toast({
+                    title: "Error",
+                    description: response.data.message,
+                })
+                return response.data.message
+            }
+        } catch (error) {
+            toast({
+                title: "Errors",
+                description: error.message,
+            })
+            console.error("Save Error", error)
+        }
+    }
     return (
         <>
             <div className={styles.container}>
+
                 <div className={`flex flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
                     ${styles.wrapper}
                     `}>
@@ -213,7 +275,9 @@ export default function Home() {
                                 </Tabs>
                             </div>
                             <Form {...form}>
-                                <form >
+                                <form
+                                    onSubmit={form.handleSubmit(handleSave)}
+                                >
 
                                     <div className="flex flex-col gap-3 justify-evenly">
                                         <div className="">
@@ -301,11 +365,9 @@ export default function Home() {
                                             variant="destructive"
                                             className="w-full"
                                             size="sm"
-                                            type="button"
-                                            onClick={() => {
-                                                setShowRates(true)
-
-                                            }}
+                                        // onClick={() => {
+                                        //     setShowRates(true)
+                                        // }}
                                         >
                                             Get Rates
                                         </Button>

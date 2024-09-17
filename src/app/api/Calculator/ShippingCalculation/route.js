@@ -30,6 +30,7 @@ export async function POST(request) {
             const responseData = {
                 status: response.data.status,
                 message: response.data.message,
+                rates: response.data.shipment,
             };
             return NextResponse.json(responseData, { status: 200 });
         } else {

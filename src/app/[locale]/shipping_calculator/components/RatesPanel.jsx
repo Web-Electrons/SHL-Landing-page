@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/src/components/ui/button'
 import { RefreshCcw } from 'lucide-react'
 import { CourrierCard } from './panel/CourrierCard'
@@ -7,9 +7,36 @@ import { ScrollArea } from '@/src/components/ui/scroll-area'
 
 // import Carrier1 from '@/public/logo.png'
 
-export const RatesPanel = () => {
 
-    const [isFastest, setIsFastest] = React.useState(false)
+
+export const RatesPanel = ({ rates = [] }) => {
+
+    const [isFastest, setIsFastest] = useState(false)
+    const [sortedRates, setSortedRates] = useState([])
+
+    useEffect(() => {
+        if (Array.isArray(rates)) {
+            if (isFastest) {
+                const filterFastest = [...rates].sort(
+                    (a, b) => a.estimatedDays - b.estimatedDays
+                );
+                setSortedRates(filterFastest);
+            } else {
+                const filterCheapest = [...rates].sort(
+                    (a, b) => a.amount - b.amount
+                );
+                setSortedRates(filterCheapest);
+            }
+        } else {
+            setSortedRates([]);
+        }
+    }, [rates, isFastest]);
+
+    const handleRefresh = () => {
+        // Implement refresh logic here
+        console.log("Refreshing rates...");
+    }
+
     return (
         <div className="flex flex-col px-[20px]">
             <div className="flex flex-row justify-between">
@@ -18,47 +45,37 @@ export const RatesPanel = () => {
                     size="xs"
                     variant='ghost'
                     className="border border-gray-300 flex flex-row gap-2"
+                    onClick={handleRefresh}
                 >
                     <RefreshCcw size={16} className='text-red-700' />
                     <p>Refresh</p>
                 </Button>
             </div>
 
-            <div className=" flex flex-row gap-2 mt-[10px]">
+            <div className="flex flex-row gap-2 mt-[10px]">
                 <Button
                     size="xs"
                     variant='ghost'
                     onClick={() => setIsFastest(false)}
-                    className={`border border-gray-300 ${isFastest === false ? 'bg-red-100 border-red-600 text-red-800' : ''}`}
+                    className={`border border-gray-300 ${!isFastest ? 'bg-red-100 border-red-600 text-red-800' : ''}`}
                 >
-                    Chepest
+                    Cheapest
                 </Button>
                 <Button
                     size="xs"
                     variant='ghost'
                     onClick={() => setIsFastest(true)}
-                    className={`border border-gray-300 ${isFastest === true ? 'bg-red-100 border-red-600 text-red-800' : ''}`}
+                    className={`border border-gray-300 ${isFastest ? 'bg-red-100 border-red-600 text-red-800' : ''}`}
                 >
                     Fastest
                 </Button>
             </div>
 
-
-            <ScrollArea className="h-[60%] mt-3 ">
+            <ScrollArea className="h-full mt-3">
                 <div className="list flex flex-col gap-2">
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
-                    <CourrierCard />
+                    {sortedRates.map((rate, index) => (
+                        <CourrierCard key={index} data={rate} />
+                    ))}
                 </div>
             </ScrollArea>
 

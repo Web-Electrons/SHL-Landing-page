@@ -53,6 +53,7 @@ const formSchema = yup.object().shape({
     }),
 
     shipped_to: yup.object().shape({
+        name: yup.string().required(),
         country: yup.string().required(),
         state: yup.string().required(),
         city: yup.string().required(),
@@ -69,6 +70,7 @@ export default function Home() {
     const { toast } = useToast();
     const [warehouse, setWarehouse] = useState([])
     console.log("🚀 ~ Home ~ warehouse:", warehouse)
+    const [courierRates, setCourierRates] = useState([])
     const [country, setCountry] = useState([])
     console.log("🚀 ~ Home ~ country:", country)
     const form = useForm({
@@ -79,6 +81,7 @@ export default function Home() {
                 dimension_unit: "cm",
             },
             shipped_to: {
+                name: "stern",
                 country: "Canada",
                 state: "",
                 city: "",
@@ -199,6 +202,7 @@ export default function Home() {
                         // warehouse_code: formData.shipped_from.warehouse_code,
                     },
                     addressTo: {
+                        name: formData.shipped_to.name,
                         country: formData.shipped_to.country,
                         state: formData.shipped_to.state,
                         city: formData.shipped_to.city,
@@ -218,13 +222,15 @@ export default function Home() {
             )
             console.log("🚀 ~ handleSave ~ response:", response)
             console.log("After API call");
-            if (response.status === true) {
-                const responseData = {
-                    status: response.status,
-                    message: response.data.message,
-                };
+            if (response.data.status === true) {
+                toast({
+                    title: "Success",
+                    description: response.data.message,
+                    status: "success",
+                })
+                setCourierRates(response.data.rates.rates || [])
                 setShowRates(true)
-                return responseData
+                console.log("🚀 ~ slo", response.data.rates.rates)
             } else {
                 toast({
                     title: "Error",
@@ -365,9 +371,11 @@ export default function Home() {
                                             variant="destructive"
                                             className="w-full"
                                             size="sm"
+                                            type="submit"
                                         // onClick={() => {
                                         //     setShowRates(true)
                                         // }}
+                                        onClick={() => handleSave(form.getValues())}
                                         >
                                             Get Rates
                                         </Button>
@@ -379,7 +387,7 @@ export default function Home() {
                 </div>
                 <div className={` ${showRates === true ? styles.panel : "hidden"}`}>
                     {/* <div className={`${styles.panel} `}> */}
-                    <RatesPanel />
+                    <RatesPanel rates={courierRates} />
                 </div>
             </div>
 

@@ -30,15 +30,9 @@ export const HomeFooter = () => {
                             <div className="address flex flex-col gap-2 text-sm">
                                 <strong>ShipLink Services Inc.</strong>
                                 <div className="text-sm">
-                                    <p>3020A route Marie-Victorin</p>
-                                    <p>Unit 100</p>
-                                    <p>Varennes, QC</p>
-                                    <p>J3X OJ5 Canada</p>
-                                </div>
-                            </div>
-                            <div className=" flex flex-col ">
                                 <p className='text-sm font-regular text-[#5A5A5A]'>{t("emsup")}</p>
-                                <div className="flex flex-row gap-3 items-center">
+                                    <div className=" flex flex-col ">
+                                        <div className="flex flex-row gap-3 items-center">
                                     <Mail width={15} height={15} />
                                     <Link
                                         passHref
@@ -46,12 +40,13 @@ export const HomeFooter = () => {
                                         className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                         <div className="text-sm">contact@shiplink.com</div>
                                     </Link>
-                                </div>
+                                     </div>
+                                  </div> 
+                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div className="right flex flex-col gap-3 justify-end w-[40%] md:flex-row">
                     <div className="flex flex-col gap-5 text-sm">
                         <div className="item flex flex-row gap-2 items-center w-[100px]">

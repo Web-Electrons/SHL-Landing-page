@@ -72,6 +72,7 @@ export default function Home() {
     console.log("🚀 ~ Home ~ warehouse:", warehouse)
     const [courierRates, setCourierRates] = useState([])
     const [country, setCountry] = useState([])
+    const [loading_rates, set_loading_rates] = useState(false)
     console.log("🚀 ~ Home ~ country:", country)
     const form = useForm({
         resolver: yupResolver(formSchema),
@@ -187,6 +188,8 @@ export default function Home() {
 
     const handleSave = async (formData) => {
         console.log("🚀 ~ handleSave ~ formData:", formData)
+        set_loading_rates(true)
+        setShowRates(true)
         try {
             console.log("Before API call");
             const response = await axios.post(
@@ -229,7 +232,7 @@ export default function Home() {
                     status: "success",
                 })
                 setCourierRates(response.data.rates.rates || [])
-                setShowRates(true)
+
                 console.log("🚀 ~ slo", response.data.rates.rates)
             } else {
                 toast({
@@ -244,6 +247,8 @@ export default function Home() {
                 description: error.message,
             })
             console.error("Save Error", error)
+        } finally {
+            set_loading_rates(false)
         }
     }
     return (
@@ -372,10 +377,10 @@ export default function Home() {
                                             className="w-full"
                                             size="sm"
                                             type="submit"
-                                        // onClick={() => {
-                                        //     setShowRates(true)
-                                        // }}
-                                        onClick={() => handleSave(form.getValues())}
+                                            // onClick={() => {
+                                            //     setShowRates(true)
+                                            // }}
+                                            onClick={() => handleSave(form.getValues())}
                                         >
                                             Get Rates
                                         </Button>
@@ -387,7 +392,10 @@ export default function Home() {
                 </div>
                 <div className={` ${showRates === true ? styles.panel : "hidden"}`}>
                     {/* <div className={`${styles.panel} `}> */}
-                    <RatesPanel rates={courierRates} />
+                    <RatesPanel
+                        loading_rates={loading_rates}
+                        rates={courierRates}
+                    />
                 </div>
             </div>
 

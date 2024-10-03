@@ -4,13 +4,14 @@ import { Button } from '@/src/components/ui/button'
 import { RefreshCcw } from 'lucide-react'
 import { CourrierCard } from './panel/CourrierCard'
 import { ScrollArea } from '@/src/components/ui/scroll-area'
-
+import Link from 'next/link'
+import { Skeleton } from '@/src/components/ui/skeleton'
 // import Carrier1 from '@/public/logo.png'
 
 
 
-export const RatesPanel = ({ rates = [] }) => {
-
+export const RatesPanel = ({ rates = [], loading_rates }) => {
+    const login = process.env.NEXT_PUBLIC_LOGIN_URL;
     const [isFastest, setIsFastest] = useState(false)
     const [sortedRates, setSortedRates] = useState([])
 
@@ -34,14 +35,15 @@ export const RatesPanel = ({ rates = [] }) => {
 
     const handleRefresh = () => {
         // Implement refresh logic here
+
         console.log("Refreshing rates...");
     }
 
     return (
-        <div className="flex flex-col px-[20px]">
+        <div className="flex flex-col px-[20px] h-full">
             <div className="flex flex-row justify-between">
                 <p className='text-black text-lg font-bold'>Rates</p>
-                <Button
+                {/* <Button
                     size="xs"
                     variant='ghost'
                     className="border border-gray-300 flex flex-row gap-2"
@@ -49,7 +51,7 @@ export const RatesPanel = ({ rates = [] }) => {
                 >
                     <RefreshCcw size={16} className='text-red-700' />
                     <p>Refresh</p>
-                </Button>
+                </Button> */}
             </div>
 
             <div className="flex flex-row gap-2 mt-[10px]">
@@ -71,22 +73,43 @@ export const RatesPanel = ({ rates = [] }) => {
                 </Button>
             </div>
 
-            <ScrollArea className="h-full mt-3">
+            <ScrollArea className="h-[80%] mt-3">
                 <div className="list flex flex-col gap-2">
-                    {sortedRates.map((rate, index) => (
-                        <CourrierCard key={index} data={rate} />
-                    ))}
+                    {
+                        rates.length === 0 && loading_rates ? (
+                            <>
+                                <Skeleton className={`w-full h-[30px]`} />
+                                <Skeleton className={`w-full h-[30px]`} />
+                                <Skeleton className={`w-full h-[30px]`} />
+                            </>
+                        ) : rates.length === 0 && !loading_rates ? (
+                            <p className="text-gray-500 text-sm">No rates available</p>
+                        ) : rates.length > 0 ? (
+                            sortedRates.map((rate, index) => (
+                                <CourrierCard key={index} data={rate} />
+                            ))
+                        ) : (
+                            <p className="text-gray-500 text-sm">No rates available</p>
+                        )
+                    }
+
                 </div>
             </ScrollArea>
-
             <div className="">
-                <Button
-                    variant="destructive"
-                    size="xs"
-                    className="w-full mt-3"
+                <Link
+                    passHref
+                    className='w-full'
+                    href={`${login}`}
                 >
-                    Start Shipping
-                </Button>
+                    <Button
+                        variant="destructive"
+                        size="xs"
+                        className="w-full mt-3"
+                    >
+                        Start Shipping
+                    </Button>
+                </Link>
+
             </div>
         </div>
     )

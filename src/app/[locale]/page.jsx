@@ -72,12 +72,12 @@ export default function Home() {
               height: "90dvh",
             }}
             className="relative z-10 flex flex-col justify-center items-center text-center">
-            <h1 className="text-5xl font-bold leading-tight mb-4">{t("Header")}</h1>
-            <p className="text-3xl font-bold leading-tight mb-1">
+            <h1 className="lg:text-5xl font-bold leading-tight mb-4 sm:text-3xl">{t("Header")}</h1>
+            <p className="lg:text-3xl sm:text-3xl font-bold leading-tight mb-1">
               {t("SubHeader")}
               {/* {t("Header")} */}
             </p>
-            <p className="text-3xl font-bold leading-tight mb-4">
+            <p className="lg:text-3xl sm:text-xl font-bold leading-tight mb-4">
               {t("SubHeader2")}
               {/* {t("Header")} */}
             </p>

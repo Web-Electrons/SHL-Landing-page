@@ -27,15 +27,30 @@ import {
 } from '../../ui/dropdown-menu'
 import { LangSwitcher } from './LangSwitcher'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import logo from '../../../public/whiteLogo.png'
+import { useTranslations, useLocale } from 'next-intl';
 
 export const HomeNavbar = () => {
+    const t = useLocale()
+    const [selectedLang, setSelectedLang] = useState(t.toUpperCase())
+    const router = useRouter()
+    const pathname = usePathname();
+
+    console.log("🚀 ~ LangSwitcher ~ locale:", t);
+    const onSelectChange = (lang) => () => {
+        const newSelectedLang = lang.toUpperCase();
+        setSelectedLang(newSelectedLang);
+        const newPath = `/${lang}/${pathname.split('/').slice(2).join('/')}`;
+        router.replace(newPath)
+    }
+
+
+    const [showOther, setShowOther] = useState(false);
     const [isSolidBackground, setIsSolidBackground] = useState(false);
     const [open, setOpen] = useState(false)
     const login = process.env.NEXT_PUBLIC_LOGIN_URL;
     const signup = process.env.NEXT_PUBLIC_SIGNUP_URL;
-    const pathname = usePathname()
     const isHomeOnly = pathname === '/' || pathname === '/en' || pathname === '/fr' || pathname === '/es'
 
     const isTable = useMediaQuery({ query: "(min-width: 1091px)" });
@@ -154,16 +169,60 @@ export const HomeNavbar = () => {
                                 <p className={`text-sm text-left font-extralight`}>About Us</p>
                             </Button>
                         </Link>
-                        <Button
-                            variant="ghost"
-                            className=" text-left flex flex-row justify-start"
-                        >
-                            <p className={`text-sm text-left font-extralight`}>EN</p>
-                            <ChevronDown
-                                width={15}
-                                height={15}
-                            />
-                        </Button>
+
+                        <div className=" w-full">
+                            <Button
+                                variant="ghost"
+                                onClick={() => {
+                                    setShowOther(!showOther)
+                                }}
+                                className=" text-left flex flex-row justify-between w-full"
+                            >
+                                <p className={`text-sm text-left font-extralight`}>{selectedLang}</p>
+                                <ChevronDown
+                                    width={15}
+                                    height={15}
+                                    className={`${showOther ? 'transform rotate-180' : ''}`}
+                                />
+                            </Button>
+                            {
+                                showOther && (
+
+                                    <div className="bg-slate-100">
+
+                                        <ul>
+                                            <li className="px-2">
+                                                <Button
+                                                    variant="ghost"
+                                                    onClick={onSelectChange("en")}
+                                                    className=" text-left flex flex-row justify-start"
+                                                >
+                                                    <p className={`text-sm text-left font-extralight`}>EN</p>
+                                                </Button>
+                                            </li>
+                                            <li className="px-2">
+                                                <Button
+                                                    variant="ghost"
+                                                    onClick={onSelectChange("fr")}
+                                                    className=" text-left flex flex-row justify-start"
+                                                >
+                                                    <p className={`text-sm text-left font-extralight`}>FR</p>
+                                                </Button>
+                                            </li>
+                                            <li className="px-2">
+                                                <Button
+                                                    variant="ghost"
+                                                    onClick={onSelectChange("es")}
+                                                    className=" text-left flex flex-row justify-start"
+                                                >
+                                                    <p className={`text-sm text-left font-extralight`}>ES</p>
+                                                </Button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )
+                            }
+                        </div>
                         <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">
                             {
                                 <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">

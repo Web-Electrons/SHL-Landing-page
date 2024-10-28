@@ -23,18 +23,14 @@
         "SignupP": "Join us for great benefits by getting your account right now!\nEnjoy exclusive access to our specialized services, unique features and unmatched prices",
         "SubHeader": "Get delivery Cross-Border and Worldwide",
         "why1": "Website",
-        
         "why1-params": "State of the art website and platform. you can buy, track and control in real time, all in one place.",
         "why2": "Online Payment",
         "why2-params": "Make your payments online for fast collection at branches and terminals.",
         "why3": "By Weight",
-
         "why3-params": "For our Cross-Border services, You only pay for what it weighs, you do not pay for volumetric weight.",
         "why4": "ShipLink Points",
-
         "why4-params": "You accumulate points that you can redeem for discounts on our services.\n(Comming Soon)",
         "why5": "Branches",
-
         "why5-params": "Several terminals and branches in the US and Canada for in person pickup and dropoff",
         "why6": "Tiered Rate",
         "why6-params": "The heavier your package, the cheaper your rate per pound.",
@@ -78,14 +74,12 @@
         "OWC": "Our World Class Partners and Carriers",
         "WoW": "We work with the world’s most reputable carriers",
         "Learn": "Learn More",
-
         "HIW1": "Quickly enter Origin and Destination addresses, get instant prices, times and carrier options.",
         "HIW2": "Select a shipping option with the carrier, price and speed of service you prefer.",
         "HIW3": "Click Print, stick the label on your package and ship.",
         "HIW4": "Conveniently track your shipment directly from your Dashboard",
-        "HIW_Tittle" : "Ship Your Pakcages",
-        "HIW_SubTittle" : "With our high volume carrier discounts and partnerships, we can offer you exceptional shipping rates along with a state of the art Dashboard and operating experience."
-
+        "HIW_Tittle": "Ship Your Pakcages",
+        "HIW_SubTittle": "With our high volume carrier discounts and partnerships, we can offer you exceptional shipping rates along with a state of the art Dashboard and operating experience."
     },
     "about": {
         "Header": "About Us",
@@ -106,5 +100,9 @@
         "SubHeader": "Closer to ShipLink",
         "Vision": "Vision",
         "Vision_param": "Our team offers customers consistent first-class service, an organization that is close to its customers and builds long term relationships."
+    },
+    "Shoping": {
+        "header": "Coming Soon",
+        "sub_header": "Please Comeback Later"
     }
 }

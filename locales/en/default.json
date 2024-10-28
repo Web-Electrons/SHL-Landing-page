@@ -60,9 +60,11 @@
         "Selfpick": "Self Pick-Up at ShipLink Locations",
         "cs": "Consolidation Services",
         "DSL": "Discounted Shipping Rates",
-        "Lv2": "Level 2 Discount Shipping Rates",
+        "Lv2": "Level 3 Discount Shipping Rates",
         "PR": "Pallet Reception",
         "Lv3": "Level 3 Discount Shipping Rates",
+        "custom": "Custom Discount Shipping",
+        "Special_volume": "Special Volume Pricing",
         "AM": "Account Manager",
         "Subscribe": "Subscribe",
         "Terms": "Terms and Conditions",
@@ -84,23 +86,23 @@
         "HIW_SubTittle": "With our high volume carrier discounts and partnerships, we can offer you exceptional shipping rates along with a state of the art Dashboard and operating experience.",
         "about": {
             "Header": "About Us",
-            "Header_Title": "We are the best-in-class platform for national and international shipping services. Our many years of experience, customer satisfaction.",
+            "Header_Title": "We are the best-in-class platform for national and international shipping services. Our many years of experience and customer satisfaction ensures you the best shipping experience",
             "Helo": "Helo Worlld",
             "Mission": "Mission",
-            "Mission_param": "We make your shipping experience easier for both personal and business through our services and distribution network, offering convenient and economical solutions through our best-in-class service.",
+            "Mission_param": "We make your shipping experience easier for both personal and business through our use of state-of-the-art technology and distribution network, offering convenient and economical solutions.",
             "Other": "Other Important Data",
             "Other1": "World class business model using industry best practices",
             "Other2": "Top Rated by customer reviews",
             "Other3": "Management with over 15 years of experience in international logistics",
-            "Other4": "Terminals and Service across all North America",
-            "Service_list1": "National and international shipment labels (USPS, CP, DHL, UPS, etc)",
+            "Other4": "Terminals and Service across all North America and Europe",
+            "Service_list1": "National and international shipping labels (USPS, CP, DHL, UPS, etc)",
             "Service_list2": "Sale of shipping and packaging supplies",
             "Service_list3": "Cross-Border Mailboxes (Import, Export, Internet Purchases, Courier)",
-            "Service_Param": "We are a comprehensive personal and business solutions service provider, helping you optimize and save on your shipping needs through the following services:",
+            "Service_Param": "We are a comprehensive personal and business solutions provider, helping you optimize and save on your shipping needs through the following services:",
             "Service_Title": "Our Services",
-            "SubHeader": "Closer to ShipLink",
+            "SubHeader": "Closer With ShipLink",
             "Vision": "Vision",
-            "Vision_param": "Our team offers customers consistent first-class service, an organization that is close to its customers and builds long term relationships.",
+            "Vision_param": "Our team offers consistent first-class service while building close long term relationships with our customers",
             "MoreQuestion": "You have more questions?",
             "CTA": "Contact Us"
         },
@@ -174,7 +176,7 @@
         },
         "prohibited": {
             "detail": "Details on Prohibited Items",
-            "detail_text": "ShipLink prohibits the shipment of any items that are banned by the laws, regulations, or statutes of any federal, state, or local government of any country through which the shipment may pass. Items requiring a special license for transport are also prohibited. Additionally, ShipLink prohibits items that could damage equipment, personnel, or other packages.\nCountry-specific restrictions apply.\nThe above list is not exhaustive; please check country-specific restrictions here.\nIf you have further questions, please contact customer service at ",
+            "detail_text": "ShipLink prohibits the shipment of any items that are banned by the laws, regulations, or statutes of any federal, state, or local government of any country through which the shipment may pass. Items requiring a special license for transport are also prohibited. Additionally, ShipLink prohibits items that could damage equipment, personnel, or other packages.\nCountry-specific restrictions apply.\nThe above list is not exhaustive; please check country-specific restrictions here.\nIf you have further questions, please contact customer support",
             "item1": "ANIMALS, PLANTS, FOOD",
             "item1_list": "Live Animals or Insects\nAnimal Carcasses\nFurs\nLive plants and plant materials\nFungi, Mushroom, Plant Spores\nPlant Seeds\nPerishable items\nFresh food or items that require refrigeration",
             "item2": "HIGH VALUE ITEMS",
@@ -220,7 +222,7 @@
             "title": "Terms and Conditions",
             "title_text": "Please read and review carefully our terms and conditions before signing up to our services"
         },
-        "footer" : {
+        "footer": {
             "about": "About",
             "contact": "Contact",
             "info": "Info",
@@ -232,9 +234,13 @@
             "how_it_works": "How it works",
             "shipping_calculator": "Shipping Calculator",
             "prohibited_items": "Prohibited Items",
-            "Shoping_ideas" : "Shoping Ideas",
-            "Virtual_mailbox" : "Virtual Mailbox",
-            "shipment_label" : "Shipment Label"
+            "Shoping_ideas": "Shopping Ideas",
+            "Virtual_mailbox": "Virtual Mailbox",
+            "shipment_label": "Shipment Label"
+        },
+        "Shoping": {
+            "header": "Coming Soon",
+            "sub_header": "Please Come Back later"
         }
     }
 }

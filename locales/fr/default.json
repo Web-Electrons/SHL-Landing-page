@@ -59,9 +59,11 @@
         "Selfpick": "Ramassage en personne dans les points de vente ShipLink",
         "cs": "Services de consolidation",
         "DSL": "Étiquettes d'expédition à prix réduit",
-        "Lv2": "Niveau 2 - Étiquettes d'expédition à prix réduit",
+        "Lv2": "Niveau 3 - Étiquettes d'expédition à prix réduit",
+        "custom": "Expédition personnalisée à prix réduit",
         "PR": "Réception des palettes",
         "Lv3": "Étiquettes d'expédition à prix réduit pour le niveau 3",
+        "Special_volume": "Tarifs spéciaux en fonction du volume",
         "AM": "Gestionnaire de comptes",
         "Subscribe": "S'abonner",
         "Terms": "Conditions générales d'utilisation",
@@ -83,23 +85,23 @@
         "HIW_SubTittle": "Grâce à nos remises et partenariats avec les transporteurs à gros volume, nous pouvons vous offrir des tarifs d'expédition exceptionnels ainsi qu'un tableau de bord et une expérience opérationnelle de pointe.",
         "about": {
             "Header": "À propos de nous",
-            "Header_Title": "Nous sommes la meilleure plateforme de services d'expédition nationaux et internationaux. Nos nombreuses années d'expérience, la satisfaction du client",
+            "Header_Title": "Nous sommes la meilleure plateforme de services d'expédition nationaux et internationaux. Nos nombreuses années d'expérience et la satisfaction de nos clients vous garantissent la meilleure expérience d'expédition",
             "Helo": "Hélo Monde",
             "Mission": "Mission",
-            "Mission_param": "Nous facilitons votre expérience d'expédition, tant pour les particuliers que pour les entreprises, grâce à nos services et à notre réseau de distribution, offrant des solutions pratiques et économiques grâce à notre service de premier ordre.",
+            "Mission_param": "Nous facilitons votre expérience d'expédition, tant pour les particuliers que pour les entreprises, grâce à notre utilisation d'une technologie de pointe et d'un réseau de distribution, offrant des solutions pratiques et économiques.",
             "Other": "Autres données importantes",
             "Other1": "Modèle commercial de classe mondiale utilisant les meilleures pratiques de lindustrie",
             "Other2": "Mieux notés par les avis clients",
             "Other3": "Management avec plus de 15 ans d'expérience en logistique internationale",
-            "Other4": "Terminaux et service partout en Amérique du Nord",
-            "Service_list1": "Étiquettes d'expédition nationales et internationales (USPS, CP, DHL, UPS, etc.)",
+            "Other4": "Terminaux et services dans toute l'Amérique du Nord et en Europe",
+            "Service_list1": "Etiquetas de envío nacionales e internacionales (USPS, CP, DHL, UPS, etc.)",
             "Service_list2": "Vente de fournitures d'expédition et d'emballage",
             "Service_list3": "Boîtes aux lettres transfrontalières (importation, exportation, achats sur Internet, messagerie)",
-            "Service_Param": "Nous sommes un fournisseur de services complets de solutions personnelles et professionnelles, vous aidant à optimiser et à économiser sur vos besoins d'expédition grâce aux services suivants :",
+            "Service_Param": "Nous sommes un fournisseur complet de solutions personnelles et professionnelles, vous aidant à optimiser et à économiser sur vos besoins d'expédition grâce aux services suivants :",
             "Service_Title": "Nos services",
-            "SubHeader": "Plus proche de ShipLink",
+            "SubHeader": "Plus proche avec ShipLink",
             "Vision": "Vision",
-            "Vision_param": "Notre équipe offre à nos clients un service constant de première classe, une organisation proche de ses clients et qui construit des relations à long terme.",
+            "Vision_param": "Notre équipe offre un service de première classe tout en établissant des relations étroites à long terme avec nos clients",
             "MoreQuestion": "Vous avez d'autres questions ?",
             "CTA": "Contactez-nous"
         },
@@ -173,7 +175,7 @@
         },
         "prohibited": {
             "detail": "Détails sur les articles interdits",
-            "detail_text": "ShipLink interdit l'expédition de tout article interdit par les lois, réglementations ou statuts de tout gouvernement fédéral, étatique ou local de tout pays par lequel l'envoi peut passer. Les articles nécessitant une autorisation spéciale pour le transport sont également interdits. De plus, ShipLink interdit les articles susceptibles d'endommager l'équipement, le personnel ou d'autres colis. Des restrictions spécifiques à chaque pays s'appliquent. La liste ci-dessus n'est pas exhaustive ; veuillez vérifier les restrictions spécifiques à chaque pays ici. Si vous avez d'autres questions, veuillez contacter le service client a ",
+            "detail_text": "ShipLink interdit l'expédition de tout article interdit par les lois, réglementations ou statuts de tout gouvernement fédéral, étatique ou local de tout pays par lequel l'envoi peut passer. Les articles nécessitant une autorisation spéciale pour le transport sont également interdits. De plus, ShipLink interdit les articles susceptibles d'endommager l'équipement, le personnel ou d'autres colis. Des restrictions spécifiques à chaque pays s'appliquent. La liste ci-dessus n'est pas exhaustive ; veuillez vérifier les restrictions spécifiques à chaque pays ici. Si vous avez d'autres questions, veuillez contacter le support client ",
             "item1": "ANIMAUX, PLANTES, NOURRITURE",
             "item1_list": "Animaux ou insectes vivants\nCarcasses d'animaux\nFourrures\nPlantes vivantes et matières végétales\nChampignons, spores\nGraines de plantes\nArticles périssables\nAliments frais ou articles nécessitant réfrigération",
             "item2": "ARTICLES DE HAUTE VALEUR",
@@ -234,6 +236,10 @@
             "Shoping_ideas": "Idées de Shopping",
             "Virtual_mailbox": "Boîte aux Lettres Virtuelle",
             "shipment_label": "Étiquette d'Expédition"
+        },
+        "Shoping": {
+            "header": "À venir",
+            "sub_header": "S'il vous plaît, revenez plus tard"
         }
     }
 }

@@ -30,24 +30,24 @@ export const HomeFooter = () => {
                             <div className="address flex flex-col gap-2 text-sm">
                                 <strong>ShipLink Services Inc.</strong>
                                 <div className="text-sm">
-                                <p className='text-sm font-regular text-[#5A5A5A]'>{t("emsup")}</p>
+                                    <p className='text-sm font-regular text-[#5A5A5A]'>{t("emsup")}</p>
                                     <div className=" flex flex-col ">
                                         <div className="flex flex-row gap-3 items-center">
-                                    <Mail width={15} height={15} />
-                                    <Link
-                                        passHref
-                                        href={"mailto:contact@shiplink.com"}
-                                        className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                                        <div className="text-sm">contact@shiplink.com</div>
-                                    </Link>
-                                     </div>
-                                  </div> 
-                               </div>
+                                            <Mail width={15} height={15} />
+                                            <Link
+                                                passHref
+                                                href={"mailto:contact@shiplink.com"}
+                                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                                                <div className="text-sm">contact@shiplink.com</div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="right flex flex-col gap-3 justify-end w-[40%] md:flex-row">
+                <div className="right flex flex-col gap-5 justify-end w-[40%] md:flex-row">
                     <div className="flex flex-col gap-5 text-sm">
                         <div className="item flex flex-row gap-2 items-center w-[100px]">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
@@ -55,15 +55,7 @@ export const HomeFooter = () => {
                                 <p>{t("abo")}</p>
                             </Link>
                         </div>
-                        <div className="item flex flex-row gap-2 items-center w-[200px]">
-                            <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <Link
-                                passHref
-                                href={"mailto:support@shiplink.com"}
-                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                                <p>{t("sup")}</p>
-                            </Link>
-                        </div>
+
                         <div className="item flex flex-row gap-2 items-center w-[200px]">
 
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
@@ -77,10 +69,12 @@ export const HomeFooter = () => {
                         <div className="item flex flex-row gap-2 items-center w-[200px]">
 
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <div
+                            <Link
+                                passHref
+                                href={"/blog/shopping_ideas"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("footer.Shoping_ideas")}</p>
-                            </div>
+                            </Link>
                             {/* <Link
                                 passHref
                                 href={"/shippingLabels"}
@@ -103,32 +97,29 @@ export const HomeFooter = () => {
                                 <p>{t("proit")}</p>
                             </Link>
                         </div>
+
                         <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
                                 passHref
-                                href={"mailto:contact@shiplink.com"}
-                                className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
-                                <p>{t("cont")}</p>
-                            </Link>
-                        </div>
-                        <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
-                            <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <div
+                                href={"/#cross-border"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("footer.Virtual_mailbox")}</p>
-                            </div>
+                            </Link>
+
                         </div>
                         <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <div
+                            <Link
+                                passHref
+                                href={"/shippingLabels"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("footer.shipment_label")}</p>
-                            </div>
+                            </Link>
+
                         </div>
                         <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
- 
                             <Link
                                 passHref
                                 href={"/shipping_calculator"}

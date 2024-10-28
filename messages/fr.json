@@ -94,5 +94,9 @@
         "SubHeader": "Plus proche de ShipLink",
         "Vision": "Vision",
         "Vision_param": "Notre équipe offre à nos clients un service constant de première classe, une organisation proche de ses clients et qui construit des relations à long terme."
+    },
+    "Shoping": {
+        "header": "Muy pronto",
+        "sub_header": "À venir"
     }
 }

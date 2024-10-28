@@ -60,7 +60,9 @@
         "Selfpick": "Recogida personal en las sucursales de ShipLink",
         "cs": "Servicios de consolidación",
         "DSL": "Etiquetas de envío con descuento",
-        "Lv2": "Etiquetas de envío con descuento de nivel 2",
+        "Lv2": "Etiquetas de envío con descuento de nivel 3",
+        "custom": "Envío con descuento personalizado",
+        "Special_volume": "Precios especiales por volumen",
         "PR": "Recepción de palés",
         "Lv3": "Etiquetas de envío con descuento de nivel 3",
         "AM": "Gestor de cuentas",
@@ -84,23 +86,23 @@
         "HIW_SubTittle": "Con nuestros descuentos y asociaciones con transportistas de gran volumen, podemos ofrecerle tarifas de envío excepcionales junto con un panel de control y una experiencia operativa de última generación.",
         "about": {
             "Header": "Sobre nosotros",
-            "Header_Title": "Somos la mejor plataforma de su clase para servicios de envío nacional e internacional. Nuestros muchos años de experiencia, la satisfacción del cliente.",
+            "Header_Title": "Somos la mejor plataforma de servicios de envío nacionales e internacionales. Nuestros muchos años de experiencia y la satisfacción del cliente le garantizan la mejor experiencia de envío.",
             "Helo": "Hola mundo",
             "Mission": "Misión",
-            "Mission_param": "Hacemos que su experiencia de envío sea más fácil tanto para personas como para empresas a través de nuestros servicios y red de distribución, ofreciendo soluciones convenientes y económicas a través de nuestro mejor servicio en su clase.",
+            "Mission_param": "Hacemos que su experiencia de envío sea más fácil tanto para personas como para empresas mediante el uso de tecnología de punta y red de distribución, ofreciendo soluciones convenientes y económicas.",
             "Other": "Otros datos importantes",
             "Other1": "Modelo de negocio de clase mundial que utiliza las mejores prácticas de la industria",
             "Other2": "Mejor valorados por opiniones de clientes",
             "Other3": "Gerencia con más de 15 años de experiencia en logística internacional",
-            "Other4": "Terminales y Servicio en toda Norteamérica",
+            "Other4": "Terminales y servicios en toda América del Norte y Europa",
             "Service_list1": "Etiquetas para envíos nacionales e internacionales (USPS, CP, DHL, UPS, etc)",
             "Service_list2": "Venta de insumos para envío y embalaje.",
             "Service_list3": "Buzones Transfronterizos (Importación, Exportación, Compras por Internet, Courier)",
             "Service_Param": "Somos un proveedor integral de servicios de soluciones personales y comerciales, que lo ayudamos a optimizar y ahorrar en sus necesidades de envío a través de los siguientes servicios:",
             "Service_Title": "Nuestros servicios",
-            "SubHeader": "Más cerca de ShipLink",
+            "SubHeader": "Más cerca con ShipLink",
             "Vision": "Visión",
-            "Vision_param": "Nuestro equipo ofrece a los clientes un servicio constante de primera clase, una organización cercana a sus clientes y que construye relaciones a largo plazo.",
+            "Vision_param": "Nuestro equipo ofrece un servicio constante de primera clase al tiempo que construye relaciones estrechas a largo plazo con nuestros clientes.",
             "MoreQuestion": "¿Tienes más preguntas?",
             "CTA": "Contacta con nosotros"
         },
@@ -235,6 +237,10 @@
             "Shoping_ideas": "Ideas de Compras",
             "Virtual_mailbox": "Buzón Virtual",
             "shipment_label": "Etiqueta de Envío"
+        },
+        "Shoping": {
+            "header": "Muy pronto",
+            "sub_header": "Por favor vuelve más tarde"
         }
     }
 }

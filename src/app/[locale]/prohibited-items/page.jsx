@@ -357,11 +357,11 @@ export default function Prohibited() {
                                     <br />
                                     If you have further questions, please contact customer service at
                                 </p> */}
-                                <Link
+                                {/* <Link
                                     className='text-myBlue underline'
                                     href={"mailto:support@shiplink.com."}>
                                     support@shiplink.com.
-                                </Link>
+                                </Link> */}
                             </div>
                         </div>
                     </div>

@@ -80,67 +80,10 @@ export const SubsCardsComponents = ({
                 <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
                     <SubsMenu
                         month={"/month"}
-                        title={t("Premium")}
-                        price={"$9.99"}
+                        title={t("business")}
+                        price={"$0.00"}
                         icon={<Image
                             src={premium}
-                            width={25}
-                            height={25}
-                            alt='free'
-                        />}
-                    >
-                        <CardItems
-                            type={'landing'}
-                            title={t("perso")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("US")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("CA")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("SLAtSLA")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("PFS")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("Selfpick")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("cs")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("Lv2")}
-                        />
-                        <CardItems
-                            type={'landing'}
-                            title={t("PR")}
-                        />
-                    </SubsMenu>
-                    <div className='w-full'>
-                        <NextLink passHref href={`${process.env.NEXT_PUBLIC_SIGNUP_URL}`} >
-                            <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
-                                {t("Subscribe")}
-                            </Button>
-                        </NextLink>
-                    </div>
-                </div>
-                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
-                    <SubsMenu
-                        month={"/month"}
-                        title={t("business")}
-                        price={"$99.99"}
-                        icon={<Image
-                            src={business}
                             width={25}
                             height={25}
                             alt='free'
@@ -195,9 +138,76 @@ export const SubsCardsComponents = ({
                         </NextLink>
                     </div>
                 </div>
+                <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
+                    <SubsMenu
+                        month={"/month"}
+                        title={t("Custom")}
+                        price={"$-.—"}
+                        icon={<Image
+                            src={premium}
+                            width={25}
+                            height={25}
+                            alt='free'
+                        />}
+                    >
+                        <CardItems
+                            type={'landing'}
+                            title={t("perso")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("US")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("CA")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("SLAtSLA")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("PFS")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("Selfpick")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("cs")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("Lv2")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("PR")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("custom")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("Special_volume")}
+                        />
+                    </SubsMenu>
+
+                    <div className='w-full'>
+                        <NextLink passHref href={`mailto:contact@shiplink.com`} >
+                            <Button variant="destructive" className='w-[100%] mt-6 py-[10px] px-5'>
+                                {t("emsup")}
+                            </Button>
+                        </NextLink>
+                    </div>
+                </div>
+
             </div>
             <SentEmail teks={buttonP} />
-            
+
         </>
     )
 }

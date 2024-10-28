@@ -141,7 +141,7 @@ export const SubsCardsComponents = ({
                 <div className="p-4 bg-white rounded-md shadow-2xl border flex-col justify-between items-center inline-flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
                     <SubsMenu
                         month={"/month"}
-                        title={t("Custom")}
+                        title={t("customs")}
                         price={"$-.—"}
                         icon={<Image
                             src={premium}

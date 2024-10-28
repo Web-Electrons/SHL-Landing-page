@@ -190,14 +190,13 @@ export const SubsCardsComponents = ({
                             type={'landing'}
                             title={t("PR")}
                         />
-
-                        <CardItems
-                            type={'landing'}
-                            title={t("Special_volume")}
-                        />
                         <CardItems
                             type={'landing'}
                             title={t("AM")}
+                        />
+                        <CardItems
+                            type={'landing'}
+                            title={t("Special_volume")}
                         />
                     </SubsMenu>
 

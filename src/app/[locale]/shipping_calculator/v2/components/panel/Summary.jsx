@@ -8,17 +8,13 @@ import { Card, CardContent } from '@/src/components/ui/card'
 
 import React from 'react'
 import { Separator } from '@/src/components/ui/separator'
-import { Checkbox } from '@/src/components/ui/checkbox'
 
 export const Summary = ({
     rates = [],
     loading_rates,
     summaryData,
     selecetedData,
-    setShowRates,
-    handleNextContent,
-    addingDataToSummary,
-    handleRestart
+    setShowRates
 }) => {
     const login = process.env.NEXT_PUBLIC_LOGIN_URL;
     const [isFastest, setIsFastest] = useState(false)
@@ -44,41 +40,22 @@ export const Summary = ({
     }, [summaryData]);
 
     return (
-        <div className="flex flex-col w-[500px] h-full  gap-5">
-            <div className=" gap-2">
-                <div className="flex flex-row justify-between">
-                    <p className='text-black text-lg font-bold'>Warehouse & Service Fees</p>
-                </div>
-                {[
-                    { service: "Storage Fee (per day)", fee: "$2.00" },
-                    { service: "Extra Tape", fee: "$5.00" },
-                    { service: "Insurance Fee", fee: "$3.00" },
-                    { service: "Request More Picture", fee: "$5.00" },
-                ].map((fee, index) => (
-                    <div
-                        key={index}
-                        className="flex justify-between items-center p-1 gap-2 w-full  rounded-lg"
-                    >
-                        <div className="inline-flex gap-2">
-                            <Checkbox
-                                checked={summaryData.some(item => item.id === fee.service)}
-                                onCheckedChange={(checked) => {
-                                    return checked
-                                        ? addingDataToSummary({ id: fee.service, amount: fee.fee, service_name: fee.service })
-                                        : removeDataFromSummary(fee.service);
-                                }}
-                            />
-                            <span className="font-medium text-xs text-left">{fee.service}</span>
-                        </div>
-                        <span className=" text-xs">{fee.fee}</span>
-                    </div>
-                ))}
+        <div className="flex flex-col  h-full">
+
+            <div className="flex flex-row justify-between">
+                <p className='text-black text-lg font-bold'>Summary</p>
+                {/* <Button
+                    size="xs"
+                    variant='ghost'
+                    className="border border-gray-300 flex flex-row gap-2"
+                    onClick={handleRefresh}
+                >
+                    <RefreshCcw size={16} className='text-red-700' />
+                    <p>Refresh</p>
+                </Button> */}
             </div>
 
-            <ScrollArea className="h-[80%] mt-3 w-fu">
-                <div className="flex flex-row justify-between">
-                    <p className='text-black text-lg font-bold'>Summary</p>
-                </div>
+            <ScrollArea className="h-[80%] mt-3">
                 <div className="list flex flex-col gap-2">
                     <div className="">
                         <Card className="border-none p-0">
@@ -88,10 +65,10 @@ export const Summary = ({
                                         selecetedData && (
                                             <div className="flex flex-row gap-2 items-center  p-1">
                                                 <div className="flex flex-col w-[70%]">
-                                                    <p className='text-sm'>{selecetedData.provider} - {selecetedData.servicelevel?.name}</p>
+                                                    <p className='text-xs'>{selecetedData.provider} - {selecetedData.servicelevel?.name}</p>
                                                     <p className="text-[10px] text-gray-500">Estimate {selecetedData.estimatedDays || "-"} Days</p>
                                                 </div>
-                                                <p className='text-sm w-[30%] text-right'>{`$ ${selecetedData.amountLocal.toFixed(2)}`}</p>
+                                                <p className='text-xs w-[30%] text-right'>{`$ ${selecetedData.amountLocal.toFixed(2)}`}</p>
                                             </div>
                                         )
 
@@ -103,9 +80,9 @@ export const Summary = ({
                                                 className="flex justify-between items-center p-1 gap-2 w-full  rounded-lg"
                                             >
                                                 <div className="inline-flex gap-2">
-                                                    <span className="font-medium text-sm text-left">{item.service_name}</span>
+                                                    <span className="font-medium text-xs text-left">{item.service_name}</span>
                                                 </div>
-                                                <span className=" text-sm">$ {item.amount}</span>
+                                                <span className=" text-xs">$ {item.amount}</span>
                                             </div>
                                         ))
                                     }
@@ -140,11 +117,9 @@ export const Summary = ({
                                     <Button
                                         variant="redOutline"
                                         className="w-full mt-3"
-                                        onClick={() => {
-                                            handleRestart();
-                                        }}
+                                        onClick={() => setShowRates(false)}
                                     >
-                                        Try Other Rates
+                                        Cancel
                                     </Button>
                                 </div>
                             </CardContent>

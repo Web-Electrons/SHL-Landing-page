@@ -54,6 +54,7 @@ import { ScrollArea } from '@/src/components/ui/scroll-area';
 import { Skeleton } from '@/src/components/ui/skeleton';
 import { CourrierCard } from './components/panel/CourrierCard';
 import { sum } from 'lodash';
+import NextLink from 'next/link'
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -392,11 +393,18 @@ export default function Home() {
                                         Shipping Calculator
                                         {/* Shipping Labels */}
                                     </h1>
-                                    <h1 className=" text-black text-lg font-bold">
+                                    <h1 className=" text- text-lg font-bold">
                                         {/* {t('ship.Shipping_Sub')} */}
                                         {/* How it Works */}
                                         Simulate Your Shipping Cost
                                     </h1>
+
+                                    <NextLink
+                                        href="shipping_calculator/v2"
+                                        className='text-myBlue'
+                                    >
+                                        <p>View Version 2</p>
+                                    </NextLink>
                                 </div>
 
                                 <div className="flex flex-row gap-7 min-h-max">

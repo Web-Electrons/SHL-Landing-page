@@ -17,7 +17,9 @@ import {
 import {
     Select,
     SelectContent,
+    SelectGroup,
     SelectItem,
+    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from '@/src/components/ui/select';
@@ -31,6 +33,8 @@ import { Dimension } from './components/forms/Dimension';
 import { ShippedTo } from './components/forms/ShippedTo';
 import { useToast } from '@/src/components/ui/use-toast';
 import axios from 'axios';
+import { ServiceOptions } from './components/panel/ServiceOptions';
+import { Summary } from './components/panel/Summary';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -48,7 +52,6 @@ const formSchema = yup.object().shape({
         city: yup.string().required(),
         zip: yup.string().required(),
         address: yup.string().required(),
-        address2: yup.string(),
         warehouse_code: yup.string(),
     }),
 
@@ -62,6 +65,7 @@ const formSchema = yup.object().shape({
         address2: yup.string(),
     }),
 
+    shippingType: yup.string().required(),
     mailboxSelected: yup.string()
 })
 
@@ -72,7 +76,14 @@ export default function Home() {
     console.log("🚀 ~ Home ~ warehouse:", warehouse)
     const [courierRates, setCourierRates] = useState([])
     const [country, setCountry] = useState([])
+    const [disabledForm, setDisabledForm] = useState(false)
     const [loading_rates, set_loading_rates] = useState(false)
+    const [openRates, setOpenRates] = useState(false)
+    const [openServicesOption, setOpenServicesOption] = useState(false)
+    const [summaryData, setSummaryData] = useState([])
+    const [selecetedData, setSelectedData] = useState(null)
+
+
     console.log("🚀 ~ Home ~ country:", country)
     const form = useForm({
         resolver: yupResolver(formSchema),
@@ -90,9 +101,16 @@ export default function Home() {
                 address: "",
                 address2: "",
             },
+            shipped_from: {
+                address2: "",
+            },
+            shippingType: "HFP",
             mailboxSelected: "ca"
         }
     })
+
+    const shipping = form.watch("shippingType");
+    console.log("🚀 ~ Home ~ shipping:", shipping)
 
 
     useEffect(() => {
@@ -186,10 +204,11 @@ export default function Home() {
         handleAssingData(data)
     }
 
+
     const handleSave = async (formData) => {
         console.log("🚀 ~ handleSave ~ formData:", formData)
         set_loading_rates(true)
-        setShowRates(true)
+        // setShowRates(true)
         try {
             console.log("Before API call");
             const response = await axios.post(
@@ -251,11 +270,41 @@ export default function Home() {
             set_loading_rates(false)
         }
     }
+
+    const validateForm = async () => {
+        const isValid = await form.trigger();
+        if (!isValid) {
+            // Ambil semua field yang error dari form state
+            const errorFields = Object.keys(form.formState.errors).map((key) => key.replace(/\./g, ' > '));
+            console.log("🚀 ~ validateForm ~ errorFields:", form.formState.errors)
+            toast({
+                title: "Error",
+                description: `Required fields: ${errorFields.join(', ')}`,
+                status: "error",
+            });
+
+            return false;
+        }
+        return true
+    };
+    const triggerSave = () => {
+        // validateForm()
+        handleSave(form.getValues())
+    }
+
+    const handleContinue = async () => {
+        const isValid = await validateForm();
+        if (isValid) {
+            setOpenServicesOption(true)
+            setDisabledForm(true)
+            setShowRates(false)
+            triggerSave()
+        }
+    }
     return (
         <>
             <div className={styles.container}>
-
-                <div className={`flex flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
+                <div className={`flex  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
                     ${styles.wrapper}
                     `}>
                     <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-3">
@@ -271,24 +320,54 @@ export default function Home() {
                         </h1>
 
                         <div className="">
-                            <div className="pb-4">
-                                <Tabs
-                                    onValueChange={(value) => setTabsName(value)}
-                                    defaultValue="mailbox" className="w-[400px]">
-                                    <TabsList>
-                                        <TabsTrigger
-                                            className="w-[150px]"
-                                            value="mailbox">Mailbox</TabsTrigger>
-                                        <TabsTrigger
-                                            className="w-[150px]"
-                                            value="custom">Custom Address</TabsTrigger>
-                                    </TabsList>
-                                </Tabs>
-                            </div>
+
                             <Form {...form}>
                                 <form
+                                    disabled={disabledForm}
                                     onSubmit={form.handleSubmit(handleSave)}
                                 >
+                                    <div className="services space-y-2">
+                                        <h1 className=" text-black text-lg font-bold">
+                                            Select Your Services
+                                        </h1>
+                                        <FormField
+                                            control={form.control}
+                                            name="shippingType"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <FormControl>
+                                                            <SelectTrigger className="w-[300px] my-2">
+                                                                <SelectValue defaultValue={"HFP"} placeholder="Select Services Option" />
+                                                            </SelectTrigger>
+                                                        </FormControl>
+                                                        <SelectContent>
+                                                            <SelectItem value="HFP">Hold For Pickup</SelectItem>
+                                                            <SelectItem value="CBP">Cross Border Pickup</SelectItem>
+                                                            <SelectItem value="CBF">Cross Border Forward</SelectItem>
+                                                            <SelectItem value="FP">Forward Package</SelectItem>
+                                                        </SelectContent>
+                                                    </Select>
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+
+                                    <div className="pb-4 pt-3">
+                                        <Tabs
+                                            onValueChange={(value) => setTabsName(value)}
+                                            defaultValue="mailbox" className="w-[400px]">
+                                            <TabsList>
+                                                <TabsTrigger
+                                                    className="w-[150px]"
+                                                    value="mailbox">Mailbox</TabsTrigger>
+                                                <TabsTrigger
+                                                    className="w-[150px]"
+                                                    disabled={shipping === "HFP"}
+                                                    value="custom">Custom Address</TabsTrigger>
+                                            </TabsList>
+                                        </Tabs>
+                                    </div>
 
                                     <div className="flex flex-col gap-3 justify-evenly">
                                         <div className="">
@@ -349,10 +428,12 @@ export default function Home() {
                                                     />
                                                 ) : (
                                                     <>
+
                                                         <ShiptoForm
                                                             form={form}
                                                             country_list={country}
                                                         />
+
                                                     </>
                                                 )
                                             }
@@ -366,23 +447,25 @@ export default function Home() {
                                         </div>
 
                                         {/* ReshipedTo */}
-
                                         <ShippedTo
                                             form={form}
                                             country_list={country}
+
                                         />
 
                                         <Button
                                             variant="destructive"
                                             className="w-full"
                                             size="sm"
-                                            type="submit"
-                                            // onClick={() => {
-                                            //     setShowRates(true)
-                                            // }}
-                                            onClick={() => handleSave(form.getValues())}
+                                            type="button"
+                                            disabled={loading_rates}
+                                            onClick={() => handleContinue()}
+                                        // onClick={() => {
+                                        //     setShowRates(true)
+                                        // }}
+                                        // onClick={() => handleSave(form.getValues())}
                                         >
-                                            Get Rates
+                                            Continue
                                         </Button>
                                     </div>
                                 </form>
@@ -390,13 +473,48 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className={` ${showRates === true ? styles.panel : "hidden"}`}>
-                    {/* <div className={`${styles.panel} `}> */}
-                    <RatesPanel
-                        loading_rates={loading_rates}
-                        rates={courierRates}
-                    />
-                </div>
+                {
+                    openServicesOption && (
+                        <div className={`
+                
+                            ${openServicesOption === true ? styles.service : "hidden"}`}>
+                            {/* <div className={`${styles.panel} `}> */}
+                            <ServiceOptions
+                                loading_rates={loading_rates}
+                                rates={courierRates}
+                                getRates={triggerSave}
+                                setSummaryData={setSummaryData}
+                                setShowRates={setShowRates}
+                                summaryData={summaryData}
+                                setSelectedData={setSelectedData}
+                                selecetedData={selecetedData}
+                                showRates={showRates}
+                                setOpenServicesOption={setOpenServicesOption}
+                            />
+                        </div>
+                    )
+                }
+                {
+                    showRates && (
+                        <div
+                            className={`${showRates ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'} 
+                    transition-all duration-300 ease-in-out ${styles.panel}`}
+                        >
+                            {/* <div className={`${styles.panel} `}> */}
+                            {/* <RatesPanel
+                            loading_rates={loading_rates}
+                            rates={courierRates}
+                        /> */}
+                            <Summary
+                                loading_rates={loading_rates}
+                                rates={courierRates}
+                                summaryData={summaryData}
+                                selecetedData={selecetedData}
+                                setShowRates={setShowRates}
+                            />
+                        </div>
+                    )
+                }
             </div>
 
 

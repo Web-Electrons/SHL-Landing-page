@@ -14,12 +14,12 @@ export const CourrierCard = ({ data, isSelected, onSelect }) => {
             alt={data.provider}
             className="h-8 w-8 object-center object-contain p-1 bg-blue-100 rounded"
           />
-          <div className="flex flex-col">
+          <div className="flex flex-col w-[70%]">
             <p className='text-xs'>{data.provider} - {data.servicelevel?.name}</p>
             <p className="text-[10px] text-gray-500">Estimate {data.estimatedDays || "-"} Days</p>
           </div>
         </div>
-        <p className='text-xs'>{`${data.currency} ${data.amountLocal.toFixed(2)}`}</p>
+        <p className='text-xs w-[30%] text-right'>{`${data.currency} ${data.amountLocal.toFixed(2)}`}</p>
       </div>
     </div>
   );

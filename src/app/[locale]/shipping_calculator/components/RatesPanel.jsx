@@ -6,6 +6,15 @@ import { CourrierCard } from './panel/CourrierCard'
 import { ScrollArea } from '@/src/components/ui/scroll-area'
 import Link from 'next/link'
 import { Skeleton } from '@/src/components/ui/skeleton'
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from '@/src/components/ui/select'
 // import Carrier1 from '@/public/logo.png'
 
 
@@ -14,6 +23,8 @@ export const RatesPanel = ({ rates = [], loading_rates }) => {
     const login = process.env.NEXT_PUBLIC_LOGIN_URL;
     const [isFastest, setIsFastest] = useState(false)
     const [sortedRates, setSortedRates] = useState([])
+    const [selecetedData, setSelectedData] = useState({})
+    console.log("🚀 ~ RatesPanel ~ selecetedData:", selecetedData)
 
     useEffect(() => {
         if (Array.isArray(rates)) {
@@ -41,6 +52,7 @@ export const RatesPanel = ({ rates = [], loading_rates }) => {
 
     return (
         <div className="flex flex-col px-[20px] h-full">
+
             <div className="flex flex-row justify-between">
                 <p className='text-black text-lg font-bold'>Rates</p>
                 {/* <Button
@@ -53,6 +65,7 @@ export const RatesPanel = ({ rates = [], loading_rates }) => {
                     <p>Refresh</p>
                 </Button> */}
             </div>
+
 
             <div className="flex flex-row gap-2 mt-[10px]">
                 <Button
@@ -76,7 +89,7 @@ export const RatesPanel = ({ rates = [], loading_rates }) => {
             <ScrollArea className="h-[80%] mt-3">
                 <div className="list flex flex-col gap-2">
                     {
-                        rates.length === 0 && loading_rates ? (
+                        loading_rates ? (
                             <>
                                 <Skeleton className={`w-full h-[30px]`} />
                                 <Skeleton className={`w-full h-[30px]`} />
@@ -86,7 +99,10 @@ export const RatesPanel = ({ rates = [], loading_rates }) => {
                             <p className="text-gray-500 text-sm">No rates available</p>
                         ) : rates.length > 0 ? (
                             sortedRates.map((rate, index) => (
-                                <CourrierCard key={index} data={rate} />
+                                <CourrierCard
+                                    isSelected={selecetedData === rate}
+                                    onSelect={setSelectedData}
+                                    key={index} data={rate} />
                             ))
                         ) : (
                             <p className="text-gray-500 text-sm">No rates available</p>

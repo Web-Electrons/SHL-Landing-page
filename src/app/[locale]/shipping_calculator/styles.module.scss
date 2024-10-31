@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
     gap: 5px;
+    max-height: max-content;
 }
 
 // .wrapper {
@@ -15,10 +16,26 @@
     /* Memungkinkan untuk mengambil ruang yang tersisa */
     transition: width 0.3s ease;
     /* Opsional, untuk efek transisi */
+    height: 100vh;
+    max-height: max-content;
+}
+
+.service {
+    width: 30%;
+    min-width: 400px;
+    padding-top: 90px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 5;
+    justify-content: start;
+    display: hidden;
+    transition: width 0.3s ease;
 }
 
 .panel {
-    width: 450px;
+    width: 400px;
+    min-width: 400px;
     padding-top: 90px;
     background-color: #FFFFFF;
     display: flex;

@@ -44,9 +44,18 @@ export const ShippedTo = ({ form, country_list }) => {
     }
 
     const [popOverOpen, setPopOverOpen] = React.useState(false);
+
+    const shipping = form.watch("shippingType");
     return (
         <div className="flex flex-col">
-            <p className='font-bold text-xs'>Reshipped to ...</p>
+            {
+                shipping === "HFP" || shipping === "CBP" ? (
+                    <p className='font-bold text-xs'>Reshipped From ...</p>
+                ) : (
+                    <p className='font-bold text-xs'>Reshipped to ...</p>
+                )
+            }
+
             <FormField
                 control={form.control}
                 name="shipped_to.address"

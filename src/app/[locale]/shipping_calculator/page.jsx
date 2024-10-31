@@ -35,6 +35,25 @@ import { useToast } from '@/src/components/ui/use-toast';
 import axios from 'axios';
 import { ServiceOptions } from './components/panel/ServiceOptions';
 import { Summary } from './components/panel/Summary';
+import { Separator } from '@/src/components/ui/separator';
+import {
+    Alert,
+    AlertDescription,
+    AlertTitle,
+} from '@/src/components/ui/alert';
+import {
+    Breadcrumb,
+    BreadcrumbEllipsis,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from '@/src/components/ui/breadcrumb';
+import { ScrollArea } from '@/src/components/ui/scroll-area';
+import { Skeleton } from '@/src/components/ui/skeleton';
+import { CourrierCard } from './components/panel/CourrierCard';
+import { sum } from 'lodash';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -82,6 +101,15 @@ export default function Home() {
     const [openServicesOption, setOpenServicesOption] = useState(false)
     const [summaryData, setSummaryData] = useState([])
     const [selecetedData, setSelectedData] = useState(null)
+    const [breadCumbNext, setBreadCumbNext] = useState({
+        label: true,
+        label_bradcumb: true,
+        rates: false,
+        reate_bradcumb: false,
+        summary: false,
+        summary_bradcumb: false,
+    })
+    console.log("🚀 ~ Home ~ breadCumbNext:", breadCumbNext)
 
 
     console.log("🚀 ~ Home ~ country:", country)
@@ -204,6 +232,14 @@ export default function Home() {
         handleAssingData(data)
     }
 
+    const addingDataToSummary = ({ id, amount, service_name }) => {
+        setSummaryData(prevData => {
+            if (!prevData.find(item => item.id === id)) {
+                return [...prevData, { id, amount: parseFloat(amount.replace('$', '')), service_name }];
+            }
+            return prevData;
+        });
+    };
 
     const handleSave = async (formData) => {
         console.log("🚀 ~ handleSave ~ formData:", formData)
@@ -287,237 +323,348 @@ export default function Home() {
         }
         return true
     };
-    const triggerSave = () => {
+    const triggerSave = async () => {
         // validateForm()
         handleSave(form.getValues())
     }
 
+    // const handleContinue = async () => {
+    //     const isValid = await validateForm();
+    //     if (isValid) {
+    //         setOpenServicesOption(true)
+    //         setDisabledForm(true)
+    //         setShowRates(false)
+    //         triggerSave()
+    //     }
+    // }
     const handleContinue = async () => {
         const isValid = await validateForm();
         if (isValid) {
-            setOpenServicesOption(true)
-            setDisabledForm(true)
-            setShowRates(false)
-            triggerSave()
+            await triggerSave()
+            setBreadCumbNext({
+                label: false,
+                label_bradcumb: true,
+                rates: true,
+                reate_bradcumb: true,
+                summary: false,
+            })
         }
+    }
+
+    const handleNextContent = () => {
+        setBreadCumbNext({
+            label: false,
+            label_bradcumb: true,
+            rates: false,
+            reate_bradcumb: true,
+            summary: true,
+            summary_bradcumb: true,
+        })
+    }
+
+    const handleRestart = () => {
+        setSummaryData([])
+        setSelectedData(null)
+        setBreadCumbNext({
+            label: true,
+            label_bradcumb: true,
+            rates: false,
+            reate_bradcumb: false,
+            summary: false,
+            summary_bradcumb: false,
+        })
     }
     return (
         <>
-            <div className={styles.container}>
-                <div className={`flex  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
+            <Form {...form}>
+                <form
+                    disabled={disabledForm}
+                    onSubmit={form.handleSubmit(handleSave)}
+                >
+                    <div className={styles.container}>
+                        <div className={`flex  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
                     ${styles.wrapper}
                     `}>
-                    <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-3">
-                        <h1 className=" text-myBlue text-3xl font-bold">
-                            {/* {t('ship.Shipping')} */}
-                            Shipping Calculator
-                            {/* Shipping Labels */}
-                        </h1>
-                        <h1 className=" text-black text-lg font-bold">
-                            {/* {t('ship.Shipping_Sub')} */}
-                            {/* How it Works */}
-                            Simulate Your Shipping Cost
-                        </h1>
+                            <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-3 min-h-max">
+                                <div className="flex flex-col gap-5">
+                                    <h1 className=" text-myBlue text-3xl font-bold">
+                                        {/* {t('ship.Shipping')} */}
+                                        Shipping Calculator
+                                        {/* Shipping Labels */}
+                                    </h1>
+                                    <h1 className=" text-black text-lg font-bold">
+                                        {/* {t('ship.Shipping_Sub')} */}
+                                        {/* How it Works */}
+                                        Simulate Your Shipping Cost
+                                    </h1>
+                                </div>
 
-                        <div className="">
+                                <div className="flex flex-row gap-7 min-h-max">
+                                    {/* <Separator orientation={'vertical'} /> */}
+                                    <div className="">
+                                        <Breadcrumb>
+                                            <BreadcrumbList>
+                                                <BreadcrumbItem
+                                                    onClick={() => {
+                                                        setBreadCumbNext({
+                                                            label: true,
+                                                            label_bradcumb: true,
+                                                            rates: false,
+                                                            reate_bradcumb: false,
+                                                            summary: false,
+                                                            summary_bradcumb: false,
+                                                        })
+                                                    }}
+                                                    className={`px-3 rounded-sm cursor-pointer
+                                                        ${breadCumbNext.label_bradcumb === true ? 'bg-red-700 text-white ' : ''}`}
+                                                >
+                                                    Label
+                                                </BreadcrumbItem>
+                                                <BreadcrumbSeparator />
+                                                <BreadcrumbItem
+                                                    className={`px-3 rounded-sm 
+                                                        ${breadCumbNext.reate_bradcumb === true ? 'bg-red-700 text-white ' : ''}`}
+                                                >
+                                                    Rates
+                                                </BreadcrumbItem>
+                                                <BreadcrumbSeparator />
+                                                <BreadcrumbItem
+                                                    className={`px-3 rounded-sm 
+                                                        ${breadCumbNext.summary_bradcumb === true ? 'bg-red-700 text-white ' : ''}`}
+                                                >
+                                                    Summary
+                                                </BreadcrumbItem>
+                                            </BreadcrumbList>
+                                        </Breadcrumb>
 
-                            <Form {...form}>
-                                <form
-                                    disabled={disabledForm}
-                                    onSubmit={form.handleSubmit(handleSave)}
-                                >
-                                    <div className="services space-y-2">
-                                        <h1 className=" text-black text-lg font-bold">
-                                            Select Your Services
-                                        </h1>
-                                        <FormField
-                                            control={form.control}
-                                            name="shippingType"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger className="w-[300px] my-2">
-                                                                <SelectValue defaultValue={"HFP"} placeholder="Select Services Option" />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectItem value="HFP">Hold For Pickup</SelectItem>
-                                                            <SelectItem value="CBP">Cross Border Pickup</SelectItem>
-                                                            <SelectItem value="CBF">Cross Border Forward</SelectItem>
-                                                            <SelectItem value="FP">Forward Package</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
+                                        <div className={`${breadCumbNext.rates === true ? "block" : "hidden "}`}>
+                                            <div className="w-full py-[20px]">
+                                                <ServiceOptions
+                                                    loading_rates={loading_rates}
+                                                    rates={courierRates}
+                                                    getRates={triggerSave}
+                                                    setSummaryData={setSummaryData}
+                                                    setShowRates={setShowRates}
+                                                    summaryData={summaryData}
+                                                    setSelectedData={setSelectedData}
+                                                    selecetedData={selecetedData}
+                                                    showRates={showRates}
+                                                    setOpenServicesOption={setOpenServicesOption}
+                                                    handleNextContent={handleNextContent}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className={`${breadCumbNext.summary === true ? "block" : "hidden "}`}>
+                                            <div className="w-full py-[20px]">
+                                                <Summary
+                                                    handleRestart={handleRestart}
+                                                    addingDataToSummary={addingDataToSummary}
+                                                    loading_rates={loading_rates}
+                                                    rates={courierRates}
+                                                    summaryData={summaryData}
+                                                    selecetedData={selecetedData}
+                                                    setShowRates={setShowRates}
+                                                    handleNextContent={handleNextContent}
 
-                                    <div className="pb-4 pt-3">
-                                        <Tabs
-                                            onValueChange={(value) => setTabsName(value)}
-                                            defaultValue="mailbox" className="w-[400px]">
-                                            <TabsList>
-                                                <TabsTrigger
-                                                    className="w-[150px]"
-                                                    value="mailbox">Mailbox</TabsTrigger>
-                                                <TabsTrigger
-                                                    className="w-[150px]"
-                                                    disabled={shipping === "HFP"}
-                                                    value="custom">Custom Address</TabsTrigger>
-                                            </TabsList>
-                                        </Tabs>
-                                    </div>
-
-                                    <div className="flex flex-col gap-3 justify-evenly">
-                                        <div className="">
-                                            {
-                                                tabsName === "mailbox" ? (
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className={`pb-4 pt-3 ${breadCumbNext.label === true ? 'block' : 'hidden'}`}>
+                                            <div className="">
+                                                <div className="">
+                                                    <h1 className=" text-black text-sm font-bold">
+                                                        Select Your Services
+                                                    </h1>
                                                     <FormField
                                                         control={form.control}
-                                                        name="mailboxSelected"
+                                                        name="shippingType"
                                                         render={({ field }) => (
-                                                            <FormItem
-                                                                className="w-full"
-                                                            >
-                                                                <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
-                                                                <FormControl
-                                                                    className="w-full"
-                                                                >
-                                                                    <Select
-                                                                        className='text-xs'
-                                                                        // onValueChange={handleValueChange(field.value)}
-                                                                        onValueChange={(value) => handleValueChange(value)}
-                                                                        defaultValue={field.value}>
-                                                                        <FormControl>
-                                                                            <SelectTrigger className='text-xs  h-[36px]'>
-                                                                                <SelectValue placeholder="Select Mailbox">
-                                                                                    <div className="flex flex-row gap-2 items-center ">
-                                                                                        <img
-                                                                                            // src={`https://flagcdn.com/w640/ca.png`}
-                                                                                            src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
-                                                                                            srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
-                                                                                            alt=""
-                                                                                            className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
-                                                                                        />
-                                                                                        {/* <p>- {field.value}</p> */}
-                                                                                        <p>{selectedData()}</p>
-                                                                                    </div>
-                                                                                </SelectValue>
-                                                                            </SelectTrigger>
-                                                                        </FormControl>
-                                                                        <SelectContent >
-
-                                                                            {
-                                                                                warehouse?.map((item, index) => (
-                                                                                    <SelectItem
-                                                                                        key={index}
-                                                                                        className="text-xs"
-                                                                                        value={item?.warehouse_code}
-                                                                                    >
-                                                                                        {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
-                                                                                    </SelectItem>
-                                                                                ))
-                                                                            }
-
-                                                                        </SelectContent>
-                                                                    </Select>
-                                                                </FormControl>
+                                                            <FormItem>
+                                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                                    <FormControl>
+                                                                        <SelectTrigger className="w-[300px] h-[35px] my-2 text-xs">
+                                                                            <SelectValue defaultValue={"HFP"} placeholder="Select Services Option" />
+                                                                        </SelectTrigger>
+                                                                    </FormControl>
+                                                                    <SelectContent>
+                                                                        <SelectItem className="text-xs" value="HFP">Hold For Pickup</SelectItem>
+                                                                        <SelectItem className="text-xs" value="CBP">Cross Border Pickup</SelectItem>
+                                                                        <SelectItem className="text-xs" value="CBF">Cross Border Forward</SelectItem>
+                                                                        <SelectItem className="text-xs" value="FP">Forward Package</SelectItem>
+                                                                    </SelectContent>
+                                                                </Select>
                                                             </FormItem>
                                                         )}
                                                     />
-                                                ) : (
-                                                    <>
+                                                </div>
+                                                <div className="py-[10px]">
+                                                    <Tabs
+                                                        onValueChange={(value) => setTabsName(value)}
+                                                        defaultValue="mailbox" className="w-[400px]">
+                                                        <TabsList>
+                                                            <TabsTrigger
+                                                                className="w-[150px]"
+                                                                value="mailbox">Mailbox</TabsTrigger>
+                                                            <TabsTrigger
+                                                                className="w-[150px]"
+                                                                disabled={shipping === "HFP"}
+                                                                value="custom">Custom Address</TabsTrigger>
+                                                        </TabsList>
+                                                    </Tabs>
+                                                </div>
+                                            </div>
 
-                                                        <ShiptoForm
-                                                            form={form}
-                                                            country_list={country}
+                                            <div className="flex flex-col gap-3 justify-evenly">
+                                                {
+                                                    tabsName === "mailbox" ? (
+                                                        <FormField
+                                                            control={form.control}
+                                                            name="mailboxSelected"
+                                                            render={({ field }) => (
+                                                                <FormItem
+                                                                    className="w-full"
+                                                                >
+                                                                    <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
+                                                                    <FormControl
+                                                                        className="w-full"
+                                                                    >
+                                                                        <Select
+                                                                            className='text-xs'
+                                                                            // onValueChange={handleValueChange(field.value)}
+                                                                            onValueChange={(value) => handleValueChange(value)}
+                                                                            defaultValue={field.value}>
+                                                                            <FormControl>
+                                                                                <SelectTrigger className='text-xs  h-[36px]'>
+                                                                                    <SelectValue placeholder="Select Mailbox">
+                                                                                        <div className="flex flex-row gap-2 items-center ">
+                                                                                            <img
+                                                                                                // src={`https://flagcdn.com/w640/ca.png`}
+                                                                                                src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
+                                                                                                srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
+                                                                                                alt=""
+                                                                                                className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
+                                                                                            />
+                                                                                            {/* <p>- {field.value}</p> */}
+                                                                                            <p>{selectedData()}</p>
+                                                                                        </div>
+                                                                                    </SelectValue>
+                                                                                </SelectTrigger>
+                                                                            </FormControl>
+                                                                            <SelectContent >
+
+                                                                                {
+                                                                                    warehouse?.map((item, index) => (
+                                                                                        <SelectItem
+                                                                                            key={index}
+                                                                                            className="text-xs"
+                                                                                            value={item?.warehouse_code}
+                                                                                        >
+                                                                                            {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                                                                        </SelectItem>
+                                                                                    ))
+                                                                                }
+
+                                                                            </SelectContent>
+                                                                        </Select>
+                                                                    </FormControl>
+                                                                </FormItem>
+                                                            )}
                                                         />
+                                                    ) : (
+                                                        <>
 
-                                                    </>
-                                                )
-                                            }
+                                                            <ShiptoForm
+                                                                form={form}
+                                                                country_list={country}
+                                                            />
 
+                                                        </>
+                                                    )
+                                                }
+
+                                            </div>
+                                            <div className="flex flex-col gap-3 justify-evenly">
+                                                <div className="">
+                                                    <Dimension
+                                                        form={form}
+                                                    />
+                                                </div>
+                                                {/* ReshipedTo */}
+                                                <ShippedTo
+                                                    form={form}
+                                                    country_list={country}
+
+                                                />
+                                            </div>
+
+                                            <Button
+                                                variant="destructive"
+                                                className="w-full"
+                                                size="sm"
+                                                type="button"
+                                                disabled={loading_rates}
+                                                onClick={() => handleContinue()}
+                                            // onClick={() => {
+                                            //     setShowRates(true)
+                                            // }}
+                                            // onClick={() => handleSave(form.getValues())}
+                                            >
+                                                Continue
+                                            </Button>
                                         </div>
 
-                                        <div className="">
-                                            <Dimension
-                                                form={form}
-                                            />
-                                        </div>
-
-                                        {/* ReshipedTo */}
-                                        <ShippedTo
-                                            form={form}
-                                            country_list={country}
-
-                                        />
-
-                                        <Button
-                                            variant="destructive"
-                                            className="w-full"
-                                            size="sm"
-                                            type="button"
-                                            disabled={loading_rates}
-                                            onClick={() => handleContinue()}
-                                        // onClick={() => {
-                                        //     setShowRates(true)
-                                        // }}
-                                        // onClick={() => handleSave(form.getValues())}
-                                        >
-                                            Continue
-                                        </Button>
                                     </div>
-                                </form>
-                            </Form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                {
-                    openServicesOption && (
-                        <div className={`
-                
+                        {
+                            openServicesOption && (
+                                <div className={`
                             ${openServicesOption === true ? styles.service : "hidden"}`}>
-                            {/* <div className={`${styles.panel} `}> */}
-                            <ServiceOptions
-                                loading_rates={loading_rates}
-                                rates={courierRates}
-                                getRates={triggerSave}
-                                setSummaryData={setSummaryData}
-                                setShowRates={setShowRates}
-                                summaryData={summaryData}
-                                setSelectedData={setSelectedData}
-                                selecetedData={selecetedData}
-                                showRates={showRates}
-                                setOpenServicesOption={setOpenServicesOption}
-                            />
-                        </div>
-                    )
-                }
-                {
-                    showRates && (
-                        <div
-                            className={`${showRates ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'} 
-                    transition-all duration-300 ease-in-out ${styles.panel}`}
-                        >
-                            {/* <div className={`${styles.panel} `}> */}
-                            {/* <RatesPanel
-                            loading_rates={loading_rates}
-                            rates={courierRates}
-                        /> */}
-                            <Summary
-                                loading_rates={loading_rates}
-                                rates={courierRates}
-                                summaryData={summaryData}
-                                selecetedData={selecetedData}
-                                setShowRates={setShowRates}
-                            />
-                        </div>
-                    )
-                }
-            </div>
+                                    {/* <div className={`${styles.panel} `}> */}
+                                    <ServiceOptions
+                                        loading_rates={loading_rates}
+                                        rates={courierRates}
+                                        getRates={triggerSave}
+                                        setSummaryData={setSummaryData}
+                                        setShowRates={setShowRates}
+                                        summaryData={summaryData}
+                                        setSelectedData={setSelectedData}
+                                        selecetedData={selecetedData}
+                                        showRates={showRates}
+                                        setOpenServicesOption={setOpenServicesOption}
+                                    />
+                                </div>
+                            )
+                        }
+
+                    </div >
+                </form>
+            </Form >
 
 
         </>
     )
 }
+
+// {
+//     showRates && (
+//         <div
+//             className={`${showRates ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}
+// transition-all duration-300 ease-in-out ${styles.panel}`}
+//         >
+//             {/* <div className={`${styles.panel} `}> */}
+//             {/* <RatesPanel
+//     loading_rates={loading_rates}
+//     rates={courierRates}
+// /> */}
+//             {/* <Summary
+//                 loading_rates={loading_rates}
+//                 rates={courierRates}
+//                 summaryData={summaryData}
+//                 selecetedData={selecetedData}
+//                 setShowRates={setShowRates}
+//             /> */}
+//         </div>
+//     )
+// }

@@ -18,7 +18,8 @@ export const ServiceOptions = ({
     setSelectedData,
     selecetedData,
     showRates,
-    setOpenServicesOption
+    setOpenServicesOption,
+    handleNextContent
 }) => {
     console.log("🚀 ~ summaryData:", summaryData)
     const [sortedRates, setSortedRates] = useState([])
@@ -61,14 +62,15 @@ export const ServiceOptions = ({
         setSummaryData(prevData => prevData.filter(item => item.id !== id));
     };
     return (
-        <div className={`
-         ${showRates === true ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}
-        flex flex-col px-[20px] h-full`}>
-            <div className="flex flex-row justify-between">
+        // <div className={`
+        //  ${showRates === true ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}
+        // flex flex-col h-full w-full`}>
+        <div className={`flex flex-col h-full w-full`}>
+            {/* <div className="flex flex-row justify-between">
                 <p className='text-black text-lg font-bold'>Warehouse & Service Fees</p>
-            </div>
-            <ScrollArea className="h-[100%] mt-3">
-                <div className="grid gap-2">
+            </div> */}
+            <ScrollArea className="h-[100%] ">
+                <div className=" gap-2 hidden">
                     {[
                         { service: "Storage Fee (per day)", fee: "$2.00" },
                         { service: "Extra Tape", fee: "$5.00" },
@@ -125,7 +127,7 @@ export const ServiceOptions = ({
                     </div>
                 </RadioGroup> */}
 
-                <div className="flex flex-col py-[20px] h-full">
+                <div className="flex flex-col  h-full w-[400px]">
                     <div className="flex flex-row justify-between">
                         <p className='text-black text-lg font-bold'>Rates</p>
                     </div>
@@ -182,7 +184,7 @@ export const ServiceOptions = ({
                         size="sm"
                         disabled={selecetedData === null}
                         className="w-full mt-3"
-                        onClick={() => setShowRates(true)}
+                        onClick={() => handleNextContent()}
                     >
                         Select And Continue
                     </Button>

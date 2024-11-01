@@ -400,7 +400,7 @@ export default function Home() {
                                     </h1>
 
                                     <NextLink
-                                        href="shipping_calculator/v2"
+                                        href="shipping_calculator/v3"
                                         className='text-myBlue'
                                     >
                                         <p>View Version 2</p>

@@ -1,0 +1,47 @@
+.container {
+    // background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    min-height: max-content;
+}
+
+// .wrapper {
+//     width: calc(100% - 400px);
+//     background-color: #FFFFFF;
+// }
+.wrapper {
+    background-color: #FFFFFF;
+    flex-grow: 1;
+    /* Memungkinkan untuk mengambil ruang yang tersisa */
+    transition: width 0.3s ease;
+    /* Opsional, untuk efek transisi */
+    height: 100vh;
+    min-height: max-content;
+}
+
+.service {
+    width: 30%;
+    min-width: 400px;
+    padding-top: 90px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 5;
+    justify-content: start;
+    display: hidden;
+    transition: width 0.3s ease;
+}
+
+.panel {
+    width: 400px;
+    min-width: 400px;
+    padding-top: 90px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 5;
+    justify-content: start;
+    display: hidden;
+    transition: width 0.3s ease;
+}

@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     gap: 5px;
-    max-height: max-content;
+    min-height: max-content;
 }
 
 // .wrapper {
@@ -17,7 +17,6 @@
     transition: width 0.3s ease;
     /* Opsional, untuk efek transisi */
     height: 100vh;
-
     min-height: max-content;
 }
 

@@ -390,9 +390,10 @@ export default function Home() {
                                 <div className="flex flex-col gap-5">
                                     <h1 className=" text-myBlue text-3xl font-bold">
                                         {/* {t('ship.Shipping')} */}
-                                        Shipping Calculator
+                                        Shipping Calculator | <span>Service Price</span>
                                         {/* Shipping Labels */}
                                     </h1>
+
                                     <h1 className=" text- text-lg font-bold">
                                         {/* {t('ship.Shipping_Sub')} */}
                                         {/* How it Works */}

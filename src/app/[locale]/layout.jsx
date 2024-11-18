@@ -22,12 +22,6 @@ export const roboto = Roboto({
     variable: '--font-roboto',
     display: 'swap',
 })
-
-// export const metadata = {
-//     title: 'ShipLink',
-//     description: "Worldwide best package forwarding service",
-// }
-// Metadata SEO
 export const metadata = {
     title: 'ShipLink - Best Package Forwarding Service',
     description: "Worldwide best package forwarding service.",
@@ -36,6 +30,8 @@ export const metadata = {
         description: "ShipLink is the world's best package forwarding service, offering worldwide coverage and secure shipping.",
         url: 'https://w3.shiplink.ca/en',
         type: 'website',
+        siteName: 'ShipLink', // Menambahkan nama website
+        locale: 'en_US', // Pastikan locale sesuai dengan target audiens
         images: [
             {
                 url: 'https://w3.shiplink.ca/images/shipLink_preview.png',
@@ -49,7 +45,10 @@ export const metadata = {
         card: 'summary_large_image',
         title: 'ShipLink - Best Package Forwarding Service',
         description: "ShipLink is the world's best package forwarding service, offering worldwide coverage and secure shipping.",
-        images: ['https://w3.shiplink.ca/images/shipLink_preview.png'], // Path absolut ke gambar di folder public
+        images: ['https://w3.shiplink.ca/images/shipLink_preview.png'], // URL absolut untuk gambar
+    },
+    facebook: {
+        appId: '1234567890', // Tambahkan ID aplikasi Facebook jika Anda memilikinya
     },
 };
 

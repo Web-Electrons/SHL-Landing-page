@@ -1,8 +1,14 @@
+// app/[slug]/page.js
 import { redirect } from 'next/navigation';
 
-export default function InvitePage({ params }) {
-    const { slug } = params;
+export async function generateMetadata({ params }) {
     const baseRedirect = process.env.NEXT_PUBLIC_SIGNUP_URL;
-    // Redirect ke halaman signup
+    const { slug } = params;
+
+    // Redirect server-side
     redirect(`${baseRedirect}/${slug}`);
+}
+
+export default function InvitePage() {
+    return null; // Halaman tidak akan terlihat karena redirect
 }

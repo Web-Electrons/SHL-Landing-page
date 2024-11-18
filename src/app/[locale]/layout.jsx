@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils'
 import { Toaster } from "@/src/components/ui/toaster"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import metaImages from '../../public/'
 export const poppins = Poppins({
     subsets: ['latin'],
     weight: ['100', '300', '400', '500', '600', '700', '900'],

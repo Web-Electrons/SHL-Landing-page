@@ -11,7 +11,6 @@ export default function InvitePage({ params }) {
 
     return (
         <div>
-            <p>Redirecting...</p>
         </div>
     );
 }

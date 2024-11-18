@@ -28,7 +28,7 @@ export const metadata = {
     openGraph: {
         title: 'ShipLink - Best Package Forwarding Service',
         description: "ShipLink is the world's best package forwarding service, offering worldwide coverage and secure shipping.",
-        url: 'https://w3.shiplink.ca/en',
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}`, // URL absolut dari halaman ini
         type: 'website',
         siteName: 'ShipLink', // Menambahkan nama website
         locale: 'en_US', // Pastikan locale sesuai dengan target audiens
@@ -49,6 +49,11 @@ export const metadata = {
     },
     facebook: {
         appId: '1234567890', // Tambahkan ID aplikasi Facebook jika Anda memilikinya
+    },
+    whatsapp: {
+        title: 'ShipLink - Best Package Forwarding Service',
+        description: "ShipLink is the world's best package forwarding service, offering worldwide coverage and secure shipping.",
+        image: images.src, // WhatsApp will show the image link too
     },
 };
 

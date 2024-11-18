@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { Toaster } from "@/src/components/ui/toaster"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-// import metaImages from '@/public/shipLink_preview.png'
+import metaImages from '../../public/'
 export const poppins = Poppins({
     subsets: ['latin'],
     weight: ['100', '300', '400', '500', '600', '700', '900'],
@@ -39,7 +39,7 @@ export const metadata = {
         type: 'website',
         images: [
             {
-                url: '../../public/shipLink_preview.png', // Path absolut ke gambar di folder public
+                url: 'https://w3.shiplink.ca/images/shipLink_preview.png',
                 width: 1200,
                 height: 630,
                 alt: 'ShipLink package forwarding preview',
@@ -50,7 +50,7 @@ export const metadata = {
         card: 'summary_large_image',
         title: 'ShipLink - Best Package Forwarding Service',
         description: "ShipLink is the world's best package forwarding service, offering worldwide coverage and secure shipping.",
-        images: ['../../public/shipLink_preview.png'], // Path absolut ke gambar di folder public
+        images: ['https://w3.shiplink.ca/images/shipLink_preview.png'], // Path absolut ke gambar di folder public
     },
 };
 

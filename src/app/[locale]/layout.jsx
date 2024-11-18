@@ -9,6 +9,7 @@ import { Toaster } from "@/src/components/ui/toaster"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import images from '../../public/images/shipLink_preview.png'
+import smallImages from '../../public/images/favicon.ico'
 export const poppins = Poppins({
     subsets: ['latin'],
     weight: ['100', '300', '400', '500', '600', '700', '900'],
@@ -53,7 +54,7 @@ export const metadata = {
     whatsapp: {
         title: 'ShipLink - Best Package Forwarding Service',
         description: "ShipLink is the world's best package forwarding service, offering worldwide coverage and secure shipping.",
-        image: images.src, // WhatsApp will show the image link too
+        image: smallImages.src, // WhatsApp will show the image link too
     },
 };
 

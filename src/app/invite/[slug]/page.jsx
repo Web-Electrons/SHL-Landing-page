@@ -1,16 +1,14 @@
-// app/[slug]/page.js
 import { redirect } from 'next/navigation';
 
-export async function generateMetadata({ params }) {
-    // const baseRedirect = process.env.NEXT_PUBLIC_SIGNUP_URL;
-    const baseRedirect = 'https://client.shiplink.ca/es/auth/signup';
-
+export default function InvitePage({ params }) {
     const { slug } = params;
 
-    // Redirect server-side
-    redirect(`https://client.shiplink.ca/en/auth/signup/${slug}`);
-}
+    // Hardcode URL tujuan
+    const baseRedirect = 'https://client.shiplink.ca/en/auth/signup';
 
-export default function InvitePage() {
-    return null; // Halaman tidak akan terlihat karena redirect
+    // Lakukan redirect
+    redirect(`${baseRedirect}/${slug}`);
+
+    // Komponen ini tidak akan dirender karena redirect
+    return null;
 }

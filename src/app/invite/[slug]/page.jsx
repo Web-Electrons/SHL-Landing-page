@@ -1,7 +1,17 @@
-import { redirect } from 'next/navigation';
-
+"use client";
+import { useEffect } from "react";
 export default function InvitePage({ params }) {
     const { slug } = params;
-    // Redirect pada sisi server
-    redirect(`https://client.shiplink.ca/en/auth/signup/${slug}`);
+
+    useEffect(() => {
+        const targetUrl = `https://client.shiplink.ca/en/auth/signup/${slug}`;
+        console.log("Redirecting to:", targetUrl); // Log URL
+        window.location.href = targetUrl; // Gunakan window.location
+    }, [slug]);
+
+    return (
+        <div>
+            <p>Redirecting...</p>
+        </div>
+    );
 }

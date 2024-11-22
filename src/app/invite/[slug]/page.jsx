@@ -9,6 +9,8 @@ export default function InvitePage({ params }) {
     //     console.log("Redirecting to:", targetUrl); // Log URL
     //     window.location.href = targetUrl; // Redirect ke URL yang sudah dibangun
     // }, []);
+
+    const singupURL = process.env.NEXT_PUBLIC_SIGNUP_URL;
     useEffect(() => {
         const { pathname, search } = window.location;
 
@@ -16,7 +18,7 @@ export default function InvitePage({ params }) {
         const slug = pathname.split('/').pop(); // Ambil bagian terakhir dari path (misal 'N7M3F')
 
         // Gabungkan slug dan query string untuk membangun URL target
-        const targetUrl = `https://client.shiplink.ca/en/auth/signup/${slug}${search}`;
+        const targetUrl = `${singupURL}/${slug}${search}`;
 
         console.log("Redirecting to:", targetUrl); // Log URL
         window.location.href = targetUrl; // Redirect ke URL yang sudah dibangun

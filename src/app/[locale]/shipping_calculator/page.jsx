@@ -5,6 +5,7 @@ import styles from './styles.module.scss'
 import { ShippingLabels } from '@/src/components/home/ShippingLabels'
 import { Input } from '@/src/components/ui/input';
 import { useForm, useFieldArray } from "react-hook-form"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/src/components/ui/tableDashboard'
 import {
     Form,
     FormControl,
@@ -38,23 +39,24 @@ import { Summary } from './components/panel/Summary';
 import { RatesOption } from './components/panel/RatesOption';
 import { SummaryPanel } from './components/panel/SummaryPanel';
 import { ChevronRight } from 'lucide-react';
+import { Separator } from '@/src/components/ui/separator';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
-        length: yup.number().required(),
-        width: yup.number().required(),
-        height: yup.number().required(),
-        weight: yup.number().required(),
-        weight_unit: yup.string().required(),
-        dimension_unit: yup.string().required(),
+        length: yup.number().required('Package length is required'),
+        width: yup.number().required('Pacakge Width is required'),
+        height: yup.number().required("Package Height is required"),
+        weight: yup.number().required('Package Weight is required'),
+        weight_unit: yup.string().required('Weight unit is required'),
+        dimension_unit: yup.string().required('Dimension unit is required'),
     }),
 
     shipped_from: yup.object().shape({
-        country: yup.string().required(),
-        state: yup.string().required(),
-        city: yup.string().required(),
-        zip: yup.string().required(),
-        address: yup.string().required(),
+        country: yup.string().required('Please select country'),
+        state: yup.string().required('Please select state'),
+        city: yup.string().required('Please select city'),
+        zip: yup.string().required('Please enter zip code'),
+        address: yup.string().required('Please enter address'),
         warehouse_code: yup.string(),
     }),
 
@@ -189,10 +191,29 @@ export default function Home() {
                 "Consolidate",
                 "Package Reception CA"
             ];
+            const descriptions = {
+                "Hold for Pickup": "Pick up your package from our local warehouse.",
+                "Cancel Consolidate": "Cancel the package consolidation process.",
+                "Package Reception US": "Receive your package at our US warehouse.",
+                "Request More Picture": "Request additional photos of your package.",
+                "Cross Border Pickup": "Pick up your package across borders.",
+                "Cross Border Forward": "Forward your package to another country.",
+                "Forward Package": "Forward your package to your address.",
+                "Consolidate": "Combine multiple packages into one shipment.",
+                "Package Reception CA": "Receive your package at our Canada warehouse.",
+                "Carrier Rate": "Check carrier rates for your shipment.",
+                "Brokerage fee - CA import": "Fee for importing into Canada.",
+                "Brokerage fee - US import": "Fee for importing into the US.",
+                "Free Membership": "Enjoy free membership benefits."
+            };
 
+            const withDescriptions = removeDuplicate.map((item) => ({
+                ...item,
+                description: descriptions[item.service] || "No description available."
+            }));
             // Kelompokkan layanan ke dalam "package" dan "other"
-            const packageList = removeDuplicate.filter((item) => packageServices.includes(item.service));
-            const otherList = removeDuplicate.filter((item) => !packageServices.includes(item.service));
+            const packageList = withDescriptions.filter((item) => packageServices.includes(item.service));
+            const otherList = withDescriptions.filter((item) => !packageServices.includes(item.service));
 
             setOtherService(otherList)
             setServiceList(packageList)
@@ -315,21 +336,53 @@ export default function Home() {
         }
     }
 
+    // const validateForm = async () => {
+    //     const isValid = await form.trigger();
+    //     if (!isValid) {
+    //         // Ambil semua field yang error dari form state
+    //         const errorFields = Object.keys(form.formState.errors).map((key) => key.replace(/\./g, ' > '));
+    //         console.log("🚀 ~ validateForm ~ errorFields:", form.formState.errors)
+    //         toast({
+    //             title: "Error",
+    //             description: `Required fields: ${errorFields.join(', ')}`,
+    //             status: "error",
+    //         });
+
+    //         return false;
+    //     }
+    //     return true
+    // };
+
     const validateForm = async () => {
         const isValid = await form.trigger();
+
         if (!isValid) {
             // Ambil semua field yang error dari form state
-            const errorFields = Object.keys(form.formState.errors).map((key) => key.replace(/\./g, ' > '));
-            console.log("🚀 ~ validateForm ~ errorFields:", form.formState.errors)
+            const errors = form.formState.errors;
+            console.log("🚀 ~ validateForm ~ errors:", errors)
+
+            // Mapping pesan error yang lebih friendly
+            const errorMessages = Object.values(errors).map((fieldError) => {
+                console.log("🚀 ~ errorMessages ~ fieldError.message:", fieldError.message)
+                if (fieldError.message) return fieldError.message;
+                return "Some required fields are missing.";
+            });
+
+            // Gabungkan semua pesan error
+            const friendlyErrorMessage = errorMessages.join(', ');
+
+            console.log("🚀 ~ validateForm ~ errorFields:", errors);
+
             toast({
-                title: "Error",
-                description: `Required fields: ${errorFields.join(', ')}`,
+                title: "Oops! Please check the form",
+                description: friendlyErrorMessage,
                 status: "error",
             });
 
             return false;
         }
-        return true
+
+        return true;
     };
     const triggerSave = () => {
         // validateForm()
@@ -346,6 +399,17 @@ export default function Home() {
             triggerSave()
         }
     }
+
+
+    const formatCurrency = (value, currency) => {
+        return new Intl.NumberFormat('en-ID', {
+            style: 'currency',
+            currency: currency,
+            minimumIntegerDigits: 2,
+            maximumFractionDigits: 2
+        }).format(value)
+    }
+
     return (
         <>
 
@@ -369,29 +433,45 @@ export default function Home() {
                                     disabled={disabledForm}
                                     onSubmit={form.handleSubmit(handleSave)}
                                 >
-                                    <div className="pb-4 pt-3">
+                                    <div className="pb-4 pt-3 flex flex-row gap-[20px] h-full items-center">
                                         <Tabs
                                             onValueChange={(value) => setTabsName(value)}
-                                            defaultValue="mailbox" className="w-[400px]">
+                                            defaultValue="mailbox"
+                                            value={tabsName}
+                                            className=""
+                                        >
                                             <TabsList>
                                                 <TabsTrigger
                                                     className="w-[150px]"
-                                                    value="mailbox">Mailbox</TabsTrigger>
+                                                    value="mailbox">
+                                                    Mailbox
+                                                </TabsTrigger>
                                                 <TabsTrigger
                                                     className="w-[150px]"
                                                     // disabled={shipping === "HFP"}
                                                     value="custom">
                                                     Custom Address
                                                 </TabsTrigger>
-                                                {/* <TabsTrigger
-                                                    className="w-[150px]"
-                                                    // disabled={shipping === "HFP"}
-                                                    value="priceList">
-                                                    Price List
-                                                    <ChevronRight className="w-4 h-4" />
-                                                </TabsTrigger> */}
+
                                             </TabsList>
                                         </Tabs>
+                                        <div className="flex  h-[32px]">
+                                            <Separator orientation="vertical w-[10px]" />
+
+                                        </div>
+                                        <div className="">
+                                            <Tabs
+                                                value={tabsName}
+                                                onValueChange={(value) => setTabsName(value)}
+                                            >
+                                                <TabsList>
+                                                    <TabsTrigger
+                                                        className="w-[150px]"
+                                                        value="priceList">Price List
+                                                    </TabsTrigger>
+                                                </TabsList>
+                                            </Tabs>
+                                        </div>
                                     </div>
 
                                     <div className="flex flex-col gap-3 justify-evenly">
@@ -448,35 +528,111 @@ export default function Home() {
                                                                         </SelectContent>
                                                                     </Select>
                                                                 </FormControl>
+                                                                <div className="">
+                                                                    <Dimension
+                                                                        form={form}
+                                                                    />
+                                                                </div>
+                                                                {/* ReshipedTo */}
+                                                                <ShippedTo
+                                                                    form={form}
+                                                                    country_list={country}
+
+                                                                />
                                                             </FormItem>
+
                                                         )}
                                                     />
-                                                ) : (
+                                                ) : tabsName === "custom" ? (
                                                     <>
 
                                                         <ShiptoForm
                                                             form={form}
                                                             country_list={country}
                                                         />
+                                                        <div className="">
+                                                            <Dimension
+                                                                form={form}
+                                                            />
+                                                        </div>
+                                                        {/* ReshipedTo */}
+                                                        <ShippedTo
+                                                            form={form}
+                                                            country_list={country}
 
+                                                        />
+
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <div className=" space-y-3">
+                                                            <div className="pb-2">
+                                                                <div className="flex flex-row justify-between mb-[10px]">
+                                                                    <p className='text-black text-sm font-bold '>Package Services</p>
+                                                                </div>
+                                                                <Table>
+                                                                    <TableHeader>
+                                                                        <TableRow className="bg-white text-black hover:bg-slate-100 border-none">
+                                                                            <TableHead className="w-[300px] text-black text-xs">Service</TableHead>
+                                                                            <TableHead className=" text-xs text-black">Description</TableHead>
+                                                                            <TableHead className="text-right text-black  text-xs">Fee</TableHead>
+                                                                        </TableRow>
+                                                                    </TableHeader>
+                                                                    <TableBody>
+                                                                        {
+                                                                            serviceList?.map((item, index) => (
+                                                                                <TableRow
+                                                                                    className="border-none"
+                                                                                    key={index}>
+                                                                                    <TableCell className="font-medium text-xs border-x-0">{item.service}</TableCell>
+                                                                                    <TableCell className="text-xs border-x-0">
+                                                                                        {item.description}
+                                                                                    </TableCell>
+                                                                                    <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency)}</TableCell>
+                                                                                </TableRow>
+                                                                            ))
+                                                                        }
+                                                                    </TableBody>
+                                                                </Table>
+                                                            </div>
+                                                            <div className="">
+                                                                <div className="flex flex-row justify-between mb-[10px]">
+                                                                    <p className='text-black text-sm font-bold '>Other Services</p>
+                                                                </div>
+                                                                <Table>
+                                                                    <TableHeader>
+                                                                        <TableRow className="bg-white text-black hover:bg-slate-100 border-none">
+                                                                            <TableHead className="w-[300px] text-black text-xs">Service</TableHead>
+                                                                            <TableHead className=" text-xs text-black">Description</TableHead>
+                                                                            <TableHead className="text-right text-black  text-xs">Fee</TableHead>
+                                                                        </TableRow>
+                                                                    </TableHeader>
+                                                                    <TableBody>
+                                                                        {
+                                                                            otherService?.map((item, index) => (
+                                                                                <TableRow
+                                                                                    className="border-none"
+                                                                                    key={index}>
+                                                                                    <TableCell className="font-medium text-xs border-x-0">{item.service}</TableCell>
+                                                                                    <TableCell className="text-xs border-x-0">
+                                                                                        {item.description}
+                                                                                    </TableCell>
+                                                                                    <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency)}</TableCell>
+                                                                                </TableRow>
+                                                                            ))
+                                                                        }
+                                                                    </TableBody>
+                                                                </Table>
+                                                            </div>
+                                                        </div>
                                                     </>
                                                 )
                                             }
 
                                         </div>
 
-                                        <div className="">
-                                            <Dimension
-                                                form={form}
-                                            />
-                                        </div>
 
-                                        {/* ReshipedTo */}
-                                        <ShippedTo
-                                            form={form}
-                                            country_list={country}
 
-                                        />
 
                                         {/* <Button
                                             variant="destructive"

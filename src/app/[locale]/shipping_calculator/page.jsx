@@ -37,6 +37,7 @@ import { ServiceOptions } from './components/panel/ServiceOptions';
 import { Summary } from './components/panel/Summary';
 import { RatesOption } from './components/panel/RatesOption';
 import { SummaryPanel } from './components/panel/SummaryPanel';
+import { ChevronRight } from 'lucide-react';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -75,24 +76,23 @@ export default function Home() {
 
     const { toast } = useToast();
     const [warehouse, setWarehouse] = useState([])
-    console.log("🚀 ~ Home ~ warehouse:", warehouse)
     const [courierRates, setCourierRates] = useState([])
     const [country, setCountry] = useState([])
     const [disabledForm, setDisabledForm] = useState(false)
     const [loading_rates, set_loading_rates] = useState(false)
     const [openRates, setOpenRates] = useState(false)
     const [openServicesOption, setOpenServicesOption] = useState(false)
-    console.log("🚀 ~ Home ~ openServicesOption:", openServicesOption)
     const [summaryData, setSummaryData] = useState([])
     const [selecetedData, setSelectedData] = useState(null)
     const [openRatesOption, setOpenRatesOption] = useState(false)
     const [openSummary, setOpenSummary] = useState(false);
     const [selectedService, setSelectedService] = useState(null)
-    console.log("🚀 ~ Home ~ selectedService:", selectedService)
-    console.log("🚀 ~ Home ~ openRatesOption:", openRatesOption)
+    const [serviceList, setServiceList] = useState([]);
+    const [otherService, setOtherService] = useState([])
+    console.log("🚀 ~ Home ~ serviceList:", serviceList)
+
     // const [openServicesOption]
 
-    console.log("🚀 ~ Home ~ country:", country)
     const form = useForm({
         resolver: yupResolver(formSchema),
         defaultValues: {
@@ -118,8 +118,6 @@ export default function Home() {
     })
 
     const shipping = form.watch("shippingType");
-    console.log("🚀 ~ Home ~ shipping:", shipping)
-
 
     useEffect(() => {
         const countryList = async () => {
@@ -167,6 +165,44 @@ export default function Home() {
 
     useEffect(() => {
         warehouseList()
+    }, [])
+
+
+    const getServicesList = async () => {
+        try {
+            const response = await axios.get(
+                `/api/Service_list`
+            )
+            console.log("🚀 ~ getServicesList ~ response:", response)
+            const responseData = response.data.data
+
+            const filteredActiveStatus = responseData.filter((item) => item.status === "Active")
+            const removeDuplicate = filteredActiveStatus.filter((item, index, self) => self.findIndex(t => t.service === item.service) === index)
+            const packageServices = [
+                "Hold for Pickup",
+                "Cancel Consolidate",
+                "Package Reception US",
+                "Request More Picture",
+                "Cross Border Pickup",
+                "Cross Border Forward",
+                "Forward Package",
+                "Consolidate",
+                "Package Reception CA"
+            ];
+
+            // Kelompokkan layanan ke dalam "package" dan "other"
+            const packageList = removeDuplicate.filter((item) => packageServices.includes(item.service));
+            const otherList = removeDuplicate.filter((item) => !packageServices.includes(item.service));
+
+            setOtherService(otherList)
+            setServiceList(packageList)
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    useEffect(() => {
+        getServicesList();
     }, [])
 
     const [showRates, setShowRates] = useState(false)
@@ -312,19 +348,17 @@ export default function Home() {
     }
     return (
         <>
+
             <div className={styles.container}>
                 <div className={`flex  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
                     ${styles.wrapper}
                     `}>
                     <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-3">
                         <h1 className=" text-myBlue text-3xl font-bold">
-                            {/* {t('ship.Shipping')} */}
                             Shipping Calculator
-                            {/* Shipping Labels */}
                         </h1>
                         <h1 className=" text-black text-lg font-bold">
-                            {/* {t('ship.Shipping_Sub')} */}
-                            {/* How it Works */}
+
                             Estimate Your Shipping Cost
                         </h1>
 
@@ -335,33 +369,6 @@ export default function Home() {
                                     disabled={disabledForm}
                                     onSubmit={form.handleSubmit(handleSave)}
                                 >
-                                    {/* <div className="services space-y-2">
-                                        <h1 className=" text-black text-lg font-bold">
-                                            Select Your Services
-                                        </h1>
-                                        <FormField
-                                            control={form.control}
-                                            name="shippingType"
-                                            render={({ field }) => (
-                                                <FormItem>
-                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                        <FormControl>
-                                                            <SelectTrigger className="w-[300px] my-2">
-                                                                <SelectValue defaultValue={"HFP"} placeholder="Select Services Option" />
-                                                            </SelectTrigger>
-                                                        </FormControl>
-                                                        <SelectContent>
-                                                            <SelectItem value="HFP">Hold For Pickup</SelectItem>
-                                                            <SelectItem value="CBP">Cross Border Pickup</SelectItem>
-                                                            <SelectItem value="CBF">Cross Border Forward</SelectItem>
-                                                            <SelectItem value="FP">Forward Package</SelectItem>
-                                                        </SelectContent>
-                                                    </Select>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div> */}
-
                                     <div className="pb-4 pt-3">
                                         <Tabs
                                             onValueChange={(value) => setTabsName(value)}
@@ -372,8 +379,17 @@ export default function Home() {
                                                     value="mailbox">Mailbox</TabsTrigger>
                                                 <TabsTrigger
                                                     className="w-[150px]"
-                                                    disabled={shipping === "HFP"}
-                                                    value="custom">Custom Address</TabsTrigger>
+                                                    // disabled={shipping === "HFP"}
+                                                    value="custom">
+                                                    Custom Address
+                                                </TabsTrigger>
+                                                {/* <TabsTrigger
+                                                    className="w-[150px]"
+                                                    // disabled={shipping === "HFP"}
+                                                    value="priceList">
+                                                    Price List
+                                                    <ChevronRight className="w-4 h-4" />
+                                                </TabsTrigger> */}
                                             </TabsList>
                                         </Tabs>
                                     </div>
@@ -500,6 +516,8 @@ export default function Home() {
                         setSelectedService={setSelectedService}
                         handleContinue={handleContinue}
                         openServicesOption={openServicesOption}
+                        priceList={serviceList}
+                        otherService={otherService}
                     />
                 </div>
 

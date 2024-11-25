@@ -119,7 +119,7 @@ export const SubsCardsComponents = ({
                         />
                         <CardItems
                             type={'landing'}
-                            title={t("Lv3")}
+                            title={t("Lv2")}
                         />
                         <CardItems
                             type={'landing'}
@@ -180,7 +180,7 @@ export const SubsCardsComponents = ({
                         />
                         <CardItems
                             type={'landing'}
-                            title={t("Lv2")}
+                            title={t("Lv3")}
                         />
                         <CardItems
                             type={'landing'}

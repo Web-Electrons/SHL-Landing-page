@@ -50,7 +50,7 @@ export const CarrierList = () => {
 
                     />
                 </div>
-                <div className="h-[60px] flex items-center">
+                {/* <div className="h-[60px] flex items-center">
                     <Image
                         src={Carrier5}
                         width={200}
@@ -58,7 +58,7 @@ export const CarrierList = () => {
                         alt='carrier'
                         style={{ width: "231px", height: "38px", objectFit: 'contain' }}
                     />
-                </div>
+                </div> */}
                 <div className="h-[60px] flex items-center">
                     <Image
                         src={Carrier6}

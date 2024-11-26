@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import './globals.scss'
 import { Loaders } from "../components/ui/loaders";
+import Script from "next/script";
 export const metadata = {
   title: "ShipLink",
   description: "Worldwide best package forwarding service",
@@ -8,7 +9,6 @@ export const metadata = {
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="en" className="!scroll-smooth">
       <head>
@@ -17,6 +17,21 @@ export default function RootLayout({ children }) {
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
 
+        {/* Google Analythics */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-2TXD709TE7"></Script>
+        <Script
+          id="google-analythics"
+        >
+          {
+            `
+             window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-2TXD709TE7');
+            `
+          }
+        </Script>
         {/* Facebook Meta Tags */}
         <meta property="og:url" content="https://www.shiplink.com/en" />
         <meta property="og:type" content="website" />

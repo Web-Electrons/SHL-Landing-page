@@ -466,7 +466,7 @@ export default function Home() {
         <>
 
             <div className={styles.container}>
-                <div className={`flex  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
+                <div className={`flex  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10 h-max
                     ${styles.wrapper}
                     `}>
                     <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-3">
@@ -527,7 +527,7 @@ export default function Home() {
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col gap-3 justify-evenly">
+                                    <div className="flex flex-col gap-3 justify-evenly h-max">
                                         <div className="">
                                             {
                                                 tabsName === "mailbox" ? (
@@ -870,9 +870,6 @@ export default function Home() {
                         otherService={otherService}
                     />
                 </div> */}
-
-
-
 
             </div>
 

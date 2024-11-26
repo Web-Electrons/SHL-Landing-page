@@ -24,6 +24,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/src/components/ui/select';
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from '@/src/components/ui/sheet';
 import * as yup from "yup"
 import { Button } from '@/src/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/src/components/ui/tabs';
@@ -40,6 +50,8 @@ import { RatesOption } from './components/panel/RatesOption';
 import { SummaryPanel } from './components/panel/SummaryPanel';
 import { ChevronRight } from 'lucide-react';
 import { Separator } from '@/src/components/ui/separator';
+import { ServiceTable } from './components/ServiceTable';
+import { useMediaQuery } from 'react-responsive';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -62,11 +74,11 @@ const formSchema = yup.object().shape({
 
     shipped_to: yup.object().shape({
         name: yup.string().required(),
-        country: yup.string().required(),
-        state: yup.string().required(),
-        city: yup.string().required(),
-        zip: yup.string().required(),
-        address: yup.string().required(),
+        country: yup.string().required('Please select country'),
+        state: yup.string().required('Please select state'),
+        city: yup.string().required('Please enter city'),
+        zip: yup.string().required('Please enter zip code'),
+        address: yup.string().required('Please enter address'),
         address2: yup.string(),
     }),
 
@@ -75,6 +87,8 @@ const formSchema = yup.object().shape({
 })
 
 export default function Home() {
+
+    const tableMode = useMediaQuery({ query: '(max-width: 950px)' });
 
     const { toast } = useToast();
     const [warehouse, setWarehouse] = useState([])
@@ -91,7 +105,11 @@ export default function Home() {
     const [selectedService, setSelectedService] = useState(null)
     const [serviceList, setServiceList] = useState([]);
     const [otherService, setOtherService] = useState([])
-    console.log("🚀 ~ Home ~ serviceList:", serviceList)
+    const [warehouse_id, setWarehouseId] = useState('');
+    const [warehouseServiceList, setWarehouseServiceList] = useState([]);
+    const [openSheet, setOpenSheet] = useState(false);
+    const [open, setOpen] = useState(false);
+    console.log("🚀 ~ Home ~ openSheet:", openSheet)
 
     // const [openServicesOption]
 
@@ -118,8 +136,6 @@ export default function Home() {
             mailboxSelected: "ca"
         }
     })
-
-    const shipping = form.watch("shippingType");
 
     useEffect(() => {
         const countryList = async () => {
@@ -158,6 +174,7 @@ export default function Home() {
             const filteredWarehouse = responseData.filter((item) => item.warehouse_code !== "AAA" && item.warehouse_code !== "BBB");
             setWarehouse(filteredWarehouse)
             handleAssingData(filteredWarehouse[0])
+            setWarehouseId(filteredWarehouse[0]?.warehouse_id)
             return filteredWarehouse || []
 
         } catch (error) {
@@ -169,37 +186,50 @@ export default function Home() {
         warehouseList()
     }, [])
 
+    const [loadingService, setLoadingService] = useState(false)
 
     const getServicesList = async () => {
+        setLoadingService(true)
         try {
-            const response = await axios.get(
-                `/api/Service_list`
-            )
-            console.log("🚀 ~ getServicesList ~ response:", response)
-            const responseData = response.data.data
+            // Panggil kedua API
+            const [serviceListResponse, warehouseServiceResponse] = await Promise.all([
+                axios.get(`/api/Service_list`),
+                axios.post(`/api/warehouse/service_list`, { warehouse_id: warehouse_id })
+            ]);
 
-            const filteredActiveStatus = responseData.filter((item) => item.status === "Active")
-            const removeDuplicate = filteredActiveStatus.filter((item, index, self) => self.findIndex(t => t.service === item.service) === index)
+            console.log("🚀 ~ getServicesList ~ response:", serviceListResponse);
+            console.log("🚀 ~ getWarehouseServiceList:", warehouseServiceResponse);
+
+            const serviceListData = serviceListResponse.data.data;
+            const warehouseServiceData = warehouseServiceResponse.data.data;
+
+            // Daftar layanan yang harus dihapus dari main service
+            const servicesToReplace = [
+                "Forward Package",
+                "Consolidate",
+                "Request More Picture",
+                "Package Reception US",
+                "Package Reception CA"
+            ];
+
             const packageServices = [
                 "Hold for Pickup",
-                "Cancel Consolidate",
-                "Package Reception US",
-                "Request More Picture",
                 "Cross Border Pickup",
                 "Cross Border Forward",
                 "Forward Package",
-                "Consolidate",
+                "Package Reception US",
                 "Package Reception CA"
             ];
+
             const descriptions = {
                 "Hold for Pickup": "Pick up your package from our local warehouse.",
                 "Cancel Consolidate": "Cancel the package consolidation process.",
-                "Package Reception US": "Receive your package at our US warehouse.",
-                "Request More Picture": "Request additional photos of your package.",
                 "Cross Border Pickup": "Pick up your package across borders.",
                 "Cross Border Forward": "Forward your package to another country.",
                 "Forward Package": "Forward your package to your address.",
                 "Consolidate": "Combine multiple packages into one shipment.",
+                "Request More Picture": "Request additional photos of your package.",
+                "Package Reception US": "Receive your package at our US warehouse.",
                 "Package Reception CA": "Receive your package at our Canada warehouse.",
                 "Carrier Rate": "Check carrier rates for your shipment.",
                 "Brokerage fee - CA import": "Fee for importing into Canada.",
@@ -207,24 +237,53 @@ export default function Home() {
                 "Free Membership": "Enjoy free membership benefits."
             };
 
-            const withDescriptions = removeDuplicate.map((item) => ({
+            // Filter data main service
+            const filteredMainServices = serviceListData
+                .filter((item) => item.status === "Active") // Hanya ambil status aktif
+                .filter((item) => item.service === item.service) // Hapus duplikat
+                .filter((item) => !servicesToReplace.includes(item.service)) // Hapus layanan yang diambil dari warehouseService
+                .map((item) => ({
+                    ...item,
+                    description: descriptions[item.service] || "No description available."
+                }));
+
+            // Tambahkan deskripsi pada layanan warehouseService
+            const warehouseServicesWithDescriptions = warehouseServiceData.map((item) => ({
                 ...item,
                 description: descriptions[item.service] || "No description available."
             }));
-            // Kelompokkan layanan ke dalam "package" dan "other"
-            const packageList = withDescriptions.filter((item) => packageServices.includes(item.service));
-            const otherList = withDescriptions.filter((item) => !packageServices.includes(item.service));
 
-            setOtherService(otherList)
-            setServiceList(packageList)
+            // Gabungkan data warehouseService ke dalam layanan utama
+            const combinedServices = [
+                ...filteredMainServices,
+                ...warehouseServicesWithDescriptions
+            ];
+
+            // Kelompokkan ke dalam "package" dan "other"
+            const packageList = combinedServices.filter((item) => packageServices.includes(item.service));
+            const otherList = combinedServices.filter((item) => !packageServices.includes(item.service));
+
+            const packageClean = packageList.filter((item, index, self) =>
+                self.findIndex(t => t.service === item.service) === index
+            );
+
+            const cleanOtherList = otherList.filter((item, index, self) =>
+                self.findIndex(t => t.service === item.service) === index
+            );
+
+            setOtherService(cleanOtherList);
+            setServiceList(packageClean);
         } catch (e) {
-            console.error(e)
+            console.error(e);
+        } finally {
+            setLoadingService(false)
         }
-    }
+    };
 
+    // Gunakan `getServicesList` dalam `useEffect`
     useEffect(() => {
         getServicesList();
-    }, [])
+    }, [warehouse_id]);
 
     const [showRates, setShowRates] = useState(false)
     const [tabsName, setTabsName] = useState("mailbox")
@@ -266,7 +325,9 @@ export default function Home() {
 
     const handleValueChange = (value) => {
         const data = warehouse.find((item) => item.warehouse_code === value)
+        console.log("🚀 ~ handleValueChange ~ data:", data)
         handleAssingData(data)
+        setWarehouseId(data?.warehouse_id)
     }
 
 
@@ -336,27 +397,11 @@ export default function Home() {
         }
     }
 
-    // const validateForm = async () => {
-    //     const isValid = await form.trigger();
-    //     if (!isValid) {
-    //         // Ambil semua field yang error dari form state
-    //         const errorFields = Object.keys(form.formState.errors).map((key) => key.replace(/\./g, ' > '));
-    //         console.log("🚀 ~ validateForm ~ errorFields:", form.formState.errors)
-    //         toast({
-    //             title: "Error",
-    //             description: `Required fields: ${errorFields.join(', ')}`,
-    //             status: "error",
-    //         });
-
-    //         return false;
-    //     }
-    //     return true
-    // };
-
     const validateForm = async () => {
         const isValid = await form.trigger();
 
         if (!isValid) {
+            tableMode && setOpen(true)
             // Ambil semua field yang error dari form state
             const errors = form.formState.errors;
             console.log("🚀 ~ validateForm ~ errors:", errors)
@@ -375,7 +420,7 @@ export default function Home() {
 
             toast({
                 title: "Oops! Please check the form",
-                description: friendlyErrorMessage,
+                description: "Some required fields are missing.",
                 status: "error",
             });
 
@@ -384,11 +429,18 @@ export default function Home() {
 
         return true;
     };
+
     const triggerSave = () => {
         // validateForm()
         handleSave(form.getValues())
     }
 
+    const triggerContinue = async () => {
+        const isValid = await form.trigger();
+        if (isValid) {
+            setOpen(true)
+        }
+    }
     const handleContinue = async () => {
         setOpenSummary(false)
         const isValid = await validateForm();
@@ -433,7 +485,9 @@ export default function Home() {
                                     disabled={disabledForm}
                                     onSubmit={form.handleSubmit(handleSave)}
                                 >
-                                    <div className="pb-4 pt-3 flex flex-row gap-[20px] h-full items-center">
+                                    <div className={`pb-4 pt-3 flex 
+                                        ${tableMode ? 'flex flex-col gap-3 items-start  ' : 'flex-row gap-[20px] h-full items-center'}
+                                        `}>
                                         <Tabs
                                             onValueChange={(value) => setTabsName(value)}
                                             defaultValue="mailbox"
@@ -455,9 +509,8 @@ export default function Home() {
 
                                             </TabsList>
                                         </Tabs>
-                                        <div className="flex  h-[32px]">
+                                        <div className={`h-[32px] ${tableMode ? 'hidden' : 'flex'}`}>
                                             <Separator orientation="vertical w-[10px]" />
-
                                         </div>
                                         <div className="">
                                             <Tabs
@@ -482,65 +535,78 @@ export default function Home() {
                                                         control={form.control}
                                                         name="mailboxSelected"
                                                         render={({ field }) => (
-                                                            <FormItem
-                                                                className="w-full"
-                                                            >
-                                                                <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
-                                                                <FormControl
-                                                                    className="w-full"
-                                                                >
-                                                                    <Select
-                                                                        className='text-xs'
-                                                                        // onValueChange={handleValueChange(field.value)}
-                                                                        onValueChange={(value) => handleValueChange(value)}
-                                                                        defaultValue={field.value}>
-                                                                        <FormControl>
-                                                                            <SelectTrigger className='text-xs  h-[36px]'>
-                                                                                <SelectValue placeholder="Select Mailbox">
-                                                                                    <div className="flex flex-row gap-2 items-center ">
-                                                                                        <img
-                                                                                            // src={`https://flagcdn.com/w640/ca.png`}
-                                                                                            src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
-                                                                                            srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
-                                                                                            alt=""
-                                                                                            className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
-                                                                                        />
-                                                                                        {/* <p>- {field.value}</p> */}
-                                                                                        <p>{selectedData()}</p>
-                                                                                    </div>
-                                                                                </SelectValue>
-                                                                            </SelectTrigger>
-                                                                        </FormControl>
-                                                                        <SelectContent >
-
-                                                                            {
-                                                                                warehouse?.map((item, index) => (
-                                                                                    <SelectItem
-                                                                                        key={index}
-                                                                                        className="text-xs"
-                                                                                        value={item?.warehouse_code}
-                                                                                    >
-                                                                                        {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
-                                                                                    </SelectItem>
-                                                                                ))
-                                                                            }
-
-                                                                        </SelectContent>
-                                                                    </Select>
-                                                                </FormControl>
+                                                            <>
                                                                 <div className="">
-                                                                    <Dimension
-                                                                        form={form}
-                                                                    />
+                                                                    <FormItem
+                                                                        className="w-full"
+                                                                    >
+                                                                        <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
+                                                                        <FormControl
+                                                                            className="w-full"
+                                                                        >
+                                                                            <Select
+                                                                                className='text-xs'
+                                                                                // onValueChange={handleValueChange(field.value)}
+                                                                                onValueChange={(value) => handleValueChange(value)}
+                                                                                defaultValue={field.value}>
+                                                                                <FormControl>
+                                                                                    <SelectTrigger className='text-xs  h-[36px]'>
+                                                                                        <SelectValue placeholder="Select Mailbox">
+                                                                                            <div className="flex flex-row gap-2 items-center ">
+                                                                                                <img
+                                                                                                    // src={`https://flagcdn.com/w640/ca.png`}
+                                                                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
+                                                                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
+                                                                                                    alt=""
+                                                                                                    className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
+                                                                                                />
+                                                                                                {/* <p>- {field.value}</p> */}
+                                                                                                <p>{selectedData()}</p>
+                                                                                            </div>
+                                                                                        </SelectValue>
+                                                                                    </SelectTrigger>
+                                                                                </FormControl>
+                                                                                <SelectContent >
+
+                                                                                    {
+                                                                                        warehouse?.map((item, index) => (
+                                                                                            <SelectItem
+                                                                                                key={index}
+                                                                                                className="text-xs"
+                                                                                                value={item?.warehouse_code}
+                                                                                            >
+                                                                                                {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                                                                            </SelectItem>
+                                                                                        ))
+                                                                                    }
+
+                                                                                </SelectContent>
+                                                                            </Select>
+                                                                        </FormControl>
+                                                                        <div className="">
+                                                                            <Dimension
+                                                                                form={form}
+                                                                            />
+                                                                        </div>
+                                                                        {/* ReshipedTo */}
+                                                                        <ShippedTo
+                                                                            form={form}
+                                                                            country_list={country}
+
+                                                                        />
+                                                                    </FormItem>
+
+                                                                    <Button
+                                                                        className={`${tableMode ? 'bloc' : 'hidden'} w-full mt-5`}
+                                                                        variant="destructive"
+                                                                        onClick={() => {
+                                                                            triggerContinue()
+                                                                        }}
+                                                                    >
+                                                                        Continue
+                                                                    </Button>
                                                                 </div>
-                                                                {/* ReshipedTo */}
-                                                                <ShippedTo
-                                                                    form={form}
-                                                                    country_list={country}
-
-                                                                />
-                                                            </FormItem>
-
+                                                            </>
                                                         )}
                                                     />
                                                 ) : tabsName === "custom" ? (
@@ -565,96 +631,224 @@ export default function Home() {
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <div className=" space-y-3">
-                                                            <div className="pb-2">
-                                                                <div className="flex flex-row justify-between mb-[10px]">
-                                                                    <p className='text-black text-sm font-bold '>Package Services</p>
-                                                                </div>
-                                                                <Table>
-                                                                    <TableHeader>
-                                                                        <TableRow className="bg-white text-black hover:bg-slate-100 border-none">
-                                                                            <TableHead className="w-[300px] text-black text-xs">Service</TableHead>
-                                                                            <TableHead className=" text-xs text-black">Description</TableHead>
-                                                                            <TableHead className="text-right text-black  text-xs">Fee</TableHead>
-                                                                        </TableRow>
-                                                                    </TableHeader>
-                                                                    <TableBody>
-                                                                        {
-                                                                            serviceList?.map((item, index) => (
-                                                                                <TableRow
-                                                                                    className="border-none"
-                                                                                    key={index}>
-                                                                                    <TableCell className="font-medium text-xs border-x-0">{item.service}</TableCell>
-                                                                                    <TableCell className="text-xs border-x-0">
-                                                                                        {item.description}
-                                                                                    </TableCell>
-                                                                                    <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency)}</TableCell>
-                                                                                </TableRow>
-                                                                            ))
-                                                                        }
-                                                                    </TableBody>
-                                                                </Table>
-                                                            </div>
-                                                            <div className="">
-                                                                <div className="flex flex-row justify-between mb-[10px]">
-                                                                    <p className='text-black text-sm font-bold '>Other Services</p>
-                                                                </div>
-                                                                <Table>
-                                                                    <TableHeader>
-                                                                        <TableRow className="bg-white text-black hover:bg-slate-100 border-none">
-                                                                            <TableHead className="w-[300px] text-black text-xs">Service</TableHead>
-                                                                            <TableHead className=" text-xs text-black">Description</TableHead>
-                                                                            <TableHead className="text-right text-black  text-xs">Fee</TableHead>
-                                                                        </TableRow>
-                                                                    </TableHeader>
-                                                                    <TableBody>
-                                                                        {
-                                                                            otherService?.map((item, index) => (
-                                                                                <TableRow
-                                                                                    className="border-none"
-                                                                                    key={index}>
-                                                                                    <TableCell className="font-medium text-xs border-x-0">{item.service}</TableCell>
-                                                                                    <TableCell className="text-xs border-x-0">
-                                                                                        {item.description}
-                                                                                    </TableCell>
-                                                                                    <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency)}</TableCell>
-                                                                                </TableRow>
-                                                                            ))
-                                                                        }
-                                                                    </TableBody>
-                                                                </Table>
-                                                            </div>
-                                                        </div>
+                                                        <ServiceTable
+                                                            form={form}
+                                                            warehouse={warehouse}
+                                                            otherService={otherService}
+                                                            serviceList={serviceList}
+                                                            selectedData={selectedData}
+                                                            handleValueChange={handleValueChange}
+                                                            checkCoutryCode={checkCoutryCode}
+                                                            warehouseServiceList={warehouseServiceList}
+                                                            loadingService={loadingService}
+                                                        />
                                                     </>
                                                 )
                                             }
 
                                         </div>
 
-
-
-
-                                        {/* <Button
-                                            variant="destructive"
-                                            className="w-full"
-                                            size="sm"
-                                            type="button"
-                                            disabled={loading_rates}
-                                            onClick={() => handleContinue()}
-                                        // onClick={() => {
-                                        //     setShowRates(true)
-                                        // }}
-                                        // onClick={() => handleSave(form.getValues())}
-                                        >
-                                            Continue
-                                        </Button> */}
                                     </div>
                                 </form>
                             </Form>
                         </div>
                     </div>
                 </div>
-                <div className={styles.service}>
+                {
+                    tableMode ? (
+                        <>
+                            {
+                                open === true && (
+                                    <Sheet
+                                        open={open}
+                                        onOpenChange={setOpen}
+                                        modal={true}
+                                    >
+                                        <SheetContent
+                                            className='rounded-sm'
+                                            side={"bottom"}>
+                                            <SheetHeader
+                                                className={'hidden'}
+                                            >
+                                                <SheetTitle>Edit profile</SheetTitle>
+                                                <SheetDescription>
+                                                </SheetDescription>
+                                            </SheetHeader>
+                                            <ServiceOptions
+                                                loading_rates={loading_rates}
+                                                rates={courierRates}
+                                                getRates={triggerSave}
+                                                setSummaryData={setSummaryData}
+                                                setShowRates={setShowRates}
+                                                summaryData={summaryData}
+                                                setSelectedData={setSelectedData}
+                                                selecetedData={selecetedData}
+                                                showRates={showRates}
+                                                setOpenServicesOption={setOpenServicesOption}
+                                                openRatesOption={openRatesOption}
+                                                setOpenRatesOption={setOpenRatesOption}
+                                                selectedService={selectedService}
+                                                setSelectedService={setSelectedService}
+                                                handleContinue={handleContinue}
+                                                openServicesOption={openServicesOption}
+                                                priceList={serviceList}
+                                                otherService={otherService}
+                                            />
+                                        </SheetContent>
+                                    </Sheet>
+                                )
+                            }
+
+
+                            {
+                                openServicesOption && (
+                                    <Sheet
+                                        open={openServicesOption}
+                                        onOpenChange={setOpenServicesOption}
+                                        modal={true}
+                                    >
+                                        <SheetContent
+                                            className='rounded-sm w-full flex flex-col'
+                                            side={"bottom"}>
+                                            <>
+                                                {
+                                                    openServicesOption && (
+                                                        selectedService?.toLowerCase() === 'hfp' ? (
+                                                            <SummaryPanel
+                                                                loading_rates={loading_rates}
+                                                                rates={courierRates}
+                                                                getRates={triggerSave}
+                                                                setSummaryData={setSummaryData}
+                                                                setShowRates={setShowRates}
+                                                                summaryData={summaryData}
+                                                                setSelectedData={setSelectedData}
+                                                                selecetedData={selecetedData}
+                                                                showRates={showRates}
+                                                                setOpenServicesOption={setOpenServicesOption}
+                                                            />
+                                                        ) : openSummary && selectedService?.toLowerCase() !== 'hfp' ? (
+                                                            <SummaryPanel
+                                                                loading_rates={loading_rates}
+                                                                rates={courierRates}
+                                                                getRates={triggerSave}
+                                                                setSummaryData={setSummaryData}
+                                                                setShowRates={setShowRates}
+                                                                summaryData={summaryData}
+                                                                setSelectedData={setSelectedData}
+                                                                selecetedData={selecetedData}
+                                                                showRates={showRates}
+                                                                setOpenServicesOption={setOpenServicesOption}
+                                                            />
+                                                        ) : (
+                                                            <RatesOption
+                                                                openSummary={openSummary}
+                                                                setOpenSummary={setOpenSummary}
+                                                                loading_rates={loading_rates}
+                                                                rates={courierRates}
+                                                                getRates={triggerSave}
+                                                                setSummaryData={setSummaryData}
+                                                                setShowRates={setShowRates}
+                                                                summaryData={summaryData}
+                                                                setSelectedData={setSelectedData}
+                                                                selecetedData={selecetedData}
+                                                                showRates={showRates}
+                                                                setOpenServicesOption={setOpenServicesOption}
+
+                                                            />
+                                                        )
+                                                    )
+                                                }
+
+                                            </>
+                                        </SheetContent>
+                                    </Sheet>
+                                )
+                            }
+
+                        </>
+                    ) : (
+                        <>
+                            <div className={styles.service}>
+                                <ServiceOptions
+                                    loading_rates={loading_rates}
+                                    rates={courierRates}
+                                    getRates={triggerSave}
+                                    setSummaryData={setSummaryData}
+                                    setShowRates={setShowRates}
+                                    summaryData={summaryData}
+                                    setSelectedData={setSelectedData}
+                                    selecetedData={selecetedData}
+                                    showRates={showRates}
+                                    setOpenServicesOption={setOpenServicesOption}
+                                    openRatesOption={openRatesOption}
+                                    setOpenRatesOption={setOpenRatesOption}
+                                    selectedService={selectedService}
+                                    setSelectedService={setSelectedService}
+                                    handleContinue={handleContinue}
+                                    openServicesOption={openServicesOption}
+                                    priceList={serviceList}
+                                    otherService={otherService}
+                                />
+                            </div>
+
+                            {
+                                openServicesOption && (
+                                    selectedService?.toLowerCase() === 'hfp' ? (
+                                        <div className={`${styles.service}`}>
+                                            <SummaryPanel
+                                                loading_rates={loading_rates}
+                                                rates={courierRates}
+                                                getRates={triggerSave}
+                                                setSummaryData={setSummaryData}
+                                                setShowRates={setShowRates}
+                                                summaryData={summaryData}
+                                                setSelectedData={setSelectedData}
+                                                selecetedData={selecetedData}
+                                                showRates={showRates}
+                                                setOpenServicesOption={setOpenServicesOption}
+                                            />
+                                        </div>
+                                    ) : openSummary && selectedService?.toLowerCase() !== 'hfp' ? (
+                                        <div className={`${styles.service}`}>
+                                            <SummaryPanel
+                                                loading_rates={loading_rates}
+                                                rates={courierRates}
+                                                getRates={triggerSave}
+                                                setSummaryData={setSummaryData}
+                                                setShowRates={setShowRates}
+                                                summaryData={summaryData}
+                                                setSelectedData={setSelectedData}
+                                                selecetedData={selecetedData}
+                                                showRates={showRates}
+                                                setOpenServicesOption={setOpenServicesOption}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className={`${styles.service}`}>
+                                            <RatesOption
+                                                openSummary={openSummary}
+                                                setOpenSummary={setOpenSummary}
+                                                loading_rates={loading_rates}
+                                                rates={courierRates}
+                                                getRates={triggerSave}
+                                                setSummaryData={setSummaryData}
+                                                setShowRates={setShowRates}
+                                                summaryData={summaryData}
+                                                setSelectedData={setSelectedData}
+                                                selecetedData={selecetedData}
+                                                showRates={showRates}
+                                                setOpenServicesOption={setOpenServicesOption}
+
+                                            />
+                                        </div>
+                                    )
+                                )
+                            }
+                        </>
+
+                    )
+                }
+                {/* <div className={styles.service}>
                     <ServiceOptions
                         loading_rates={loading_rates}
                         rates={courierRates}
@@ -675,106 +869,10 @@ export default function Home() {
                         priceList={serviceList}
                         otherService={otherService}
                     />
-                </div>
+                </div> */}
 
-                {
-                    openServicesOption && (
-                        selectedService?.toLowerCase() === 'hfp' ? (
-                            <div className={`${styles.service}`}>
-                                {/* <div className={`${styles.panel} `}> */}
-                                <SummaryPanel
-                                    loading_rates={loading_rates}
-                                    rates={courierRates}
-                                    getRates={triggerSave}
-                                    setSummaryData={setSummaryData}
-                                    setShowRates={setShowRates}
-                                    summaryData={summaryData}
-                                    setSelectedData={setSelectedData}
-                                    selecetedData={selecetedData}
-                                    showRates={showRates}
-                                    setOpenServicesOption={setOpenServicesOption}
-                                />
-                            </div>
-                        ) : openSummary && selectedService?.toLowerCase() !== 'hfp' ? (
-                            <div className={`${styles.service}`}>
-                                {/* <div className={`${styles.panel} `}> */}
-                                <SummaryPanel
-                                    loading_rates={loading_rates}
-                                    rates={courierRates}
-                                    getRates={triggerSave}
-                                    setSummaryData={setSummaryData}
-                                    setShowRates={setShowRates}
-                                    summaryData={summaryData}
-                                    setSelectedData={setSelectedData}
-                                    selecetedData={selecetedData}
-                                    showRates={showRates}
-                                    setOpenServicesOption={setOpenServicesOption}
-                                />
-                            </div>
-                        ) : (
-                            <div className={`${styles.service}`}>
-                                {/* <div className={`${styles.panel} `}> */}
-                                <RatesOption
-                                    openSummary={openSummary}
-                                    setOpenSummary={setOpenSummary}
-                                    loading_rates={loading_rates}
-                                    rates={courierRates}
-                                    getRates={triggerSave}
-                                    setSummaryData={setSummaryData}
-                                    setShowRates={setShowRates}
-                                    summaryData={summaryData}
-                                    setSelectedData={setSelectedData}
-                                    selecetedData={selecetedData}
-                                    showRates={showRates}
-                                    setOpenServicesOption={setOpenServicesOption}
 
-                                />
-                            </div>
-                        )
-                    )
-                }
 
-                {/* {
-                    openRatesOption && (
-                        <div className={`
-                            ${openRatesOption === true ? styles.service : "hidden"}`}>
-                            <RatesOption
-                                openSummary={openSummary}
-                                setOpenSummary={setOpenSummary}
-                                loading_rates={loading_rates}
-                                rates={courierRates}
-                                getRates={triggerSave}
-                                setSummaryData={setSummaryData}
-                                setShowRates={setShowRates}
-                                summaryData={summaryData}
-                                setSelectedData={setSelectedData}
-                                selecetedData={selecetedData}
-                                showRates={showRates}
-                                setOpenServicesOption={setOpenServicesOption}
-                            />
-                        </div>
-                    )
-                }
-
-                {
-                    openSummary && (
-                        <div className={`
-                            ${openSummary === true ? styles.service : "hidden"}`}>
-                            <SummaryPanel
-                                loading_rates={loading_rates}
-                                rates={courierRates}
-                                getRates={triggerSave}
-                                setSummaryData={setSummaryData}
-                                setShowRates={setShowRates}
-                                summaryData={summaryData}
-                                setSelectedData={setSelectedData}
-                                selecetedData={selecetedData}
-                                showRates={showRates}
-                                setOpenServicesOption={setOpenServicesOption}
-                            />
-                        </div>
-                    )
-                } */}
 
             </div>
 

@@ -34,6 +34,7 @@ export const ShiptoForm = ({ form, country_list }) => {
                                 {...field}
                             />
                         </FormControl>
+                        <FormMessage className="text-xs" />
                     </FormItem>
                 )}
             />
@@ -91,6 +92,7 @@ export const ShiptoForm = ({ form, country_list }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         )}
                     />
@@ -109,6 +111,7 @@ export const ShiptoForm = ({ form, country_list }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         )}
                     />
@@ -125,6 +128,7 @@ export const ShiptoForm = ({ form, country_list }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         )}
                     />

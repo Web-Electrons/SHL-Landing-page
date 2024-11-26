@@ -69,6 +69,7 @@ export const ShippedTo = ({ form, country_list }) => {
                                 {...field}
                             />
                         </FormControl>
+                        <FormMessage className="text-xs" />
                     </FormItem>
                 )}
             />
@@ -108,6 +109,7 @@ export const ShippedTo = ({ form, country_list }) => {
                                         </SelectContent>
                                     </Select>
                                 </FormControl>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         )}
                     />
@@ -126,6 +128,7 @@ export const ShippedTo = ({ form, country_list }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         )}
                     />
@@ -144,6 +147,7 @@ export const ShippedTo = ({ form, country_list }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         )}
                     />
@@ -160,6 +164,7 @@ export const ShippedTo = ({ form, country_list }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className="text-xs" />
                             </FormItem>
                         )}
                     />

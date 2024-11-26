@@ -31,6 +31,7 @@ export const Dimension = ({ form }) => {
                                     {...field}
                                 />
                             </FormControl>
+
                         </FormItem>
                     )}
                 />
@@ -69,6 +70,15 @@ export const Dimension = ({ form }) => {
                     )}
                 />
             </div>
+            <FormField
+                control={form.control}
+                name="dimension.weight"
+                render={({ field }) => (
+                    <FormItem>
+                        <FormMessage className='text-xs' />
+                    </FormItem>
+                )}
+            />
 
             <div className="flex flex-col mt-2">
                 <p className='font-bold text-xs'>Package Dimension <span className='text-red-600'>*</span></p>
@@ -84,6 +94,7 @@ export const Dimension = ({ form }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className='text-xs' />
                             </FormItem>
                         )}
                     />
@@ -98,6 +109,7 @@ export const Dimension = ({ form }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className='text-xs' />
                             </FormItem>
                         )}
                     />
@@ -112,6 +124,7 @@ export const Dimension = ({ form }) => {
                                         {...field}
                                     />
                                 </FormControl>
+                                <FormMessage className='text-xs' />
                             </FormItem>
                         )}
                     />

@@ -65,11 +65,8 @@ export const RatesOption = ({
         setSummaryData(prevData => prevData.filter(item => item.id !== id));
     };
     return (
-        <div className={`
-    
-        flex flex-col px-[20px] h-full`}>
-
-            <ScrollArea className="">
+        <div className={`flex flex-col px-[20px] h-full w-full`}>
+            <ScrollArea className="w-full">
                 {/* <div className={` ${showRates === false ? 'hidden' : 'block'}`}>
                     <div className="flex flex-row justify-between mb-[10px]">
                         <p className='text-black text-lg font-bold'>Warehouse & Service Fees</p>

@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../styles.module.scss'
-import { ShippingLabels } from '@/src/components/home/ShippingLabels'
+import { ShippingLabels } from '@/components/home/ShippingLabels'
 import { useTranslations } from "next-intl";
 export default function Home() {
     const t = useTranslations("default");

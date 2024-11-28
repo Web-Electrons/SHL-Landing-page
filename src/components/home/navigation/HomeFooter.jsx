@@ -6,7 +6,7 @@ import Fb from '../../../public/assets/home/Socials/fb.png'
 import Ig from '../../../public/assets/home/Socials/ig.png'
 import Xicon from '../../../public/assets/home/Socials/x.png'
 import NextLink from 'next/link'
-import { Link } from '@/src/navigation'
+import { Link } from '@/navigation'
 import logo from '../../../public/logo.png'
 
 export const HomeFooter = () => {

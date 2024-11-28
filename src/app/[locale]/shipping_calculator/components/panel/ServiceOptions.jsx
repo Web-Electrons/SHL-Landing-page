@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from '@/src/components/ui/button'
-import { ScrollArea } from '@/src/components/ui/scroll-area'
-import { Label } from '@/src/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/src/components/ui/radio-group'
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Package, Truck, Warehouse, ChevronRight, ArrowRight } from "lucide-react"
-import { Checkbox } from '@/src/components/ui/checkbox'
-import { Skeleton } from '@/src/components/ui/skeleton'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Skeleton } from '@/components/ui/skeleton'
 import { CourrierCard } from './CourrierCard'
 import { Summary } from './Summary'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/src/components/ui/tableDashboard'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/src/components/ui/tabs';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/tableDashboard'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const ServiceOptions = ({
     rates = [],

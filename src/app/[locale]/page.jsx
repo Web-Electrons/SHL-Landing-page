@@ -1,18 +1,18 @@
 
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { Button } from "@/src/components/ui/button";
-import { CardsComponents } from "@/src/components/home/CardsComponents";
-import { ListCardComponents } from "@/src/components/home/ListCardComponents";
-import { WhyCardsComponents } from "@/src/components/home/WhyCardsComponents";
-import { CarrierList } from "@/src/components/home/CarrierList";
-import { SubsCardsComponents } from "@/src/components/home/SubsCardsComponents";
+import { Button } from "@/components/ui/button";
+import { CardsComponents } from "@/components/home/CardsComponents";
+import { ListCardComponents } from "@/components/home/ListCardComponents";
+import { WhyCardsComponents } from "@/components/home/WhyCardsComponents";
+import { CarrierList } from "@/components/home/CarrierList";
+import { SubsCardsComponents } from "@/components/home/SubsCardsComponents";
 import { useTranslations } from "next-intl";
 import CrossImg from "../../public/assets/home/Section2.png";
 import Frame3 from "../../public/assets/home/Frame3.png";
 import hero from "../../public/assets/home/Banner.png";
 import NextLink from "next/link";
-import { Link } from "@/src/navigation";
+import { Link } from "@/navigation";
 
 export default function Home() {
   const t = useTranslations("default");

@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../styles.module.scss";
-import { Separator } from "@/src/components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import { Button } from "@/src/components/ui/button";
-import { CardData } from "@/src/components/home/CardData";
+import { Button } from "@/components/ui/button";
+import { CardData } from "@/components/home/CardData";
 import header from "../../../public/assets/home/AboutUsHeading.png";
 import { useTranslations } from "next-intl";
 import Link from "next/link";

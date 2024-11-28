@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react'
-import { Button } from '@/src/components/ui/button'
-import { ScrollArea } from '@/src/components/ui/scroll-area'
+import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import Link from 'next/link'
 
-import { Card, CardContent } from '@/src/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 
 import React from 'react'
-import { Separator } from '@/src/components/ui/separator'
+import { Separator } from '@/components/ui/separator'
 
 export const Summary = ({
     rates = [],

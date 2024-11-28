@@ -1,11 +1,12 @@
 import React from "react"
 import styles from './styles.module.scss'
-import { HomeNavbar } from "@/src/components/home/navigation/HomeNavbar"
-import { HomeFooter } from "@/src/components/home/navigation/HomeFooter"
+// import { HomeNavbar } from "@/src/components/home/navigation/HomeNavbar"
+import { HomeNavbar } from "@/components/home/navigation/HomeNavbar"
+import { HomeFooter } from "@/components/home/navigation/HomeFooter"
 import { Roboto, Poppins } from 'next/font/google'
 import './globals.scss'
 import { cn } from '@/lib/utils'
-import { Toaster } from "@/src/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster"
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import images from '../../public/images/shipLink_preview.png'

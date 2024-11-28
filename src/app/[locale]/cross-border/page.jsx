@@ -1,15 +1,13 @@
 import React from 'react'
 import styles from '../styles.module.scss'
 // import { CardData } from '@/components/home/CardData'
-import { CardData } from '@/src/components/home/CardData'
-import { Separator } from '@/src/components/ui/separator'
 import Image from 'next/image'
-import { CardCrossBorder } from '@/src/components/home/CardCrossBorder'
-import { Button } from '@/src/components/ui/button'
+import { CardCrossBorder } from '@/components/home/CardCrossBorder'
+import { Button } from '@/components/ui/button'
 import NextLink from 'next/link'
 // import { useTranslation } from 'next-i18next'
 import { useTranslations } from 'next-intl'
-import { CrossBorderComponents } from '@/src/components/home/CrossBorder'
+import { CrossBorderComponents } from '@/components/home/CrossBorder'
 
 export default function Home() {
     const t = useTranslations('default.mailbox')

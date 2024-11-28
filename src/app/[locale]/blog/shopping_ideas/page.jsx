@@ -2,12 +2,12 @@
 import React from "react";
 import styles from '../../styles.module.scss';
 import Image from "next/image";
-import { Button } from "@/src/components/ui/button";
+import { Button } from "@/components/ui/button";
 import cartImages from '../../../../public/images/cartImages.jpg';
 import Link from "next/link";
 import { ItemList } from "./components/ItemList";
 import AmazonImage from '../../../../public/images/store/amazon.png';
-import { WhyCardsComponents } from "@/src/components/home/WhyCardsComponents";
+import { WhyCardsComponents } from "@/components/home/WhyCardsComponents";
 import { useTranslations } from "next-intl";
 
 export default function Home() {

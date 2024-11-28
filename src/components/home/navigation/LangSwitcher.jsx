@@ -10,7 +10,7 @@ import {
 import { Button } from '../../ui/button'
 import { ChevronDown } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import i18n from '@/src/i18n';
+import i18n from '@/i18n';
 import { useTranslations, useLocale } from 'next-intl';
 export const LangSwitcher = () => {
     const t = useLocale()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from '@/src/components/ui/input';
+import { Input } from '@/components/ui/input';
 import {
     Form,
     FormControl,
@@ -8,14 +8,14 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/src/components/ui/form';
+} from '@/components/ui/form';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/src/components/ui/select';
+} from '@/components/ui/select';
 
 export const ShiptoForm = ({ form, country_list }) => {
     return (

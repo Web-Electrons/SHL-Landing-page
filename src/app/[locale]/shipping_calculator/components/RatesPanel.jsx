@@ -1,20 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react'
-import { Button } from '@/src/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { RefreshCcw } from 'lucide-react'
 import { CourrierCard } from './panel/CourrierCard'
-import { ScrollArea } from '@/src/components/ui/scroll-area'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import Link from 'next/link'
-import { Skeleton } from '@/src/components/ui/skeleton'
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from '@/src/components/ui/select'
+import { Skeleton } from '@/components/ui/skeleton'
+
 // import Carrier1 from '@/public/logo.png'
 
 

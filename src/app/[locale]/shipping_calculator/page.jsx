@@ -2,10 +2,9 @@
 'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import styles from './styles.module.scss'
-import { ShippingLabels } from '@/src/components/home/ShippingLabels'
-import { Input } from '@/src/components/ui/input';
+import { ShippingLabels } from '@/components/home/ShippingLabels'
+import { Input } from '@/components/ui/input';
 import { useForm, useFieldArray } from "react-hook-form"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/src/components/ui/tableDashboard'
 import {
     Form,
     FormControl,
@@ -14,7 +13,7 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/src/components/ui/form';
+} from '@/components/ui/form';
 import {
     Select,
     SelectContent,
@@ -23,7 +22,7 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-} from '@/src/components/ui/select';
+} from '@/components/ui/select';
 import {
     Sheet,
     SheetClose,
@@ -33,23 +32,23 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-} from '@/src/components/ui/sheet';
+} from '@/components/ui/sheet';
 import * as yup from "yup"
-import { Button } from '@/src/components/ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/src/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ShiptoForm } from './components/shiptoForm';
 import { yupResolver } from "@hookform/resolvers/yup"
 import { RatesPanel } from './components/RatesPanel';
 import { Dimension } from './components/forms/Dimension';
 import { ShippedTo } from './components/forms/ShippedTo';
-import { useToast } from '@/src/components/ui/use-toast';
+import { useToast } from '@/components/ui/use-toast';
 import axios from 'axios';
 import { ServiceOptions } from './components/panel/ServiceOptions';
 import { Summary } from './components/panel/Summary';
 import { RatesOption } from './components/panel/RatesOption';
 import { SummaryPanel } from './components/panel/SummaryPanel';
 import { ChevronRight } from 'lucide-react';
-import { Separator } from '@/src/components/ui/separator';
+import { Separator } from '@/components/ui/separator';
 import { ServiceTable } from './components/ServiceTable';
 import { useMediaQuery } from 'react-responsive';
 
@@ -209,7 +208,9 @@ export default function Home() {
                 "Consolidate",
                 "Request More Picture",
                 "Package Reception US",
-                "Package Reception CA"
+                "Package Reception CA",
+                "Free Membership",
+                "Cancel Consolidate",
             ];
 
             const packageServices = [
@@ -222,16 +223,16 @@ export default function Home() {
             ];
 
             const descriptions = {
-                "Hold for Pickup": "Pick up your package from our local warehouse.",
+                "Hold for Pickup": "Pick up your package in person from a warehouse location.",
                 "Cancel Consolidate": "Cancel the package consolidation process.",
-                "Cross Border Pickup": "Pick up your package across borders.",
-                "Cross Border Forward": "Forward your package to another country.",
-                "Forward Package": "Forward your package to your address.",
-                "Consolidate": "Combine multiple packages into one shipment.",
+                "Cross Border Pickup": "We import your package and you pickup in person from a local warehouse",
+                "Cross Border Forward": "We import your package and forward it domestically to your final destination with the carrier you select",
+                "Forward Package": "Internationally directly to the address of your choice with the carrier you select",
+                "Consolidate": "Combine multiple packages into one shippment.",
                 "Request More Picture": "Request additional photos of your package.",
-                "Package Reception US": "Receive your package at our US warehouse.",
-                "Package Reception CA": "Receive your package at our Canada warehouse.",
-                "Carrier Rate": "Check carrier rates for your shipment.",
+                "Package Reception US": "Brokerage service for package with value over $800 USD.",
+                "Package Reception CA": "Brokerage service for package with value over $20 CAD.",
+                "Carrier Rate": "Check carrier rates for your package.",
                 "Brokerage fee - CA import": "Fee for importing into Canada.",
                 "Brokerage fee - US import": "Fee for importing into the US.",
                 "Free Membership": "Enjoy free membership benefits."
@@ -466,7 +467,7 @@ export default function Home() {
         <>
 
             <div className={styles.container}>
-                <div className={`flex  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10 h-max
+                <div className={`flex h-screen min-h-max  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
                     ${styles.wrapper}
                     `}>
                     <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-3">

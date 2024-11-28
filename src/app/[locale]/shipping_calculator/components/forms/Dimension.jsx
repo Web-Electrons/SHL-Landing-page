@@ -7,15 +7,15 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/src/components/ui/form';
+} from '@/components/ui/form';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from '@/src/components/ui/select';
-import { Input } from '@/src/components/ui/input';
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 export const Dimension = ({ form }) => {
     return (
         <>

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/src/components/ui/tableDashboard'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/tableDashboard'
 import {
     Select,
     SelectContent,
@@ -10,10 +10,10 @@ import {
     SelectLabel,
     SelectTrigger,
     SelectValue,
-} from '@/src/components/ui/select'
+} from '@/components/ui/select'
 import axios from 'axios'
-import { FormControl, FormField, FormItem, FormLabel } from '@/src/components/ui/form'
-import { Skeleton } from '@/src/components/ui/skeleton'
+import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
+import { Skeleton } from '@/components/ui/skeleton'
 export const ServiceTable = ({
     serviceList,
     otherService,
@@ -204,7 +204,9 @@ export const ServiceTable = ({
                                         <TableCell className="text-xs border-x-0">
                                             {item.description}
                                         </TableCell>
-                                        <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency)}</TableCell>
+                                        <TableCell className="text-right text-xs border-x-0  tabular-nums">
+                                            {item?.service === "Brokerage fee - US import" ? "Contact us" : (formatCurrency(item.price, item.currency))}
+                                        </TableCell>
                                     </TableRow>
                                 ))
 

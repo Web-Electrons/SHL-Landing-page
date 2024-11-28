@@ -1,5 +1,5 @@
-import { CardItems } from '@/src/app/[locale]/components/CardItems'
-import { SubsMenu } from '@/src/app/[locale]/components/SubsMenu'
+import { CardItems } from '@/app/[locale]/components/CardItems'
+import { SubsMenu } from '@/app/[locale]/components/SubsMenu'
 // import { SubsMenu } from '@/app/[locale]/components/SubsMenu'
 import Image from 'next/image'
 import React from 'react'

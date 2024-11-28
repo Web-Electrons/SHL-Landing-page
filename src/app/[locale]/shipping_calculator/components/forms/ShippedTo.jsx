@@ -7,7 +7,7 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from '@/src/components/ui/form';
+} from '@/components/ui/form';
 import {
     Select,
     SelectContent,
@@ -15,8 +15,8 @@ import {
     SelectTrigger,
     SelectValue,
     SelectGroup,
-} from '@/src/components/ui/select';
-import { Input } from '@/src/components/ui/input';
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 import {
     Command,
     CommandEmpty,
@@ -24,16 +24,16 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from '@/src/components/ui/command';
+} from '@/components/ui/command';
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from '@/src/components/ui/popover';
+} from '@/components/ui/popover';
 import { CheckIcon } from 'lucide-react';
 import { PopoverClose } from '@radix-ui/react-popover';
-import { ScrollArea } from '@/src/components/ui/scroll-area';
-import { Button } from '@/src/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
 
 export const ShippedTo = ({ form, country_list }) => {
     console.log("🚀 ~ ShippedTo ~ country_list:", country_list)

@@ -504,6 +504,7 @@ export default function Home() {
                                                 <TabsTrigger
                                                     className="w-[150px]"
                                                     // disabled={shipping === "HFP"}
+                                                    disabled={true}
                                                     value="custom">
                                                     Custom Address
                                                 </TabsTrigger>

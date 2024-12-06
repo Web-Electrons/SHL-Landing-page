@@ -81,7 +81,7 @@ export const Dimension = ({ form }) => {
             />
 
             <div className="flex flex-col mt-2">
-                <p className='font-bold text-xs'>Package Dimension <span className='text-red-600'>*</span></p>
+                <p className='font-bold text-xs'>{`Package Dimension's`}<span className='text-red-600'>*</span></p>
                 <div className="flex flex-row gap-2 items-end">
                     <FormField
                         control={form.control}

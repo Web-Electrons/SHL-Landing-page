@@ -51,6 +51,7 @@ import { ChevronRight } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { ServiceTable } from './components/ServiceTable';
 import { useMediaQuery } from 'react-responsive';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -108,6 +109,7 @@ export default function Home() {
     const [warehouseServiceList, setWarehouseServiceList] = useState([]);
     const [openSheet, setOpenSheet] = useState(false);
     const [open, setOpen] = useState(false);
+    const [loadingWarehouse, setLoadingWarehouse] = useState(false);
     console.log("🚀 ~ Home ~ openSheet:", openSheet)
 
     // const [openServicesOption]
@@ -117,7 +119,7 @@ export default function Home() {
         defaultValues: {
             dimension: {
                 weight_unit: "lbs",
-                dimension_unit: "cm",
+                dimension_unit: "in",
             },
             shipped_to: {
                 name: "stern",
@@ -159,6 +161,7 @@ export default function Home() {
     }, [])
 
     const warehouseList = useCallback(async () => {
+        setLoadingWarehouse(true)
         try {
             const response = await axios.post(
                 `/api/warehouse/list`,
@@ -171,13 +174,19 @@ export default function Home() {
             )
             const responseData = response.data.warehouse
             const filteredWarehouse = responseData.filter((item) => item.warehouse_code !== "AAA" && item.warehouse_code !== "BBB");
+            const intialMNYWarehouse = filteredWarehouse.find((item) => item.warehouse_code === "MNY")
+            console.log("🚀 ~ warehouseList ~ filteredWarehouse:", filteredWarehouse)
             setWarehouse(filteredWarehouse)
-            handleAssingData(filteredWarehouse[0])
-            setWarehouseId(filteredWarehouse[0]?.warehouse_id)
+            handleAssingData(intialMNYWarehouse)
+            setWarehouseId(intialMNYWarehouse?.warehouse_id)
+            console.log("🚀 ~ warehouseList ~ intialMNYWarehouse:", intialMNYWarehouse)
+
             return filteredWarehouse || []
 
         } catch (error) {
             console.error(error)
+        } finally {
+            setLoadingWarehouse(false)
         }
     }, [])
 
@@ -228,13 +237,13 @@ export default function Home() {
                 "Cross Border Pickup": "We import your package and you pickup in person from a local warehouse",
                 "Cross Border Forward": "We import your package and forward it domestically to your final destination with the carrier you select",
                 "Forward Package": "Internationally directly to the address of your choice with the carrier you select",
-                "Consolidate": "Combine multiple packages into one shippment.",
+                "Consolidate": "Combine multiple packages into one package.",
                 "Request More Picture": "Request additional photos of your package.",
-                "Package Reception US": "Brokerage service for package with value over $800 USD.",
-                "Package Reception CA": "Brokerage service for package with value over $20 CAD.",
+                "Package Reception US": "Receive your package at our US warehouse.",
+                "Package Reception CA": "Receive your package at our CA warehouse.",
                 "Carrier Rate": "Check carrier rates for your package.",
-                "Brokerage fee - CA import": "Fee for importing into Canada.",
-                "Brokerage fee - US import": "Fee for importing into the US.",
+                "Brokerage fee - CA import": "Brokerage service for package with value over $20 CAD",
+                "Brokerage fee - US import": "Brokerage service for package with value over $800 USD.",
                 "Free Membership": "Enjoy free membership benefits."
             };
 
@@ -501,14 +510,30 @@ export default function Home() {
                                                     value="mailbox">
                                                     Mailbox
                                                 </TabsTrigger>
-                                                <TabsTrigger
-                                                    className="w-[150px]"
-                                                    // disabled={shipping === "HFP"}
-                                                    disabled={true}
-                                                    value="custom">
-                                                    Custom Address
-                                                </TabsTrigger>
+                                                <div className=""
+                                                    onClick={() => {
+                                                        toast({
+                                                            title: "Coming Soon",
+                                                            description: "Custom Address will coming soon.",
+                                                        })
+                                                    }}
+                                                >
+                                                    <TabsTrigger
+                                                        className="w-[150px]"
+                                                        // disabled={shipping === "HFP"}
+                                                        disabled={true}
+                                                        value="custom"
+                                                        onClick={() => {
+                                                            toast({
+                                                                title: "Coming Soon",
+                                                                description: "Custom Address will coming soon.",
+                                                            })
+                                                        }}
 
+                                                    >
+                                                        Custom Address
+                                                    </TabsTrigger>
+                                                </div>
                                             </TabsList>
                                         </Tabs>
                                         <div className={`h-[32px] ${tableMode ? 'hidden' : 'flex'}`}>
@@ -539,52 +564,61 @@ export default function Home() {
                                                         render={({ field }) => (
                                                             <>
                                                                 <div className="">
+                                                                    <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
+                                                                    <FormControl
+                                                                        className="w-full"
+                                                                    >
+                                                                        <Select
+                                                                            className='text-xs'
+                                                                            // onValueChange={handleValueChange(field.value)}
+                                                                            onValueChange={(value) => handleValueChange(value)}
+                                                                            defaultValue={field.value}>
+                                                                            <FormControl>
+                                                                                <SelectTrigger className='text-xs  h-[36px]'>
+                                                                                    <SelectValue placeholder="Select Mailbox">
+                                                                                        {
+                                                                                            loadingWarehouse ? (
+                                                                                                <Skeleton className="w-full h-[20px]" />
+                                                                                            ) : (
+
+                                                                                                <div className="flex flex-row gap-2 items-center ">
+                                                                                                    <img
+                                                                                                        // src={`https://flagcdn.com/w640/ca.png`}
+                                                                                                        src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
+                                                                                                        srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
+                                                                                                        alt=""
+                                                                                                        className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
+                                                                                                    />
+                                                                                                    {/* <p>- {field.value}</p> */}
+                                                                                                    <p>{selectedData()}</p>
+                                                                                                </div>
+                                                                                            )
+                                                                                        }
+                                                                                    </SelectValue>
+                                                                                </SelectTrigger>
+                                                                            </FormControl>
+                                                                            <SelectContent >
+
+                                                                                {
+                                                                                    warehouse?.map((item, index) => (
+                                                                                        <SelectItem
+                                                                                            key={index}
+                                                                                            className="text-xs"
+                                                                                            value={item?.warehouse_code}
+                                                                                        >
+                                                                                            {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                                                                        </SelectItem>
+                                                                                    ))
+                                                                                }
+
+                                                                            </SelectContent>
+                                                                        </Select>
+                                                                    </FormControl>
+
                                                                     <FormItem
                                                                         className="w-full"
                                                                     >
-                                                                        <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
-                                                                        <FormControl
-                                                                            className="w-full"
-                                                                        >
-                                                                            <Select
-                                                                                className='text-xs'
-                                                                                // onValueChange={handleValueChange(field.value)}
-                                                                                onValueChange={(value) => handleValueChange(value)}
-                                                                                defaultValue={field.value}>
-                                                                                <FormControl>
-                                                                                    <SelectTrigger className='text-xs  h-[36px]'>
-                                                                                        <SelectValue placeholder="Select Mailbox">
-                                                                                            <div className="flex flex-row gap-2 items-center ">
-                                                                                                <img
-                                                                                                    // src={`https://flagcdn.com/w640/ca.png`}
-                                                                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
-                                                                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
-                                                                                                    alt=""
-                                                                                                    className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
-                                                                                                />
-                                                                                                {/* <p>- {field.value}</p> */}
-                                                                                                <p>{selectedData()}</p>
-                                                                                            </div>
-                                                                                        </SelectValue>
-                                                                                    </SelectTrigger>
-                                                                                </FormControl>
-                                                                                <SelectContent >
 
-                                                                                    {
-                                                                                        warehouse?.map((item, index) => (
-                                                                                            <SelectItem
-                                                                                                key={index}
-                                                                                                className="text-xs"
-                                                                                                value={item?.warehouse_code}
-                                                                                            >
-                                                                                                {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
-                                                                                            </SelectItem>
-                                                                                        ))
-                                                                                    }
-
-                                                                                </SelectContent>
-                                                                            </Select>
-                                                                        </FormControl>
                                                                         <div className="">
                                                                             <Dimension
                                                                                 form={form}

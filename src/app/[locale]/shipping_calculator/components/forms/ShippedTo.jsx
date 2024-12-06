@@ -50,9 +50,9 @@ export const ShippedTo = ({ form, country_list }) => {
         <div className="flex flex-col">
             {
                 shipping === "HFP" || shipping === "CBP" ? (
-                    <p className='font-bold text-xs'>Reshipped From ...</p>
+                    <p className='font-bold text-xs'>Ship To ...</p>
                 ) : (
-                    <p className='font-bold text-xs'>Reshipped to ...</p>
+                    <p className='font-bold text-xs'>Ship To ...</p>
                 )
             }
 

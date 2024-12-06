@@ -145,7 +145,6 @@ export const RatesOption = ({
                         <Button
                             variant="redOutline"
                             size="sm"
-                            disabled={selecetedData === null}
                             className="w-full mt-3"
                             onClick={() => {
                                 setShowRates(false)

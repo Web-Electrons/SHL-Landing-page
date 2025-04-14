@@ -26,10 +26,10 @@ export const ServiceTable = ({
     loadingService
 }) => {
 
-    const formatCurrency = (value = 0, currency = "USD") => {
+    const formatCurrency = (value = 0, currency) => {
         return new Intl.NumberFormat('en-ID', {
             style: 'currency',
-            currency: currency,
+            currency: currency || 'USD',
             minimumIntegerDigits: 1,
             maximumFractionDigits: 2
         }).format(value)
@@ -144,7 +144,7 @@ export const ServiceTable = ({
                                         <TableCell className="text-xs border-x-0">
                                             {item.description}
                                         </TableCell>
-                                        <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency || "USD")}</TableCell>
+                                        <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency)}</TableCell>
                                     </TableRow>
                                 ))
 
@@ -197,6 +197,7 @@ export const ServiceTable = ({
                                 </TableRow>
                             ) : otherService.length > 0 ? (
                                 otherService?.map((item, index) => (
+                                    console.log("CURRENCY", item),
                                     <TableRow
                                         className="border-none"
                                         key={index}>

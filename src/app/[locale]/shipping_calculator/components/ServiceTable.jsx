@@ -15,14 +15,14 @@ import axios from 'axios'
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Skeleton } from '@/components/ui/skeleton'
 export const ServiceTable = ({
-    serviceList?,
+    serviceList,
     otherService,
     warehouse,
     form,
     selectedData,
     handleValueChange,
     checkCoutryCode,
-    warehouseServiceList?,
+    warehouseServiceList,
     loadingService
 }) => {
 

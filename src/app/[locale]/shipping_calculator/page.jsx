@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { use, useCallback, useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import { ShippingLabels } from '@/components/home/ShippingLabels'
 import { Input } from '@/components/ui/input';
@@ -52,6 +52,7 @@ import { Separator } from '@/components/ui/separator';
 import { ServiceTable } from './components/ServiceTable';
 import { useMediaQuery } from 'react-responsive';
 import { Skeleton } from '@/components/ui/skeleton';
+import { set } from 'lodash';
 
 const formSchema = yup.object().shape({
     dimension: yup.object().shape({
@@ -110,6 +111,7 @@ export default function Home() {
     const [openSheet, setOpenSheet] = useState(false);
     const [open, setOpen] = useState(false);
     const [loadingWarehouse, setLoadingWarehouse] = useState(false);
+    const [warehousesServiceList, setwarehousesServiceList] = useState(null)
     console.log("🚀 ~ Home ~ openSheet:", openSheet)
 
     // const [openServicesOption]
@@ -289,6 +291,31 @@ export default function Home() {
             setLoadingService(false)
         }
     };
+
+    
+
+    const fetchServiceList = async (warehouse_id) => {
+        try {
+          const response = await axios.post('/api/warehouse/service_list', {
+            warehouse_id: warehouse_id,
+          }); 
+          const data = response.data.data;
+          setwarehousesServiceList(data);
+        } catch (error) {
+          console.error('Failed to fetch service list:', error);
+          return [];
+        }
+      };
+
+    //   console.log("WAREHOUSE SERVICE LIST", warehousesServiceList)
+
+      useEffect(() => {
+        if (warehouse_id) {
+          fetchServiceList(warehouse_id);
+        }
+      }, [warehouse_id]);
+
+   
 
     // Gunakan `getServicesList` dalam `useEffect`
     useEffect(() => {
@@ -671,7 +698,7 @@ export default function Home() {
                                                             form={form}
                                                             warehouse={warehouse}
                                                             otherService={otherService}
-                                                            serviceList={serviceList}
+                                                            serviceList={warehousesServiceList}
                                                             selectedData={selectedData}
                                                             handleValueChange={handleValueChange}
                                                             checkCoutryCode={checkCoutryCode}

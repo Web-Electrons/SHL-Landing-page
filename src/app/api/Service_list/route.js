@@ -19,7 +19,7 @@ export async function GET(request) {
             }
         );
 
-        console.log("🚀 ~ GET ~ response:", response)
+        // console.log("🚀 ~ GET ~ response:", response)
 
         if (response.status === 200) {
             const responseData = {

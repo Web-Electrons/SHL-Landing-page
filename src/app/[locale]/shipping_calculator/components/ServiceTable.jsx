@@ -195,7 +195,7 @@ export const ServiceTable = ({
                                         ))
                                     }
                                 </TableRow>
-                            ) : otherService.length > 0 ? (
+                            ) : otherService?.length > 0 ? (
                                 otherService?.map((item, index) => (
                                     console.log("CURRENCY", item),
                                     <TableRow

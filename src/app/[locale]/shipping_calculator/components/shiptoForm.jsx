@@ -54,7 +54,12 @@ export const ShiptoForm = ({ form, country_list }) => {
                                         className='text-xs'
                                         onValueChange={field.onChange} defaultValue={field.value}>
                                         <FormControl>
-                                            <SelectTrigger className='text-xs h-[36px]'>
+                                            <SelectTrigger
+                                                data-testid="country-select-trigger"
+                                                name="shipped_from.country"
+                                                id="shipped_from.country"
+                                                className='text-xs h-[36px]'
+                                            >
                                                 <SelectValue placeholder="Select Country" />
                                             </SelectTrigger>
                                         </FormControl>

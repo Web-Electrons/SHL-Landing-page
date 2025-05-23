@@ -124,6 +124,7 @@ export const ServiceOptions = ({
 
                 <Button
                     className={'mt-4 w-full'}
+                    id="continue_service"
                     variant="destructive"
                     onClick={() => {
                         handleContinue()

@@ -112,7 +112,7 @@ export default function Home() {
     const [open, setOpen] = useState(false);
     const [loadingWarehouse, setLoadingWarehouse] = useState(false);
     const [warehousesServiceList, setwarehousesServiceList] = useState(null)
-    console.log("🚀 ~ Home ~ openSheet:", openSheet)
+    // console.log("🚀 ~ Home ~ openSheet:", openSheet)
 
     // const [openServicesOption]
 
@@ -136,7 +136,7 @@ export default function Home() {
                 address2: "",
             },
             shippingType: "HFP",
-            mailboxSelected: "ca"
+            mailboxSelected: "VRN"
         }
     })
 
@@ -176,12 +176,11 @@ export default function Home() {
             )
             const responseData = response.data.warehouse
             const filteredWarehouse = responseData.filter((item) => item.warehouse_code !== "AAA" && item.warehouse_code !== "BBB");
-            const intialMNYWarehouse = filteredWarehouse.find((item) => item.warehouse_code === "MNY")
-            console.log("🚀 ~ warehouseList ~ filteredWarehouse:", filteredWarehouse)
+            const getFirstWarehouse = filteredWarehouse[0]
+            const intialMNYWarehouse = filteredWarehouse.find((item) => item.warehouse_code === "VRN" || "CDM" || getFirstWarehouse?.warehouse_code)
             setWarehouse(filteredWarehouse)
             handleAssingData(intialMNYWarehouse)
             setWarehouseId(intialMNYWarehouse?.warehouse_id)
-            console.log("🚀 ~ warehouseList ~ intialMNYWarehouse:", intialMNYWarehouse)
 
             return filteredWarehouse || []
 
@@ -207,8 +206,8 @@ export default function Home() {
                 axios.post(`/api/warehouse/service_list`, { warehouse_id: warehouse_id })
             ]);
 
-            console.log("🚀 ~ getServicesList ~ response:", serviceListResponse);
-            console.log("🚀 ~ getWarehouseServiceList:", warehouseServiceResponse);
+            // console.log("🚀 ~ getServicesList ~ response:", serviceListResponse);
+            // console.log("🚀 ~ getWarehouseServiceList:", warehouseServiceResponse);
 
             const serviceListData = serviceListResponse.data.data;
             const warehouseServiceData = warehouseServiceResponse.data.data;
@@ -292,30 +291,30 @@ export default function Home() {
         }
     };
 
-    
+
 
     const fetchServiceList = async (warehouse_id) => {
         try {
-          const response = await axios.post('/api/warehouse/service_list', {
-            warehouse_id: warehouse_id,
-          }); 
-          const data = response.data.data;
-          setwarehousesServiceList(data);
+            const response = await axios.post('/api/warehouse/service_list', {
+                warehouse_id: warehouse_id,
+            });
+            const data = response.data.data;
+            setwarehousesServiceList(data);
         } catch (error) {
-          console.error('Failed to fetch service list:', error);
-          return [];
+            console.error('Failed to fetch service list:', error);
+            return [];
         }
-      };
+    };
 
     //   console.log("WAREHOUSE SERVICE LIST", warehousesServiceList)
 
-      useEffect(() => {
+    useEffect(() => {
         if (warehouse_id) {
-          fetchServiceList(warehouse_id);
+            fetchServiceList(warehouse_id);
         }
-      }, [warehouse_id]);
+    }, [warehouse_id]);
 
-   
+
 
     // Gunakan `getServicesList` dalam `useEffect`
     useEffect(() => {
@@ -594,6 +593,7 @@ export default function Home() {
                                                                     <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
                                                                     <FormControl
                                                                         className="w-full"
+
                                                                     >
                                                                         <Select
                                                                             className='text-xs'
@@ -601,7 +601,7 @@ export default function Home() {
                                                                             onValueChange={(value) => handleValueChange(value)}
                                                                             defaultValue={field.value}>
                                                                             <FormControl>
-                                                                                <SelectTrigger className='text-xs  h-[36px]'>
+                                                                                <SelectTrigger name="mailboxSelected" id="mailboxSelected" className='text-xs  h-[36px]'>
                                                                                     <SelectValue placeholder="Select Mailbox">
                                                                                         {
                                                                                             loadingWarehouse ? (
@@ -624,14 +624,14 @@ export default function Home() {
                                                                                     </SelectValue>
                                                                                 </SelectTrigger>
                                                                             </FormControl>
-                                                                            <SelectContent >
-
+                                                                            <SelectContent id="warehouseContentSelect" >
                                                                                 {
                                                                                     warehouse?.map((item, index) => (
                                                                                         <SelectItem
                                                                                             key={index}
                                                                                             className="text-xs"
                                                                                             value={item?.warehouse_code}
+                                                                                            id={item?.warehouse_code}
                                                                                         >
                                                                                             {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
                                                                                         </SelectItem>

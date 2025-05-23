@@ -9,12 +9,12 @@ export const metadata = {
 export default function RootLayout({ children, params: { locale } }) {
     return (
         <>
-            <head>
+            {/* <head>
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>{metadata.title}</title>
                 <meta name="description" content={metadata.description} />
-            </head>
+            </head> */}
             {children}
         </>
     );

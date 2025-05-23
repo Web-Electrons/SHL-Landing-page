@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "node server-landingpage.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open --e2e"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -46,6 +47,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "cypress": "^14.4.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "i18nexus-cli": "^3.4.0",

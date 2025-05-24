@@ -51,7 +51,9 @@ export const HomeFooter = () => {
                     <div className="flex flex-col gap-5 text-sm">
                         <div className="item flex flex-row gap-2 items-center w-[100px]">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
-                            <Link passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
+                            <Link
+                                id='footer_aboutUs'
+                                passHref href={"/aboutUs"} className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("abo")}</p>
                             </Link>
                         </div>
@@ -61,6 +63,7 @@ export const HomeFooter = () => {
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
                                 passHref
+                                id='footer_membership'
                                 href={"/#membership"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
                                 <p>{t("memb")}</p>
@@ -70,6 +73,7 @@ export const HomeFooter = () => {
 
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
+                                id='footer_shopping'
                                 passHref
                                 href={"/blog/shopping_ideas"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
@@ -91,6 +95,7 @@ export const HomeFooter = () => {
                         <div className="item flex flex-row gap-2 items-center w-[200px]">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
+                                id='footer_prohibited'
                                 passHref
                                 href={"/prohibited-items"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
@@ -101,6 +106,7 @@ export const HomeFooter = () => {
                         <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
+                                id='footer_mailbox'
                                 passHref
                                 href={"/#cross-border"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
@@ -111,6 +117,7 @@ export const HomeFooter = () => {
                         <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
+                                id='footer_shipment'
                                 passHref
                                 href={"/shippingLabels"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
@@ -121,6 +128,7 @@ export const HomeFooter = () => {
                         <div className="item flex flex-row gap-2 items-center w-[200px] text-sm">
                             <ChevronRight className='text-red-700 w-[15px] h-[15px]' />
                             <Link
+                                id='footer_shipping_calculator'
                                 passHref
                                 href={"/shipping_calculator"}
                                 className='cursor-pointer transition ease-in-out duration-300 hover:opacity-70'>
@@ -141,11 +149,15 @@ export const HomeFooter = () => {
                         © 2024  ShipLink.com
                     </p>
                     <div className=" flex flex-row gap-4 font-regular flex-wrap">
-                        <Link passHref href={"/terms"} >
+                        <Link
+                            id='footer_terms'
+                            passHref href={"/terms"} >
                             <p className='hover:opacity-70'>{t("Terms")}</p>
                         </Link>
                         <p> | </p>
-                        <Link passHref href={"/privacy"} >
+                        <Link
+                        id='footer_privacy'
+                        passHref href={"/privacy"} >
                             <p className='hover:opacity-70'>{t("priv")}</p>
                         </Link>
                     </div>

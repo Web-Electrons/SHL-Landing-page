@@ -51,34 +51,40 @@ export const HomeNavbar = () => {
             {/* Desktop Navbar */}
             <div className={`${styles.list} hidden lg:flex text-white flex-row gap-[30px]  justify-between items-center`}>
 
-                <Link href="/#cross-border" className='cursor-pointer text-base font-extralight leading-3 hover:opacity-70 transition ease-in-out duration-300'>
+                <Link id='navbar_shippingAddress' href="/#cross-border" className='cursor-pointer text-base font-extralight leading-3 hover:opacity-70 transition ease-in-out duration-300'>
                     Shipping Addresses
                 </Link>
-                <Link href="/shippingLabels" className='cursor-pointer text-base font-extralight leading-3 hover:opacity-70 transition ease-in-out duration-300'>
+                <Link id='navbar_shippingLabels' href="/shippingLabels" className='cursor-pointer text-base font-extralight leading-3 hover:opacity-70 transition ease-in-out duration-300'>
                     Shipping Labels
                 </Link>
-                <Link href="/aboutUs" className='cursor-pointer text-base font-extralight leading-3 hover:opacity-70 transition ease-in-out duration-300'>
+                <Link id='navbar_aboutUs' href="/aboutUs" className='cursor-pointer text-base font-extralight leading-3 hover:opacity-70 transition ease-in-out duration-300'>
                     About Us
                 </Link>
                 <LangSwitcher />
                 <div className="flex flex-row gap-[24px]">
-                    <NextLink passHref href={`${signup}`} >
                         <Button
+                        asChild
                             variant='outline'
                             className="w-[126px] text-white bg-transparent border border-white"
                         >
-                            <p className='text-base'>Sign Up</p>
+                             <Link 
+                             className='text-base'
+                             id='navbar_signup' 
+                             passHref 
+                             href={`${signup}`} 
+                             >Sign Up</Link>
                         </Button>
-                    </NextLink>
 
-                    <NextLink passHref href={`${login}`} >
                         <Button
+                        asChild
                             variant='destructive'
                             className="w-[126px]"
                         >
-                            <p className='text-base'>Login</p>
+                                <Link id='navbar_login' 
+                                className='text-base'
+                                passHref 
+                                href={`${login}`} >Login</Link>
                         </Button>
-                    </NextLink>
                 </div>
             </div >
 
@@ -87,6 +93,7 @@ export const HomeNavbar = () => {
                 <Button
                     variant="outline"
                     className="bg-none"
+                    id='mobile_navbar_button'
                     size="sm"
                     onClick={() => { setOpen(true) }}
                 >
@@ -97,53 +104,76 @@ export const HomeNavbar = () => {
             <Sheet open={open} onOpenChange={setOpen}>
                 <SheetContent>
                     <div className={`flex text-black flex-col gap-[10px] justify-start items-start w-full`}>
-                        <Link href={'/#cross-border'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
+                            asChild
                                 variant="ghost"
-                                className="w-full text-left justify-start"
+                                onClick={() => setOpen(false)}
+                                id='mobile_navbar_button_shippingAddress'
+                                className="text-left justify-start cursor-pointer hover:opacity-70 w-full"
                             >
-                                <p className={`text-sm text-left font-extralight leading-3 line-clamp-1`}>Shipping Addresses</p>
+                                <Link 
+                                id='mobile_navbar_shippingAddress'
+                                href={'/#cross-border'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                                Shipping Addresses
+                                </Link>
                             </Button>
-                        </Link>
-                        <Link href={'/shippingLabels'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                            
                             <Button
+                            asChild
                                 variant="ghost"
-                                className="w-full text-left justify-start"
+                                onClick={() => setOpen(false)}
+                                id='mobile_navbar_button_shippingLabels'
+                                className="text-left justify-start cursor-pointer hover:opacity-70 w-full"
                             >
-                                <p className={`text-sm text-left font-extralight`}>Shipping Labels</p>
+                                <Link 
+                                id='mobile_navbar_shippingLabels'
+                                href={'/shippingLabels'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                                Shipping Labels
+                                </Link>
                             </Button>
-                        </Link>
-
-                        <Link href={'/aboutUs'} className='cursor-pointer hover:opacity-70 w-full' passHref>
                             <Button
+                            asChild
                                 variant="ghost"
-                                className="w-full text-left justify-start"
+                                onClick={() => setOpen(false)}
+                                id='mobile_navbar_button_aboutUs'
+                                className="text-left justify-start cursor-pointer hover:opacity-70 w-full"
                             >
-                                <p className={`text-sm text-left font-extralight`}>About Us</p>
+                                <Link 
+                                id='mobile_navbar_aboutUs'
+                                href={'/aboutUs'} className='cursor-pointer hover:opacity-70 w-full' passHref>
+                                About Us 
+                                </Link>
                             </Button>
-                        </Link>
                         <LangSwitcher version='mobile' />
 
                         <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">
                             {
                                 <div className="flex flex-col gap-[10px] py-5 justify-center items-center w-full">
-                                    <NextLink href={`${signup}`} passHref className='w-full'>
                                         <Button
+                                            asChild
                                             variant='redOutline'
                                             className="w-[100%]"
                                         >
-                                            <p className='text-sm'>Sign Up</p>
+                                            <Link 
+                                            className='text-sm'
+                                            href={`${signup}`} 
+                                            >
+                                            Sign Up
+                                            </Link>
                                         </Button>
-                                    </NextLink>
-
-                                    <NextLink href={`${login}`} passHref className='w-full'>
+                                        
                                         <Button
+                                            asChild
                                             variant='destructive'
                                             className="w-[100%]"
                                         >
-                                            <p className='text-sm'>Login</p>
+                                            <Link 
+                                            className='text-sm'
+                                            href={`${login}`} 
+                                            >
+                                            Login
+                                            </Link>
                                         </Button>
-                                    </NextLink>
                                 </div>
                             }
 

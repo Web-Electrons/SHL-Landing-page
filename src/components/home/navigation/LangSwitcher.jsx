@@ -33,7 +33,10 @@ export const LangSwitcher = ({ version = "desktop" }) => {
             {
                 version === "desktop" ? (
                     <DropdownMenu modal={false} >
-                        <DropdownMenuTrigger asChild >
+                        <DropdownMenuTrigger
+                            id='navbar_language'
+                            asChild
+                        >
                             <Button
                                 variant="ghost"
                                 className=" text-left flex flex-row justify-start h-[30px] gap-2"
@@ -47,6 +50,7 @@ export const LangSwitcher = ({ version = "desktop" }) => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent >
                             <DropdownMenuCheckboxItem
+                                id="navbar_language_en"
                                 checked={"EN"}
                                 onCheckedChange={onSelectChange("en")}
                                 className="text-center w-full "
@@ -54,6 +58,7 @@ export const LangSwitcher = ({ version = "desktop" }) => {
                                 English
                             </DropdownMenuCheckboxItem >
                             <DropdownMenuCheckboxItem
+                                id="navbar_language_fr"
                                 checked={"FR"}
                                 onCheckedChange={onSelectChange("fr")}
                                 className="text-center w-full "
@@ -61,6 +66,7 @@ export const LangSwitcher = ({ version = "desktop" }) => {
                                 Français
                             </DropdownMenuCheckboxItem>
                             <DropdownMenuCheckboxItem
+                                id="navbar_language_es"
                                 checked={"ES"}
                                 onCheckedChange={onSelectChange("es")}
                                 className="text-center w-full "
@@ -73,12 +79,15 @@ export const LangSwitcher = ({ version = "desktop" }) => {
                     <div className=" w-full">
                         <Button
                             variant="ghost"
+                            id="mobile_navbar_language"
                             onClick={() => {
                                 setShowOther(!showOther)
                             }}
-                            className=" text-left flex flex-row justify-between w-full"
+                            className={`
+                                ${showOther ? 'bg-slate-100' : ''}
+                                text-left flex flex-row justify-between w-full`}
                         >
-                            <p className={`text-sm text-left font-extralight`}>{selectedLang}</p>
+                            <p className={`text-sm text-left font-extralight `}>{selectedLang}</p>
                             <ChevronDown
                                 width={15}
                                 height={15}
@@ -87,15 +96,14 @@ export const LangSwitcher = ({ version = "desktop" }) => {
                         </Button>
                         {
                             showOther && (
-
-                                <div className="bg-slate-100">
-
+                                <div className="bg-slate-100 p-2 rounded-b-sm">
                                     <ul>
                                         <li className="px-2">
                                             <Button
                                                 variant="ghost"
                                                 onClick={onSelectChange("en")}
-                                                className=" text-left flex flex-row justify-start"
+                                                id="mobile_navbar_language_en"
+                                                className=" text-left flex flex-row justify-start w-full hover:bg-slate-200"
                                             >
                                                 <p className={`text-sm text-left font-extralight`}>EN</p>
                                             </Button>
@@ -104,7 +112,8 @@ export const LangSwitcher = ({ version = "desktop" }) => {
                                             <Button
                                                 variant="ghost"
                                                 onClick={onSelectChange("fr")}
-                                                className=" text-left flex flex-row justify-start"
+                                                id="mobile_navbar_language_fr"
+                                                className=" text-left flex flex-row justify-start w-full hover:bg-slate-200"
                                             >
                                                 <p className={`text-sm text-left font-extralight`}>FR</p>
                                             </Button>
@@ -113,7 +122,8 @@ export const LangSwitcher = ({ version = "desktop" }) => {
                                             <Button
                                                 variant="ghost"
                                                 onClick={onSelectChange("es")}
-                                                className=" text-left flex flex-row justify-start"
+                                                id="mobile_navbar_language_es"
+                                                className=" text-left flex flex-row justify-start w-full hover:bg-slate-200"
                                             >
                                                 <p className={`text-sm text-left font-extralight`}>ES</p>
                                             </Button>

@@ -136,7 +136,7 @@ export default function Home() {
                 address2: "",
             },
             shippingType: "HFP",
-            mailboxSelected: "VRN"
+            mailboxSelected: "Select Mailbox",
         }
     })
 
@@ -338,10 +338,10 @@ export default function Home() {
     }
 
     const selectedData = () => {
-        if (form.watch("shipped_from") === undefined) {
+        if (form.getValues("shipped_from") === undefined) {
             return "Select Mailbox"
         } else {
-            const shipped_from = form.watch("shipped_from")
+            const shipped_from = form.getValues("shipped_from")
             return (
                 `${shipped_from.city}, ${shipped_from.state}, ${shipped_from.zip}, ${shipped_from.country}`
             )
@@ -593,26 +593,26 @@ export default function Home() {
                                                                     <FormLabel className="font-bold">Select Your Mailbox <span className='text-red-600'>*</span></FormLabel>
                                                                     <FormControl
                                                                         className="w-full"
-
                                                                     >
                                                                         <Select
                                                                             className='text-xs'
                                                                             // onValueChange={handleValueChange(field.value)}
                                                                             onValueChange={(value) => handleValueChange(value)}
-                                                                            defaultValue={field.value}>
+                                                                            defaultValue={field.value}
+                                                                            disabled={loadingWarehouse}
+                                                                        >
                                                                             <FormControl>
                                                                                 <SelectTrigger name="mailboxSelected" id="mailboxSelected" className='text-xs  h-[36px]'>
                                                                                     <SelectValue placeholder="Select Mailbox">
                                                                                         {
                                                                                             loadingWarehouse ? (
-                                                                                                <Skeleton className="w-full h-[20px]" />
+                                                                                                <p>...</p>
                                                                                             ) : (
-
                                                                                                 <div className="flex flex-row gap-2 items-center ">
                                                                                                     <img
                                                                                                         // src={`https://flagcdn.com/w640/ca.png`}
-                                                                                                        src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
-                                                                                                        srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
+                                                                                                        src={`https://flagcdn.com/h80/${checkCoutryCode(form.getValues('shipped_from.country'))}.jpg`}
+                                                                                                        srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.getValues('shipped_from.country'))}.jpg 2x`}
                                                                                                         alt=""
                                                                                                         className='rounded-full w-6 h-6 border border-blue-50 object-center object-cover'
                                                                                                     />

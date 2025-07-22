@@ -626,6 +626,9 @@ export default function Home() {
                                                                             </FormControl>
                                                                             <SelectContent id="warehouseContentSelect" >
                                                                                 {
+                                                                                    loadingWarehouse ? (
+                                                                                        <Skeleton className="w-full h-[20px]" />
+                                                                                    ) : (   
                                                                                     warehouse?.map((item, index) => (
                                                                                         <SelectItem
                                                                                             key={index}
@@ -635,7 +638,7 @@ export default function Home() {
                                                                                         >
                                                                                             {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
                                                                                         </SelectItem>
-                                                                                    ))
+                                                                                    )))
                                                                                 }
 
                                                                             </SelectContent>

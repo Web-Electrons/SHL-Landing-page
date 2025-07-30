@@ -9,6 +9,8 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
 import { CourrierCard } from './CourrierCard'
 import { Summary } from './Summary'
+import { toast } from '@/components/ui/use-toast'
+import axios from 'axios'
 
 export const RatesOption = ({
   rates = [],
@@ -22,7 +24,12 @@ export const RatesOption = ({
   showRates,
   setOpenServicesOption,
   openSummary,
+  set_loading_rates,
   setOpenSummary,
+  warehouse_id,
+  selectedService,
+  warehouseCountry,
+  formWatch,
 }) => {
   const [sortedRates, setSortedRates] = useState([])
 
@@ -59,6 +66,129 @@ export const RatesOption = ({
   const removeDataFromSummary = id => {
     setSummaryData(prevData => prevData.filter(item => item.id !== id))
   }
+
+  console.log('FORMWTACH', formWatch?.shipped_to?.country)
+
+  const warehouseDestination =
+    formWatch?.shipped_to?.country === 'USA'
+      ? 'KM9'
+      : formWatch?.shipped_to?.country === 'CAD'
+        ? 'AAA'
+        : ''
+
+  const handleCBF = async () => {
+    set_loading_rates(true)
+    try {
+      const response = await axios.post(`/api/Calculator/CrossBorderForward_Calculation`, {
+        warehouse_id: warehouse_id,
+        warehouse_id_destination: warehouseDestination,
+        broker: 'use shiplink broker',
+        amountLocal: selecetedData?.amountLocal,
+        currencyLocal: selecetedData?.currencyLocal,
+        parcels: {
+          weight: formWatch.dimension.weight,
+          mass_unit: formWatch.dimension.weight_unit,
+          length: formWatch.dimension.length,
+          width: formWatch.dimension.width,
+          height: formWatch.dimension.height,
+          distance_unit: formWatch.dimension.dimension_unit,
+        },
+      })
+
+      if (response.data.status === true) {
+        const responseData = {
+          status: response.data.status,
+          message: response.data.message,
+          data: response.data,
+        }
+        setSummaryData(responseData)
+        setOpenSummary(true)
+        setOpenServicesOption(true)
+        return responseData
+      } else {
+        toast({
+          title: 'Error',
+          description: response.data.message,
+          variant: 'destructive',
+        })
+      }
+    } catch (error) {
+      console.error('Error in handleHFP:', error)
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      })
+    } finally {
+      set_loading_rates(false)
+    }
+  }
+
+  console.log('FORMWATCH', selectedService)
+  const handleDF = async () => {
+    set_loading_rates(true)
+    try {
+      const response = await axios.post(`/api/Calculator/Forward_Calculation`, {
+        warehouse_id: warehouse_id,
+        broker: '',
+        amountLocal: selecetedData?.amountLocal,
+        currencyLocal: selecetedData?.currencyLocal,
+        parcels: {
+          weight: formWatch.dimension.weight,
+          mass_unit: formWatch.dimension.weight_unit,
+          length: formWatch.dimension.length,
+          width: formWatch.dimension.width,
+          height: formWatch.dimension.height,
+          distance_unit: formWatch.dimension.dimension_unit,
+        },
+        addressTo: {
+          name: formWatch.shipped_to.name,
+          country: formWatch.shipped_to.country,
+          state: formWatch.shipped_to.state,
+          city: formWatch.shipped_to.city,
+          zip: formWatch.shipped_to.zip,
+          street1: formWatch.shipped_to.address,
+          street2: formWatch.shipped_to.address2,
+        },
+      })
+
+      if (response.data.status === true) {
+        const responseData = {
+          status: response.data.status,
+          message: response.data.message,
+          data: response.data,
+        }
+        setSummaryData(responseData)
+        setOpenSummary(true)
+        setOpenServicesOption(true)
+        return responseData
+      } else {
+        toast({
+          title: 'Error',
+          description: response.data.message,
+          variant: 'destructive',
+        })
+      }
+    } catch (error) {
+      console.error('Error in handleHFP:', error)
+      toast({
+        title: 'Error',
+        description: error.message,
+        variant: 'destructive',
+      })
+    } finally {
+      set_loading_rates(false)
+    }
+  }
+
+  const handleCalculate = () => {
+    if (selectedService === 'cbf') {
+      handleCBF()
+    } else if (selectedService === 'forward') {
+      handleDF()
+    }
+  }
+
   return (
     <div className={`flex flex-col px-[20px] h-full w-full`}>
       <div className="w-full h-[90vh]">
@@ -119,7 +249,7 @@ export const RatesOption = ({
               size="sm"
               disabled={selecetedData === null}
               className="w-full mt-3"
-              onClick={() => setOpenSummary(true)}
+              onClick={() => handleCalculate()}
             >
               Calculate
             </Button>

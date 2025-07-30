@@ -60,7 +60,7 @@ export const Summary = ({
             <Card className="border-none p-0">
               <CardContent className="px-0 space-y-2">
                 <div className="">
-                  {selecetedData && selectedService !== 'hfp' && selectedService !== 'cbp' && (
+                  {/* {selecetedData && selectedService !== 'hfp' && selectedService !== 'cbp' && (
                     <div className="flex flex-row gap-2 items-center  p-1">
                       <div className="flex flex-col w-[70%]">
                         <p className="text-xs">
@@ -72,7 +72,7 @@ export const Summary = ({
                       </div>
                       <p className="text-xs w-[30%] text-right">{`$ ${selecetedData.amountLocal.toFixed(2)}`}</p>
                     </div>
-                  )}
+                  )} */}
                   {summaryData?.data?.services?.map((item, index) => (
                     <div
                       key={index}

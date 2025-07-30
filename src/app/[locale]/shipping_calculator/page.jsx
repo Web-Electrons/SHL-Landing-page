@@ -54,6 +54,7 @@ import { useMediaQuery } from 'react-responsive'
 import { Skeleton } from '@/components/ui/skeleton'
 import Loading from '@/app/loading'
 import { set } from 'lodash'
+import DeclareTable from './components/forms/DeclareTable'
 
 const formSchema = yup.object().shape({
   dimension: yup.object().shape({
@@ -115,6 +116,7 @@ export default function Home() {
   const [loadingWarehouse, setLoadingWarehouse] = useState(false)
   const [warehousesServiceList, setwarehousesServiceList] = useState(null)
   const [warehouseDestination_id, setWarehouseDestination_id] = useState('')
+  const [warehouseCountry, setWarehouseCountry] = useState('')
 
   const form = useForm({
     resolver: yupResolver(formSchema),
@@ -181,6 +183,7 @@ export default function Home() {
       setWarehouse(filteredWarehouse)
       handleAssingData(intialMNYWarehouse)
       setWarehouseId(intialMNYWarehouse?.warehouse_id)
+      setWarehouseCountry(intialMNYWarehouse?.country_code)
 
       return filteredWarehouse || []
     } catch (error) {
@@ -763,6 +766,9 @@ export default function Home() {
                                     <></>
                                   ) : selectedService === 'cbp' ? (
                                     <div>
+                                      <div className="w-full my-4">
+                                        <DeclareTable />
+                                      </div>
                                       <Form {...form}>
                                         <form disabled={disabledForm}>
                                           <FormLabel className="font-bold">
@@ -830,7 +836,12 @@ export default function Home() {
                                       </Form>
                                     </div>
                                   ) : (
-                                    <ShippedTo form={form} country_list={country} />
+                                    <>
+                                      <div className="w-full my-4">
+                                        <DeclareTable />
+                                      </div>
+                                      <ShippedTo form={form} country_list={country} />
+                                    </>
                                   )}
                                 </FormItem>
 
@@ -857,6 +868,9 @@ export default function Home() {
                             <></>
                           ) : selectedService === 'cbp' ? (
                             <div>
+                              <div className="w-full my-4">
+                                <DeclareTable />
+                              </div>
                               <Form {...form}>
                                 <form disabled={disabledForm}>
                                   <FormLabel className="font-bold">Warehouse Destination</FormLabel>
@@ -922,7 +936,12 @@ export default function Home() {
                               </Form>
                             </div>
                           ) : (
-                            <ShippedTo form={form} country_list={country} />
+                            <>
+                              <div className="w-full my-4">
+                                <DeclareTable />
+                              </div>
+                              <ShippedTo form={form} country_list={country} />
+                            </>
                           )}
                         </>
                       ) : (
@@ -1113,6 +1132,11 @@ export default function Home() {
                     selecetedData={selecetedData}
                     showRates={showRates}
                     setOpenServicesOption={setOpenServicesOption}
+                    set_loading_rates={set_loading_rates}
+                    warehouse_id={warehouse_id}
+                    selectedService={selectedService}
+                    warehouseCountry={warehouseCountry}
+                    formWatch={formWatch}
                   />
                 </div>
               ))}

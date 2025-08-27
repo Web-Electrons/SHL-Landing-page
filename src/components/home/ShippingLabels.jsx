@@ -115,7 +115,7 @@ export const ShippingLabels = ({
                             width={40}
                             height={40}
                         /></p>
-                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">{params("ship.Ship3")}</p>
+                        <p className="block antialiased tracking-normal font-bold text-xl text-black leading-snug">{params("ship.Ship4")}</p>
                         <p className="block antialiased text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">
                             {/* Stay updated with real-time tracking information. Our platform allows you to monitor the status of your shipment from dispatch to delivery. */}
                             {params("ship.Ship4_param")}

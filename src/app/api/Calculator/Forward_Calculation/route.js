@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server'
+
 import axios from 'axios'
 import https from 'https'
+import { NextResponse } from 'next/server'
 
 const agent = new https.Agent({
   rejectUnauthorized: false, // Non-production use only! Disables SSL certificate verification

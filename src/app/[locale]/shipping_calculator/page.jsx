@@ -89,6 +89,23 @@ const formSchema = yup.object().shape({
   warehouse_destination: yup.string(),
   warehouse_destination_country: yup.string(),
   mailboxSelected: yup.string(),
+
+  package_content: yup.array().of(
+    yup.object({
+      id: yup.string(),
+      tracking_id: yup.string().nullable(),
+      qty: yup
+        .number(),
+      value: yup
+        .number(),
+      desc: yup.string(),
+      hs_desc: yup.string().nullable(),
+      hs_code: yup.string().nullable(),
+      made_in: yup.string().nullable(),
+      currency: yup.string(),
+      subtotal: yup.number(),
+    })
+  ),
 })
 
 export default function Home() {
@@ -141,6 +158,7 @@ export default function Home() {
       warehouse_destination: '',
       warehouse_destination_country: '',
       mailboxSelected: 'VRN',
+      package_content: [],
     },
   })
 
@@ -390,6 +408,8 @@ export default function Home() {
     // setShowRates(true)
     try {
       const response = await axios.post(`/api/Calculator/ShippingCalculation`, {
+        warehouse_id: warehouse_id,
+        warehouse_id_destination: warehouseDestination_id,
         addressFrom: {
           country: formData.shipped_from.country,
           state: formData.shipped_from.state,
@@ -397,7 +417,7 @@ export default function Home() {
           zip: formData.shipped_from.zip,
           street1: formData.shipped_from.address,
           street2: formData.shipped_from.address2,
-          // warehouse_code: formData.shipped_from.warehouse_code,
+      
         },
         addressTo: {
           name: formData.shipped_to.name,
@@ -416,8 +436,20 @@ export default function Home() {
           height: formData.dimension.height,
           distance_unit: formData.dimension.dimension_unit,
         },
+   package_content: formData.package_content.map(item => ({
+  id: item.id || "",
+  tracking_id: item.tracking_id || "",
+  qty: item.qty,
+  value: item.value,
+  desc: item.desc,
+  hs_desc: item.hs_desc,
+  hs_code: item.hs_code,
+  made_in: item.made_in,
+  currency: item.currency || "USD",
+  subtotal: item.subtotal ?? 0,
+})),
       })
-      console.log('RESPONSE CBF CBF CBF', response.data)
+    
 
       if (response.data.status === true) {
         toast({
@@ -625,6 +657,7 @@ export default function Home() {
     }).format(value)
   }
 
+
   return (
     <>
       {loading_rates && <Loading />}
@@ -767,7 +800,7 @@ export default function Home() {
                                   ) : selectedService === 'cbp' ? (
                                     <div>
                                       <div className="w-full my-4">
-                                        <DeclareTable />
+                                        <DeclareTable form={form}/>
                                       </div>
                                       <Form {...form}>
                                         <form disabled={disabledForm}>
@@ -835,12 +868,82 @@ export default function Home() {
                                         </form>
                                       </Form>
                                     </div>
-                                  ) : (
+                                  ) : selectedService === 'cbf' ? (
                                     <>
                                       <div className="w-full my-4">
-                                        <DeclareTable />
+                                        <DeclareTable form={form}/>
                                       </div>
+                                                    <Form {...form}>
+                                <form disabled={disabledForm}>
+                                  <FormLabel className="font-bold">Warehouse Destination</FormLabel>
+                                  <FormControl className="w-full">
+                                    <Select
+                                      className="text-xs"
+                                      onValueChange={handlewarehouseDestination}
+                                      defaultValue={selectedDataDestination}
+                                    >
+                                      <FormControl>
+                                        <SelectTrigger
+                                          name="warehouse_destination"
+                                          id="warehouse_destination"
+                                          className="text-xs h-[36px]"
+                                        >
+                                          <SelectValue placeholder="Select Warehouse Destination">
+                                            {loadingWarehouse &&
+                                            selectedDataDestination === undefined ? (
+                                              <Skeleton className="w-full h-[20px]" />
+                                            ) : (
+                                              <div className="flex flex-row gap-2 items-center">
+                                                {selectedDataDestination() ===
+                                                'Select Warehouse Destination' ? (
+                                                  <></>
+                                                ) : (
+                                                  <img
+                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg`}
+                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg 2x`}
+                                                    alt=""
+                                                    className="rounded-full w-6 h-6 border border-blue-50 object-cover object-center"
+                                                  />
+                                                )}
+                                                <p>{selectedDataDestination()}</p>
+                                              </div>
+                                            )}
+                                          </SelectValue>
+                                        </SelectTrigger>
+                                      </FormControl>
+
+                                      <SelectContent id="warehouse_destination_select">
+                                        {loadingWarehouse ? (
+                                          <Skeleton className="w-full h-[20px]" />
+                                        ) : (
+                                          warehouse?.map((item, index) => (
+                                            <SelectItem
+                                              key={index}
+                                              className="text-xs"
+                                              value={item?.warehouse_code}
+                                              id={item?.warehouse_code}
+                                              disabled={
+                                                form.watch('shipped_from.country') ===
+                                                item?.country_code
+                                              }
+                                            >
+                                              {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                            </SelectItem>
+                                          ))
+                                        )}
+                                      </SelectContent>
+                                    </Select>
+                                  </FormControl>
+                                </form>
+                              </Form>
                                       <ShippedTo form={form} country_list={country} />
+                                    </>
+                                  ) : (
+                                     <>
+                                      <div className="w-full my-4">
+                                        <DeclareTable form={form}/>
+                                      </div>
+                                       <ShippedTo form={form} country_list={country} />
                                     </>
                                   )}
                                 </FormItem>
@@ -940,6 +1043,70 @@ export default function Home() {
                               <div className="w-full my-4">
                                 <DeclareTable />
                               </div>
+
+                              <Form {...form}>
+                                <form disabled={disabledForm}>
+                                  <FormLabel className="font-bold">Warehouse Destination</FormLabel>
+                                  <FormControl className="w-full">
+                                    <Select
+                                      className="text-xs"
+                                      onValueChange={handlewarehouseDestination}
+                                      defaultValue={selectedDataDestination}
+                                    >
+                                      <FormControl>
+                                        <SelectTrigger
+                                          name="warehouse_destination"
+                                          id="warehouse_destination"
+                                          className="text-xs h-[36px]"
+                                        >
+                                          <SelectValue placeholder="Select Warehouse Destination">
+                                            {loadingWarehouse &&
+                                            selectedDataDestination === undefined ? (
+                                              <Skeleton className="w-full h-[20px]" />
+                                            ) : (
+                                              <div className="flex flex-row gap-2 items-center">
+                                                {selectedDataDestination() ===
+                                                'Select Warehouse Destination' ? (
+                                                  <></>
+                                                ) : (
+                                                  <img
+                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg`}
+                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg 2x`}
+                                                    alt=""
+                                                    className="rounded-full w-6 h-6 border border-blue-50 object-cover object-center"
+                                                  />
+                                                )}
+                                                <p>{selectedDataDestination()}</p>
+                                              </div>
+                                            )}
+                                          </SelectValue>
+                                        </SelectTrigger>
+                                      </FormControl>
+
+                                      <SelectContent id="warehouse_destination_select">
+                                        {loadingWarehouse ? (
+                                          <Skeleton className="w-full h-[20px]" />
+                                        ) : (
+                                          warehouse?.map((item, index) => (
+                                            <SelectItem
+                                              key={index}
+                                              className="text-xs"
+                                              value={item?.warehouse_code}
+                                              id={item?.warehouse_code}
+                                              disabled={
+                                                form.watch('shipped_from.country') ===
+                                                item?.country_code
+                                              }
+                                            >
+                                              {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                            </SelectItem>
+                                          ))
+                                        )}
+                                      </SelectContent>
+                                    </Select>
+                                  </FormControl>
+                                </form>
+                              </Form>
                               <ShippedTo form={form} country_list={country} />
                             </>
                           )}

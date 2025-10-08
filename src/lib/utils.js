@@ -27,3 +27,18 @@ export const formatCurrency = value => {
     return '$'
   }
 }
+
+
+ export const checkCoutryCode = code => {
+    if (code === undefined) {
+      return 'ca'
+    } else {
+      if (code === 'MEX') {
+        return 'mx'
+      } else if (code?.length >= 2) {
+        return code.substring(0, 2).toLowerCase()
+      } else {
+        return code.toLowerCase()
+      }
+    }
+  }

@@ -9,7 +9,7 @@ const agent = new https.Agent({
 export async function POST(request) {
   try {
     const { warehouse_id, broker, warehouse_id_destination, parcels } = await request.json()
-    console.log('')
+  
 
     const response = await axios.post(
       `${process.env.API_URL}/Carrier/CrossBorderPickup_Calculation`,

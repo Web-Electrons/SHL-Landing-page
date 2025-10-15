@@ -76,6 +76,7 @@ export const RatesOption = ({
         ? 'AAA'
         : ''
 
+          console.log('selecetedData', selecetedData)
   const handleCBF = async () => {
     set_loading_rates(true)
     try {
@@ -85,6 +86,15 @@ export const RatesOption = ({
         broker: 'use shiplink broker',
         amountLocal: selecetedData?.amountLocal,
         currencyLocal: selecetedData?.currencyLocal,
+           addressTo: {
+          name: "Shiplink",
+          country: formWatch.shipped_to.country,
+          state: formWatch.shipped_to.state,
+          city: formWatch.shipped_to.city,
+          zip: formWatch.shipped_to.zip,
+          street1: formWatch.shipped_to.address,
+          street2: formWatch.shipped_to.address2,
+        },
         parcels: {
           weight: formWatch.dimension.weight,
           mass_unit: formWatch.dimension.weight_unit,

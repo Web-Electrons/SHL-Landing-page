@@ -8,7 +8,7 @@ const agent = new https.Agent({
 
 export async function POST(request) {
   try {
-    const { warehouse_id, broker, warehouse_id_destination, parcels, amountLocal, currencyLocal } =
+    const { warehouse_id, broker, warehouse_id_destination, parcels, amountLocal, currencyLocal, addressTo } =
       await request.json()
 
     const response = await axios.post(
@@ -18,6 +18,7 @@ export async function POST(request) {
         broker,
         warehouse_id_destination,
         parcels,
+        addressTo,
         amountLocal,
         currencyLocal,
       },

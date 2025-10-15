@@ -143,8 +143,8 @@ export default function Home() {
         dimension_unit: 'in',
       },
       shipped_to: {
-        name: 'stern',
-        country: 'Canada',
+        name: '',
+        country: '',
         state: '',
         city: '',
         zip: '',
@@ -324,7 +324,6 @@ export default function Home() {
     }
   }
 
-  //   console.log("WAREHOUSE SERVICE LIST", warehousesServiceList)
 
   useEffect(() => {
     if (warehouse_id) {
@@ -332,7 +331,7 @@ export default function Home() {
     }
   }, [warehouse_id])
 
-  // Gunakan `getServicesList` dalam `useEffect`
+ 
   useEffect(() => {
     getServicesList()
   }, [warehouse_id])
@@ -403,7 +402,56 @@ export default function Home() {
     form.setValue('warehouse_destination_country', data?.country_code)
   }
 
+
   const handleSave = async formData => {
+    const content = formData.package_content
+    const addressTo = formData.shipped_to
+   
+    if (!content || (typeof content === "string" && content.trim() === "")) {
+    toast({
+      title: 'Oops! Please check the form',
+      description: 'Declare content is required.',
+      variant: 'destructive',
+    })
+    return
+  }
+
+  {
+    if ( selectedService?.toLowerCase() === 'cbf' ) {
+if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
+    toast({
+      title: 'Oops! Please check the form',
+      description: 'Warehouse destination is required.',
+      variant: 'destructive',
+    })
+    return
+  }
+    }
+  }
+
+  
+
+   const notRequired = ["name", "address2"]
+  const emptyFields = Object.entries(addressTo).filter(
+    ([key, value]) =>
+      !notRequired.includes(key) && ( // skip jika key termasuk not required
+        value === "" ||
+        value === null ||
+        value === undefined ||
+        (typeof value === "string" && value.trim() === "")
+      )
+  )
+
+  if (emptyFields.length > 0) {
+    toast({
+      title: 'Oops! Please check the form',
+      description: `Field "${emptyFields[0]}" in address destination is required.`,
+      variant: 'destructive',
+    })
+    return
+  }
+
+    
     set_loading_rates(true)
     // setShowRates(true)
     try {
@@ -420,7 +468,7 @@ export default function Home() {
       
         },
         addressTo: {
-          name: formData.shipped_to.name,
+          name: "Shiplink",
           country: formData.shipped_to.country,
           state: formData.shipped_to.state,
           city: formData.shipped_to.city,
@@ -1309,28 +1357,7 @@ export default function Home() {
               ))}
           </>
         )}
-        {/* <div className={styles.service}>
-                    <ServiceOptions
-                        loading_rates={loading_rates}
-                        rates={courierRates}
-                        getRates={triggerSave}
-                        setSummaryData={setSummaryData}
-                        setShowRates={setShowRates}
-                        summaryData={summaryData}
-                        setSelectedData={setSelectedData}
-                        selecetedData={selecetedData}
-                        showRates={showRates}
-                        setOpenServicesOption={setOpenServicesOption}
-                        openRatesOption={openRatesOption}
-                        setOpenRatesOption={setOpenRatesOption}
-                        selectedService={selectedService}
-                        setSelectedService={setSelectedService}
-                        handleContinue={handleContinue}
-                        openServicesOption={openServicesOption}
-                        priceList={serviceList}
-                        otherService={otherService}
-                    />
-                </div> */}
+   
       </div>
     </>
   )

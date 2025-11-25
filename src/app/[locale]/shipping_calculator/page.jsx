@@ -141,6 +141,10 @@ export default function Home() {
       dimension: {
         weight_unit: 'lbs',
         dimension_unit: 'in',
+        weight: 0,
+        length: 0,
+        width: 0,
+        height: 0,
       },
       shipped_to: {
         name: '',
@@ -618,6 +622,8 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
     }
   }
 
+ 
+
   const handleCBP = async () => {
     if (
       formWatch.dimension.weight === undefined ||
@@ -648,7 +654,18 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
           width: formWatch.dimension.width,
           height: formWatch.dimension.height,
           distance_unit: formWatch.dimension.dimension_unit,
-        },
+        }, package_content: formWatch.package_content.map(item => ({
+  id: item.id || "",
+  tracking_id: item.tracking_id || "",
+  qty: item.qty,
+  value: item.value,
+  desc: item.desc,
+  hs_desc: item.hs_desc,
+  hs_code: item.hs_code,
+  made_in: item.made_in,
+  currency: item.currency || "USD",
+  subtotal: item.subtotal ?? 0,
+})),
       })
 
       if (response.data.status === true) {
@@ -921,7 +938,7 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
                                       <div className="w-full my-4">
                                         <DeclareTable form={form}/>
                                       </div>
-                                                    <Form {...form}>
+                                <Form {...form}>
                                 <form disabled={disabledForm}>
                                   <FormLabel className="font-bold">Warehouse Destination</FormLabel>
                                   <FormControl className="w-full">

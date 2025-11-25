@@ -6,7 +6,7 @@ import {
   TableRow,
   TableCell,
 } from '@/components/ui/tableDashboard'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFieldArray } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import {
@@ -19,6 +19,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { XIcon } from 'lucide-react'
 import { formatCurrency, formatDecimal } from '@/lib/utils'
+
 
 const DeclareTable = ({ form }) => {
   const { fields, append, remove } = useFieldArray({
@@ -34,6 +35,8 @@ const DeclareTable = ({ form }) => {
     const value = Number(item.value) || 0
     return acc + qty * value
   }, 0)
+
+
 
   const totalCurrency = items?.[0]?.currency || 'USD'
 

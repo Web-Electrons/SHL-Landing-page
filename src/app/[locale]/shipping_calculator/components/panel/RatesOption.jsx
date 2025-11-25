@@ -67,7 +67,7 @@ export const RatesOption = ({
     setSummaryData(prevData => prevData.filter(item => item.id !== id))
   }
 
-  console.log('FORMWTACH', formWatch?.shipped_to?.country)
+
 
   const warehouseDestination =
     formWatch?.shipped_to?.country === 'USA'
@@ -102,7 +102,18 @@ export const RatesOption = ({
           width: formWatch.dimension.width,
           height: formWatch.dimension.height,
           distance_unit: formWatch.dimension.dimension_unit,
-        },
+        }, package_content: formWatch.package_content.map(item => ({
+  id: item.id || "",
+  tracking_id: item.tracking_id || "",
+  qty: item.qty,
+  value: item.value,
+  desc: item.desc,
+  hs_desc: item.hs_desc,
+  hs_code: item.hs_code,
+  made_in: item.made_in,
+  currency: item.currency || "USD",
+  subtotal: item.subtotal ?? 0,
+})),
       })
 
       if (response.data.status === true) {

@@ -36,7 +36,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 
 export const ShippedTo = ({ form, country_list }) => {
-    console.log("🚀 ~ ShippedTo ~ country_list:", country_list)
+   
 
     const handleSelectCountry = (country_code, country_name) => {
         form.setValue('country_code', country_code);

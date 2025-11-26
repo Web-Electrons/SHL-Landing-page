@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Form,
     FormControl,
@@ -34,18 +34,72 @@ import { CheckIcon } from 'lucide-react';
 import { PopoverClose } from '@radix-ui/react-popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
+import { set } from 'lodash';
+import axios from 'axios';
+
+
 
 export const ShippedTo = ({ form, country_list }) => {
    
+    const [selectedCountry, setSelectedCountry] = useState({
+  country_code: '',
+  country_name: '',
+})
 
     const handleSelectCountry = (country_code, country_name) => {
-        form.setValue('country_code', country_code);
+        console.log("Selected Country: ", country_code, country_name);
         form.setValue('country_name', country_name);
+        setSelectedCountry({ country_code, country_name });
+
     }
 
-    const [popOverOpen, setPopOverOpen] = React.useState(false);
+    const [province_list, setProvince] = useState([]);
+    const [popProvince, setPopProvince] = useState(false);
+
+   
 
     const shipping = form.watch("shippingType");
+
+    const country_code = form.watch("shipped_to.country");
+
+const [queryProvince, setQueryProvince] = useState({
+  keyword: '',
+  country_code: '',
+  page: 0,
+  limit: 1000,
+  index: 0,
+})
+
+useEffect(() => {
+  // Update country_code hanya saat selectedCountry berubah
+  if (!country_code) return;
+
+  setQueryProvince((prev) => ({
+    ...prev,
+    country_code: country_code,
+  }));
+}, [country_code]);
+
+useEffect(() => {
+  // Fetch data hanya jika country_code sudah ada
+  if (!queryProvince.country_code) return;
+
+  const fetchDataProvince = async () => {
+    try {
+      const response = await axios.post(`/api/province`, queryProvince);
+      setProvince(response.data.province);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  fetchDataProvince();
+}, [queryProvince]);
+
+    const filteredProvince = province_list
+
+    
+
     return (
         <div className="flex flex-col">
             {
@@ -74,7 +128,7 @@ export const ShippedTo = ({ form, country_list }) => {
                 )}
             />
             <div className="py-2 flex flex-col gap-2">
-                <div className="flex flex-row gap-2 w-full">
+                <div className="flex flex-row gap-2 w-full items-end">
                     <FormField
                         control={form.control}
                         name="shipped_to.country"
@@ -100,6 +154,7 @@ export const ShippedTo = ({ form, country_list }) => {
                                                         key={index}
                                                         className="text-xs"
                                                         value={item.country_code}
+                                                        onClick={() => handleSelectCountry(item.country_code, item.country_name)}
                                                     >
                                                         {item.country_name}
                                                     </SelectItem>
@@ -115,23 +170,48 @@ export const ShippedTo = ({ form, country_list }) => {
                     />
 
                     <FormField
-                        control={form.control}
-                        name="shipped_to.state"
-                        className="w-full"
-                        render={({ field }) => (
-                            <FormItem
-                                className="w-full"
-                            >
-                                <FormLabel className="">State / Province <span className='text-red-600'>*</span></FormLabel>
-                                <FormControl>
-                                    <Input placeholder="State"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage className="text-xs" />
-                            </FormItem>
-                        )}
-                    />
+  control={form.control}
+  name="shipped_to.state"
+  render={({ field }) => (
+    <FormItem className="w-full">
+      <FormLabel>
+        State / Province <span className="text-red-600">*</span>
+      </FormLabel>
+
+      <Select
+        onValueChange={field.onChange}
+        value={field.value}
+      >
+        <FormControl>
+          <SelectTrigger className="h-[36px] text-xs">
+            <SelectValue placeholder="Select State / Province" />
+          </SelectTrigger>
+        </FormControl>
+
+        <SelectContent>
+          {filteredProvince?.length > 0 ? (
+            filteredProvince.map((item) => (
+              <SelectItem
+                key={item.province_id}
+                value={item.province_name}
+                className="text-xs"
+              >
+                {item.province_name}
+              </SelectItem>
+            ))
+          ) : (
+            <div className="text-xs text-center py-2">
+              No Province found.
+            </div>
+          )}
+        </SelectContent>
+      </Select>
+
+      <FormMessage className="text-xs" />
+    </FormItem>
+  )}
+/>
+
                 </div>
                 <div className="flex flex-row gap-2 w-full">
                     <FormField

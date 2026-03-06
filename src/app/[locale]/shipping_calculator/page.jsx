@@ -94,10 +94,8 @@ const formSchema = yup.object().shape({
     yup.object({
       id: yup.string(),
       tracking_id: yup.string().nullable(),
-      qty: yup
-        .number(),
-      value: yup
-        .number(),
+      qty: yup.number(),
+      value: yup.number(),
       desc: yup.string(),
       hs_desc: yup.string().nullable(),
       hs_code: yup.string().nullable(),
@@ -328,14 +326,12 @@ export default function Home() {
     }
   }
 
-
   useEffect(() => {
     if (warehouse_id) {
       fetchServiceList(warehouse_id)
     }
   }, [warehouse_id])
 
- 
   useEffect(() => {
     getServicesList()
   }, [warehouse_id])
@@ -406,56 +402,51 @@ export default function Home() {
     form.setValue('warehouse_destination_country', data?.country_code)
   }
 
-
   const handleSave = async formData => {
     const content = formData.package_content
     const addressTo = formData.shipped_to
-   
-    if (!content || (typeof content === "string" && content.trim() === "")) {
-    toast({
-      title: 'Oops! Please check the form',
-      description: 'Declare content is required.',
-      variant: 'destructive',
-    })
-    return
-  }
 
-  {
-    if ( selectedService?.toLowerCase() === 'cbf' ) {
-if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
-    toast({
-      title: 'Oops! Please check the form',
-      description: 'Warehouse destination is required.',
-      variant: 'destructive',
-    })
-    return
-  }
+    if (!content || (typeof content === 'string' && content.trim() === '')) {
+      toast({
+        title: 'Oops! Please check the form',
+        description: 'Declare content is required.',
+        variant: 'destructive',
+      })
+      return
     }
-  }
 
-  
+    // {
+    //   if (selectedService?.toLowerCase() === 'cbf') {
+    //     if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
+    //       toast({
+    //         title: 'Oops! Please check the form',
+    //         description: 'Warehouse destination is required.',
+    //         variant: 'destructive',
+    //       })
+    //       return
+    //     }
+    //   }
+    // }
 
-   const notRequired = ["name", "address2"]
-  const emptyFields = Object.entries(addressTo).filter(
-    ([key, value]) =>
-      !notRequired.includes(key) && ( // skip jika key termasuk not required
-        value === "" ||
-        value === null ||
-        value === undefined ||
-        (typeof value === "string" && value.trim() === "")
-      )
-  )
+    const notRequired = ['name', 'address2']
+    const emptyFields = Object.entries(addressTo).filter(
+      ([key, value]) =>
+        !notRequired.includes(key) && // skip jika key termasuk not required
+        (value === '' ||
+          value === null ||
+          value === undefined ||
+          (typeof value === 'string' && value.trim() === ''))
+    )
 
-  if (emptyFields.length > 0) {
-    toast({
-      title: 'Oops! Please check the form',
-      description: `Field "${emptyFields[0]}" in address destination is required.`,
-      variant: 'destructive',
-    })
-    return
-  }
+    if (emptyFields.length > 0) {
+      toast({
+        title: 'Oops! Please check the form',
+        description: `Field "${emptyFields[0]}" in address destination is required.`,
+        variant: 'destructive',
+      })
+      return
+    }
 
-    
     set_loading_rates(true)
     // setShowRates(true)
     try {
@@ -469,10 +460,9 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
           zip: formData.shipped_from.zip,
           street1: formData.shipped_from.address,
           street2: formData.shipped_from.address2,
-      
         },
         addressTo: {
-          name: "Shiplink",
+          name: 'Shiplink',
           country: formData.shipped_to.country,
           state: formData.shipped_to.state,
           city: formData.shipped_to.city,
@@ -488,20 +478,19 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
           height: formData.dimension.height,
           distance_unit: formData.dimension.dimension_unit,
         },
-   package_content: formData.package_content.map(item => ({
-  id: item.id || "",
-  tracking_id: item.tracking_id || "",
-  qty: item.qty,
-  value: item.value,
-  desc: item.desc,
-  hs_desc: item.hs_desc,
-  hs_code: item.hs_code,
-  made_in: item.made_in,
-  currency: item.currency || "USD",
-  subtotal: item.subtotal ?? 0,
-})),
+        package_content: formData.package_content.map(item => ({
+          id: item.id || '',
+          tracking_id: item.tracking_id || '',
+          qty: item.qty,
+          value: item.value,
+          desc: item.desc,
+          hs_desc: item.hs_desc,
+          hs_code: item.hs_code,
+          made_in: item.made_in,
+          currency: item.currency || 'USD',
+          subtotal: item.subtotal ?? 0,
+        })),
       })
-    
 
       if (response.data.status === true) {
         toast({
@@ -622,8 +611,6 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
     }
   }
 
- 
-
   const handleCBP = async () => {
     if (
       formWatch.dimension.weight === undefined ||
@@ -654,18 +641,19 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
           width: formWatch.dimension.width,
           height: formWatch.dimension.height,
           distance_unit: formWatch.dimension.dimension_unit,
-        }, package_content: formWatch.package_content.map(item => ({
-  id: item.id || "",
-  tracking_id: item.tracking_id || "",
-  qty: item.qty,
-  value: item.value,
-  desc: item.desc,
-  hs_desc: item.hs_desc,
-  hs_code: item.hs_code,
-  made_in: item.made_in,
-  currency: item.currency || "USD",
-  subtotal: item.subtotal ?? 0,
-})),
+        },
+        package_content: formWatch.package_content.map(item => ({
+          id: item.id || '',
+          tracking_id: item.tracking_id || '',
+          qty: item.qty,
+          value: item.value,
+          desc: item.desc,
+          hs_desc: item.hs_desc,
+          hs_code: item.hs_code,
+          made_in: item.made_in,
+          currency: item.currency || 'USD',
+          subtotal: item.subtotal ?? 0,
+        })),
       })
 
       if (response.data.status === true) {
@@ -721,7 +709,6 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
       maximumFractionDigits: 2,
     }).format(value)
   }
-
 
   return (
     <>
@@ -865,7 +852,7 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
                                   ) : selectedService === 'cbp' ? (
                                     <div>
                                       <div className="w-full my-4">
-                                        <DeclareTable form={form}/>
+                                        <DeclareTable form={form} />
                                       </div>
                                       <Form {...form}>
                                         <form disabled={disabledForm}>
@@ -936,9 +923,9 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
                                   ) : selectedService === 'cbf' ? (
                                     <>
                                       <div className="w-full my-4">
-                                        <DeclareTable form={form}/>
+                                        <DeclareTable form={form} />
                                       </div>
-                                <Form {...form}>
+                                      {/* <Form {...form}>
                                 <form disabled={disabledForm}>
                                   <FormLabel className="font-bold">Warehouse Destination</FormLabel>
                                   <FormControl className="w-full">
@@ -1000,15 +987,15 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
                                     </Select>
                                   </FormControl>
                                 </form>
-                              </Form>
+                              </Form> */}
                                       <ShippedTo form={form} country_list={country} />
                                     </>
                                   ) : (
-                                     <>
+                                    <>
                                       <div className="w-full my-4">
-                                        <DeclareTable form={form}/>
+                                        <DeclareTable form={form} />
                                       </div>
-                                       <ShippedTo form={form} country_list={country} />
+                                      <ShippedTo form={form} country_list={country} />
                                     </>
                                   )}
                                 </FormItem>
@@ -1374,7 +1361,6 @@ if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
               ))}
           </>
         )}
-   
       </div>
     </>
   )

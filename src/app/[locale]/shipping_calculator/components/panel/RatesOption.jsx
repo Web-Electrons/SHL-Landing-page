@@ -72,7 +72,7 @@ export const RatesOption = ({
   const warehouseDestination =
     formWatch?.shipped_to?.country === 'USA'
       ? 'KM9'
-      : formWatch?.shipped_to?.country === 'CAD'
+      : formWatch?.shipped_to?.country === 'CAN'
         ? 'AAA'
         : ''
 

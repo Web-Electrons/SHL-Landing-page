@@ -1,4 +1,5 @@
 {
-    "iis.configDir": "",
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "iis.configDir": "",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

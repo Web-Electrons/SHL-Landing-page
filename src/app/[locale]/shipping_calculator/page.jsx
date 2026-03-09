@@ -83,6 +83,8 @@ const formSchema = yup.object().shape({
     zip: yup.string(),
     address: yup.string(),
     address2: yup.string(),
+    email: yup.string(),
+    phone: yup.string(),
   }),
 
   shippingType: yup.string(),
@@ -152,6 +154,8 @@ export default function Home() {
         zip: '',
         address: '',
         address2: '',
+        email: '',
+        phone: '',
       },
       shipped_from: {
         address2: '',
@@ -460,6 +464,7 @@ export default function Home() {
           zip: formData.shipped_from.zip,
           street1: formData.shipped_from.address,
           street2: formData.shipped_from.address2,
+
         },
         addressTo: {
           name: 'Shiplink',
@@ -469,6 +474,8 @@ export default function Home() {
           zip: formData.shipped_to.zip,
           street1: formData.shipped_to.address,
           street2: formData.shipped_to.address2,
+          email: formData.shipped_to.email,
+          phone: formData.shipped_to.phone,
         },
         parcels: {
           weight: formData.dimension.weight,
@@ -709,6 +716,8 @@ export default function Home() {
       maximumFractionDigits: 2,
     }).format(value)
   }
+
+  console.log("Slected Service:", selectedService);
 
   return (
     <>

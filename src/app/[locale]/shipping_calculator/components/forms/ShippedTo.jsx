@@ -119,7 +119,7 @@ export const ShippedTo = ({ form, country_list }) => {
   useEffect(() => {
     if (!pendingStateCode || province_list.length === 0) return
 
-    const province = province_list.find(p => p.province_code === pendingStateCode)
+    const province = province_list.find(p => p.province_name === pendingStateCode)
 
     if (province) {
       form.setValue('shipped_to.state', province.province_name)
@@ -236,7 +236,7 @@ export const ShippedTo = ({ form, country_list }) => {
                   form.setValue('shipped_to.country', place.country_code)
                   form.setValue('country_name', place.country)
 
-                  handleCountryChange(place.country_code, place.state_code)
+                  handleCountryChange(place.country_code, place.state)
                 }}
                 onValueChange={e => {
                   form.setValue('shipped_to.address', e)

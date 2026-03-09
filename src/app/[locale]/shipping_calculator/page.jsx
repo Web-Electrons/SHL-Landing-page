@@ -410,6 +410,15 @@ export default function Home() {
     const content = formData.package_content
     const addressTo = formData.shipped_to
 
+    if (formWatch.package_content.length === 0) {
+      toast({
+        title: 'Oops! Please check the form',
+        description: 'Declare content is required.',
+        variant: 'destructive',
+      })
+      return
+    }
+
     if (!content || (typeof content === 'string' && content.trim() === '')) {
       toast({
         title: 'Oops! Please check the form',
@@ -464,7 +473,6 @@ export default function Home() {
           zip: formData.shipped_from.zip,
           street1: formData.shipped_from.address,
           street2: formData.shipped_from.address2,
-
         },
         addressTo: {
           name: 'Shiplink',
@@ -697,6 +705,14 @@ export default function Home() {
     } else if (selectedService === 'cbp') {
       handleCBP()
     } else {
+      if (formWatch.package_content.length === 0) {
+        toast({
+          title: 'Oops! Please check the form',
+          description: 'Declare content is required.',
+          variant: 'destructive',
+        })
+        return
+      }
       setOpenSummary(false)
       const isValid = await validateForm()
       if (isValid) {
@@ -717,7 +733,7 @@ export default function Home() {
     }).format(value)
   }
 
-  console.log("Slected Service:", selectedService);
+  console.log('Slected Service:', selectedService)
 
   return (
     <>

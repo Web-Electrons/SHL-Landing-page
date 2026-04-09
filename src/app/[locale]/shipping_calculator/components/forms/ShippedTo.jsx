@@ -137,82 +137,6 @@ export const ShippedTo = ({ form, country_list }) => {
         <p className="font-bold text-xs">Ship To ...</p>
       )}
 
-      <div className="w-full grid grid-cols-2 gap-2 mt-3">
-        <FormField
-          className="w-full space-y-0"
-          name="shipped_to.email"
-          control={form.control}
-          render={({ field }) => (
-            <>
-              <FormItem className="w-full space-y-0 flex flex-col gap-1">
-                <FormLabel>{`Email`}</FormLabel>
-                <FormControl>
-                  <Input
-                    size="xs"
-                    id="name"
-                    type="text"
-                    className="  px-2.5 py-3 bg-white   justify-start items-center gap-2.5 inline-flex  text-xs font-normal font-['Poppins'] leading-tight outline-none"
-                    placeholder="Email"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage className={'text-xs'} />
-              </FormItem>
-            </>
-          )}
-        />
-        <FormField
-          name="shipped_to.phone"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem className="w-full space-y-0 flex flex-col gap-1">
-              <FormLabel className="text-xs">Phone Number</FormLabel>
-              <FormControl>
-                {/* Wrapper border custom */}
-                <div className="border border-zinc-300 rounded flex items-center w-full h-[30px]">
-                  <PhoneInput
-                    country="us" // default country
-                    value={field.value}
-                    onChange={phone => field.onChange(phone)} // biarkan library handle '+'
-                    enableSearch
-                    disableDropdown={false}
-                    inputProps={{
-                      name: 'phone',
-                      required: true,
-                      autoFocus: false,
-                      className:
-                        'flex-1 h-9 px-2 text-xs bg-transparent placeholder:text-zinc-400 focus:outline-none',
-                      placeholder: '+1 123 456 7890',
-                    }}
-                    countrySelectorStyleProps={{
-                      style: {
-                        background: 'transparent',
-                        border: 'none',
-                        boxShadow: 'none',
-                        outline: 'none',
-                        padding: 0,
-                        margin: 0,
-                      },
-                      buttonStyle: {
-                        background: 'transparent',
-                        border: 'none',
-                        boxShadow: 'none',
-                        outline: 'none',
-                        padding: 0,
-                        margin: 0,
-                      },
-                      dropdownStyleProps: {
-                        className: 'phone-dropdown',
-                      },
-                    }}
-                  />
-                </div>
-              </FormControl>
-              <FormMessage className="text-xs text-red-500" />
-            </FormItem>
-          )}
-        />
-      </div>
       <FormField
         control={form.control}
         name="shipped_to.address"
@@ -222,7 +146,7 @@ export const ShippedTo = ({ form, country_list }) => {
             <FormLabel className="">Address</FormLabel>
             <FormControl>
               <NewAutocompleteInput
-                className="px-2.5 py-3 bg-white  justify-start items-center gap-2.5 inline-flex  text-xs font-normal font-['Poppins'] leading-tight outline-none"
+                className="px-2.5 py-3 bg-white  justify-start items-center gap-2.5 inline-flex  text-xs font-normal font-['Poppins'] leading-tight outline-none h-[35px]"
                 placeholder={`Address`}
                 autoComplete="off"
                 autoFill="off"

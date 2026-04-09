@@ -6,17 +6,26 @@ const agent = new https.Agent({
 })
 export async function POST(request) {
   try {
-    const { warehouse_id, warehouse_id_destination, addressFrom, addressTo, parcels, package_content } = await request.json()
+    const {
+      warehouse_id,
+      warehouse_id_destination,
+      addressFrom,
+      addressTo,
+      parcels,
+      total_package_value,
+      currency_package_value,
+    } = await request.json()
 
     const response = await axios.post(
       `${process.env.API_URL}/Carrier/ShippingCalculation`,
       {
         warehouse_id: warehouse_id,
         warehouse_id_destination: warehouse_id_destination,
-        package_content: package_content,
         addressFrom: addressFrom,
         addressTo: addressTo,
         parcels: parcels,
+        total_package_value: total_package_value,
+        currency_package_value: currency_package_value,
       },
       {
         httpsAgent: agent,

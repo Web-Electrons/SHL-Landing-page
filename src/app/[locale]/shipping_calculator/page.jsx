@@ -106,6 +106,8 @@ const formSchema = yup.object().shape({
       subtotal: yup.number(),
     })
   ),
+  total_package_value: yup.number(),
+  currency_package_value: yup.string(),
 })
 
 export default function Home() {
@@ -154,8 +156,6 @@ export default function Home() {
         zip: '',
         address: '',
         address2: '',
-        email: '',
-        phone: '',
       },
       shipped_from: {
         address2: '',
@@ -165,6 +165,8 @@ export default function Home() {
       warehouse_destination_country: '',
       mailboxSelected: 'VRN',
       package_content: [],
+      currency_package_value: 'CAD',
+      total_package_value: 0,
     },
   })
 
@@ -407,39 +409,16 @@ export default function Home() {
   }
 
   const handleSave = async formData => {
-    const content = formData.package_content
     const addressTo = formData.shipped_to
 
-    if (formWatch.package_content.length === 0) {
+    if (formData.total_package_value <= 0) {
       toast({
         title: 'Oops! Please check the form',
-        description: 'Declare content is required.',
+        description: 'Please input total declare value.',
         variant: 'destructive',
       })
       return
     }
-
-    if (!content || (typeof content === 'string' && content.trim() === '')) {
-      toast({
-        title: 'Oops! Please check the form',
-        description: 'Declare content is required.',
-        variant: 'destructive',
-      })
-      return
-    }
-
-    // {
-    //   if (selectedService?.toLowerCase() === 'cbf') {
-    //     if (!warehouseDestination_id || warehouseDestination_id.trim() === '') {
-    //       toast({
-    //         title: 'Oops! Please check the form',
-    //         description: 'Warehouse destination is required.',
-    //         variant: 'destructive',
-    //       })
-    //       return
-    //     }
-    //   }
-    // }
 
     const notRequired = ['name', 'address2']
     const emptyFields = Object.entries(addressTo).filter(
@@ -482,8 +461,6 @@ export default function Home() {
           zip: formData.shipped_to.zip,
           street1: formData.shipped_to.address,
           street2: formData.shipped_to.address2,
-          email: formData.shipped_to.email,
-          phone: formData.shipped_to.phone,
         },
         parcels: {
           weight: formData.dimension.weight,
@@ -493,18 +470,8 @@ export default function Home() {
           height: formData.dimension.height,
           distance_unit: formData.dimension.dimension_unit,
         },
-        package_content: formData.package_content.map(item => ({
-          id: item.id || '',
-          tracking_id: item.tracking_id || '',
-          qty: item.qty,
-          value: item.value,
-          desc: item.desc,
-          hs_desc: item.hs_desc,
-          hs_code: item.hs_code,
-          made_in: item.made_in,
-          currency: item.currency || 'USD',
-          subtotal: item.subtotal ?? 0,
-        })),
+        total_package_value: Number(formData.total_package_value) || 0,
+        currency_package_value: formData.currency_package_value,
       })
 
       if (response.data.status === true) {
@@ -578,6 +545,8 @@ export default function Home() {
   }
 
   const formWatch = form.watch()
+
+  console.log('FORM WATCH', formWatch)
 
   const handleHFP = async () => {
     if (
@@ -657,18 +626,8 @@ export default function Home() {
           height: formWatch.dimension.height,
           distance_unit: formWatch.dimension.dimension_unit,
         },
-        package_content: formWatch.package_content.map(item => ({
-          id: item.id || '',
-          tracking_id: item.tracking_id || '',
-          qty: item.qty,
-          value: item.value,
-          desc: item.desc,
-          hs_desc: item.hs_desc,
-          hs_code: item.hs_code,
-          made_in: item.made_in,
-          currency: item.currency || 'USD',
-          subtotal: item.subtotal ?? 0,
-        })),
+        currency_package_value: formWatch.currency_package_value,
+        total_package_value: Number(formWatch.total_package_value) || 0,
       })
 
       if (response.data.status === true) {
@@ -705,10 +664,11 @@ export default function Home() {
     } else if (selectedService === 'cbp') {
       handleCBP()
     } else {
-      if (formWatch.package_content.length === 0) {
+      console.log('FORM WATCH', formWatch.total_package_value)
+      if (formWatch.total_package_value <= 0) {
         toast({
           title: 'Oops! Please check the form',
-          description: 'Declare content is required.',
+          description: 'Please input total declare value.',
           variant: 'destructive',
         })
         return
@@ -876,7 +836,7 @@ export default function Home() {
                                     <></>
                                   ) : selectedService === 'cbp' ? (
                                     <div>
-                                      <div className="w-full my-4">
+                                      <div className="w-full my-4 grid grid-cols-3">
                                         <DeclareTable form={form} />
                                       </div>
                                       <Form {...form}>
@@ -947,7 +907,7 @@ export default function Home() {
                                     </div>
                                   ) : selectedService === 'cbf' ? (
                                     <>
-                                      <div className="w-full my-4">
+                                      <div className="w-full my-4 grid grid-cols-3">
                                         <DeclareTable form={form} />
                                       </div>
                                       {/* <Form {...form}>
@@ -1017,7 +977,7 @@ export default function Home() {
                                     </>
                                   ) : (
                                     <>
-                                      <div className="w-full my-4">
+                                      <div className="w-full my-4 grid grid-cols-3">
                                         <DeclareTable form={form} />
                                       </div>
                                       <ShippedTo form={form} country_list={country} />
@@ -1117,7 +1077,7 @@ export default function Home() {
                             </div>
                           ) : (
                             <>
-                              <div className="w-full my-4">
+                              <div className="w-full my-4 grid grid-cols-3">
                                 <DeclareTable />
                               </div>
 

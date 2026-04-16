@@ -65,20 +65,21 @@ export default function RootLayout({ children, params: { locale } }) {
 
     return (
         <NextIntlClientProvider locale={locale} messages={messages}>
-            <TenstackProvider />
-            <main
-                className={cn(
-                    "min-h-screen font-sans antialiased",
-                    roboto.variable
-                )}
-            >
-                <div className={styles.mains}>
-                    <HomeNavbar />
-                    {children}
-                    <HomeFooter />
-                </div>
-            </main>
-            <Toaster />
+            <TenstackProvider >
+                <main
+                    className={cn(
+                        "min-h-screen font-sans antialiased",
+                        roboto.variable
+                    )}
+                >
+                    <div className={styles.mains}>
+                        <HomeNavbar />
+                        {children}
+                        <HomeFooter />
+                    </div>
+                </main>
+                <Toaster />
+            </TenstackProvider>
         </NextIntlClientProvider>
     )
 }

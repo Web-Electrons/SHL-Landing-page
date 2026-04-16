@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from 'react'
 import {
-  Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-  SelectGroup,
+  SelectValue
 } from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
+import { useEffect, useState } from 'react'
 
 import axios from 'axios'
-import { PhoneInput } from 'react-international-phone'
 import 'react-international-phone/style.css'
 
-import './style.css'
 import NewAutocompleteInput from '@/components/new-autocomplete'
+import { fetchCountryList } from '@/features/shipping_calculator/services/shipping.api'
+import { useQuery } from '@tanstack/react-query'
+import './style.css'
 
-export const ShippedTo = ({ form, country_list }) => {
+export const ShippedTo = ({ form }) => {
   const [selectedCountry, setSelectedCountry] = useState({
     country_code: '',
     country_name: '',
   })
+
+  const { data: country_list } = useQuery({
+    queryKey: ['countryList'],
+    queryFn: fetchCountryList
+  })
+
 
   const handleSelectCountry = (country_code, country_name) => {
     form.setValue('country_name', country_name)

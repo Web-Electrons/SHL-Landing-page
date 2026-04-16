@@ -1,26 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Package, Truck, Warehouse, ChevronRight, ArrowRight } from 'lucide-react'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Skeleton } from '@/components/ui/skeleton'
-import { CourrierCard } from './CourrierCard'
-import { Summary } from './Summary'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/tableDashboard'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { toast } from '@/components/ui/use-toast'
-import { NextResponse } from 'next/server'
-import axios from 'axios'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { ArrowRight, Package, Truck, Warehouse } from 'lucide-react'
 
 export const ServiceOptions = ({
   rates = [],

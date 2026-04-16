@@ -17,7 +17,7 @@ export const fetchWarehouseList = async (): Promise<Warehouse[]> => {
   const response = await axios.post<{ warehouse: Warehouse[] }>("/api/warehouse/list", {
     keyword: "",
     page: 1,
-    limit: 10,
+    limit: 999,
     index: 0,
   });
   return response.data.warehouse;

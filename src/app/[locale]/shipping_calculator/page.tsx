@@ -51,6 +51,8 @@ export default function ShippingCalculator() {
     resolver: yupResolver(shippingFormSchema) as any,
     defaultValues: SHIPPING_FORM_DEFAULTS,
     mode: "all",
+    reValidateMode: "onChange",
+    shouldFocusError: true,
   });
 
   const {

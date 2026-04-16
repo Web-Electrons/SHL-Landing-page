@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { formatCurrency, formatDecimal } from '@/lib/utils';
-import React from 'react'
 
 export const CourrierCard = ({ data, isSelected, onSelect }) => {
   return (

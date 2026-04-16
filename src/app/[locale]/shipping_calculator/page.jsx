@@ -1,61 +1,47 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import React, { use, useCallback, useEffect, useState } from 'react'
-import styles from './styles.module.scss'
-import { ShippingLabels } from '@/components/home/ShippingLabels'
-import { Input } from '@/components/ui/input'
-import { useForm, useFieldArray } from 'react-hook-form'
+import Loading from '@/app/loading'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormLabel
 } from '@/components/ui/form'
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
-  SheetTitle,
-  SheetTrigger,
+  SheetTitle
 } from '@/components/ui/sheet'
-import * as yup from 'yup'
-import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ShiptoForm } from './components/shiptoForm'
+import { useToast } from '@/components/ui/use-toast'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { RatesPanel } from './components/RatesPanel'
+import axios from 'axios'
+import { useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useMediaQuery } from 'react-responsive'
+import * as yup from 'yup'
+import { ServiceTable } from './components/ServiceTable'
+import DeclareTable from './components/forms/DeclareTable'
 import { Dimension } from './components/forms/Dimension'
 import { ShippedTo } from './components/forms/ShippedTo'
-import { useToast } from '@/components/ui/use-toast'
-import axios from 'axios'
-import { ServiceOptions } from './components/panel/ServiceOptions'
-import { Summary } from './components/panel/Summary'
 import { RatesOption } from './components/panel/RatesOption'
+import { ServiceOptions } from './components/panel/ServiceOptions'
 import { SummaryPanel } from './components/panel/SummaryPanel'
-import { ChevronRight } from 'lucide-react'
-import { Separator } from '@/components/ui/separator'
-import { ServiceTable } from './components/ServiceTable'
-import { useMediaQuery } from 'react-responsive'
-import { Skeleton } from '@/components/ui/skeleton'
-import Loading from '@/app/loading'
-import { set } from 'lodash'
-import DeclareTable from './components/forms/DeclareTable'
-
+import { ShiptoForm } from './components/shiptoForm'
+import styles from './styles.module.scss'
 const formSchema = yup.object().shape({
   dimension: yup.object().shape({
     length: yup.number().required('Package length is required'),
@@ -858,12 +844,12 @@ export default function Home() {
                                                 >
                                                   <SelectValue placeholder="Select Warehouse Destination">
                                                     {loadingWarehouse &&
-                                                    selectedDataDestination === undefined ? (
+                                                      selectedDataDestination === undefined ? (
                                                       <Skeleton className="w-full h-[20px]" />
                                                     ) : (
                                                       <div className="flex flex-row gap-2 items-center">
                                                         {selectedDataDestination() ===
-                                                        'Select Warehouse Destination' ? (
+                                                          'Select Warehouse Destination' ? (
                                                           <></>
                                                         ) : (
                                                           <img
@@ -1028,12 +1014,12 @@ export default function Home() {
                                         >
                                           <SelectValue placeholder="Select Warehouse Destination">
                                             {loadingWarehouse &&
-                                            selectedDataDestination === undefined ? (
+                                              selectedDataDestination === undefined ? (
                                               <Skeleton className="w-full h-[20px]" />
                                             ) : (
                                               <div className="flex flex-row gap-2 items-center">
                                                 {selectedDataDestination() ===
-                                                'Select Warehouse Destination' ? (
+                                                  'Select Warehouse Destination' ? (
                                                   <></>
                                                 ) : (
                                                   <img
@@ -1098,12 +1084,12 @@ export default function Home() {
                                         >
                                           <SelectValue placeholder="Select Warehouse Destination">
                                             {loadingWarehouse &&
-                                            selectedDataDestination === undefined ? (
+                                              selectedDataDestination === undefined ? (
                                               <Skeleton className="w-full h-[20px]" />
                                             ) : (
                                               <div className="flex flex-row gap-2 items-center">
                                                 {selectedDataDestination() ===
-                                                'Select Warehouse Destination' ? (
+                                                  'Select Warehouse Destination' ? (
                                                   <></>
                                                 ) : (
                                                   <img
@@ -1210,7 +1196,7 @@ export default function Home() {
                   <>
                     {openServicesOption &&
                       (selectedService?.toLowerCase() === 'hfp' ||
-                      selectedService?.toLowerCase() === 'cbp' ? (
+                        selectedService?.toLowerCase() === 'cbp' ? (
                         <SummaryPanel
                           loading_rates={loading_rates}
                           rates={courierRates}
@@ -1288,7 +1274,7 @@ export default function Home() {
 
             {openServicesOption &&
               (selectedService?.toLowerCase() === 'hfp' ||
-              selectedService?.toLowerCase() === 'cbp' ? (
+                selectedService?.toLowerCase() === 'cbp' ? (
                 <div className={`${styles.service}`}>
                   <SummaryPanel
                     loading_rates={loading_rates}

@@ -1,16 +1,16 @@
-import React from "react"
 import styles from './styles.module.scss'
 // import { HomeNavbar } from "@/src/components/home/navigation/HomeNavbar"
-import { HomeNavbar } from "@/components/home/navigation/HomeNavbar"
 import { HomeFooter } from "@/components/home/navigation/HomeFooter"
-import { Roboto, Poppins } from 'next/font/google'
-import './globals.scss'
-import { cn } from '@/lib/utils'
+import { HomeNavbar } from "@/components/home/navigation/HomeNavbar"
 import { Toaster } from "@/components/ui/toaster"
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import images from '../../public/images/shipLink_preview.png'
+import { cn } from '@/lib/utils'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { Poppins, Roboto } from 'next/font/google'
+import TenstackProvider from "../../../utils/provider/tenstackQuery.provider"
 import smallImages from '../../public/images/favicon.ico'
+import images from '../../public/images/shipLink_preview.png'
+import './globals.scss'
 export const poppins = Poppins({
     subsets: ['latin'],
     weight: ['100', '300', '400', '500', '600', '700', '900'],
@@ -65,6 +65,7 @@ export default function RootLayout({ children, params: { locale } }) {
 
     return (
         <NextIntlClientProvider locale={locale} messages={messages}>
+            <TenstackProvider />
             <main
                 className={cn(
                     "min-h-screen font-sans antialiased",

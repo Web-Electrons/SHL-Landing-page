@@ -1,19 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import React, { useEffect, useState } from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/tableDashboard'
+import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import {
     Select,
     SelectContent,
-    SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
-    SelectValue,
+    SelectValue
 } from '@/components/ui/select'
-import axios from 'axios'
-import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/tableDashboard'
 export const ServiceTable = ({
     serviceList,
     otherService,
@@ -197,7 +193,6 @@ export const ServiceTable = ({
                                 </TableRow>
                             ) : otherService?.length > 0 ? (
                                 otherService?.map((item, index) => (
-                                    console.log("CURRENCY", item),
                                     <TableRow
                                         className="border-none"
                                         key={index}>

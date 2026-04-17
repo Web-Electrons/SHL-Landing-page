@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Card, CardContent } from '@/components/ui/card'
-import { Package, Truck, Warehouse } from 'lucide-react'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
-import { CourrierCard } from './CourrierCard'
-import { Summary } from './Summary'
 import { toast } from '@/components/ui/use-toast'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { CourrierCard } from './CourrierCard'
 
 export const RatesOption = ({
   rates = [],
@@ -159,6 +153,7 @@ export const RatesOption = ({
           zip: formWatch.shipped_to.zip,
           street1: formWatch.shipped_to.address,
           street2: formWatch.shipped_to.address2,
+          phone: ""
         },
       })
 

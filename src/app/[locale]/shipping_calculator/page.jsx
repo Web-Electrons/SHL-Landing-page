@@ -1,60 +1,47 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import React, { use, useCallback, useEffect, useState } from 'react'
-import styles from './styles.module.scss'
-import { ShippingLabels } from '@/components/home/ShippingLabels'
-import { Input } from '@/components/ui/input'
-import { useForm, useFieldArray } from 'react-hook-form'
+import Loading from '@/app/loading'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormLabel
 } from '@/components/ui/form'
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
-  SheetTitle,
-  SheetTrigger,
+  SheetTitle
 } from '@/components/ui/sheet'
-import * as yup from 'yup'
-import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ShiptoForm } from './components/shiptoForm'
+import { useToast } from '@/components/ui/use-toast'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { RatesPanel } from './components/RatesPanel'
+import axios from 'axios'
+import { useCallback, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useMediaQuery } from 'react-responsive'
+import * as yup from 'yup'
+import { ServiceTable } from './components/ServiceTable'
+import DeclareTable from './components/forms/DeclareTable'
 import { Dimension } from './components/forms/Dimension'
 import { ShippedTo } from './components/forms/ShippedTo'
-import { useToast } from '@/components/ui/use-toast'
-import axios from 'axios'
-import { ServiceOptions } from './components/panel/ServiceOptions'
-import { Summary } from './components/panel/Summary'
 import { RatesOption } from './components/panel/RatesOption'
+import { ServiceOptions } from './components/panel/ServiceOptions'
 import { SummaryPanel } from './components/panel/SummaryPanel'
-import { ChevronRight } from 'lucide-react'
-import { Separator } from '@/components/ui/separator'
-import { ServiceTable } from './components/ServiceTable'
-import { useMediaQuery } from 'react-responsive'
-import { Skeleton } from '@/components/ui/skeleton'
-import Loading from '@/app/loading'
-import { set } from 'lodash'
-import DeclareTable from './components/forms/DeclareTable'
+import { ShiptoForm } from './components/shiptoForm'
+import styles from './styles.module.scss'
 
 const formSchema = yup.object().shape({
   dimension: yup.object().shape({
@@ -115,6 +102,12 @@ export default function Home() {
 
   const { toast } = useToast()
   const [warehouse, setWarehouse] = useState([])
+  const [selectedWarehouseFrom, setSelectedWarehouseFrom] = useState(null)
+  const isServiceDisabled = (setting) => {
+    console.log('setting', setting)
+    if (!setting) return false
+    return setting.toLowerCase() === 'disable'
+  }
   const [courierRates, setCourierRates] = useState([])
   const [country, setCountry] = useState([])
   const [disabledForm, setDisabledForm] = useState(false)
@@ -203,11 +196,14 @@ export default function Home() {
         item => item.warehouse_code !== 'AAA' && item.warehouse_code !== 'BBB'
       )
       const getFirstWarehouse = filteredWarehouse[0]
-      const intialMNYWarehouse = filteredWarehouse.find(
-        item => item.warehouse_code === 'VRN' || 'CDM' || getFirstWarehouse?.warehouse_code
-      )
+      const preferredCodes = ['SHN', 'VRN']
+      const intialMNYWarehouse =
+        filteredWarehouse.find(item =>
+          preferredCodes.includes(item.warehouse_code)
+        ) || getFirstWarehouse
       setWarehouse(filteredWarehouse)
       handleAssingData(intialMNYWarehouse)
+      setSelectedWarehouseFrom(intialMNYWarehouse)
       setWarehouseId(intialMNYWarehouse?.warehouse_id)
       setWarehouseCountry(intialMNYWarehouse?.country_code)
 
@@ -231,7 +227,7 @@ export default function Home() {
       // Panggil kedua API
       const [serviceListResponse, warehouseServiceResponse] = await Promise.all([
         axios.get(`/api/Service_list`),
-        axios.post(`/api/warehouse/service_list`, { warehouse_id: warehouse_id }),
+        axios.post(`/api/public/WarehouseServices_list`, { warehouse_id: warehouse_id }),
       ])
 
       // console.log("🚀 ~ getServicesList ~ response:", serviceListResponse);
@@ -321,7 +317,7 @@ export default function Home() {
 
   const fetchServiceList = async warehouse_id => {
     try {
-      const response = await axios.post('/api/warehouse/service_list', {
+      const response = await axios.post('/api/public/WarehouseServices_list', {
         warehouse_id: warehouse_id,
       })
       const data = response.data.data
@@ -396,6 +392,7 @@ export default function Home() {
 
   const handleValueChange = value => {
     const data = warehouse.find(item => item.warehouse_code === value)
+    setSelectedWarehouseFrom(data)
     handleAssingData(data)
     setWarehouseId(data?.warehouse_id)
   }
@@ -461,6 +458,7 @@ export default function Home() {
           zip: formData.shipped_to.zip,
           street1: formData.shipped_to.address,
           street2: formData.shipped_to.address2,
+          phone: '+12023432343'
         },
         parcels: {
           weight: formData.dimension.weight,
@@ -546,7 +544,6 @@ export default function Home() {
 
   const formWatch = form.watch()
 
-  console.log('FORM WATCH', formWatch)
 
   const handleHFP = async () => {
     if (
@@ -692,8 +689,6 @@ export default function Home() {
       maximumFractionDigits: 2,
     }).format(value)
   }
-
-  console.log('Slected Service:', selectedService)
 
   return (
     <>
@@ -858,12 +853,12 @@ export default function Home() {
                                                 >
                                                   <SelectValue placeholder="Select Warehouse Destination">
                                                     {loadingWarehouse &&
-                                                    selectedDataDestination === undefined ? (
+                                                      selectedDataDestination === undefined ? (
                                                       <Skeleton className="w-full h-[20px]" />
                                                     ) : (
                                                       <div className="flex flex-row gap-2 items-center">
                                                         {selectedDataDestination() ===
-                                                        'Select Warehouse Destination' ? (
+                                                          'Select Warehouse Destination' ? (
                                                           <></>
                                                         ) : (
                                                           <img
@@ -1028,12 +1023,12 @@ export default function Home() {
                                         >
                                           <SelectValue placeholder="Select Warehouse Destination">
                                             {loadingWarehouse &&
-                                            selectedDataDestination === undefined ? (
+                                              selectedDataDestination === undefined ? (
                                               <Skeleton className="w-full h-[20px]" />
                                             ) : (
                                               <div className="flex flex-row gap-2 items-center">
                                                 {selectedDataDestination() ===
-                                                'Select Warehouse Destination' ? (
+                                                  'Select Warehouse Destination' ? (
                                                   <></>
                                                 ) : (
                                                   <img
@@ -1098,12 +1093,12 @@ export default function Home() {
                                         >
                                           <SelectValue placeholder="Select Warehouse Destination">
                                             {loadingWarehouse &&
-                                            selectedDataDestination === undefined ? (
+                                              selectedDataDestination === undefined ? (
                                               <Skeleton className="w-full h-[20px]" />
                                             ) : (
                                               <div className="flex flex-row gap-2 items-center">
                                                 {selectedDataDestination() ===
-                                                'Select Warehouse Destination' ? (
+                                                  'Select Warehouse Destination' ? (
                                                   <></>
                                                 ) : (
                                                   <img
@@ -1199,6 +1194,11 @@ export default function Home() {
                     priceList={serviceList}
                     otherService={otherService}
                     warehouse_id={warehouse_id}
+                    disbaledService={isServiceDisabled(
+                      selectedWarehouseFrom ?
+                        selectedWarehouseFrom?.warehouse_bullet_setting
+                        : false
+                    )}
                   />
                 </SheetContent>
               </Sheet>
@@ -1210,7 +1210,7 @@ export default function Home() {
                   <>
                     {openServicesOption &&
                       (selectedService?.toLowerCase() === 'hfp' ||
-                      selectedService?.toLowerCase() === 'cbp' ? (
+                        selectedService?.toLowerCase() === 'cbp' ? (
                         <SummaryPanel
                           loading_rates={loading_rates}
                           rates={courierRates}
@@ -1283,12 +1283,17 @@ export default function Home() {
                 priceList={serviceList}
                 otherService={otherService}
                 warehouse_id={warehouse_id}
+                disbaledService={isServiceDisabled(
+                  selectedWarehouseFrom ?
+                    selectedWarehouseFrom?.warehouse_bullet_setting
+                    : false
+                )}
               />
             </div>
 
             {openServicesOption &&
               (selectedService?.toLowerCase() === 'hfp' ||
-              selectedService?.toLowerCase() === 'cbp' ? (
+                selectedService?.toLowerCase() === 'cbp' ? (
                 <div className={`${styles.service}`}>
                   <SummaryPanel
                     loading_rates={loading_rates}

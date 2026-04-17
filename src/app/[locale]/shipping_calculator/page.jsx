@@ -45,14 +45,38 @@ import styles from './styles.module.scss'
 
 const formSchema = yup.object().shape({
   dimension: yup.object().shape({
-    length: yup.number().required('Package length is required'),
-    width: yup.number().required('Pacakge Width is required'),
-    height: yup.number().required('Package Height is required'),
-    weight: yup.number().required('Package Weight is required'),
-    weight_unit: yup.string().required('Weight unit is required'),
-    dimension_unit: yup.string().required('Dimension unit is required'),
-  }),
+    length: yup
+      .number()
+      .typeError('Length must be a number')
+      .required('Package length is required')
+      .min(1, 'Length must be greater than 0'),
 
+    width: yup
+      .number()
+      .typeError('Width must be a number')
+      .required('Package width is required')
+      .min(1, 'Width must be greater than 0'),
+
+    height: yup
+      .number()
+      .typeError('Height must be a number')
+      .required('Package height is required')
+      .min(1, 'Height must be greater than 0'),
+
+    weight: yup
+      .number()
+      .typeError('Weight must be a number')
+      .required('Package weight is required')
+      .min(0.01, 'Weight must be greater than 0'),
+
+    weight_unit: yup
+      .string()
+      .required('Weight unit is required'),
+
+    dimension_unit: yup
+      .string()
+      .required('Dimension unit is required'),
+  }),
   shipped_from: yup.object().shape({
     country: yup.string(),
     state: yup.string(),
@@ -61,7 +85,6 @@ const formSchema = yup.object().shape({
     address: yup.string(),
     warehouse_code: yup.string(),
   }),
-
   shipped_to: yup.object().shape({
     name: yup.string(),
     country: yup.string(),
@@ -73,7 +96,6 @@ const formSchema = yup.object().shape({
     email: yup.string(),
     phone: yup.string(),
   }),
-
   shippingType: yup.string(),
   warehouse_destination: yup.string(),
   warehouse_destination_country: yup.string(),
@@ -161,6 +183,7 @@ export default function Home() {
       currency_package_value: 'CAD',
       total_package_value: 0,
     },
+    mode: 'onChange',
   })
 
   useEffect(() => {
@@ -245,6 +268,7 @@ export default function Home() {
         'Package Reception CA',
         'Free Membership',
         'Cancel Consolidate',
+
       ]
 
       const packageServices = [
@@ -265,6 +289,8 @@ export default function Home() {
           'We import your package and forward it domestically to your final destination with the carrier you select',
         'Forward Package':
           'Internationally directly to the address of your choice with the carrier you select',
+        'Package Forward':
+          'Internationally directly to the address of your choice with the carrier you select',
         Consolidate: 'Combine multiple packages into one package.',
         'Request More Picture': 'Request additional photos of your package.',
         'Package Reception US': 'Receive your package at our US warehouse.',
@@ -273,6 +299,11 @@ export default function Home() {
         'Brokerage fee - CA import': 'Brokerage service for package with value over $20 CAD',
         'Brokerage fee - US import': 'Brokerage service for package with value over $800 USD.',
         'Free Membership': 'Enjoy free membership benefits.',
+        'Request Picture': 'Request additional photos of your package.',
+        'Pallet Reception US': 'Receive your Pallet at our US warehouse.',
+        'Pallet Forward': 'Internationally directly to the address of your choice with the carrier you select',
+        'Pallet HFP': 'Pick up your Pallet in person from a warehouse location.',
+        'Pallet Reception CA': 'Receive your Pallet at our CA warehouse.',
       }
 
       // Filter data main service
@@ -458,7 +489,7 @@ export default function Home() {
           zip: formData.shipped_to.zip,
           street1: formData.shipped_to.address,
           street2: formData.shipped_to.address2,
-          phone: '+12023432343'
+          phone: '+12345678900'
         },
         parcels: {
           weight: formData.dimension.weight,
@@ -496,32 +527,68 @@ export default function Home() {
       set_loading_rates(false)
     }
   }
+  const getErrorMessages = (errors, parentKey = '') => {
+    let messages = []
+
+    for (const key in errors) {
+      const error = errors[key]
+      const fieldName = parentKey ? `${parentKey}.${key}` : key
+
+      if (error?.message) {
+        messages.push(`${fieldName}: ${error.message}`)
+      }
+
+      if (typeof error === 'object' && !error.message) {
+        messages = messages.concat(getErrorMessages(error, fieldName))
+      }
+    }
+
+    return messages
+  }
+
+  // const validateForm = async () => {
+  //   const isValid = await form.trigger()
+
+  //   if (!isValid) {
+  //     tableMode && setOpen(true)
+  //     // Ambil semua field yang error dari form state
+  //     const errors = form.formState.errors
+  //     console.log('🚀 ~ validateForm ~ errors:', errors)
+
+  //     // Mapping pesan error yang lebih friendly
+  //     const errorMessages = Object.values(errors).map(fieldError => {
+  //       console.log('🚀 ~ errorMessages ~ fieldError.message:', fieldError.message)
+  //       if (fieldError.message) return fieldError.message
+  //       return 'Some required fields are missing.'
+  //     })
+
+  //     // Gabungkan semua pesan error
+  //     const friendlyErrorMessage = errorMessages.join(', ')
+
+  //     console.log('🚀 ~ validateForm ~ errorFields:', errors)
+
+  //     toast({
+  //       title: 'Oops! Please check the form',
+  //       description: 'Some required fields are missing.',
+  //       status: 'error',
+  //     })
+
+  //     return false
+  //   }
 
   const validateForm = async () => {
     const isValid = await form.trigger()
 
     if (!isValid) {
-      tableMode && setOpen(true)
-      // Ambil semua field yang error dari form state
+      if (tableMode) setOpen(true)
+
       const errors = form.formState.errors
-      console.log('🚀 ~ validateForm ~ errors:', errors)
-
-      // Mapping pesan error yang lebih friendly
-      const errorMessages = Object.values(errors).map(fieldError => {
-        console.log('🚀 ~ errorMessages ~ fieldError.message:', fieldError.message)
-        if (fieldError.message) return fieldError.message
-        return 'Some required fields are missing.'
-      })
-
-      // Gabungkan semua pesan error
-      const friendlyErrorMessage = errorMessages.join(', ')
-
-      console.log('🚀 ~ validateForm ~ errorFields:', errors)
+      const messages = getErrorMessages(errors)
 
       toast({
         title: 'Oops! Please check the form',
-        description: 'Some required fields are missing.',
-        status: 'error',
+        description: messages[0] || 'Some required fields are missing.',
+        variant: 'destructive',
       })
 
       return false
@@ -529,9 +596,17 @@ export default function Home() {
 
     return true
   }
+  //   return true
+  // }
 
-  const triggerSave = () => {
-    // validateForm()
+  // const triggerSave = () => {
+  //   // validateForm()
+  //   handleSave(form.getValues())
+  // }
+  const triggerSave = async () => {
+    const isValid = await validateForm()
+    if (!isValid) return
+
     handleSave(form.getValues())
   }
 
@@ -655,7 +730,51 @@ export default function Home() {
     }
   }
 
+  // const handleContinue = async () => {
+  //   const isValid = await validateForm()
+  //   if (!isValid) return
+
+  //   if (selectedService === 'hfp') {
+  //     return handleHFP()
+  //   }
+
+  //   if (selectedService === 'cbp') {
+  //     return handleCBP()
+  //   }
+
+  //   if (formWatch.total_package_value <= 0) {
+  //     toast({
+  //       title: 'Oops! Please check the form',
+  //       description: 'Please input total declare value.',
+  //       variant: 'destructive',
+  //     })
+  //     return
+  //   }
+  //   if (formWatch.shipped_to.country === '') {
+  //     toast({
+  //       title: 'Oops! Please check the form',
+  //       description: 'Please input total COuntry value.',
+  //       variant: 'destructive',
+  //     })
+  //     return
+  //   }
+
+  //   setOpenSummary(false)
+  //   setDisabledForm(true)
+  //   setShowRates(false)
+
+  //   await triggerSave()
+  //   setOpenServicesOption(true)
+  // }
   const handleContinue = async () => {
+    if (formWatch.dimension.height === 0 || formWatch.dimension.width === 0 || formWatch.dimension.length === 0 || formWatch.dimension.weight === 0) {
+      toast({
+        title: 'Oops! Please check the form',
+        description: 'Package dimensions fields are missing.',
+        variant: 'destructive',
+      })
+      return
+    }
     if (selectedService === 'hfp') {
       handleHFP()
     } else if (selectedService === 'cbp') {
@@ -666,6 +785,14 @@ export default function Home() {
         toast({
           title: 'Oops! Please check the form',
           description: 'Please input total declare value.',
+          variant: 'destructive',
+        })
+        return
+      }
+      if (formWatch.shipped_to.country === '' || formWatch.shipped_to.state === '' || formWatch.shipped_to.city === '' || formWatch.shipped_to.zip === '' || formWatch.shipped_to.address === '') {
+        toast({
+          title: 'Oops! Please check the form',
+          description: 'Please input shipping address.',
           variant: 'destructive',
         })
         return

@@ -195,7 +195,9 @@ export const ServiceTable = ({
                                     <TableRow
                                         className="border-none"
                                         key={index}>
-                                        <TableCell className="font-medium text-xs border-x-0">{item.service}</TableCell>
+                                        <TableCell className="font-medium text-xs border-x-0">
+                                            {(item?.service === "Cross Border Pickup" || item?.service === "Cross Border Forward") ? item?.display_service : item.service}
+                                        </TableCell>
                                         <TableCell className="text-xs border-x-0">
                                             {item.description}
                                         </TableCell>

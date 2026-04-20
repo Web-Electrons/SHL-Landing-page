@@ -245,122 +245,22 @@ export default function Home() {
   }, [])
 
   const [loadingService, setLoadingService] = useState(false)
-  // const getServicesList = async () => {
-  //   setLoadingService(true)
 
-  //   try {
-  //     const [serviceListResponse, warehouseServiceResponse] = await Promise.all([
-  //       axios.get(`/api/Service_list`),
-  //       axios.post(`/api/public/WarehouseServices_list`, { warehouse_id }),
-  //     ])
+  const currencyLabel = {
+    USD: 'US',
+    CAD: 'CA',
+  }
 
-  //     const serviceListData = serviceListResponse.data.data || []
-  //     const warehouseServiceData = warehouseServiceResponse.data.data || []
+  const getDisplayService = item => {
+    const name = item.service
+    const currency = item.currency
 
-  //     // 🔥 normalize super aman (handle spasi + casing)
-  //     const normalize = str =>
-  //       str?.toLowerCase().trim().replace(/\s+/g, ' ')
+    const label = currencyLabel[currency] || currency
 
-  //     const packageServices = [
-  //       'Hold for Pickup',
-  //       'Cross Border Pickup',
-  //       'Cross Border Forward',
-  //       'Forward Package',
-  //       'Package Reception US',
-  //       'Package Reception CA',
-  //     ]
-
-  //     // ✅ normalize sekali (biar hemat compute)
-  //     const normalizedPackageServices = packageServices.map(normalize)
-
-  //     const descriptions = {
-  //       'Hold for Pickup': 'Pick up your package in person from a warehouse location.',
-  //       'Cancel Consolidate': 'Cancel the package consolidation process.',
-  //       'Cross Border Pickup':
-  //         'We import your package and you pickup in person from a local warehouse',
-  //       'Cross Border Forward':
-  //         'We import your package and forward it domestically to your final destination with the carrier you select',
-  //       'Forward Package':
-  //         'Internationally directly to the address of your choice with the carrier you select',
-  //       'Package Forward':
-  //         'Internationally directly to the address of your choice with the carrier you select',
-  //       Consolidate: 'Combine multiple packages into one package.',
-  //       'Request More Picture': 'Request additional photos of your package.',
-  //       'Package Reception US': 'Receive your package at our US warehouse.',
-  //       'Package Reception CA': 'Receive your package at our CA warehouse.',
-  //       'Carrier Rate': 'Check carrier rates for your package.',
-  //       'Brokerage fee - CA import': 'Brokerage service for package with value over $20 CAD',
-  //       'Brokerage fee - US import': 'Brokerage service for package with value over $800 USD.',
-  //       'Free Membership': 'Enjoy free membership benefits.',
-  //       'Request Picture': 'Request additional photos of your package.',
-  //       'Pallet Reception US': 'Receive your Pallet at our US warehouse.',
-  //       'Pallet Forward': 'Internationally directly to the address of your choice with the carrier you select',
-  //       'Pallet HFP': 'Pick up your Pallet in person from a warehouse location.',
-  //       'Pallet Reception CA': 'Receive your Pallet at our CA warehouse.',
-  //     }
-
-  //     // ✅ 1. filter ACTIVE ONLY
-  //     const activeGlobal = serviceListData.filter(item => item.status === 'Active')
-  //     const activeWarehouse = warehouseServiceData.filter(item => item.status === 'Active')
-
-  //     // ✅ 2. warehouse override (pakai normalize)
-  //     const warehouseMap = new Map()
-  //     activeWarehouse.forEach(item => {
-  //       warehouseMap.set(normalize(item.service), item)
-  //     })
-
-  //     // ✅ 3. filter global → buang kalau ada di warehouse
-  //     const filteredGlobal = activeGlobal.filter(
-  //       item => !warehouseMap.has(normalize(item.service))
-  //     )
-
-  //     // ✅ helper inject description
-  //     const withDescription = item => ({
-  //       ...item,
-  //       description: descriptions[item.service] || 'No description available.',
-  //     })
-
-  //     const globalWithDesc = filteredGlobal.map(withDescription)
-  //     const warehouseWithDesc = activeWarehouse.map(withDescription)
-
-  //     // 🔗 4. gabungkan (warehouse override)
-  //     const combined = [...globalWithDesc, ...warehouseWithDesc]
-
-  //     // 🧼 5. dedupe FINAL (pakai normalized key)
-  //     const uniqueServices = Array.from(
-  //       new Map(
-  //         combined.map(item => [normalize(item.service), item])
-  //       ).values()
-  //     )
-
-  //     // 🔍 DEBUG WAJIB (biar tau kalau ada miss lagi)
-  //     console.log('FINAL SERVICES:', uniqueServices.map(s => `[${s.service}]`))
-
-  //     // 📦 6. grouping (pakai normalized compare)
-  //     const packageList = uniqueServices.filter(item =>
-  //       normalizedPackageServices.includes(normalize(item.service))
-  //     )
-
-  //     const otherList = uniqueServices.filter(
-  //       item => !normalizedPackageServices.includes(normalize(item.service))
-  //     )
-
-  //     // 🔍 DEBUG TAMBAHAN
-  //     console.log('PACKAGE:', packageList.map(s => s.service))
-  //     console.log('OTHER:', otherList.map(s => s.service))
-
-  //     // ✅ 7. set state
-  //     setServiceList(packageList)
-  //     setOtherService(otherList)
-
-  //   } catch (e) {
-  //     console.error(e)
-  //   } finally {
-  //     setLoadingService(false)
-  //   }
-  // }
-
-
+    return currency
+      ? `${name} - ${label}`
+      : name
+  }
 
   const getServicesList = async (warehouse_id) => {
     setLoadingService(true)
@@ -376,9 +276,15 @@ export default function Home() {
 
       const normalize = str =>
         str?.toLowerCase().trim().replace(/\s+/g, ' ')
+
+      // =========================
+      // DESCRIPTIONS
+      // =========================
       const descriptions = {
-        'Hold for Pickup': 'Pick up your package in person from a warehouse location.',
-        'Cancel Consolidate': 'Cancel the package consolidation process.',
+        'Hold for Pickup':
+          'Pick up your package in person from a warehouse location.',
+        'Cancel Consolidate':
+          'Cancel the package consolidation process.',
         'Cross Border Pickup':
           'We import your package and you pickup in person from a local warehouse',
         'Cross Border Forward':
@@ -387,30 +293,55 @@ export default function Home() {
           'Internationally directly to the address of your choice with the carrier you select',
         'Package Forward':
           'Internationally directly to the address of your choice with the carrier you select',
-        'Consolidate': 'Combine multiple packages into one package.',
+        Consolidate: 'Combine multiple packages into one package.',
         'Request More Picture': 'Request additional photos of your package.',
         'Package Reception US': 'Receive your package at our US warehouse.',
         'Package Reception CA': 'Receive your package at our CA warehouse.',
         'Carrier Rate': 'Check carrier rates for your package.',
-        'Brokerage fee - CA import': 'Brokerage service for package with value over $20 CAD',
-        'Brokerage fee - US import': 'Brokerage service for package with value over $800 USD.',
+        'Brokerage fee - CA import':
+          'Brokerage service for package with value over $20 CAD',
+        'Brokerage fee - US import':
+          'Brokerage service for package with value over $800 USD.',
         'Free Membership': 'Enjoy free membership benefits.',
         'Request Picture': 'Request additional photos of your package.',
         'Pallet Reception US': 'Receive your Pallet at our US warehouse.',
-        'Pallet Forward': 'Internationally directly to the address of your choice with the carrier you select',
-        'Pallet HFP': 'Pick up your Pallet in person from a warehouse location.',
+        'Pallet Forward':
+          'Internationally directly to the address of your choice with the carrier you select',
+        'Pallet HFP':
+          'Pick up your Pallet in person from a warehouse location.',
         'Pallet Reception CA': 'Receive your Pallet at our CA warehouse.',
       }
 
-      // ✅ 1. FILTER ACTIVE
+      // =========================
+      // 1. ACTIVE FILTER
+      // =========================
       const activeGlobal = serviceListData.filter(s => s.status === 'Active')
-      const activeWarehouse = warehouseServiceData;
+      const activeWarehouse = warehouseServiceData
 
-      // ✅ 2. DEDUPE WAREHOUSE (karena bisa ada USD/CAD dll)
+      // =========================
+      // 2. MULTI CURRENCY SERVICES RULE
+      // =========================
+      const multiCurrencyServices = new Set([
+        'cross border pickup',
+        'cross border forward',
+        'brokerage fee - ca import',
+        'brokerage fee - us import',
+      ])
+
+      const getKey = item => {
+        const name = normalize(item.service)
+        const isMulti = multiCurrencyServices.has(name)
+
+        return isMulti ? `${name}|${item.currency}` : name
+      }
+
+      // =========================
+      // 3. WAREHOUSE DEDUPE
+      // =========================
       const warehouseMap = new Map()
 
       activeWarehouse.forEach(item => {
-        const key = normalize(item.service)
+        const key = getKey(item)
 
         if (!warehouseMap.has(key)) {
           warehouseMap.set(key, item)
@@ -419,39 +350,50 @@ export default function Home() {
 
       const warehouseList = Array.from(warehouseMap.values()).map(item => ({
         ...item,
-        description: descriptions[item.service] || 'No description available.',
+        display_service: item.currency
+          ? `${item.service} - ${item.currency}`
+          : item.service,
+        description:
+          descriptions[item.service] || 'No description available.',
+        source: 'warehouse',
       }))
 
-      // 🔥 3. BUAT SET NAMA DARI WAREHOUSE
-      const warehouseNameSet = new Set(
-        warehouseList.map(item => normalize(item.service))
-      )
+      // =========================
+      // 4. WAREHOUSE KEY SET
+      // =========================
+      const warehouseNameSet = new Set(warehouseList.map(getKey))
 
-      // ✅ 4. FILTER GLOBAL → BUANG YANG ADA DI WAREHOUSE
+      // =========================
+      // 5. GLOBAL FILTER
+      // =========================
       const otherMap = new Map()
 
       activeGlobal.forEach(item => {
-        const key = normalize(item.service)
+        const key = getKey(item)
 
-        // ❗ skip kalau ada di warehouse
+        // skip if exists in warehouse
         if (warehouseNameSet.has(key)) return
 
-        // ❗ dedupe global juga
         if (!otherMap.has(key)) {
           otherMap.set(key, item)
         }
       })
-
       const otherList = Array.from(otherMap.values()).map(item => ({
         ...item,
-        description: descriptions[item.service] || 'No description available.',
+        display_service: getDisplayService(item),
+        description:
+          descriptions[item.service] || 'No description available.',
+        source: 'global',
       }))
+      // =========================
+      // 6. DEBUG
+      // =========================
+      console.log('WAREHOUSE:', warehouseList.map(s => s.display_service))
+      console.log('OTHER:', otherList.map(s => s))
 
-      // 🔍 DEBUG FINAL
-      console.log('WAREHOUSE:', warehouseList.map(s => s.service))
-      console.log('OTHER:', otherList.map(s => s.service))
-
-      // ✅ SET STATE
+      // =========================
+      // 7. SET STATE
+      // =========================
       setServiceList(warehouseList)
       setOtherService(otherList)
 
@@ -461,6 +403,8 @@ export default function Home() {
       setLoadingService(false)
     }
   }
+
+
 
   const fetchServiceList = async warehouse_id => {
     try {

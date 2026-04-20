@@ -18,7 +18,6 @@ export const ServiceTable = ({
     selectedData,
     handleValueChange,
     checkCoutryCode,
-    warehouseServiceList,
     loadingService
 }) => {
 

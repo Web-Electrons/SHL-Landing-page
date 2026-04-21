@@ -11,7 +11,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 const DeclareTable = ({ form }) => {
   return (
     <FormItem className="w-full mb-2">
-      <FormLabel className="font-bold">Total Declare Value</FormLabel>
+      <FormLabel className="font-bold">Total Declared Value</FormLabel>
 
       <div className="flex items-center border-slate-300 border rounded overflow-hidden h-[35px]">
         {/* Currency (no border) */}

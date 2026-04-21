@@ -11,6 +11,15 @@
     "test": "vitest",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.{js,ts,tsx,jsx}": [
+      "prettier --write",
+      "eslint --fix --max-warnings=0"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",

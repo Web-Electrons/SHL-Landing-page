@@ -18,7 +18,8 @@ export const ServiceTable = ({
     selectedData,
     handleValueChange,
     checkCoutryCode,
-    loadingService
+    loadingService,
+    newServiceList
 }) => {
 
     const formatCurrency = (value = 0, currency) => {
@@ -121,101 +122,119 @@ export const ServiceTable = ({
                         {
                             loadingService ? (
                                 <TableRow className="border-none">
-                                    {
-                                        Array.from({ length: 3 }).map((_, index) => (
-                                            <TableCell key={index} className="animate-pulse border-x-0">
-                                                <Skeleton className="w-20 h-4" />
-                                            </TableCell>
-                                        ))
-                                    }
-                                </TableRow>
-                            ) : serviceList?.length > 0 ? (
-
-                                serviceList?.map((item, index) => (
-                                    <TableRow
-                                        className="border-none"
-                                        key={index}>
-                                        <TableCell className="font-medium text-xs border-x-0">{item.service}</TableCell>
-                                        <TableCell className="text-xs border-x-0">
-                                            {item.description}
+                                    {Array.from({ length: 3 }).map((_, index) => (
+                                        <TableCell key={index} className="animate-pulse border-x-0">
+                                            <Skeleton className="w-20 h-4" />
                                         </TableCell>
-                                        <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency)}</TableCell>
-                                    </TableRow>
-                                ))
+                                    ))}
+                                </TableRow>
+                            ) : newServiceList?.wwarehouse_service?.length > 0 ? (
+
+                                newServiceList.wwarehouse_service
+                                    .map((item, index) => (
+                                        <TableRow
+                                            className="border-none"
+                                            key={`${item.id}-${index}`}
+                                        >
+                                            <TableCell className="font-medium text-xs border-x-0">
+                                                {item.service}
+                                            </TableCell>
+
+                                            <TableCell className="text-xs border-x-0">
+                                                {item.description}
+                                            </TableCell>
+
+                                            <TableCell className="text-right text-xs border-x-0 tabular-nums">
+                                                {/* {item.price === 0
+                                                    ? "Free"
+                                                    : formatCurrency(item.price, item.currency)} */}
+                                                {formatCurrency(item.price, item.currency)}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
 
                             ) : (
                                 <TableRow className="border-none">
-                                    <TableCell className="text-center text-xs border-x-0" colSpan={3}>No data found</TableCell>
+                                    <TableCell
+                                        className="text-center text-xs border-x-0"
+                                        colSpan={3}
+                                    >
+                                        No data found
+                                    </TableCell>
                                 </TableRow>
                             )
                         }
-                        {/* {
-                            serviceList?.map((item, index) => (
-                                <TableRow
-                                    className="border-none"
-                                    key={index}>
-                                    <TableCell className="font-medium text-xs border-x-0">{item.service}</TableCell>
-                                    <TableCell className="text-xs border-x-0">
-                                        {item.description}
-                                    </TableCell>
-                                    <TableCell className="text-right text-xs border-x-0  tabular-nums">{formatCurrency(item.price, item.currency || "USD")}</TableCell>
-                                </TableRow>
-                            ))
-                        } */}
                     </TableBody>
                 </Table>
             </div>
-            <div className="">
-                <div className="flex flex-row justify-between mb-[10px]">
-                    <p className='text-black text-sm font-bold '>Other Services</p>
-                </div>
+            <div className="space-y-4">
+                {
+                    loadingService ? (
+                        <div className="space-y-2">
+                            {Array.from({ length: 1 }).map((_, i) => (
+                                <Skeleton key={i} className="w-full h-[20px]" />
+                            ))}
+                        </div>
+                    ) : newServiceList?.other_service?.length > 0 ? (
 
-                <Table>
-                    <TableHeader>
-                        <TableRow className="bg-white text-black hover:bg-slate-100 border-none">
-                            <TableHead className="w-[300px] text-black text-xs">Service</TableHead>
-                            <TableHead className=" text-xs text-black">Description</TableHead>
-                            <TableHead className="text-right text-black  text-xs">Fee</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {
-                            loadingService ? (
-                                <TableRow className="border-none">
-                                    {
-                                        Array.from({ length: 3 }).map((_, index) => (
-                                            <TableCell key={index} className="animate-pulse border-x-0">
-                                                <Skeleton className="w-20 h-4" />
-                                            </TableCell>
-                                        ))
-                                    }
-                                </TableRow>
-                            ) : otherService?.length > 0 ? (
-                                otherService?.map((item, index) => (
-                                    <TableRow
-                                        className="border-none"
-                                        key={index}>
-                                        <TableCell className="font-medium text-xs border-x-0">
-                                            {(item?.service === "Cross Border Pickup" || item?.service === "Cross Border Forward") ? item?.display_service : item.service}
-                                        </TableCell>
-                                        <TableCell className="text-xs border-x-0">
-                                            {item.description}
-                                        </TableCell>
-                                        <TableCell className="text-right text-xs border-x-0  tabular-nums">
-                                            {item?.service === "Brokerage fee - US import" ? "Contact us" : (formatCurrency(item.price, item.currency))}
-                                        </TableCell>
-                                    </TableRow>
-                                ))
+                        newServiceList.other_service.map((group) => (
+                            <div key={group.idconf} className="">
 
-                            ) : (
-                                <TableRow className="border-none">
-                                    <TableCell className="text-center text-xs border-x-0" colSpan={3}>No data found</TableCell>
-                                </TableRow>
-                            )
-                        }
+                                {/* 🔹 Title per Subservice */}
+                                <div className="flex flex-row justify-between mb-[10px]">
+                                    <p className="text-black text-sm font-bold">
+                                        {group.subservice}
+                                    </p>
+                                </div>
 
-                    </TableBody>
-                </Table>
+                                {/* 🔹 Table per Subservice */}
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow className="bg-white text-black hover:bg-slate-100 border-none">
+                                            <TableHead className="w-[300px] text-black text-xs">Service</TableHead>
+                                            <TableHead className="text-xs text-black">Description</TableHead>
+                                            <TableHead className="text-right text-black text-xs">Fee</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+
+                                    <TableBody>
+                                        {group.services
+                                            ?.filter((item) => item.status === "Active") // 🔥 filter disini
+                                            .map((item, index) => (
+                                                <TableRow
+                                                    key={`${item.id}-${index}`}
+                                                    className="border-none"
+                                                >
+                                                    <TableCell className="font-medium text-xs border-x-0">
+                                                        {item.service}
+                                                    </TableCell>
+
+                                                    <TableCell className="text-xs border-x-0">
+                                                        {item.description}
+                                                    </TableCell>
+
+                                                    <TableCell className="text-right text-xs border-x-0 tabular-nums">
+                                                        {formatCurrency(item.price, item.currency)}
+                                                        {/* {item.service?.toLowerCase().includes("brokerage") &&
+                                                        
+                                                            item.price === 0
+                                                            ? "Contact us"
+                                                            : formatCurrency(item.price, item.currency)} */}
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
+                                    </TableBody>
+                                </Table>
+
+                            </div>
+                        ))
+
+                    ) : (
+                        <div className="text-center text-xs text-gray-500">
+                            No data found
+                        </div>
+                    )
+                }
             </div>
         </div>
     )

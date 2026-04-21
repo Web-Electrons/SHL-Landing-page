@@ -150,7 +150,8 @@ export default function Home() {
   const [warehousesServiceList, setwarehousesServiceList] = useState(null)
   const [warehouseDestination_id, setWarehouseDestination_id] = useState('')
   const [warehouseCountry, setWarehouseCountry] = useState('')
-
+  const [newServiceList, setNewServiceList] = useState([]);
+  console.log('newServiceList', newServiceList)
 
   console.log('otherService', otherService)
   console.log('serviceList', serviceList)
@@ -404,6 +405,27 @@ export default function Home() {
     }
   }
 
+  const getNewServiceList = async (warehouse_id, country_code) => {
+    setLoadingService(true)
+    try {
+      const response = await axios.post('/api/public/ServiceSetting_list', {
+        warehouse_id: warehouse_id,
+        country_code: country_code,
+      })
+      const data = response.data.data
+      setNewServiceList(data)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoadingService(false)
+    }
+  }
+
+  useEffect(() => {
+    if (warehouse_id) {
+      getNewServiceList(warehouse_id, selectedWarehouseFrom.country_code)
+    }
+  }, [warehouse_id, selectedWarehouseFrom?.country_code])
 
 
   const fetchServiceList = async warehouse_id => {
@@ -425,9 +447,9 @@ export default function Home() {
     }
   }, [warehouse_id])
 
-  useEffect(() => {
-    getServicesList(warehouse_id)
-  }, [warehouse_id])
+  // useEffect(() => {
+  //   getServicesList(warehouse_id)
+  // }, [warehouse_id])
 
   const [showRates, setShowRates] = useState(false)
   const [tabsName, setTabsName] = useState('mailbox')
@@ -1341,6 +1363,8 @@ export default function Home() {
                             handleValueChange={handleValueChange}
                             checkCoutryCode={checkCoutryCode}
                             loadingService={loadingService}
+
+                            newServiceList={newServiceList}
                           />
                         </>
                       )}

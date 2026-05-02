@@ -1,140 +1,125 @@
-import React, { useEffect, useState } from 'react'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectGroup,
-} from '@/components/ui/select'
-import { Input } from '@/components/ui/input'
+import React, { useEffect, useState } from "react";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 
-import axios from 'axios'
-import { PhoneInput } from 'react-international-phone'
-import 'react-international-phone/style.css'
+import axios from "axios";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
-import './style.css'
-import NewAutocompleteInput from '@/components/new-autocomplete'
+import "./style.css";
+import NewAutocompleteInput from "@/components/new-autocomplete";
 
 export const ShippedTo = ({ form, country_list }) => {
   const [selectedCountry, setSelectedCountry] = useState({
-    country_code: '',
-    country_name: '',
-  })
+    country_code: "",
+    country_name: "",
+  });
 
   const handleSelectCountry = (country_code, country_name) => {
-    form.setValue('country_name', country_name)
-    setSelectedCountry({ country_code, country_name })
-  }
+    form.setValue("country_name", country_name);
+    setSelectedCountry({ country_code, country_name });
+  };
 
-  const [province_list, setProvince] = useState([])
-  const [popProvince, setPopProvince] = useState(false)
+  const [province_list, setProvince] = useState([]);
+  const [popProvince, setPopProvince] = useState(false);
 
-  const shipping = form.watch('shippingType')
+  const shipping = form.watch("shippingType");
 
-  const country_code = form.watch('shipped_to.country')
+  const country_code = form.watch("shipped_to.country");
 
   const [queryProvince, setQueryProvince] = useState({
-    keyword: '',
-    country_code: '',
+    keyword: "",
+    country_code: "",
     page: 0,
     limit: 1000,
     index: 0,
-  })
+  });
 
   useEffect(() => {
     // Update country_code hanya saat selectedCountry berubah
-    if (!country_code) return
+    if (!country_code) return;
 
-    setQueryProvince(prev => ({
+    setQueryProvince((prev) => ({
       ...prev,
       country_code: country_code,
-    }))
-  }, [country_code])
+    }));
+  }, [country_code]);
 
   useEffect(() => {
     // Fetch data hanya jika country_code sudah ada
-    if (!queryProvince.country_code) return
+    if (!queryProvince.country_code) return;
 
     const fetchDataProvince = async () => {
       try {
-        const response = await axios.post(`/api/province`, queryProvince)
+        const response = await axios.post(`/api/province`, queryProvince);
 
-        setProvince(response.data.province)
+        setProvince(response.data.province);
       } catch (error) {
-        console.error('Error:', error)
+        console.error("Error:", error);
       }
-    }
+    };
 
-    fetchDataProvince()
-  }, [queryProvince])
+    fetchDataProvince();
+  }, [queryProvince]);
 
-  const filteredProvince = province_list
+  const filteredProvince = province_list;
 
-  const [pendingStateCode, setPendingStateCode] = useState(null)
+  const [pendingStateCode, setPendingStateCode] = useState(null);
 
   const handleCountryChange = async (country_code, state_code) => {
-    const country = country_list?.find(c => c.alpha_2 === country_code)
+    const country = country_list?.find((c) => c.alpha_2 === country_code);
 
-    if (!country) return
+    if (!country) return;
 
-    form.setValue('shipped_to.country', country.country_code)
-    form.setValue('country_name', country.country_name)
+    form.setValue("shipped_to.country", country.country_code);
+    form.setValue("country_name", country.country_name);
 
     setSelectedCountry({
       country_code,
       country_name: country.country_name,
-    })
+    });
 
     try {
-      const response = await axios.post('/api/province', {
-        keyword: '',
+      const response = await axios.post("/api/province", {
+        keyword: "",
         country_code: country.country_code,
         page: 0,
         limit: 1000,
         index: 0,
-      })
+      });
 
-      const provinces = response.data.province || []
+      const provinces = response.data.province || [];
 
-      setProvince(provinces)
+      setProvince(provinces);
 
       // simpan state_code dulu
       if (state_code) {
-        setPendingStateCode(state_code)
+        setPendingStateCode(state_code);
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
   useEffect(() => {
-    if (!pendingStateCode || province_list.length === 0) return
+    if (!pendingStateCode || province_list.length === 0) return;
 
-    const province = province_list.find(p => p.province_name === pendingStateCode)
+    const province = province_list.find((p) => p.province_name === pendingStateCode);
 
     if (province) {
-      form.setValue('shipped_to.state', province.province_name)
-      form.setValue('state', province.province_name)
+      form.setValue("shipped_to.state", province.province_name);
+      form.setValue("state", province.province_name);
     }
 
-    setPendingStateCode(null)
-  }, [province_list])
+    setPendingStateCode(null);
+  }, [province_list, pendingStateCode, form]);
 
   return (
     <div className="flex flex-col">
-      {shipping === 'HFP' || shipping === 'CBP' ? (
-        <p className="font-bold text-xs">Ship To ...</p>
+      {shipping === "HFP" || shipping === "CBP" ? (
+        <p className="text-xs font-bold">Ship To ...</p>
       ) : (
-        <p className="font-bold text-xs">Ship To ...</p>
+        <p className="text-xs font-bold">Ship To ...</p>
       )}
 
       <FormField
@@ -142,28 +127,28 @@ export const ShippedTo = ({ form, country_list }) => {
         name="shipped_to.address"
         className="w-full"
         render={({ field }) => (
-          <FormItem className="w-full space-y-0 flex flex-col gap-1 mt-2">
+          <FormItem className="mt-2 flex w-full flex-col gap-1 space-y-0">
             <FormLabel className="">Address</FormLabel>
             <FormControl>
               <NewAutocompleteInput
-                className="px-2.5 py-3 bg-white  justify-start items-center gap-2.5 inline-flex  text-xs font-normal font-['Poppins'] leading-tight outline-none h-[35px]"
+                className="inline-flex h-[35px] items-center justify-start gap-2.5 bg-white px-2.5 py-3 font-['Poppins'] text-xs font-normal leading-tight outline-none"
                 placeholder={`Address`}
                 autoComplete="off"
                 autoFill="off"
-                onSelect={place => {
-                  console.log('PLACE:', place)
+                onSelect={(place) => {
+                  console.log("PLACE:", place);
 
-                  form.setValue('shipped_to.address', place.street1)
-                  form.setValue('shipped_to.city', place.city)
-                  form.setValue('shipped_to.zip', place.zip)
+                  form.setValue("shipped_to.address", place.street1);
+                  form.setValue("shipped_to.city", place.city);
+                  form.setValue("shipped_to.zip", place.zip);
 
-                  form.setValue('shipped_to.country', place.country_code)
-                  form.setValue('country_name', place.country)
+                  form.setValue("shipped_to.country", place.country_code);
+                  form.setValue("country_name", place.country);
 
-                  handleCountryChange(place.country_code, place.state)
+                  handleCountryChange(place.country_code, place.state);
                 }}
-                onValueChange={e => {
-                  form.setValue('shipped_to.address', e)
+                onValueChange={(e) => {
+                  form.setValue("shipped_to.address", e);
                 }}
                 {...field}
               />
@@ -172,8 +157,8 @@ export const ShippedTo = ({ form, country_list }) => {
           </FormItem>
         )}
       />
-      <div className="py-2 flex flex-col gap-2">
-        <div className="flex flex-row gap-2 w-full items-end">
+      <div className="flex flex-col gap-2 py-2">
+        <div className="flex w-full flex-row items-end gap-2">
           <FormField
             control={form.control}
             name="shipped_to.country"
@@ -186,21 +171,17 @@ export const ShippedTo = ({ form, country_list }) => {
                 <FormControl>
                   <Select
                     value={field.value}
-                    onValueChange={value => {
-                      field.onChange(value)
+                    onValueChange={(value) => {
+                      field.onChange(value);
                     }}
                   >
-                    <SelectTrigger className="text-xs h-[36px]">
+                    <SelectTrigger className="h-[36px] text-xs">
                       <SelectValue placeholder="Select Country" />
                     </SelectTrigger>
 
                     <SelectContent>
                       {country_list?.map((item, index) => (
-                        <SelectItem
-                          key={item?.country_id}
-                          value={item.country_code}
-                          className="text-xs"
-                        >
+                        <SelectItem key={item?.country_id} value={item.country_code} className="text-xs">
                           {item.country_name}
                         </SelectItem>
                       ))}
@@ -231,16 +212,12 @@ export const ShippedTo = ({ form, country_list }) => {
                   <SelectContent>
                     {province_list?.length > 0 ? (
                       province_list?.map((item, index) => (
-                        <SelectItem
-                          key={item.province_id}
-                          value={item.province_name}
-                          className="text-xs"
-                        >
+                        <SelectItem key={item.province_id} value={item.province_name} className="text-xs">
                           {item.province_name}
                         </SelectItem>
                       ))
                     ) : (
-                      <div className="text-xs text-center py-2">No Province found.</div>
+                      <div className="py-2 text-center text-xs">No Province found.</div>
                     )}
                   </SelectContent>
                 </Select>
@@ -250,7 +227,7 @@ export const ShippedTo = ({ form, country_list }) => {
             )}
           />
         </div>
-        <div className="flex flex-row gap-2 w-full">
+        <div className="flex w-full flex-row gap-2">
           <FormField
             control={form.control}
             name="shipped_to.city"
@@ -284,5 +261,5 @@ export const ShippedTo = ({ form, country_list }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

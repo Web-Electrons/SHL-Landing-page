@@ -42,3 +42,5 @@ next-env.d.ts
 .env.production
 .env.test
 *.env
+
+.react-email

@@ -9,7 +9,10 @@
     "lint": "next lint",
     "cypress:open": "cypress open --e2e",
     "test": "vitest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "email:dev": "email dev",
+    "email:build": "email build",
+    "email:export": "email export"
   },
   "lint-staged": {
     "*.{js,ts,tsx,jsx}": [
@@ -44,6 +47,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
+    "react-email": "6.0.8",
     "i18next": "^23.11.5",
     "lodash": "^4.17.21",
     "lucide-react": "^0.377.0",
@@ -63,6 +67,7 @@
     "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@react-email/ui": "6.0.8",
     "@tanstack/eslint-plugin-query": "^5.99.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/react": "18.3.28",

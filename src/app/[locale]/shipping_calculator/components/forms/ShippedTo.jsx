@@ -1,5 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
+/**
+ * update :
+ * OBS 1765 : Add phone number
+ * OBS 1764 : Fix Shipping Calculator > MT: sahril
+ */
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -83,8 +88,21 @@ export const ShippedTo = ({ form, country_list }) => {
    * IMPORTANT !
    *
    * > component Select State/Province mengubah State dari form !
-   * > bug ini tidak dapat di ikuti alurnya, tapi bisa di coba menghilangkan useEffect dari state form
    * >
+   * > BUG pada Select component membuat form menjadi tidak terkontrol
+   * alur debug :
+   *  hilangkan useEffect line 100 dan lihat log watch form di console
+   * > setelah select address dari auto complete > handleSelectAddress memilih country code dan state code dan mengupdate form untuk country code dan state code
+   * > selanjutnya terjadi re-rendering watch.form yang menunjukan perilaku aneh dari state code
+   * > 1. watch.form menunjukan state code setelah dipilih contoh ("NY")
+   * > 2. terjadi re-rendering watch.form menunjukan state code menjadi ("") string kosong
+   *
+   * Bug ini bersasal dari Select Component yang tidak dapat di ikuti alurnya
+   * Saat menghapus form untuk select state (line 200) watch.form menjadi normal state dalam form dapat diikuti lagi alurnya tanpa adanya bug
+   *
+   * Solve :
+   * Menggunakan state variable untuk menyimpan state code
+   * Menggunakan useEffect untuk memasukkan state code ke form, jika state code ada maka akan memasukkan state code ke form shipped_to.state
    */
 
   useEffect(() => {

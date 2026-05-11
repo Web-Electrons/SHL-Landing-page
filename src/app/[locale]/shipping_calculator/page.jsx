@@ -1,81 +1,65 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
-import Loading from '@/app/loading'
-import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel
-} from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
-import { Separator } from '@/components/ui/separator'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle
-} from '@/components/ui/sheet'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useToast } from '@/components/ui/use-toast'
-import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
-import { useCallback, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { useMediaQuery } from 'react-responsive'
-import * as yup from 'yup'
-import { ServiceTable } from './components/ServiceTable'
-import DeclareTable from './components/forms/DeclareTable'
-import { Dimension } from './components/forms/Dimension'
-import { ShippedTo } from './components/forms/ShippedTo'
-import { RatesOption } from './components/panel/RatesOption'
-import { ServiceOptions } from './components/panel/ServiceOptions'
-import { SummaryPanel } from './components/panel/SummaryPanel'
-import { ShiptoForm } from './components/shiptoForm'
-import styles from './styles.module.scss'
+/* eslint-disable react-hooks/exhaustive-deps */
+
+/**
+ * update :
+ * OBS 1764 : Fix Shipping Calculator > MT : sahril
+ */
+"use client";
+import Loading from "@/app/loading";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/components/ui/use-toast";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useMediaQuery } from "react-responsive";
+import * as yup from "yup";
+import { ServiceTable } from "./components/ServiceTable";
+import DeclareTable from "./components/forms/DeclareTable";
+import { Dimension } from "./components/forms/Dimension";
+import { ShippedTo } from "./components/forms/ShippedTo";
+import { RatesOption } from "./components/panel/RatesOption";
+import { ServiceOptions } from "./components/panel/ServiceOptions";
+import { SummaryPanel } from "./components/panel/SummaryPanel";
+import { ShiptoForm } from "./components/shiptoForm";
+import styles from "./styles.module.scss";
 
 const formSchema = yup.object().shape({
   dimension: yup.object().shape({
     length: yup
       .number()
-      .typeError('Length must be a number')
-      .required('Package length is required')
-      .min(1, 'Length must be greater than 0'),
+      .typeError("Length must be a number")
+      .required("Package length is required")
+      .min(1, "Length must be greater than 0"),
 
     width: yup
       .number()
-      .typeError('Width must be a number')
-      .required('Package width is required')
-      .min(1, 'Width must be greater than 0'),
+      .typeError("Width must be a number")
+      .required("Package width is required")
+      .min(1, "Width must be greater than 0"),
 
     height: yup
       .number()
-      .typeError('Height must be a number')
-      .required('Package height is required')
-      .min(1, 'Height must be greater than 0'),
+      .typeError("Height must be a number")
+      .required("Package height is required")
+      .min(1, "Height must be greater than 0"),
 
     weight: yup
       .number()
-      .typeError('Weight must be a number')
-      .required('Package weight is required')
-      .min(0.01, 'Weight must be greater than 0'),
+      .typeError("Weight must be a number")
+      .required("Package weight is required")
+      .min(0.01, "Weight must be greater than 0"),
 
-    weight_unit: yup
-      .string()
-      .required('Weight unit is required'),
+    weight_unit: yup.string().required("Weight unit is required"),
 
-    dimension_unit: yup
-      .string()
-      .required('Dimension unit is required'),
+    dimension_unit: yup.string().required("Dimension unit is required"),
   }),
   shipped_from: yup.object().shape({
     country: yup.string(),
@@ -117,439 +101,422 @@ const formSchema = yup.object().shape({
   ),
   total_package_value: yup.number(),
   currency_package_value: yup.string(),
-})
+});
 
 export default function Home() {
-  const tableMode = useMediaQuery({ query: '(max-width: 950px)' })
+  const tableMode = useMediaQuery({ query: "(max-width: 950px)" });
 
-  const { toast } = useToast()
-  const [warehouse, setWarehouse] = useState([])
-  const [selectedWarehouseFrom, setSelectedWarehouseFrom] = useState(null)
+  const { toast } = useToast();
+  const [warehouse, setWarehouse] = useState([]);
+  const [selectedWarehouseFrom, setSelectedWarehouseFrom] = useState(null);
   const isServiceDisabled = (setting) => {
-    console.log('setting', setting)
-    if (!setting) return false
-    return setting.toLowerCase() === 'disable'
-  }
-  const [courierRates, setCourierRates] = useState([])
-  const [country, setCountry] = useState([])
-  const [disabledForm, setDisabledForm] = useState(false)
-  const [loading_rates, set_loading_rates] = useState(false)
-  const [openRates, setOpenRates] = useState(false)
-  const [openServicesOption, setOpenServicesOption] = useState(false)
-  const [summaryData, setSummaryData] = useState([])
-  const [selecetedData, setSelectedData] = useState(null)
-  const [openRatesOption, setOpenRatesOption] = useState(false)
-  const [openSummary, setOpenSummary] = useState(false)
-  const [selectedService, setSelectedService] = useState('hfp')
-  const [serviceList, setServiceList] = useState([])
-  const [otherService, setOtherService] = useState([])
-  const [warehouse_id, setWarehouseId] = useState('')
-  const [openSheet, setOpenSheet] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [loadingWarehouse, setLoadingWarehouse] = useState(false)
-  const [warehousesServiceList, setwarehousesServiceList] = useState(null)
-  const [warehouseDestination_id, setWarehouseDestination_id] = useState('')
-  const [warehouseCountry, setWarehouseCountry] = useState('')
+    console.log("setting", setting);
+    if (!setting) return false;
+    return setting.toLowerCase() === "disable";
+  };
+  const [courierRates, setCourierRates] = useState([]);
+  const [country, setCountry] = useState([]);
+  const [disabledForm, setDisabledForm] = useState(false);
+  const [loading_rates, set_loading_rates] = useState(false);
+  const [openRates, setOpenRates] = useState(false);
+  const [openServicesOption, setOpenServicesOption] = useState(false);
+  const [summaryData, setSummaryData] = useState([]);
+  const [selecetedData, setSelectedData] = useState(null);
+  const [openRatesOption, setOpenRatesOption] = useState(false);
+  const [openSummary, setOpenSummary] = useState(false);
+  const [selectedService, setSelectedService] = useState("hfp");
+  const [serviceList, setServiceList] = useState([]);
+  const [otherService, setOtherService] = useState([]);
+  const [warehouse_id, setWarehouseId] = useState("");
+  const [openSheet, setOpenSheet] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [loadingWarehouse, setLoadingWarehouse] = useState(false);
+  const [warehousesServiceList, setwarehousesServiceList] = useState(null);
+  const [warehouseDestination_id, setWarehouseDestination_id] = useState("");
+  const [warehouseCountry, setWarehouseCountry] = useState("");
   const [newServiceList, setNewServiceList] = useState([]);
-  console.log('newServiceList', newServiceList)
+  console.log("newServiceList", newServiceList);
 
-  console.log('otherService', otherService)
-  console.log('serviceList', serviceList)
+  console.log("otherService", otherService);
+  console.log("serviceList", serviceList);
   const form = useForm({
     resolver: yupResolver(formSchema),
     defaultValues: {
       dimension: {
-        weight_unit: 'lbs',
-        dimension_unit: 'in',
+        weight_unit: "lbs",
+        dimension_unit: "in",
         weight: 0,
         length: 0,
         width: 0,
         height: 0,
       },
       shipped_to: {
-        name: '',
-        country: '',
-        state: '',
-        city: '',
-        zip: '',
-        address: '',
-        address2: '',
+        name: "",
+        country: "",
+        state: "",
+        city: "",
+        zip: "",
+        address: "",
+        address2: "",
       },
       shipped_from: {
-        address2: '',
+        address2: "",
       },
-      shippingType: '',
-      warehouse_destination: '',
-      warehouse_destination_country: '',
-      mailboxSelected: 'VRN',
+      shippingType: "",
+      warehouse_destination: "",
+      warehouse_destination_country: "",
+      mailboxSelected: "VRN",
       package_content: [],
-      currency_package_value: 'CAD',
+      currency_package_value: "CAD",
       total_package_value: 0,
     },
-    mode: 'onChange',
-  })
+    mode: "onChange",
+  });
 
   useEffect(() => {
     const countryList = async () => {
       try {
         const response = await axios.post(`/api/country/list`, {
-          keyword: '',
+          keyword: "",
           page: 1,
           limit: 999,
           index: 0,
-        })
-        const responseData = response.data.country
-        setCountry(responseData)
-        return responseData || []
+        });
+        const responseData = response.data.country;
+        setCountry(responseData);
+        return responseData || [];
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
-    countryList()
-  }, [])
+    };
+    countryList();
+  }, []);
 
   const warehouseList = useCallback(async () => {
-    setLoadingWarehouse(true)
+    setLoadingWarehouse(true);
     try {
       const response = await axios.post(`/api/warehouse/list`, {
-        keyword: '',
+        keyword: "",
         page: 1,
         limit: 10,
         index: 0,
-      })
-      const responseData = response.data.warehouse
+      });
+      const responseData = response.data.warehouse;
       const filteredWarehouse = responseData.filter(
-        item => item.warehouse_code !== 'AAA' && item.warehouse_code !== 'BBB'
-      )
-      const getFirstWarehouse = filteredWarehouse[0]
-      const preferredCodes = ['SHN', 'VRN']
+        (item) => item.warehouse_code !== "AAA" && item.warehouse_code !== "BBB"
+      );
+      const getFirstWarehouse = filteredWarehouse[0];
+      const preferredCodes = ["SHN", "VRN"];
       const intialMNYWarehouse =
-        filteredWarehouse.find(item =>
-          preferredCodes.includes(item.warehouse_code)
-        ) || getFirstWarehouse
-      setWarehouse(filteredWarehouse)
-      handleAssingData(intialMNYWarehouse)
-      setSelectedWarehouseFrom(intialMNYWarehouse)
-      setWarehouseId(intialMNYWarehouse?.warehouse_id)
-      setWarehouseCountry(intialMNYWarehouse?.country_code)
+        filteredWarehouse.find((item) => preferredCodes.includes(item.warehouse_code)) || getFirstWarehouse;
+      setWarehouse(filteredWarehouse);
+      handleAssingData(intialMNYWarehouse);
+      setSelectedWarehouseFrom(intialMNYWarehouse);
+      setWarehouseId(intialMNYWarehouse?.warehouse_id);
+      setWarehouseCountry(intialMNYWarehouse?.country_code);
 
-      return filteredWarehouse || []
+      return filteredWarehouse || [];
     } catch (error) {
-      console.error(error)
+      console.error(error);
     } finally {
-      setLoadingWarehouse(false)
+      setLoadingWarehouse(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    warehouseList()
-  }, [])
+    warehouseList();
+  }, []);
 
-  const [loadingService, setLoadingService] = useState(false)
+  const [loadingService, setLoadingService] = useState(false);
 
   const currencyLabel = {
-    USD: 'US',
-    CAD: 'CA',
-  }
+    USD: "US",
+    CAD: "CA",
+  };
 
-  const getDisplayService = item => {
-    const name = item.service
-    const currency = item.currency
+  const getDisplayService = (item) => {
+    const name = item.service;
+    const currency = item.currency;
 
-    const label = currencyLabel[currency] || currency
+    const label = currencyLabel[currency] || currency;
 
-    return currency
-      ? `${name} - ${label}`
-      : name
-  }
+    return currency ? `${name} - ${label}` : name;
+  };
 
   const getServicesList = async (warehouse_id) => {
-    setLoadingService(true)
+    setLoadingService(true);
 
     try {
       const [serviceListResponse, warehouseServiceResponse] = await Promise.all([
         axios.get(`/api/Service_list`),
         axios.post(`/api/public/WarehouseServices_list`, { warehouse_id }),
-      ])
+      ]);
 
-      const serviceListData = serviceListResponse.data.data || []
-      const warehouseServiceData = warehouseServiceResponse.data.data || []
+      const serviceListData = serviceListResponse.data.data || [];
+      const warehouseServiceData = warehouseServiceResponse.data.data || [];
 
-      const normalize = str =>
-        str?.toLowerCase().trim().replace(/\s+/g, ' ')
+      const normalize = (str) => str?.toLowerCase().trim().replace(/\s+/g, " ");
 
       // =========================
       // DESCRIPTIONS
       // =========================
       const descriptions = {
-        'Hold for Pickup':
-          'Pick up your package in person from a warehouse location.',
-        'Cancel Consolidate':
-          'Cancel the package consolidation process.',
-        'Cross Border Pickup':
-          'We import your package and you pickup in person from a local warehouse',
-        'Cross Border Forward':
-          'We import your package and forward it domestically to your final destination with the carrier you select',
-        'Forward Package':
-          'Internationally directly to the address of your choice with the carrier you select',
-        'Package Forward':
-          'Internationally directly to the address of your choice with the carrier you select',
-        Consolidate: 'Combine multiple packages into one package.',
-        'Request More Picture': 'Request additional photos of your package.',
-        'Package Reception US': 'Receive your package at our US warehouse.',
-        'Package Reception CA': 'Receive your package at our CA warehouse.',
-        'Carrier Rate': 'Check carrier rates for your package.',
-        'Brokerage fee - CA import':
-          'Brokerage service for package with value over $20 CAD',
-        'Brokerage fee - US import':
-          'Brokerage service for package with value over $800 USD.',
-        'Free Membership': 'Enjoy free membership benefits.',
-        'Request Picture': 'Request additional photos of your package.',
-        'Pallet Reception US': 'Receive your Pallet at our US warehouse.',
-        'Pallet Forward':
-          'Internationally directly to the address of your choice with the carrier you select',
-        'Pallet HFP':
-          'Pick up your Pallet in person from a warehouse location.',
-        'Pallet Reception CA': 'Receive your Pallet at our CA warehouse.',
-      }
+        "Hold for Pickup": "Pick up your package in person from a warehouse location.",
+        "Cancel Consolidate": "Cancel the package consolidation process.",
+        "Cross Border Pickup": "We import your package and you pickup in person from a local warehouse",
+        "Cross Border Forward":
+          "We import your package and forward it domestically to your final destination with the carrier you select",
+        "Forward Package": "Internationally directly to the address of your choice with the carrier you select",
+        "Package Forward": "Internationally directly to the address of your choice with the carrier you select",
+        Consolidate: "Combine multiple packages into one package.",
+        "Request More Picture": "Request additional photos of your package.",
+        "Package Reception US": "Receive your package at our US warehouse.",
+        "Package Reception CA": "Receive your package at our CA warehouse.",
+        "Carrier Rate": "Check carrier rates for your package.",
+        "Brokerage fee - CA import": "Brokerage service for package with value over $20 CAD",
+        "Brokerage fee - US import": "Brokerage service for package with value over $800 USD.",
+        "Free Membership": "Enjoy free membership benefits.",
+        "Request Picture": "Request additional photos of your package.",
+        "Pallet Reception US": "Receive your Pallet at our US warehouse.",
+        "Pallet Forward": "Internationally directly to the address of your choice with the carrier you select",
+        "Pallet HFP": "Pick up your Pallet in person from a warehouse location.",
+        "Pallet Reception CA": "Receive your Pallet at our CA warehouse.",
+      };
 
       // =========================
       // 1. ACTIVE FILTER
       // =========================
-      const activeGlobal = serviceListData.filter(s => s.status === 'Active')
-      const activeWarehouse = warehouseServiceData
+      const activeGlobal = serviceListData.filter((s) => s.status === "Active");
+      const activeWarehouse = warehouseServiceData;
 
       // =========================
       // 2. MULTI CURRENCY SERVICES RULE
       // =========================
       const multiCurrencyServices = new Set([
-        'cross border pickup',
-        'cross border forward',
-        'brokerage fee - ca import',
-        'brokerage fee - us import',
-      ])
+        "cross border pickup",
+        "cross border forward",
+        "brokerage fee - ca import",
+        "brokerage fee - us import",
+      ]);
 
-      const getKey = item => {
-        const name = normalize(item.service)
-        const isMulti = multiCurrencyServices.has(name)
+      const getKey = (item) => {
+        const name = normalize(item.service);
+        const isMulti = multiCurrencyServices.has(name);
 
-        return isMulti ? `${name}|${item.currency}` : name
-      }
+        return isMulti ? `${name}|${item.currency}` : name;
+      };
 
       // =========================
       // 3. WAREHOUSE DEDUPE
       // =========================
-      const warehouseMap = new Map()
+      const warehouseMap = new Map();
 
-      activeWarehouse.forEach(item => {
-        const key = getKey(item)
+      activeWarehouse.forEach((item) => {
+        const key = getKey(item);
 
         if (!warehouseMap.has(key)) {
-          warehouseMap.set(key, item)
+          warehouseMap.set(key, item);
         }
-      })
+      });
 
-      const warehouseList = Array.from(warehouseMap.values()).map(item => ({
+      const warehouseList = Array.from(warehouseMap.values()).map((item) => ({
         ...item,
-        display_service: item.currency
-          ? `${item.service} - ${item.currency}`
-          : item.service,
-        description:
-          descriptions[item.service] || 'No description available.',
-        source: 'warehouse',
-      }))
+        display_service: item.currency ? `${item.service} - ${item.currency}` : item.service,
+        description: descriptions[item.service] || "No description available.",
+        source: "warehouse",
+      }));
 
       // =========================
       // 4. WAREHOUSE KEY SET
       // =========================
-      const warehouseNameSet = new Set(warehouseList.map(getKey))
+      const warehouseNameSet = new Set(warehouseList.map(getKey));
 
       // =========================
       // 5. GLOBAL FILTER
       // =========================
-      const otherMap = new Map()
+      const otherMap = new Map();
 
-      activeGlobal.forEach(item => {
-        const key = getKey(item)
+      activeGlobal.forEach((item) => {
+        const key = getKey(item);
 
         // skip if exists in warehouse
-        if (warehouseNameSet.has(key)) return
+        if (warehouseNameSet.has(key)) return;
 
         if (!otherMap.has(key)) {
-          otherMap.set(key, item)
+          otherMap.set(key, item);
         }
-      })
-      const otherList = Array.from(otherMap.values()).map(item => ({
+      });
+      const otherList = Array.from(otherMap.values()).map((item) => ({
         ...item,
         display_service: getDisplayService(item),
-        description:
-          descriptions[item.service] || 'No description available.',
-        source: 'global',
-      }))
+        description: descriptions[item.service] || "No description available.",
+        source: "global",
+      }));
       // =========================
       // 6. DEBUG
       // =========================
-      console.log('WAREHOUSE:', warehouseList.map(s => s.display_service))
-      console.log('OTHER:', otherList.map(s => s))
+      console.log(
+        "WAREHOUSE:",
+        warehouseList.map((s) => s.display_service)
+      );
+      console.log(
+        "OTHER:",
+        otherList.map((s) => s)
+      );
 
       // =========================
       // 7. SET STATE
       // =========================
-      setServiceList(warehouseList)
-      setOtherService(otherList)
-
+      setServiceList(warehouseList);
+      setOtherService(otherList);
     } catch (e) {
-      console.error(e)
+      console.error(e);
     } finally {
-      setLoadingService(false)
+      setLoadingService(false);
     }
-  }
+  };
 
   const getNewServiceList = async (warehouse_id, country_code) => {
-    setLoadingService(true)
+    setLoadingService(true);
     try {
-      const response = await axios.post('/api/public/ServiceSetting_list', {
+      const response = await axios.post("/api/public/ServiceSetting_list", {
         warehouse_id: warehouse_id,
         country_code: country_code,
-      })
-      const data = response.data.data
-      setNewServiceList(data)
+      });
+      const data = response.data.data;
+      setNewServiceList(data);
     } catch (e) {
-      console.error(e)
+      console.error(e);
     } finally {
-      setLoadingService(false)
+      setLoadingService(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (warehouse_id) {
-      getNewServiceList(warehouse_id, selectedWarehouseFrom.country_code)
+      getNewServiceList(warehouse_id, selectedWarehouseFrom.country_code);
     }
-  }, [warehouse_id, selectedWarehouseFrom?.country_code])
+  }, [warehouse_id, selectedWarehouseFrom?.country_code]);
 
-
-  const fetchServiceList = async warehouse_id => {
+  const fetchServiceList = async (warehouse_id) => {
     try {
-      const response = await axios.post('/api/public/WarehouseServices_list', {
+      const response = await axios.post("/api/public/WarehouseServices_list", {
         warehouse_id: warehouse_id,
-      })
-      const data = response.data.data
-      setwarehousesServiceList(data)
+      });
+      const data = response.data.data;
+      setwarehousesServiceList(data);
     } catch (error) {
-      console.error('Failed to fetch service list:', error)
-      return []
+      console.error("Failed to fetch service list:", error);
+      return [];
     }
-  }
+  };
 
   useEffect(() => {
     if (warehouse_id) {
-      fetchServiceList(warehouse_id)
+      fetchServiceList(warehouse_id);
     }
-  }, [warehouse_id])
+  }, [warehouse_id]);
 
   // useEffect(() => {
   //   getServicesList(warehouse_id)
   // }, [warehouse_id])
 
-  const [showRates, setShowRates] = useState(false)
-  const [tabsName, setTabsName] = useState('mailbox')
+  const [showRates, setShowRates] = useState(false);
+  const [tabsName, setTabsName] = useState("mailbox");
 
-  const checkCoutryCode = code => {
+  const checkCoutryCode = (code) => {
     if (code === undefined) {
-      return 'ca'
+      return "ca";
     } else {
-      if (code === 'MEX') {
-        return 'mx'
+      if (code === "MEX") {
+        return "mx";
       } else if (code?.length >= 2) {
-        return code.substring(0, 2).toLowerCase()
+        return code.substring(0, 2).toLowerCase();
       } else {
-        return code.toLowerCase()
+        return code.toLowerCase();
       }
     }
-  }
+  };
 
   const selectedData = () => {
-    if (form.watch('shipped_from') === undefined) {
-      return 'Select Mailbox'
+    if (form.watch("shipped_from") === undefined) {
+      return "Select Mailbox";
     } else {
-      const shipped_from = form.watch('shipped_from')
+      const shipped_from = form.watch("shipped_from");
       return shipped_from.city === undefined
-        ? 'Select Mailbox'
-        : `${shipped_from.city}, ${shipped_from.state}, ${shipped_from.zip}, ${shipped_from.country}`
+        ? "Select Mailbox"
+        : `${shipped_from.city}, ${shipped_from.state}, ${shipped_from.zip}, ${shipped_from.country}`;
     }
-  }
+  };
 
   const selectedDataDestination = () => {
-    if (form.watch('warehouse_destination') === undefined) {
-      return 'Select Warehouse Destination'
+    if (form.watch("warehouse_destination") === undefined) {
+      return "Select Warehouse Destination";
     } else {
-      const shipped_to = form.watch('warehouse_destination')
-      const data = warehouse.find(item => item.warehouse_id === shipped_to)
+      const shipped_to = form.watch("warehouse_destination");
+      const data = warehouse.find((item) => item.warehouse_id === shipped_to);
       return data?.city === undefined
-        ? 'Select Warehouse Destination'
-        : `${data?.city}, ${data?.province_code}, ${data?.postal_code}, ${data?.country_code}`
+        ? "Select Warehouse Destination"
+        : `${data?.city}, ${data?.province_code}, ${data?.postal_code}, ${data?.country_code}`;
     }
-  }
+  };
 
-  const handleAssingData = data => {
-    form.setValue('shipped_from.country', data?.country_code)
-    form.setValue('shipped_from.state', data?.province_code)
-    form.setValue('shipped_from.city', data?.city)
-    form.setValue('shipped_from.zip', data?.postal_code)
-    form.setValue('shipped_from.address', data?.address)
-    form.setValue('shipped_from.address2', data?.address2)
-    form.setValue('shipped_from.warehouse_code', data?.warehouse_code)
-    checkCoutryCode(data?.country_code)
-    selectedData()
-  }
+  const handleAssingData = (data) => {
+    form.setValue("shipped_from.country", data?.country_code);
+    form.setValue("shipped_from.state", data?.province_code);
+    form.setValue("shipped_from.city", data?.city);
+    form.setValue("shipped_from.zip", data?.postal_code);
+    form.setValue("shipped_from.address", data?.address);
+    form.setValue("shipped_from.address2", data?.address2);
+    form.setValue("shipped_from.warehouse_code", data?.warehouse_code);
+    checkCoutryCode(data?.country_code);
+    selectedData();
+  };
 
-  const handleValueChange = value => {
-    const data = warehouse.find(item => item.warehouse_code === value)
-    setSelectedWarehouseFrom(data)
-    handleAssingData(data)
-    setWarehouseId(data?.warehouse_id)
-  }
+  const handleValueChange = (value) => {
+    const data = warehouse.find((item) => item.warehouse_code === value);
+    setSelectedWarehouseFrom(data);
+    handleAssingData(data);
+    setWarehouseId(data?.warehouse_id);
+  };
 
-  const handlewarehouseDestination = value => {
-    const data = warehouse.find(item => item.warehouse_code === value)
-    setWarehouseDestination_id(data?.warehouse_id)
-    selectedDataDestination()
-    form.setValue('warehouse_destination', data?.warehouse_id)
-    form.setValue('warehouse_destination_country', data?.country_code)
-  }
+  const handlewarehouseDestination = (value) => {
+    const data = warehouse.find((item) => item.warehouse_code === value);
+    setWarehouseDestination_id(data?.warehouse_id);
+    selectedDataDestination();
+    form.setValue("warehouse_destination", data?.warehouse_id);
+    form.setValue("warehouse_destination_country", data?.country_code);
+  };
 
-  const handleSave = async formData => {
-    const addressTo = formData.shipped_to
+  const handleSave = async (formData) => {
+    const addressTo = formData.shipped_to;
 
     if (formData.total_package_value <= 0) {
       toast({
-        title: 'Oops! Please check the form',
-        description: 'Please input total declare value.',
-        variant: 'destructive',
-      })
-      return
+        title: "Oops! Please check the form",
+        description: "Please input total declare value.",
+        variant: "destructive",
+      });
+      return;
     }
 
-    const notRequired = ['name', 'address2']
+    const notRequired = ["name", "address2"];
     const emptyFields = Object.entries(addressTo).filter(
       ([key, value]) =>
         !notRequired.includes(key) && // skip jika key termasuk not required
-        (value === '' ||
-          value === null ||
-          value === undefined ||
-          (typeof value === 'string' && value.trim() === ''))
-    )
+        (value === "" || value === null || value === undefined || (typeof value === "string" && value.trim() === ""))
+    );
 
     if (emptyFields.length > 0) {
       toast({
-        title: 'Oops! Please check the form',
+        title: "Oops! Please check the form",
         description: `Field "${emptyFields[0]}" in address destination is required.`,
-        variant: 'destructive',
-      })
-      return
+        variant: "destructive",
+      });
+      return;
     }
 
-    set_loading_rates(true)
+    set_loading_rates(true);
     // setShowRates(true)
     try {
       const response = await axios.post(`/api/Calculator/ShippingCalculation`, {
@@ -564,14 +531,14 @@ export default function Home() {
           street2: formData.shipped_from.address2,
         },
         addressTo: {
-          name: 'Shiplink',
+          name: "Shiplink",
           country: formData.shipped_to.country,
           state: formData.shipped_to.state,
           city: formData.shipped_to.city,
           zip: formData.shipped_to.zip,
           street1: formData.shipped_to.address,
           street2: formData.shipped_to.address2,
-          phone: '+12345678900'
+          phone: "+12345678900",
         },
         parcels: {
           weight: formData.dimension.weight,
@@ -583,50 +550,50 @@ export default function Home() {
         },
         total_package_value: Number(formData.total_package_value) || 0,
         currency_package_value: formData.currency_package_value,
-      })
+      });
 
       if (response.data.status === true) {
         toast({
-          title: 'Success',
+          title: "Success",
           description: response.data.message,
-          status: 'success',
-        })
-        setCourierRates(response.data.rates.rates || [])
+          status: "success",
+        });
+        setCourierRates(response.data.rates.rates || []);
       } else {
         toast({
-          title: 'Error',
+          title: "Error",
           description: response.data.message,
-        })
-        return response.data.message
+        });
+        return response.data.message;
       }
     } catch (error) {
       toast({
-        title: 'Errors',
+        title: "Errors",
         description: error.message,
-      })
-      console.error('Save Error', error)
+      });
+      console.error("Save Error", error);
     } finally {
-      set_loading_rates(false)
+      set_loading_rates(false);
     }
-  }
-  const getErrorMessages = (errors, parentKey = '') => {
-    let messages = []
+  };
+  const getErrorMessages = (errors, parentKey = "") => {
+    let messages = [];
 
     for (const key in errors) {
-      const error = errors[key]
-      const fieldName = parentKey ? `${parentKey}.${key}` : key
+      const error = errors[key];
+      const fieldName = parentKey ? `${parentKey}.${key}` : key;
 
       if (error?.message) {
-        messages.push(`${fieldName}: ${error.message}`)
+        messages.push(`${fieldName}: ${error.message}`);
       }
 
-      if (typeof error === 'object' && !error.message) {
-        messages = messages.concat(getErrorMessages(error, fieldName))
+      if (typeof error === "object" && !error.message) {
+        messages = messages.concat(getErrorMessages(error, fieldName));
       }
     }
 
-    return messages
-  }
+    return messages;
+  };
 
   // const validateForm = async () => {
   //   const isValid = await form.trigger()
@@ -659,25 +626,25 @@ export default function Home() {
   //   }
 
   const validateForm = async () => {
-    const isValid = await form.trigger()
+    const isValid = await form.trigger();
 
     if (!isValid) {
-      if (tableMode) setOpen(true)
+      if (tableMode) setOpen(true);
 
-      const errors = form.formState.errors
-      const messages = getErrorMessages(errors)
+      const errors = form.formState.errors;
+      const messages = getErrorMessages(errors);
 
       toast({
-        title: 'Oops! Please check the form',
-        description: messages[0] || 'Some required fields are missing.',
-        variant: 'destructive',
-      })
+        title: "Oops! Please check the form",
+        description: messages[0] || "Some required fields are missing.",
+        variant: "destructive",
+      });
 
-      return false
+      return false;
     }
 
-    return true
-  }
+    return true;
+  };
   //   return true
   // }
 
@@ -686,21 +653,20 @@ export default function Home() {
   //   handleSave(form.getValues())
   // }
   const triggerSave = async () => {
-    const isValid = await validateForm()
-    if (!isValid) return
+    const isValid = await validateForm();
+    if (!isValid) return;
 
-    handleSave(form.getValues())
-  }
+    handleSave(form.getValues());
+  };
 
   const triggerContinue = async () => {
-    const isValid = await form.trigger()
+    const isValid = await form.trigger();
     if (isValid) {
-      setOpen(true)
+      setOpen(true);
     }
-  }
+  };
 
-  const formWatch = form.watch()
-
+  const formWatch = form.watch();
 
   const handleHFP = async () => {
     if (
@@ -712,13 +678,13 @@ export default function Home() {
       formWatch.dimension.dimension_unit === undefined
     ) {
       toast({
-        title: 'Oops! Please check the form',
-        description: 'Some required fields are missing.',
-        variant: 'destructive',
-      })
-      return
+        title: "Oops! Please check the form",
+        description: "Some required fields are missing.",
+        variant: "destructive",
+      });
+      return;
     }
-    set_loading_rates(true)
+    set_loading_rates(true);
     try {
       const response = await axios.post(`/api/Calculator/HoldPickup_Calculation`, {
         warehouse_id: warehouse_id,
@@ -730,24 +696,24 @@ export default function Home() {
           height: formWatch.dimension.height,
           distance_unit: formWatch.dimension.dimension_unit,
         },
-      })
+      });
 
       if (response.status === 200) {
         const responseData = {
           status: response.data.status,
           message: response.data.message,
           data: response.data,
-        }
-        setSummaryData(responseData)
-        setOpenServicesOption(true)
-        return responseData
+        };
+        setSummaryData(responseData);
+        setOpenServicesOption(true);
+        return responseData;
       }
     } catch (error) {
-      console.error('Error in handleHFP:', error)
+      console.error("Error in handleHFP:", error);
     } finally {
-      set_loading_rates(false)
+      set_loading_rates(false);
     }
-  }
+  };
 
   const handleCBP = async () => {
     if (
@@ -757,21 +723,21 @@ export default function Home() {
       formWatch.dimension.height === undefined ||
       formWatch.dimension.weight_unit === undefined ||
       formWatch.dimension.dimension_unit === undefined ||
-      formWatch.warehouse_destination === ''
+      formWatch.warehouse_destination === ""
     ) {
       toast({
-        title: 'Oops! Please check the form',
-        description: 'Some required fields are missing.',
-        variant: 'destructive',
-      })
-      return
+        title: "Oops! Please check the form",
+        description: "Some required fields are missing.",
+        variant: "destructive",
+      });
+      return;
     }
-    set_loading_rates(true)
+    set_loading_rates(true);
     try {
       const response = await axios.post(`/api/Calculator/CrossBorderPickup_Calculation`, {
         warehouse_id: warehouse_id,
         warehouse_id_destination: formWatch.warehouse_destination,
-        broker: 'use shiplink broker',
+        broker: "use shiplink broker",
         parcels: {
           weight: formWatch.dimension.weight,
           mass_unit: formWatch.dimension.weight_unit,
@@ -782,35 +748,35 @@ export default function Home() {
         },
         currency_package_value: formWatch.currency_package_value,
         total_package_value: Number(formWatch.total_package_value) || 0,
-      })
+      });
 
       if (response.data.status === true) {
         const responseData = {
           status: response.data.status,
           message: response.data.message,
           data: response.data,
-        }
-        setSummaryData(responseData)
-        setOpenServicesOption(true)
-        return responseData
+        };
+        setSummaryData(responseData);
+        setOpenServicesOption(true);
+        return responseData;
       } else {
         toast({
-          title: 'Error',
+          title: "Error",
           description: response.data.message,
-          variant: 'destructive',
-        })
+          variant: "destructive",
+        });
       }
     } catch (error) {
-      console.error('Error in handleHFP:', error)
+      console.error("Error in handleHFP:", error);
       toast({
-        title: 'Error',
+        title: "Error",
         description: error.message,
-        variant: 'destructive',
-      })
+        variant: "destructive",
+      });
     } finally {
-      set_loading_rates(false)
+      set_loading_rates(false);
     }
-  }
+  };
 
   // const handleContinue = async () => {
   //   const isValid = await validateForm()
@@ -849,79 +815,86 @@ export default function Home() {
   //   setOpenServicesOption(true)
   // }
   const handleContinue = async () => {
-    if (formWatch.dimension.height === 0 || formWatch.dimension.width === 0 || formWatch.dimension.length === 0 || formWatch.dimension.weight === 0) {
+    if (
+      formWatch.dimension.height === 0 ||
+      formWatch.dimension.width === 0 ||
+      formWatch.dimension.length === 0 ||
+      formWatch.dimension.weight === 0
+    ) {
       toast({
-        title: 'Oops! Please check the form',
-        description: 'Package dimensions fields are missing.',
-        variant: 'destructive',
-      })
-      return
+        title: "Oops! Please check the form",
+        description: "Package dimensions fields are missing.",
+        variant: "destructive",
+      });
+      return;
     }
-    if (selectedService === 'hfp') {
-      handleHFP()
-    } else if (selectedService === 'cbp') {
-      handleCBP()
+    if (selectedService === "hfp") {
+      handleHFP();
+    } else if (selectedService === "cbp") {
+      handleCBP();
     } else {
-      console.log('FORM WATCH', formWatch.total_package_value)
+      console.log("FORM WATCH", formWatch.total_package_value);
       if (formWatch.total_package_value <= 0) {
         toast({
-          title: 'Oops! Please check the form',
-          description: 'Please input total declare value.',
-          variant: 'destructive',
-        })
-        return
+          title: "Oops! Please check the form",
+          description: "Please input total declare value.",
+          variant: "destructive",
+        });
+        return;
       }
-      if (formWatch.shipped_to.country === '' || formWatch.shipped_to.state === '' || formWatch.shipped_to.city === '' || formWatch.shipped_to.zip === '' || formWatch.shipped_to.address === '') {
+      if (
+        formWatch.shipped_to.country === "" ||
+        formWatch.shipped_to.state === "" ||
+        formWatch.shipped_to.city === "" ||
+        formWatch.shipped_to.zip === "" ||
+        formWatch.shipped_to.address === ""
+      ) {
         toast({
-          title: 'Oops! Please check the form',
-          description: 'Please input shipping address.',
-          variant: 'destructive',
-        })
-        return
+          title: "Oops! Please check the form",
+          description: "Please input shipping address.",
+          variant: "destructive",
+        });
+        return;
       }
-      setOpenSummary(false)
-      const isValid = await validateForm()
+      setOpenSummary(false);
+      const isValid = await validateForm();
       if (isValid) {
-        setOpenServicesOption(true)
-        setDisabledForm(true)
-        setShowRates(false)
-        triggerSave()
+        setOpenServicesOption(true);
+        setDisabledForm(true);
+        setShowRates(false);
+        triggerSave();
       }
     }
-  }
+  };
 
   const formatCurrency = (value, currency) => {
-    return new Intl.NumberFormat('en-ID', {
-      style: 'currency',
+    return new Intl.NumberFormat("en-ID", {
+      style: "currency",
       currency: currency,
       minimumIntegerDigits: 2,
       maximumFractionDigits: 2,
-    }).format(value)
-  }
+    }).format(value);
+  };
 
   return (
     <>
       {loading_rates && <Loading />}
       <div className={styles.container}>
         <div
-          className={`flex h-screen min-h-max  flex-col text-center justify-start gap-[32px] pt-[90px] w-full bg-[#FFFFF] py-10
-                    ${styles.wrapper}
-                    `}
+          className={`flex h-screen min-h-max w-full flex-col justify-start gap-[32px] bg-[#FFFFF] py-10 pt-[90px] text-center ${styles.wrapper} `}
         >
-          <div className="flex flex-col gap-5 justify-start text-left w-[90%] mx-auto pt-3">
-            <h1 className=" text-myBlue text-3xl font-bold">Shipping Calculator</h1>
-            <h1 className=" text-black text-lg font-bold">Estimate Your Shipping Cost</h1>
+          <div className="mx-auto flex w-[90%] flex-col justify-start gap-5 pt-3 text-left">
+            <h1 className="text-3xl font-bold text-myBlue">Shipping Calculator</h1>
+            <h1 className="text-lg font-bold text-black">Estimate Your Shipping Cost</h1>
 
             <div className="">
               <Form {...form}>
                 <form disabled={disabledForm}>
                   <div
-                    className={`pb-4 pt-3 flex 
-                                        ${tableMode ? 'flex flex-col gap-3 items-start  ' : 'flex-row gap-[20px] h-full items-center'}
-                                        `}
+                    className={`flex pb-4 pt-3 ${tableMode ? "flex flex-col items-start gap-3" : "h-full flex-row items-center gap-[20px]"} `}
                   >
                     <Tabs
-                      onValueChange={value => setTabsName(value)}
+                      onValueChange={(value) => setTabsName(value)}
                       defaultValue="mailbox"
                       value={tabsName}
                       className=""
@@ -934,9 +907,9 @@ export default function Home() {
                           className=""
                           onClick={() => {
                             toast({
-                              title: 'Coming Soon',
-                              description: 'Custom Address will coming soon.',
-                            })
+                              title: "Coming Soon",
+                              description: "Custom Address will coming soon.",
+                            });
                           }}
                         >
                           <TabsTrigger
@@ -946,9 +919,9 @@ export default function Home() {
                             value="custom"
                             onClick={() => {
                               toast({
-                                title: 'Coming Soon',
-                                description: 'Custom Address will coming soon.',
-                              })
+                                title: "Coming Soon",
+                                description: "Custom Address will coming soon.",
+                              });
                             }}
                           >
                             Custom Address
@@ -956,11 +929,11 @@ export default function Home() {
                         </div>
                       </TabsList>
                     </Tabs>
-                    <div className={`h-[32px] ${tableMode ? 'hidden' : 'flex'}`}>
+                    <div className={`h-[32px] ${tableMode ? "hidden" : "flex"}`}>
                       <Separator orientation="vertical w-[10px]" />
                     </div>
                     <div className="">
-                      <Tabs value={tabsName} onValueChange={value => setTabsName(value)}>
+                      <Tabs value={tabsName} onValueChange={(value) => setTabsName(value)}>
                         <TabsList>
                           <TabsTrigger className="w-[150px]" value="priceList">
                             Price List
@@ -970,9 +943,9 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-3 justify-evenly h-max">
+                  <div className="flex h-max flex-col justify-evenly gap-3">
                     <div className="">
-                      {tabsName === 'mailbox' ? (
+                      {tabsName === "mailbox" ? (
                         <FormField
                           control={form.control}
                           name="mailboxSelected"
@@ -992,18 +965,18 @@ export default function Home() {
                                       <SelectTrigger
                                         name="mailboxSelected"
                                         id="mailboxSelected"
-                                        className="text-xs h-[36px]"
+                                        className="h-[36px] text-xs"
                                       >
                                         <SelectValue placeholder="Select Mailbox">
                                           {loadingWarehouse && selectedData === undefined ? (
-                                            <Skeleton className="w-full h-[20px]" />
+                                            <Skeleton className="h-[20px] w-full" />
                                           ) : (
-                                            <div className="flex flex-row gap-2 items-center">
+                                            <div className="flex flex-row items-center gap-2">
                                               <img
-                                                src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg`}
-                                                srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('shipped_from.country'))}.jpg 2x`}
+                                                src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("shipped_from.country"))}.jpg`}
+                                                srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("shipped_from.country"))}.jpg 2x`}
                                                 alt=""
-                                                className="rounded-full w-6 h-6 border border-blue-50 object-cover object-center"
+                                                className="h-6 w-6 rounded-full border border-blue-50 object-cover object-center"
                                               />
                                               <p>{selectedData()}</p>
                                             </div>
@@ -1014,7 +987,7 @@ export default function Home() {
 
                                     <SelectContent id="warehouseContentSelect">
                                       {loadingWarehouse ? (
-                                        <Skeleton className="w-full h-[20px]" />
+                                        <Skeleton className="h-[20px] w-full" />
                                       ) : (
                                         warehouse?.map((item, index) => (
                                           <SelectItem
@@ -1036,18 +1009,16 @@ export default function Home() {
                                     <Dimension form={form} />
                                   </div>
                                   {/* ReshipedTo */}
-                                  {selectedService === 'hfp' ? (
+                                  {selectedService === "hfp" ? (
                                     <></>
-                                  ) : selectedService === 'cbp' ? (
+                                  ) : selectedService === "cbp" ? (
                                     <div>
-                                      <div className="w-full my-4 grid grid-cols-3">
+                                      <div className="my-4 grid w-full grid-cols-3">
                                         <DeclareTable form={form} />
                                       </div>
                                       <Form {...form}>
                                         <form disabled={disabledForm}>
-                                          <FormLabel className="font-bold">
-                                            Warehouse Destination
-                                          </FormLabel>
+                                          <FormLabel className="font-bold">Warehouse Destination</FormLabel>
                                           <FormControl className="w-full">
                                             <Select
                                               className="text-xs"
@@ -1058,23 +1029,22 @@ export default function Home() {
                                                 <SelectTrigger
                                                   name="warehouse_destination"
                                                   id="warehouse_destination"
-                                                  className="text-xs h-[36px]"
+                                                  className="h-[36px] text-xs"
                                                 >
                                                   <SelectValue placeholder="Select Warehouse Destination">
-                                                    {loadingWarehouse &&
-                                                      selectedDataDestination === undefined ? (
-                                                      <Skeleton className="w-full h-[20px]" />
+                                                    {loadingWarehouse && selectedDataDestination === undefined ? (
+                                                      <Skeleton className="h-[20px] w-full" />
                                                     ) : (
-                                                      <div className="flex flex-row gap-2 items-center">
+                                                      <div className="flex flex-row items-center gap-2">
                                                         {selectedDataDestination() ===
-                                                          'Select Warehouse Destination' ? (
+                                                        "Select Warehouse Destination" ? (
                                                           <></>
                                                         ) : (
                                                           <img
-                                                            src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg`}
-                                                            srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg 2x`}
+                                                            src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg`}
+                                                            srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg 2x`}
                                                             alt=""
-                                                            className="rounded-full w-6 h-6 border border-blue-50 object-cover object-center"
+                                                            className="h-6 w-6 rounded-full border border-blue-50 object-cover object-center"
                                                           />
                                                         )}
                                                         <p>{selectedDataDestination()}</p>
@@ -1086,7 +1056,7 @@ export default function Home() {
 
                                               <SelectContent id="warehouse_destination_select">
                                                 {loadingWarehouse ? (
-                                                  <Skeleton className="w-full h-[20px]" />
+                                                  <Skeleton className="h-[20px] w-full" />
                                                 ) : (
                                                   warehouse?.map((item, index) => (
                                                     <SelectItem
@@ -1095,8 +1065,7 @@ export default function Home() {
                                                       value={item?.warehouse_code}
                                                       id={item?.warehouse_code}
                                                       disabled={
-                                                        form.watch('shipped_from.country') ===
-                                                        item?.country_code
+                                                        form.watch("shipped_from.country") === item?.country_code
                                                       }
                                                     >
                                                       {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
@@ -1109,9 +1078,9 @@ export default function Home() {
                                         </form>
                                       </Form>
                                     </div>
-                                  ) : selectedService === 'cbf' ? (
+                                  ) : selectedService === "cbf" ? (
                                     <>
-                                      <div className="w-full my-4 grid grid-cols-3">
+                                      <div className="my-4 grid w-full grid-cols-3">
                                         <DeclareTable form={form} />
                                       </div>
                                       {/* <Form {...form}>
@@ -1181,7 +1150,7 @@ export default function Home() {
                                     </>
                                   ) : (
                                     <>
-                                      <div className="w-full my-4 grid grid-cols-3">
+                                      <div className="my-4 grid w-full grid-cols-3">
                                         <DeclareTable form={form} />
                                       </div>
                                       <ShippedTo form={form} country_list={country} />
@@ -1190,10 +1159,10 @@ export default function Home() {
                                 </FormItem>
 
                                 <Button
-                                  className={`${tableMode ? 'bloc' : 'hidden'} w-full mt-5`}
+                                  className={`${tableMode ? "bloc" : "hidden"} mt-5 w-full`}
                                   variant="destructive"
                                   onClick={() => {
-                                    triggerContinue()
+                                    triggerContinue();
                                   }}
                                 >
                                   Continue
@@ -1202,17 +1171,17 @@ export default function Home() {
                             </>
                           )}
                         />
-                      ) : tabsName === 'custom' ? (
+                      ) : tabsName === "custom" ? (
                         <>
                           <ShiptoForm form={form} country_list={country} />
                           <div className="">
                             <Dimension form={form} />
                           </div>
-                          {selectedService === 'hfp' ? (
+                          {selectedService === "hfp" ? (
                             <></>
-                          ) : selectedService === 'cbp' ? (
+                          ) : selectedService === "cbp" ? (
                             <div>
-                              <div className="w-full my-4">
+                              <div className="my-4 w-full">
                                 <DeclareTable />
                               </div>
                               <Form {...form}>
@@ -1228,23 +1197,21 @@ export default function Home() {
                                         <SelectTrigger
                                           name="warehouse_destination"
                                           id="warehouse_destination"
-                                          className="text-xs h-[36px]"
+                                          className="h-[36px] text-xs"
                                         >
                                           <SelectValue placeholder="Select Warehouse Destination">
-                                            {loadingWarehouse &&
-                                              selectedDataDestination === undefined ? (
-                                              <Skeleton className="w-full h-[20px]" />
+                                            {loadingWarehouse && selectedDataDestination === undefined ? (
+                                              <Skeleton className="h-[20px] w-full" />
                                             ) : (
-                                              <div className="flex flex-row gap-2 items-center">
-                                                {selectedDataDestination() ===
-                                                  'Select Warehouse Destination' ? (
+                                              <div className="flex flex-row items-center gap-2">
+                                                {selectedDataDestination() === "Select Warehouse Destination" ? (
                                                   <></>
                                                 ) : (
                                                   <img
-                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg`}
-                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg 2x`}
+                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg`}
+                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg 2x`}
                                                     alt=""
-                                                    className="rounded-full w-6 h-6 border border-blue-50 object-cover object-center"
+                                                    className="h-6 w-6 rounded-full border border-blue-50 object-cover object-center"
                                                   />
                                                 )}
                                                 <p>{selectedDataDestination()}</p>
@@ -1256,7 +1223,7 @@ export default function Home() {
 
                                       <SelectContent id="warehouse_destination_select">
                                         {loadingWarehouse ? (
-                                          <Skeleton className="w-full h-[20px]" />
+                                          <Skeleton className="h-[20px] w-full" />
                                         ) : (
                                           warehouse?.map((item, index) => (
                                             <SelectItem
@@ -1264,10 +1231,7 @@ export default function Home() {
                                               className="text-xs"
                                               value={item?.warehouse_code}
                                               id={item?.warehouse_code}
-                                              disabled={
-                                                form.watch('shipped_from.country') ===
-                                                item?.country_code
-                                              }
+                                              disabled={form.watch("shipped_from.country") === item?.country_code}
                                             >
                                               {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
                                             </SelectItem>
@@ -1281,7 +1245,7 @@ export default function Home() {
                             </div>
                           ) : (
                             <>
-                              <div className="w-full my-4 grid grid-cols-3">
+                              <div className="my-4 grid w-full grid-cols-3">
                                 <DeclareTable />
                               </div>
 
@@ -1298,23 +1262,21 @@ export default function Home() {
                                         <SelectTrigger
                                           name="warehouse_destination"
                                           id="warehouse_destination"
-                                          className="text-xs h-[36px]"
+                                          className="h-[36px] text-xs"
                                         >
                                           <SelectValue placeholder="Select Warehouse Destination">
-                                            {loadingWarehouse &&
-                                              selectedDataDestination === undefined ? (
-                                              <Skeleton className="w-full h-[20px]" />
+                                            {loadingWarehouse && selectedDataDestination === undefined ? (
+                                              <Skeleton className="h-[20px] w-full" />
                                             ) : (
-                                              <div className="flex flex-row gap-2 items-center">
-                                                {selectedDataDestination() ===
-                                                  'Select Warehouse Destination' ? (
+                                              <div className="flex flex-row items-center gap-2">
+                                                {selectedDataDestination() === "Select Warehouse Destination" ? (
                                                   <></>
                                                 ) : (
                                                   <img
-                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg`}
-                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg 2x`}
+                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg`}
+                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg 2x`}
                                                     alt=""
-                                                    className="rounded-full w-6 h-6 border border-blue-50 object-cover object-center"
+                                                    className="h-6 w-6 rounded-full border border-blue-50 object-cover object-center"
                                                   />
                                                 )}
                                                 <p>{selectedDataDestination()}</p>
@@ -1326,7 +1288,7 @@ export default function Home() {
 
                                       <SelectContent id="warehouse_destination_select">
                                         {loadingWarehouse ? (
-                                          <Skeleton className="w-full h-[20px]" />
+                                          <Skeleton className="h-[20px] w-full" />
                                         ) : (
                                           warehouse?.map((item, index) => (
                                             <SelectItem
@@ -1334,10 +1296,7 @@ export default function Home() {
                                               className="text-xs"
                                               value={item?.warehouse_code}
                                               id={item?.warehouse_code}
-                                              disabled={
-                                                form.watch('shipped_from.country') ===
-                                                item?.country_code
-                                              }
+                                              disabled={form.watch("shipped_from.country") === item?.country_code}
                                             >
                                               {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
                                             </SelectItem>
@@ -1363,7 +1322,6 @@ export default function Home() {
                             handleValueChange={handleValueChange}
                             checkCoutryCode={checkCoutryCode}
                             loadingService={loadingService}
-
                             newServiceList={newServiceList}
                           />
                         </>
@@ -1379,8 +1337,8 @@ export default function Home() {
           <>
             {open === true && (
               <Sheet open={open} onOpenChange={setOpen} modal={true}>
-                <SheetContent className="rounded-sm" side={'bottom'}>
-                  <SheetHeader className={'hidden'}>
+                <SheetContent className="rounded-sm" side={"bottom"}>
+                  <SheetHeader className={"hidden"}>
                     <SheetTitle>Edit profile</SheetTitle>
                     <SheetDescription></SheetDescription>
                   </SheetHeader>
@@ -1405,9 +1363,7 @@ export default function Home() {
                     otherService={otherService}
                     warehouse_id={warehouse_id}
                     disbaledService={isServiceDisabled(
-                      selectedWarehouseFrom ?
-                        selectedWarehouseFrom?.warehouse_bullet_setting
-                        : false
+                      selectedWarehouseFrom ? selectedWarehouseFrom?.warehouse_bullet_setting : false
                     )}
                   />
                 </SheetContent>
@@ -1416,11 +1372,10 @@ export default function Home() {
 
             {openServicesOption && (
               <Sheet open={openServicesOption} onOpenChange={setOpenServicesOption} modal={true}>
-                <SheetContent className="rounded-sm w-full flex flex-col" side={'bottom'}>
+                <SheetContent className="flex w-full flex-col rounded-sm" side={"bottom"}>
                   <>
                     {openServicesOption &&
-                      (selectedService?.toLowerCase() === 'hfp' ||
-                        selectedService?.toLowerCase() === 'cbp' ? (
+                      (selectedService?.toLowerCase() === "hfp" || selectedService?.toLowerCase() === "cbp" ? (
                         <SummaryPanel
                           loading_rates={loading_rates}
                           rates={courierRates}
@@ -1434,8 +1389,8 @@ export default function Home() {
                           setOpenServicesOption={setOpenServicesOption}
                           selectedService={selectedService}
                         />
-                      ) : (openSummary && selectedService?.toLowerCase() !== 'hfp') ||
-                        (openSummary && selectedService?.toLowerCase() === 'cbp') ? (
+                      ) : (openSummary && selectedService?.toLowerCase() !== "hfp") ||
+                        (openSummary && selectedService?.toLowerCase() === "cbp") ? (
                         <SummaryPanel
                           loading_rates={loading_rates}
                           rates={courierRates}
@@ -1494,16 +1449,13 @@ export default function Home() {
                 otherService={otherService}
                 warehouse_id={warehouse_id}
                 disbaledService={isServiceDisabled(
-                  selectedWarehouseFrom ?
-                    selectedWarehouseFrom?.warehouse_bullet_setting
-                    : false
+                  selectedWarehouseFrom ? selectedWarehouseFrom?.warehouse_bullet_setting : false
                 )}
               />
             </div>
 
             {openServicesOption &&
-              (selectedService?.toLowerCase() === 'hfp' ||
-                selectedService?.toLowerCase() === 'cbp' ? (
+              (selectedService?.toLowerCase() === "hfp" || selectedService?.toLowerCase() === "cbp" ? (
                 <div className={`${styles.service}`}>
                   <SummaryPanel
                     loading_rates={loading_rates}
@@ -1519,8 +1471,8 @@ export default function Home() {
                     selectedService={selectedService}
                   />
                 </div>
-              ) : (openSummary && selectedService?.toLowerCase() !== 'hfp') ||
-                (openSummary && selectedService?.toLowerCase() === 'cbp') ? (
+              ) : (openSummary && selectedService?.toLowerCase() !== "hfp") ||
+                (openSummary && selectedService?.toLowerCase() === "cbp") ? (
                 <div className={`${styles.service}`}>
                   <SummaryPanel
                     loading_rates={loading_rates}
@@ -1563,5 +1515,5 @@ export default function Home() {
         )}
       </div>
     </>
-  )
+  );
 }

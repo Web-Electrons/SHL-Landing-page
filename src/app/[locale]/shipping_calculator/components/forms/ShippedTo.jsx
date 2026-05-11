@@ -281,59 +281,61 @@ export const ShippedTo = ({ form, country_list }) => {
             )}
           />
         </div>
-
-        <FormField
-          control={form.control}
-          name="shipped_to.phone"
-          className="w-full"
-          render={({ field }) => (
-            <FormItem className="mt-2 flex w-full flex-col gap-1 space-y-0">
-              <FormLabel className="">Phone Number</FormLabel>
-              <FormControl>
-                <div className="flex w-full items-center rounded-md border border-zinc-300">
-                  <PhoneInput
-                    country="us" // default country
-                    value={field.value}
-                    onChange={(phone) => field.onChange(phone)} // biarkan library handle '+'
-                    enableSearch
-                    disableDropdown={false}
-                    className="h-[35px] w-full"
-                    inputProps={{
-                      name: "phone",
-                      required: true,
-                      autoFocus: false,
-                      className:
-                        "flex-1 h-[35px] px-3 text-sm bg-transparent placeholder:text-zinc-400 focus:outline-none w-full",
-                      placeholder: "+1 123 456 7890",
-                    }}
-                    countrySelectorStyleProps={{
-                      style: {
-                        background: "transparent",
-                        border: "none",
-                        boxShadow: "none",
-                        outline: "none",
-                        padding: 0,
-                        margin: 0,
-                      },
-                      buttonStyle: {
-                        background: "transparent",
-                        border: "none",
-                        boxShadow: "none",
-                        outline: "none",
-                        padding: 0,
-                        margin: 0,
-                      },
-                      dropdownStyleProps: {
-                        className: "phone-dropdown",
-                      },
-                    }}
-                  />
-                </div>
-              </FormControl>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
+        <div className="flex w-full flex-row gap-2">
+          <FormField
+            control={form.control}
+            name="shipped_to.phone"
+            className="w-full"
+            render={({ field }) => (
+              <FormItem className="mt-2 flex w-full grid-cols-2 flex-col gap-1 space-y-0">
+                <FormLabel className="">Phone Number</FormLabel>
+                <FormControl>
+                  <div className="flex w-full grid-cols-2 items-center rounded-md border border-slate-300">
+                    <PhoneInput
+                      country="us" // default country
+                      value={field.value}
+                      onChange={(phone) => field.onChange(phone)} // biarkan library handle '+'
+                      enableSearch
+                      disableDropdown={false}
+                      className="h-[35px] w-full"
+                      inputProps={{
+                        name: "phone",
+                        required: true,
+                        autoFocus: false,
+                        className:
+                          "flex-1 h-[35px] px-3 text-sm bg-transparent placeholder:text-zinc-400 focus:outline-none w-full",
+                        placeholder: "+1 123 456 7890",
+                      }}
+                      countrySelectorStyleProps={{
+                        style: {
+                          background: "transparent",
+                          border: "none",
+                          boxShadow: "none",
+                          outline: "none",
+                          padding: 0,
+                          margin: 0,
+                        },
+                        buttonStyle: {
+                          background: "transparent",
+                          border: "none",
+                          boxShadow: "none",
+                          outline: "none",
+                          padding: 0,
+                          margin: 0,
+                        },
+                        dropdownStyleProps: {
+                          className: "phone-dropdown",
+                        },
+                      }}
+                    />
+                  </div>
+                </FormControl>
+                <FormMessage className="text-xs" />
+              </FormItem>
+            )}
+          />
+          <div className="w-full" />
+        </div>
       </div>
     </div>
   );

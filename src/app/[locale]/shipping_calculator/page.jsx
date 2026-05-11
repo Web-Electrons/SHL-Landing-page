@@ -78,7 +78,7 @@ const formSchema = yup.object().shape({
     address: yup.string(),
     address2: yup.string(),
     email: yup.string(),
-    phone: yup.string(),
+    phone: yup.string().min(10, "Phone number must be at least 10 digits"),
   }),
   shippingType: yup.string(),
   warehouse_destination: yup.string(),
@@ -115,6 +115,9 @@ export default function Home() {
     return setting.toLowerCase() === "disable";
   };
   const [courierRates, setCourierRates] = useState([]);
+
+  const [ratesMessage, setRatesMessage] = useState([]);
+
   const [country, setCountry] = useState([]);
   const [disabledForm, setDisabledForm] = useState(false);
   const [loading_rates, set_loading_rates] = useState(false);
@@ -501,12 +504,21 @@ export default function Home() {
     }
 
     const notRequired = ["name", "address2"];
-    const emptyFields = Object.entries(addressTo).filter(
-      ([key, value]) =>
-        !notRequired.includes(key) && // skip jika key termasuk not required
-        (value === "" || value === null || value === undefined || (typeof value === "string" && value.trim() === ""))
-    );
+    const emptyFields = Object.entries(addressTo).filter(([key, value]) => {
+      if (notRequired.includes(key)) return false;
 
+      if (typeof value === "string" && value.trim() === "") return true;
+
+      if (value === null || value === undefined) return true;
+
+      if (Array.isArray(value) && value.length === 0) return true;
+
+      if (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0) {
+        return true;
+      }
+
+      return false;
+    });
     if (emptyFields.length > 0) {
       toast({
         title: "Oops! Please check the form",
@@ -538,7 +550,7 @@ export default function Home() {
           zip: formData.shipped_to.zip,
           street1: formData.shipped_to.address,
           street2: formData.shipped_to.address2,
-          phone: "+12345678900",
+          phone: formData.shipped_to.phone,
         },
         parcels: {
           weight: formData.dimension.weight,
@@ -559,6 +571,7 @@ export default function Home() {
           status: "success",
         });
         setCourierRates(response.data.rates.rates || []);
+        setRatesMessage(response.data.rates.messages || []);
       } else {
         toast({
           title: "Error",
@@ -1417,6 +1430,7 @@ export default function Home() {
                           setSelectedData={setSelectedData}
                           selecetedData={selecetedData}
                           showRates={showRates}
+                          ratesMessage={ratesMessage}
                           setOpenServicesOption={setOpenServicesOption}
                         />
                       ))}
@@ -1508,6 +1522,7 @@ export default function Home() {
                     selectedService={selectedService}
                     warehouseCountry={warehouseCountry}
                     formWatch={formWatch}
+                    ratesMessage={ratesMessage}
                   />
                 </div>
               ))}

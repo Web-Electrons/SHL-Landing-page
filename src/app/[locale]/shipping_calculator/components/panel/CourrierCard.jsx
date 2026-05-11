@@ -10,7 +10,7 @@ export const CourrierCard = ({ data, isSelected, onSelect }) => {
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-2">
           <img
-            src={data?.providerImage200 || "/placeholder-logo.png"}
+            src={data?.providerImage200 || "/Shiplink.png"}
             alt={data?.provider}
             className="h-8 w-8 rounded bg-blue-100 object-contain object-center p-1"
           />

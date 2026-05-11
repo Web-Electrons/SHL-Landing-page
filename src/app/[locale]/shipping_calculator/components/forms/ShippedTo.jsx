@@ -1,118 +1,98 @@
-import React, { useEffect, useState } from "react";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup } from "@/components/ui/select";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+import NewAutocompleteInput from "@/components/new-autocomplete";
+import { processSelectedAddress } from "@/features/autocomplete/utils/processSelectedAddress";
+import { useToast } from "@/src/components/ui/use-toast";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import React from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-
 import "./style.css";
-import NewAutocompleteInput from "@/components/new-autocomplete";
 
 export const ShippedTo = ({ form, country_list }) => {
-  const [selectedCountry, setSelectedCountry] = useState({
-    country_code: "",
-    country_name: "",
-  });
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
 
-  const handleSelectCountry = (country_code, country_name) => {
-    form.setValue("country_name", country_name);
-    setSelectedCountry({ country_code, country_name });
-  };
-
-  const [province_list, setProvince] = useState([]);
-  const [popProvince, setPopProvince] = useState(false);
+  const [stateCode, setStateCode] = React.useState("");
+  console.log("wahch form", form.watch("shipped_to"));
 
   const shipping = form.watch("shippingType");
 
   const country_code = form.watch("shipped_to.country");
 
-  const [queryProvince, setQueryProvince] = useState({
-    keyword: "",
-    country_code: "",
-    page: 0,
-    limit: 1000,
-    index: 0,
-  });
-
-  useEffect(() => {
-    // Update country_code hanya saat selectedCountry berubah
-    if (!country_code) return;
-
-    setQueryProvince((prev) => ({
-      ...prev,
-      country_code: country_code,
-    }));
-  }, [country_code]);
-
-  useEffect(() => {
-    // Fetch data hanya jika country_code sudah ada
-    if (!queryProvince.country_code) return;
-
-    const fetchDataProvince = async () => {
-      try {
-        const response = await axios.post(`/api/province`, queryProvince);
-
-        setProvince(response.data.province);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchDataProvince();
-  }, [queryProvince]);
-
-  const filteredProvince = province_list;
-
-  const [pendingStateCode, setPendingStateCode] = useState(null);
-
-  const handleCountryChange = async (country_code, state_code) => {
-    const country = country_list?.find((c) => c.alpha_2 === country_code);
-
-    if (!country) return;
-
-    form.setValue("shipped_to.country", country.country_code);
-    form.setValue("country_name", country.country_name);
-
-    setSelectedCountry({
-      country_code,
-      country_name: country.country_name,
-    });
-
-    try {
+  const { data: province_list = [], isFetching: isProvinceFetching } = useQuery({
+    queryKey: ["province", country_code],
+    enabled: !!country_code,
+    staleTime: 1000 * 60 * 60,
+    queryFn: async () => {
       const response = await axios.post("/api/province", {
         keyword: "",
-        country_code: country.country_code,
+        alpha_2: country_code,
         page: 0,
         limit: 1000,
         index: 0,
       });
+      return response.data.province;
+    },
+  });
 
-      const provinces = response.data.province || [];
+  const handleSelectedAddress = async (countryName, iso2, province, provinceCode) => {
+    const data = await processSelectedAddress({
+      iso2,
+      countryName,
+      province,
+      provinceCode,
+      country_list: country_list,
+      queryClient,
+    });
+    console.log("data", data);
 
-      setProvince(provinces);
+    const alpha_2 = data?.country?.alpha_2;
+    form.setValue("shipped_to.country", alpha_2 || "");
 
-      // simpan state_code dulu
-      if (state_code) {
-        setPendingStateCode(state_code);
-      }
-    } catch (error) {
-      console.error(error);
+    setStateCode(data?.province?.province_code);
+    if (alpha_2) {
+      form.setValue("shipped_to.state", data?.province?.province_code || "");
+    }
+
+    if (data?.status === "error") {
+      console.warn("Province fetch failed:", data.error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to fetch and set Province. Please Select Manually.",
+      });
+      form.setValue("shipped_to.state", "");
+      form.setValue("shipped_to.country", "");
+      form.setError("shipped_to.country", {
+        message: "Please Select Country Manually",
+      });
+      form.setError("shipped_to.state", {
+        message: "Please Select Province Manually",
+      });
     }
   };
-  useEffect(() => {
-    if (!pendingStateCode || province_list.length === 0) return;
 
-    const province = province_list.find((p) => p.province_name === pendingStateCode);
-
-    if (province) {
-      form.setValue("shipped_to.state", province.province_name);
-      form.setValue("state", province.province_name);
-    }
-
-    setPendingStateCode(null);
-  }, [province_list, pendingStateCode, form]);
+  /**
+   * ISSUE !!!
+   * IMPORTANT !
+   *
+   * > component Select State/Province mengubah State dari form !
+   * > bug ini tidak dapat di ikuti alurnya, tapi bisa di coba menghilangkan useEffect dari state form
+   * >
+   */
+  // ISSUE > Select Mengubah State, dari state awal seetelah autocomplete select state : NY dan mencoba lagi Autoselect ke country lain form state terisi di inital awal sa
+  console.log(
+    "province_list length:",
+    province_list?.length,
+    "isFetching:",
+    isProvinceFetching,
+    "state value:",
+    form.getValues("shipped_to.state")
+  );
 
   return (
     <div className="flex flex-col">
@@ -141,11 +121,12 @@ export const ShippedTo = ({ form, country_list }) => {
                   form.setValue("shipped_to.address", place.street1);
                   form.setValue("shipped_to.city", place.city);
                   form.setValue("shipped_to.zip", place.zip);
-                  form.setValue("shipped_to.state", place.state_code);
-                  form.setValue("shipped_to.country", place.country_code);
+                  // form.setValue("shipped_to.state", place.state_code);
+                  // form.setValue("shipped_to.country", place.country_code);
                   form.setValue("country_name", place.country);
 
-                  handleCountryChange(place.country_code, place.state);
+                  // handleCountryChange(place.country_code, place.state_code);
+                  handleSelectedAddress(place.country, place.country_code, place.state, place.state_code);
                 }}
                 onValueChange={(e) => {
                   form.setValue("shipped_to.address", e);
@@ -181,7 +162,11 @@ export const ShippedTo = ({ form, country_list }) => {
 
                     <SelectContent>
                       {country_list?.map((item, index) => (
-                        <SelectItem key={item?.country_id} value={item.country_code} className="text-xs">
+                        <SelectItem
+                          key={`country-${index}-${item?.country_id}`}
+                          value={item.alpha_2}
+                          className="text-xs"
+                        >
                           {item.country_name}
                         </SelectItem>
                       ))}
@@ -196,38 +181,47 @@ export const ShippedTo = ({ form, country_list }) => {
           <FormField
             control={form.control}
             name="shipped_to.state"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>
-                  State / Province <span className="text-red-600">*</span>
-                </FormLabel>
+            render={({ field }) => {
+              const selectValue = field.value ?? "";
+              return (
+                <FormItem className="w-full">
+                  <FormLabel>
+                    State / Province <span className="text-red-600">*</span>
+                  </FormLabel>
 
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value} // ini sekarang akan berisi province_code
-                >
-                  <FormControl>
-                    <SelectTrigger className="h-[36px] text-xs">
-                      <SelectValue placeholder="Select State / Province" />
-                    </SelectTrigger>
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={selectValue} // selalu string, tidak pernah undefined
+                  >
+                    <FormControl>
+                      <SelectTrigger className="h-[36px] text-xs">
+                        <SelectValue placeholder={isProvinceFetching ? "Loading..." : "Select State / Province"} />
+                      </SelectTrigger>
+                    </FormControl>
 
-                  <SelectContent>
-                    {province_list?.length > 0 ? (
-                      province_list.map((item) => (
-                        <SelectItem key={item.province_id} value={item.province_code} className="text-xs">
-                          {item.province_name}
-                        </SelectItem>
-                      ))
-                    ) : (
-                      <div className="py-2 text-center text-xs">No Province found.</div>
-                    )}
-                  </SelectContent>
-                </Select>
+                    <SelectContent>
+                      {isProvinceFetching ? (
+                        <div className="py-2 text-center text-xs">Loading...</div>
+                      ) : province_list?.length > 0 ? (
+                        province_list.map((item, index) => (
+                          <SelectItem
+                            key={`${item.province_id}-${index}`}
+                            value={item.province_code}
+                            className="text-xs"
+                          >
+                            {item.province_name}
+                          </SelectItem>
+                        ))
+                      ) : (
+                        <div className="py-2 text-center text-xs">No Province found.</div>
+                      )}
+                    </SelectContent>
+                  </Select>
 
-                <FormMessage className="text-xs" />
-              </FormItem>
-            )}
+                  <FormMessage className="text-xs" />
+                </FormItem>
+              );
+            }}
           />
         </div>
         <div className="flex w-full flex-row gap-2">
@@ -262,6 +256,59 @@ export const ShippedTo = ({ form, country_list }) => {
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="shipped_to.phone"
+          className="w-full"
+          render={({ field }) => (
+            <FormItem className="mt-2 flex w-full flex-col gap-1 space-y-0">
+              <FormLabel className="">Phone Number</FormLabel>
+              <FormControl>
+                <div className="flex w-full items-center rounded-md border border-zinc-300">
+                  <PhoneInput
+                    country="us" // default country
+                    value={field.value}
+                    onChange={(phone) => field.onChange(phone)} // biarkan library handle '+'
+                    enableSearch
+                    disableDropdown={false}
+                    className="h-[35px] w-full"
+                    inputProps={{
+                      name: "phone",
+                      required: true,
+                      autoFocus: false,
+                      className:
+                        "flex-1 h-[35px] px-3 text-sm bg-transparent placeholder:text-zinc-400 focus:outline-none w-full",
+                      placeholder: "+1 123 456 7890",
+                    }}
+                    countrySelectorStyleProps={{
+                      style: {
+                        background: "transparent",
+                        border: "none",
+                        boxShadow: "none",
+                        outline: "none",
+                        padding: 0,
+                        margin: 0,
+                      },
+                      buttonStyle: {
+                        background: "transparent",
+                        border: "none",
+                        boxShadow: "none",
+                        outline: "none",
+                        padding: 0,
+                        margin: 0,
+                      },
+                      dropdownStyleProps: {
+                        className: "phone-dropdown",
+                      },
+                    }}
+                  />
+                </div>
+              </FormControl>
+              <FormMessage className="text-xs" />
+            </FormItem>
+          )}
+        />
       </div>
     </div>
   );

@@ -141,7 +141,7 @@ export const ShippedTo = ({ form, country_list }) => {
                   form.setValue("shipped_to.address", place.street1);
                   form.setValue("shipped_to.city", place.city);
                   form.setValue("shipped_to.zip", place.zip);
-
+                  form.setValue("shipped_to.state", place.state_code);
                   form.setValue("shipped_to.country", place.country_code);
                   form.setValue("country_name", place.country);
 
@@ -202,7 +202,10 @@ export const ShippedTo = ({ form, country_list }) => {
                   State / Province <span className="text-red-600">*</span>
                 </FormLabel>
 
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value} // ini sekarang akan berisi province_code
+                >
                   <FormControl>
                     <SelectTrigger className="h-[36px] text-xs">
                       <SelectValue placeholder="Select State / Province" />
@@ -211,8 +214,8 @@ export const ShippedTo = ({ form, country_list }) => {
 
                   <SelectContent>
                     {province_list?.length > 0 ? (
-                      province_list?.map((item, index) => (
-                        <SelectItem key={item.province_id} value={item.province_name} className="text-xs">
+                      province_list.map((item) => (
+                        <SelectItem key={item.province_id} value={item.province_code} className="text-xs">
                           {item.province_name}
                         </SelectItem>
                       ))

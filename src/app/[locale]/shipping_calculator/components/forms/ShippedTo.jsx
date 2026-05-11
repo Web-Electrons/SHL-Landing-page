@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -7,7 +9,7 @@ import { processSelectedAddress } from "@/features/autocomplete/utils/processSel
 import { useToast } from "@/src/components/ui/use-toast";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import "./style.css";
@@ -84,7 +86,12 @@ export const ShippedTo = ({ form, country_list }) => {
    * > bug ini tidak dapat di ikuti alurnya, tapi bisa di coba menghilangkan useEffect dari state form
    * >
    */
-  // ISSUE > Select Mengubah State, dari state awal seetelah autocomplete select state : NY dan mencoba lagi Autoselect ke country lain form state terisi di inital awal sa
+
+  useEffect(() => {
+    if (stateCode) {
+      form.setValue("shipped_to.state", stateCode);
+    }
+  }, [stateCode]);
   console.log(
     "province_list length:",
     province_list?.length,

@@ -27,7 +27,8 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   body: {
     backgroundColor: COLOR.pageBg,
     margin: "0",
-    padding: "0",
+    paddingTop: "20px",
+    paddingBottom: "20px",
     fontFamily: FONT.family,
   },
 
@@ -47,10 +48,16 @@ export const emailStyles: Record<string, React.CSSProperties> = {
 
   header: {
     backgroundColor: COLOR.brand,
-    paddingTop: `${SPACE[5]}px`,
-    paddingBottom: `${SPACE[5]}px`,
+    paddingTop: `${SPACE[4]}px`,
+    paddingBottom: `${SPACE[4]}px`,
     paddingLeft: `${SPACE[11]}px`,
     paddingRight: `${SPACE[11]}px`,
+    borderBottom: `3px solid ${COLOR.brandDark}`,
+  },
+
+  headerAccent: {
+    width: `100%`,
+    backgroundColor: COLOR.brandDark,
   },
 
   logoText: {
@@ -106,7 +113,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
 
   headline: {
     fontFamily: FONT.family,
-    fontSize: `${FONT_SIZE["2xl"]}px`,
+    fontSize: `${FONT_SIZE["xl"]}px`,
     fontWeight: FONT.weight.black,
     color: COLOR.textPrimary,
     lineHeight: "1.2",
@@ -273,8 +280,8 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     fontSize: `${FONT_SIZE.small}px`,
     color: COLOR.textLabel,
     lineHeight: "24px",
-    marginTop: `${SPACE[3]}px`,
-    marginBottom: `${SPACE[3]}px`,
+    marginTop: `0`,
+    marginBottom: "0",
     padding: "0",
   },
 
@@ -304,8 +311,8 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     fontSize: `${FONT_SIZE.body}px`,
     color: COLOR.textAddress,
     lineHeight: "24px",
-    marginTop: `${SPACE[1]}px`,
-    marginBottom: `${SPACE[1]}px`,
+    marginTop: `5px`,
+    marginBottom: `5px`,
     padding: "0",
   },
 
@@ -316,10 +323,14 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   footer: {
     borderTop: `1px solid ${COLOR.containerBorder}`,
     backgroundColor: COLOR.white,
-    paddingTop: `${SPACE[8]}px`,
-    paddingBottom: `${SPACE[8]}px`,
+    // paddingTop: `${SPACE[4]}px`,
+    paddingBottom: `${SPACE[6]}px`,
     paddingLeft: `${CONTAINER.paddingH}px`,
     paddingRight: `${CONTAINER.paddingH}px`,
+  },
+
+  footerBottom: {
+    paddingTop: `${SPACE[3]}px`,
   },
 
   footerBrand: {
@@ -330,7 +341,6 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     letterSpacing: "0px",
     margin: "0",
     padding: "0",
-    lineHeight: "24px",
   },
 
   footerLink: {
@@ -341,10 +351,22 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   },
 
   footerCopy: {
+    lineHeight: "15px",
     fontFamily: FONT.family,
     fontSize: `${FONT_SIZE.caption}px`,
     color: "#444444",
     margin: "0",
     padding: "0",
+  },
+
+  // ────────────────────────────────────────────────────────
+  // Support Signature
+  // ────────────────────────────────────────────────────────
+
+  support: {
+    paddingTop: `${SPACE[8]}px`,
+    paddingBottom: `${SPACE[8]}px`,
+    paddingLeft: `${CONTAINER.paddingH}px`,
+    paddingRight: `${CONTAINER.paddingH}px`,
   },
 };

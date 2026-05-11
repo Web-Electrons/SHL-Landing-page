@@ -43,7 +43,7 @@ export const COLOR = {
 // ─── Typography ───────────────────────────────────────────────────────────────
 export const FONT = {
   // React Email sangat terbatas font-nya; stack safe untuk semua email client
-  family: "Arial, Helvetica",
+  family: "Arial, Helvetica, sans-serif",
 
   weight: {
     regular: 400,
@@ -64,7 +64,7 @@ export const FONT_SIZE = {
   lg: 16, // —
   xl: 20, // headline mobile fallback
   "2xl": 22, // headline desktop
-  logo: 32, // logo header
+  logo: 28, // logo header
 } as const;
 
 // ─── Spacing (px) ─────────────────────────────────────────────────────────────

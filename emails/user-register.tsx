@@ -1,5 +1,6 @@
-import { Body, Button, Container, Head, Html, Preview, Section, Text } from "react-email";
+import { Body, Container, Head, Html, Preview, Section, Text } from "react-email";
 
+import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { emailStyles as s } from "./style/styles";
@@ -72,11 +73,14 @@ export const NewUserEmail = (props: NewUserEmailProps) => {
             </Section>
 
             <Text style={s.description}>Please review this user and take action if necessary.</Text>
-
             {/* CTA */}
-            <Button href={p.link} style={s.cta}>
-              VIEW USER
-            </Button>
+            <CustomButton
+              style={{
+                marginTop: "0px",
+              }}
+              label="VIEW USER"
+              link={p.link}
+            />
           </Section>
 
           {/* FOOTER */}

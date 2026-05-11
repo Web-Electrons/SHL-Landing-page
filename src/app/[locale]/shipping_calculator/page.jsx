@@ -493,7 +493,7 @@ export default function Home() {
 
   const handleSave = async (formData) => {
     const addressTo = formData.shipped_to;
-
+    setRatesMessage([]);
     if (formData.total_package_value <= 0) {
       toast({
         title: "Oops! Please check the form",

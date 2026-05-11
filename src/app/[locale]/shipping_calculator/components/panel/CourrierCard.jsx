@@ -21,7 +21,7 @@ export const CourrierCard = ({ data, isSelected, onSelect }) => {
             <p className="text-[10px] text-gray-500">Estimate {data.estimatedDays || "-"} Days</p>
           </div>
         </div>
-        <p className="w-[30%] text-right text-xs">{`${formatCurrency(data?.currencyLocal)} ${formatDecimal(data?.amountLocal || 0)}`}</p>
+        <p className="w-[30%] text-right text-xs">{`${formatCurrency(data?.currency)} ${formatDecimal(data?.amountLocal || 0)}`}</p>
       </div>
     </div>
   );

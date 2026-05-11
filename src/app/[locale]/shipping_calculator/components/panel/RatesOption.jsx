@@ -75,7 +75,7 @@ export const RatesOption = ({
         warehouse_id_destination: warehouseDestination,
         broker: "use shiplink broker",
         amountLocal: selecetedData?.amountLocal,
-        currencyLocal: selecetedData?.currencyLocal,
+        currencyLocal: selecetedData?.currency,
         addressTo: {
           name: "Shiplink",
           country: formWatch.shipped_to.country,
@@ -134,7 +134,7 @@ export const RatesOption = ({
         warehouse_id: warehouse_id,
         broker: "",
         amountLocal: selecetedData?.amountLocal,
-        currencyLocal: selecetedData?.currencyLocal,
+        currencyLocal: selecetedData?.currency,
         parcels: {
           weight: formWatch.dimension.weight,
           mass_unit: formWatch.dimension.weight_unit,

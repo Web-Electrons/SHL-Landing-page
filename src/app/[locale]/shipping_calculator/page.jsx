@@ -869,6 +869,7 @@ export default function Home() {
         });
         return;
       }
+
       setOpenSummary(false);
       const isValid = await validateForm();
       if (isValid) {
@@ -889,6 +890,7 @@ export default function Home() {
     }).format(value);
   };
 
+  const whDestinationCrossBorder = form.watch("shipped_from.country") === "US" ? "CA" : "US";
   return (
     <>
       {loading_rates && <Loading />}
@@ -1077,9 +1079,7 @@ export default function Home() {
                                                       className="text-xs"
                                                       value={item?.warehouse_code}
                                                       id={item?.warehouse_code}
-                                                      disabled={
-                                                        form.watch("shipped_from.country") === item?.country_code
-                                                      }
+                                                      disabled={whDestinationCrossBorder !== item?.country_code}
                                                     >
                                                       {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
                                                     </SelectItem>

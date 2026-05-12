@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import Link from 'next/link'
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
 
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent } from "@/components/ui/card";
 
-import React from 'react'
-import { Separator } from '@/components/ui/separator'
-import { formatCurrency, formatDecimal } from '@/lib/utils'
+import React from "react";
+import { Separator } from "@/components/ui/separator";
+import { formatCurrency, formatDecimal } from "@/lib/utils";
 
 export const Summary = ({
   rates = [],
@@ -19,29 +19,29 @@ export const Summary = ({
   setOpenServicesOption,
   selectedService,
 }) => {
-  const login = process.env.NEXT_PUBLIC_LOGIN_URL
-  const [isFastest, setIsFastest] = useState(false)
-  const [sortedRates, setSortedRates] = useState([])
+  const login = process.env.NEXT_PUBLIC_LOGIN_URL;
+  const [isFastest, setIsFastest] = useState(false);
+  const [sortedRates, setSortedRates] = useState([]);
 
   const handleRefresh = () => {
     // Implement refresh logic here
 
-    console.log('Refreshing rates...')
-  }
+    console.log("Refreshing rates...");
+  };
 
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    let total = 0
-    let carrierTotal = selecetedData?.amountLocal || 0
-    summaryData?.data?.services.forEach(item => {
-      total += item?.amount
-    })
-    setTotal(total + carrierTotal)
-  }, [summaryData])
+    let total = 0;
+    let carrierTotal = selecetedData?.amountLocal || 0;
+    summaryData?.data?.services.forEach((item) => {
+      total += item?.amount;
+    });
+    setTotal(total + carrierTotal);
+  }, [summaryData, selecetedData]);
 
   return (
-    <div className="flex flex-col  h-full">
+    <div className="flex h-full flex-col">
       <div className="flex flex-row justify-between">
         {/* <Button
                     size="xs"
@@ -54,11 +54,11 @@ export const Summary = ({
                 </Button> */}
       </div>
 
-      <ScrollArea className="h-[80%] mt-3">
+      <ScrollArea className="mt-3 h-[80%]">
         <div className="list flex flex-col gap-2">
           <div className="">
             <Card className="border-none p-0">
-              <CardContent className="px-0 space-y-2">
+              <CardContent className="space-y-2 px-0">
                 <div className="">
                   {/* {selecetedData && selectedService !== 'hfp' && selectedService !== 'cbp' && (
                     <div className="flex flex-row gap-2 items-center  p-1">
@@ -74,12 +74,9 @@ export const Summary = ({
                     </div>
                   )} */}
                   {summaryData?.data?.services?.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center p-1 gap-2 w-full  rounded-lg"
-                    >
+                    <div key={index} className="flex w-full items-center justify-between gap-2 rounded-lg p-1">
                       <div className="inline-flex gap-2">
-                        <span className="font-medium text-xs text-left">{item?.service}</span>
+                        <span className="text-left text-xs font-medium">{item?.service}</span>
                       </div>
                       <span className="text-xs">
                         {formatCurrency(item?.currency)}
@@ -90,30 +87,41 @@ export const Summary = ({
                 </div>
                 <Separator />
                 <div className="">
-                  <div className="grid gap-2">
-                    <div className="flex justify-between items-center p-1 gap-2 w-full  rounded-lg">
-                      <div className="inline-flex gap-2">
-                        <span className="font-bold text-sm text-left">Total</span>
-                      </div>
-                      <span className="text-xs">
-                        {formatCurrency(summaryData?.data?.currency)}
-                        {formatDecimal(summaryData?.data?.total)}
-                      </span>
+                  <div className="flex flex-col rounded-lg p-1">
+                    <div className="flex flex-row justify-between">
+                      <p className="text-sm font-bold">Total</p>
+                      {summaryData?.data?.currency === "USD" && (
+                        <p className="text-xs font-medium">USD ${formatDecimal(summaryData?.data?.total)}</p>
+                      )}
                     </div>
+
+                    {summaryData?.data?.total_usd && summaryData?.data?.currency === "CAD" && (
+                      <div>
+                        <div className="flex justify-end gap-2 text-xs">
+                          <span>CAD</span>
+                          <span className="font-medium">${formatDecimal(summaryData?.data?.total)}</span>
+                        </div>
+
+                        <div className="flex justify-end gap-2 text-xs">
+                          <span>USD</span>
+                          <span className="font-medium">${formatDecimal(summaryData?.data?.total_usd)}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="">
                   <Link passHref className="w-full" href={`${login}`}>
-                    <Button variant="destructive" className="w-full mt-3">
+                    <Button variant="destructive" className="mt-3 w-full">
                       Start Saving
                     </Button>
                   </Link>
                   <Button
                     variant="redOutline"
-                    className="w-full mt-3"
+                    className="mt-3 w-full"
                     onClick={() => {
-                      setOpenServicesOption(false)
-                      setShowRates(false)
+                      setOpenServicesOption(false);
+                      setShowRates(false);
                     }}
                   >
                     Cancel
@@ -125,5 +133,5 @@ export const Summary = ({
         </div>
       </ScrollArea>
     </div>
-  )
-}
+  );
+};

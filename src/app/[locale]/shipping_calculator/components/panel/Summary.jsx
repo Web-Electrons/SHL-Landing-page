@@ -95,12 +95,12 @@ export const Summary = ({
                         <span>{summaryData?.data?.currency}</span>
                         <span className="font-medium">${formatDecimal(summaryData?.data?.total)}</span>
                       </div>
-                      {summaryData?.data?.total_usd && summaryData?.data?.currency === "CAD" && (
+                      {summaryData?.data?.total_usd && summaryData?.data?.currency === "CAD" ? (
                         <div className="flex justify-end gap-2 text-xs">
                           <span>USD</span>
                           <span className="font-medium">${formatDecimal(summaryData?.data?.total_usd)}</span>
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 </div>

@@ -127,7 +127,7 @@ export default function Home() {
   const [selecetedData, setSelectedData] = useState(null);
   const [openRatesOption, setOpenRatesOption] = useState(false);
   const [openSummary, setOpenSummary] = useState(false);
-  const [selectedService, setSelectedService] = useState("hfp");
+  const [selectedService, setSelectedService] = useState("forward");
   const [serviceList, setServiceList] = useState([]);
   const [otherService, setOtherService] = useState([]);
   const [warehouse_id, setWarehouseId] = useState("");

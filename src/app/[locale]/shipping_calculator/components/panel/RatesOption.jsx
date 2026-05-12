@@ -126,7 +126,6 @@ export const RatesOption = ({
     }
   };
 
-  console.log("FORMWATCH", selectedService);
   const handleDF = async () => {
     set_loading_rates(true);
     try {

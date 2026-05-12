@@ -891,6 +891,19 @@ export default function Home() {
   };
 
   const whDestinationCrossBorder = form.watch("shipped_from.country") === "US" ? "CA" : "US";
+
+  console.log("selectedService", selectedService);
+
+  useEffect(() => {
+    console.log("selectedService:", selectedService);
+
+    if (selectedService === "forward") {
+      console.log("RESET TRIGGERED");
+      form.setValue("warehouse_id_destination", "");
+      setWarehouseDestination_id("");
+    }
+  }, [selectedService, form]);
+
   return (
     <>
       {loading_rates && <Loading />}

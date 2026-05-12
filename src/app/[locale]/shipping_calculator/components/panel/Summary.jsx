@@ -15,6 +15,7 @@ export const Summary = ({
   loading_rates,
   summaryData,
   selecetedData,
+  setSelectedData,
   setShowRates,
   setOpenServicesOption,
   selectedService,
@@ -87,27 +88,20 @@ export const Summary = ({
                 </div>
                 <Separator />
                 <div className="">
-                  <div className="flex flex-col rounded-lg p-1">
-                    <div className="flex flex-row justify-between">
-                      <p className="text-sm font-bold">Total</p>
-                      {summaryData?.data?.currency === "USD" && (
-                        <p className="text-xs font-medium">USD ${formatDecimal(summaryData?.data?.total)}</p>
-                      )}
-                    </div>
-
-                    {summaryData?.data?.total_usd && summaryData?.data?.currency === "CAD" && (
-                      <div>
-                        <div className="flex justify-end gap-2 text-xs">
-                          <span>CAD</span>
-                          <span className="font-medium">${formatDecimal(summaryData?.data?.total)}</span>
-                        </div>
-
+                  <div className="flex flex-row justify-between p-1">
+                    <p className="text-sm font-bold">Total</p>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex justify-end gap-2 text-xs">
+                        <span>{summaryData?.data?.currency}</span>
+                        <span className="font-medium">${formatDecimal(summaryData?.data?.total)}</span>
+                      </div>
+                      {summaryData?.data?.total_usd && summaryData?.data?.currency === "CAD" && (
                         <div className="flex justify-end gap-2 text-xs">
                           <span>USD</span>
                           <span className="font-medium">${formatDecimal(summaryData?.data?.total_usd)}</span>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="">
@@ -122,6 +116,7 @@ export const Summary = ({
                     onClick={() => {
                       setOpenServicesOption(false);
                       setShowRates(false);
+                      setSelectedData(null);
                     }}
                   >
                     Cancel

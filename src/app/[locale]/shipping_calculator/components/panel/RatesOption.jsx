@@ -263,6 +263,7 @@ export const RatesOption = ({
                   onClick={() => {
                     setShowRates(false);
                     setOpenServicesOption(false);
+                    setSelectedData(null);
                   }}
                 >
                   Cancel

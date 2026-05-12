@@ -534,6 +534,7 @@ export default function Home() {
       const response = await axios.post(`/api/Calculator/ShippingCalculation`, {
         warehouse_id: warehouse_id,
         warehouse_id_destination: warehouseDestination_id,
+        service: selectedService === "cbf" ? "Cross Border Forward" : "Direct Forward",
         addressFrom: {
           country: formData.shipped_from.country,
           state: formData.shipped_from.state,
@@ -576,6 +577,7 @@ export default function Home() {
         toast({
           title: "Error",
           description: response.data.message,
+          variant: "destructive",
         });
         return response.data.message;
       }
@@ -583,6 +585,7 @@ export default function Home() {
       toast({
         title: "Errors",
         description: error.message,
+        variant: "destructive",
       });
       console.error("Save Error", error);
     } finally {
@@ -607,36 +610,6 @@ export default function Home() {
 
     return messages;
   };
-
-  // const validateForm = async () => {
-  //   const isValid = await form.trigger()
-
-  //   if (!isValid) {
-  //     tableMode && setOpen(true)
-  //     // Ambil semua field yang error dari form state
-  //     const errors = form.formState.errors
-  //     console.log('🚀 ~ validateForm ~ errors:', errors)
-
-  //     // Mapping pesan error yang lebih friendly
-  //     const errorMessages = Object.values(errors).map(fieldError => {
-  //       console.log('🚀 ~ errorMessages ~ fieldError.message:', fieldError.message)
-  //       if (fieldError.message) return fieldError.message
-  //       return 'Some required fields are missing.'
-  //     })
-
-  //     // Gabungkan semua pesan error
-  //     const friendlyErrorMessage = errorMessages.join(', ')
-
-  //     console.log('🚀 ~ validateForm ~ errorFields:', errors)
-
-  //     toast({
-  //       title: 'Oops! Please check the form',
-  //       description: 'Some required fields are missing.',
-  //       status: 'error',
-  //     })
-
-  //     return false
-  //   }
 
   const validateForm = async () => {
     const isValid = await form.trigger();
@@ -791,42 +764,6 @@ export default function Home() {
     }
   };
 
-  // const handleContinue = async () => {
-  //   const isValid = await validateForm()
-  //   if (!isValid) return
-
-  //   if (selectedService === 'hfp') {
-  //     return handleHFP()
-  //   }
-
-  //   if (selectedService === 'cbp') {
-  //     return handleCBP()
-  //   }
-
-  //   if (formWatch.total_package_value <= 0) {
-  //     toast({
-  //       title: 'Oops! Please check the form',
-  //       description: 'Please input total declare value.',
-  //       variant: 'destructive',
-  //     })
-  //     return
-  //   }
-  //   if (formWatch.shipped_to.country === '') {
-  //     toast({
-  //       title: 'Oops! Please check the form',
-  //       description: 'Please input total COuntry value.',
-  //       variant: 'destructive',
-  //     })
-  //     return
-  //   }
-
-  //   setOpenSummary(false)
-  //   setDisabledForm(true)
-  //   setShowRates(false)
-
-  //   await triggerSave()
-  //   setOpenServicesOption(true)
-  // }
   const handleContinue = async () => {
     if (
       formWatch.dimension.height === 0 ||
@@ -892,13 +829,8 @@ export default function Home() {
 
   const whDestinationCrossBorder = form.watch("shipped_from.country") === "US" ? "CA" : "US";
 
-  console.log("selectedService", selectedService);
-
   useEffect(() => {
-    console.log("selectedService:", selectedService);
-
-    if (selectedService === "forward") {
-      console.log("RESET TRIGGERED");
+    if (selectedService === "forward" || selectedService === "cbf") {
       form.setValue("warehouse_id_destination", "");
       setWarehouseDestination_id("");
     }

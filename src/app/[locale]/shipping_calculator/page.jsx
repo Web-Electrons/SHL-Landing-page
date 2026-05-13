@@ -29,6 +29,8 @@ import { RatesOption } from "./components/panel/RatesOption";
 import { ServiceOptions } from "./components/panel/ServiceOptions";
 import { SummaryPanel } from "./components/panel/SummaryPanel";
 import { ShiptoForm } from "./components/shiptoForm";
+import { useLocation } from "@/utils/useLocation";
+
 import styles from "./styles.module.scss";
 
 const formSchema = yup.object().shape({
@@ -138,10 +140,9 @@ export default function Home() {
   const [warehouseDestination_id, setWarehouseDestination_id] = useState("");
   const [warehouseCountry, setWarehouseCountry] = useState("");
   const [newServiceList, setNewServiceList] = useState([]);
-  console.log("newServiceList", newServiceList);
+  const { data: location } = useLocation();
+  const locationData = `${location?.ip}, ${location?.lat} ${location?.lng}, ${location?.country}`;
 
-  console.log("otherService", otherService);
-  console.log("serviceList", serviceList);
   const form = useForm({
     resolver: yupResolver(formSchema),
     defaultValues: {
@@ -355,21 +356,7 @@ export default function Home() {
         description: descriptions[item.service] || "No description available.",
         source: "global",
       }));
-      // =========================
-      // 6. DEBUG
-      // =========================
-      console.log(
-        "WAREHOUSE:",
-        warehouseList.map((s) => s.display_service)
-      );
-      console.log(
-        "OTHER:",
-        otherList.map((s) => s)
-      );
 
-      // =========================
-      // 7. SET STATE
-      // =========================
       setServiceList(warehouseList);
       setOtherService(otherList);
     } catch (e) {
@@ -534,6 +521,7 @@ export default function Home() {
       const response = await axios.post(`/api/Calculator/ShippingCalculation`, {
         warehouse_id: warehouse_id,
         warehouse_id_destination: warehouseDestination_id,
+        location: locationData,
         service: selectedService === "cbf" ? "Cross Border Forward" : "Direct Forward",
         addressFrom: {
           country: formData.shipped_from.country,
@@ -674,6 +662,7 @@ export default function Home() {
     try {
       const response = await axios.post(`/api/Calculator/HoldPickup_Calculation`, {
         warehouse_id: warehouse_id,
+        location: locationData,
         parcels: {
           weight: formWatch.dimension.weight,
           mass_unit: formWatch.dimension.weight_unit,
@@ -723,6 +712,7 @@ export default function Home() {
       const response = await axios.post(`/api/Calculator/CrossBorderPickup_Calculation`, {
         warehouse_id: warehouse_id,
         warehouse_id_destination: formWatch.warehouse_destination,
+        location: locationData,
         broker: "use shiplink broker",
         parcels: {
           weight: formWatch.dimension.weight,

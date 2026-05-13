@@ -26,8 +26,6 @@ export const ServiceOptions = ({
   warehouse_id,
   disbaledService = false,
 }) => {
-  console.log("disbaledService", disbaledService);
-
   return (
     <div
       className={`flex max-h-[90vh] flex-col px-[20px] ${openServicesOption ? "pointer-events-none cursor-not-allowed opacity-50" : ""}`}

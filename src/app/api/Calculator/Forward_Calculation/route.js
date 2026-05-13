@@ -8,7 +8,7 @@ const agent = new https.Agent({
 
 export async function POST(request) {
   try {
-    const { warehouse_id, broker, addressTo, parcels, amountLocal, currencyLocal } = await request.json();
+    const { warehouse_id, broker, addressTo, parcels, amountLocal, currencyLocal, location } = await request.json();
 
     const response = await axios.post(
       `${process.env.API_URL}/Carrier/Forward_Calculation`,
@@ -19,6 +19,7 @@ export async function POST(request) {
         parcels,
         amountLocal,
         currencyLocal,
+        location,
       },
       {
         httpsAgent: agent,

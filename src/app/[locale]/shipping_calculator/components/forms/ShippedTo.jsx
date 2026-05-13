@@ -24,7 +24,6 @@ export const ShippedTo = ({ form, country_list }) => {
   const { toast } = useToast();
 
   const [stateCode, setStateCode] = React.useState("");
-  console.log("wahch form", form.watch("shipped_to"));
 
   const shipping = form.watch("shippingType");
 
@@ -110,14 +109,6 @@ export const ShippedTo = ({ form, country_list }) => {
       form.setValue("shipped_to.state", stateCode);
     }
   }, [stateCode]);
-  console.log(
-    "province_list length:",
-    province_list?.length,
-    "isFetching:",
-    isProvinceFetching,
-    "state value:",
-    form.getValues("shipped_to.state")
-  );
 
   return (
     <div className="flex flex-col">

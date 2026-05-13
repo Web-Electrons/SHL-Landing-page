@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { CourrierCard } from "./CourrierCard";
 import { MessageArea } from "./MessageArea";
+import { useLocation } from "@/src/utils/useLocation";
 
 export const RatesOption = ({
   rates = [],
@@ -28,6 +29,8 @@ export const RatesOption = ({
   formWatch,
 }) => {
   const [sortedRates, setSortedRates] = useState([]);
+  const { data: location } = useLocation();
+  const locationData = `${location?.ip}, ${location?.lat} ${location?.lng}, ${location?.country}`;
 
   const [isFastest, setIsFastest] = useState(false);
   useEffect(() => {
@@ -76,6 +79,7 @@ export const RatesOption = ({
         broker: "use shiplink broker",
         amountLocal: selecetedData?.amountLocal,
         currencyLocal: selecetedData?.currency,
+        location: locationData,
         addressTo: {
           name: "Shiplink",
           country: formWatch.shipped_to.country,
@@ -134,6 +138,7 @@ export const RatesOption = ({
         broker: "",
         amountLocal: selecetedData?.amountLocal,
         currencyLocal: selecetedData?.currency,
+        locationData: locationData,
         parcels: {
           weight: formWatch.dimension.weight,
           mass_unit: formWatch.dimension.weight_unit,

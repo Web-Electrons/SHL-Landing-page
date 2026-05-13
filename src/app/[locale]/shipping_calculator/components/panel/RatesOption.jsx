@@ -138,7 +138,7 @@ export const RatesOption = ({
         broker: "",
         amountLocal: selecetedData?.amountLocal,
         currencyLocal: selecetedData?.currency,
-        locationData: locationData,
+        location: locationData,
         parcels: {
           weight: formWatch.dimension.weight,
           mass_unit: formWatch.dimension.weight_unit,

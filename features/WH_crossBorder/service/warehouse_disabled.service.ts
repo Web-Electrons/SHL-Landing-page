@@ -25,26 +25,37 @@ export const isWarehouseDisabled = (warehouse: WarehouseItem): boolean => {
 
   return warehouse.warehouse_crossborder_service !== "active";
 };
-
 export const isWarehouseDestinationDisabled = (
   warehouse: WarehouseItem,
-  whDestinationCrossBorder: string,
+  originCountryCode: string,
   warehouseCode: string
 ): boolean => {
+  // inactive warehouse
   if (!warehouse.status) {
     return true;
   }
 
+  // prevent same origin & destination
+  if (warehouse.warehouse_code === warehouseCode) {
+    return true;
+  }
+
+  // special warehouse always enabled
   if (isCrossBorderWarehouse(warehouse.warehouse_code)) {
     return false;
   }
 
-  // Warehouse country harus sesuai tujuan crossborder
-  if (warehouse.country_code !== whDestinationCrossBorder) {
-    return true;
+  // determine opposite country
+  let allowedCountry: string | null = null;
+
+  if (originCountryCode === "US") {
+    allowedCountry = "CA";
+  } else if (originCountryCode === "CA") {
+    allowedCountry = "US";
   }
 
-  if (warehouse.warehouse_code === warehouseCode) {
+  // if origin US/CA -> only opposite country allowed
+  if (allowedCountry && warehouse.country_code !== allowedCountry) {
     return true;
   }
 
@@ -52,6 +63,5 @@ export const isWarehouseDestinationDisabled = (
 
   const isDestinationEnabled = warehouse.crossborder_destination === true;
 
-  // aktif jika salah satu aktif
   return !(isCrossBorderServiceEnabled || isDestinationEnabled);
 };

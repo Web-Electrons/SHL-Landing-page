@@ -46,7 +46,7 @@ export const ServiceOptions = ({
         )}
 
         <ScrollArea className="w-full">
-          <RadioGroup onValueChange={(value) => setSelectedService(value)} defaultValue="forward">
+          <RadioGroup onValueChange={(value) => setSelectedService(value)} value={selectedService}>
             <div className="flex w-full flex-col gap-3">
               <div className="flex w-full flex-col space-x-2 rounded-sm border bg-slate-100 p-3">
                 <div className="flex flex-row items-start gap-2 space-x-1">

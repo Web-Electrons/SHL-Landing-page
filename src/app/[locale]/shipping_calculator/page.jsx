@@ -15,6 +15,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
+import { useLocation } from "@/utils/useLocation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
@@ -29,8 +30,8 @@ import { RatesOption } from "./components/panel/RatesOption";
 import { ServiceOptions } from "./components/panel/ServiceOptions";
 import { SummaryPanel } from "./components/panel/SummaryPanel";
 import { ShiptoForm } from "./components/shiptoForm";
-import { useLocation } from "@/utils/useLocation";
 
+import { isWarehouseDestinationDisabled } from "@/features/WH_crossBorder/service/warehouse_disabled.service";
 import styles from "./styles.module.scss";
 
 const formSchema = yup.object().shape({
@@ -112,12 +113,10 @@ export default function Home() {
   const [warehouse, setWarehouse] = useState([]);
   const [selectedWarehouseFrom, setSelectedWarehouseFrom] = useState(null);
   const isServiceDisabled = (setting) => {
-    console.log("setting", setting);
     if (!setting) return false;
     return setting.toLowerCase() === "disable";
   };
   const [courierRates, setCourierRates] = useState([]);
-
   const [ratesMessage, setRatesMessage] = useState([]);
 
   const [country, setCountry] = useState([]);
@@ -176,6 +175,10 @@ export default function Home() {
     },
     mode: "onChange",
   });
+
+  const availableWarehousesDestination = warehouse.filter(
+    (item) => !isWarehouseDestinationDisabled(item, form.watch("shipped_from.country"))
+  );
 
   useEffect(() => {
     const countryList = async () => {
@@ -440,15 +443,17 @@ export default function Home() {
   };
 
   const selectedDataDestination = () => {
-    if (form.watch("warehouse_destination") === undefined) {
+    const destination = form.watch("warehouse_destination");
+
+    if (!destination) {
       return "Select Warehouse Destination";
-    } else {
-      const shipped_to = form.watch("warehouse_destination");
-      const data = warehouse.find((item) => item.warehouse_id === shipped_to);
-      return data?.city === undefined
-        ? "Select Warehouse Destination"
-        : `${data?.city}, ${data?.province_code}, ${data?.postal_code}, ${data?.country_code}`;
     }
+
+    const data = warehouse.find((item) => item.warehouse_code === destination);
+
+    return data?.city
+      ? `${data.city}, ${data.province_code}, ${data.postal_code}, ${data.country_code}`
+      : "Select Warehouse Destination";
   };
 
   const handleAssingData = (data) => {
@@ -462,21 +467,49 @@ export default function Home() {
     checkCoutryCode(data?.country_code);
     selectedData();
   };
+  const getAvailableService = (warehouse, currentService) => {
+    const serviceSetting = warehouse?.warehouse_crossborder_service;
+
+    const isCrossBorderDisabled = serviceSetting?.toLowerCase() === "disable";
+
+    if (isCrossBorderDisabled && ["cbp", "cbf", "hfp"].includes(currentService)) {
+      return "forward";
+    }
+
+    return currentService;
+  };
 
   const handleValueChange = (value) => {
     const data = warehouse.find((item) => item.warehouse_code === value);
     setSelectedWarehouseFrom(data);
     handleAssingData(data);
     setWarehouseId(data?.warehouse_id);
+    // reset Destination
+    resetDestination();
+    // hanlde selected service
+    setSelectedService((prev) => getAvailableService(data, prev));
   };
 
+  const resetDestination = () => {
+    form.setValue("warehouse_destination", "");
+    form.setValue("warehouse_destination_country", "");
+  };
   const handlewarehouseDestination = (value) => {
     const data = warehouse.find((item) => item.warehouse_code === value);
+
     setWarehouseDestination_id(data?.warehouse_id);
-    selectedDataDestination();
-    form.setValue("warehouse_destination", data?.warehouse_id);
+
+    form.setValue("warehouse_destination", data?.warehouse_code);
+
     form.setValue("warehouse_destination_country", data?.country_code);
   };
+  // const handlewarehouseDestination = (value) => {
+  //   const data = warehouse.find((item) => item.warehouse_code === value);
+  //   setWarehouseDestination_id(data?.warehouse_id);
+  //   selectedDataDestination();
+  //   form.setValue("warehouse_destination", data?.warehouse_id);
+  //   form.setValue("warehouse_destination_country", data?.country_code);
+  // };
 
   const handleSave = async (formData) => {
     const addressTo = formData.shipped_to;
@@ -973,7 +1006,7 @@ export default function Home() {
                                             <Select
                                               className="text-xs"
                                               onValueChange={handlewarehouseDestination}
-                                              defaultValue={selectedDataDestination}
+                                              value={form.watch("warehouse_destination") || ""}
                                             >
                                               <FormControl>
                                                 <SelectTrigger
@@ -1008,13 +1041,12 @@ export default function Home() {
                                                 {loadingWarehouse ? (
                                                   <Skeleton className="h-[20px] w-full" />
                                                 ) : (
-                                                  warehouse?.map((item, index) => (
+                                                  availableWarehousesDestination?.map((item, index) => (
                                                     <SelectItem
                                                       key={index}
                                                       className="text-xs"
                                                       value={item?.warehouse_code}
                                                       id={item?.warehouse_code}
-                                                      disabled={whDestinationCrossBorder !== item?.country_code}
                                                     >
                                                       {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
                                                     </SelectItem>
@@ -1031,69 +1063,6 @@ export default function Home() {
                                       <div className="my-4 grid w-full grid-cols-3">
                                         <DeclareTable form={form} />
                                       </div>
-                                      {/* <Form {...form}>
-                                <form disabled={disabledForm}>
-                                  <FormLabel className="font-bold">Warehouse Destination</FormLabel>
-                                  <FormControl className="w-full">
-                                    <Select
-                                      className="text-xs"
-                                      onValueChange={handlewarehouseDestination}
-                                      defaultValue={selectedDataDestination}
-                                    >
-                                      <FormControl>
-                                        <SelectTrigger
-                                          name="warehouse_destination"
-                                          id="warehouse_destination"
-                                          className="text-xs h-[36px]"
-                                        >
-                                          <SelectValue placeholder="Select Warehouse Destination">
-                                            {loadingWarehouse &&
-                                            selectedDataDestination === undefined ? (
-                                              <Skeleton className="w-full h-[20px]" />
-                                            ) : (
-                                              <div className="flex flex-row gap-2 items-center">
-                                                {selectedDataDestination() ===
-                                                'Select Warehouse Destination' ? (
-                                                  <></>
-                                                ) : (
-                                                  <img
-                                                    src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg`}
-                                                    srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch('warehouse_destination_country'))}.jpg 2x`}
-                                                    alt=""
-                                                    className="rounded-full w-6 h-6 border border-blue-50 object-cover object-center"
-                                                  />
-                                                )}
-                                                <p>{selectedDataDestination()}</p>
-                                              </div>
-                                            )}
-                                          </SelectValue>
-                                        </SelectTrigger>
-                                      </FormControl>
-
-                                      <SelectContent id="warehouse_destination_select">
-                                        {loadingWarehouse ? (
-                                          <Skeleton className="w-full h-[20px]" />
-                                        ) : (
-                                          warehouse?.map((item, index) => (
-                                            <SelectItem
-                                              key={index}
-                                              className="text-xs"
-                                              value={item?.warehouse_code}
-                                              id={item?.warehouse_code}
-                                              disabled={
-                                                form.watch('shipped_from.country') ===
-                                                item?.country_code
-                                              }
-                                            >
-                                              {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
-                                            </SelectItem>
-                                          ))
-                                        )}
-                                      </SelectContent>
-                                    </Select>
-                                  </FormControl>
-                                </form>
-                              </Form> */}
                                       <ShippedTo form={form} country_list={country} />
                                     </>
                                   ) : (
@@ -1238,7 +1207,7 @@ export default function Home() {
                                         {loadingWarehouse ? (
                                           <Skeleton className="h-[20px] w-full" />
                                         ) : (
-                                          warehouse?.map((item, index) => (
+                                          availableWarehousesDestination?.map((item, index) => (
                                             <SelectItem
                                               key={index}
                                               className="text-xs"
@@ -1311,7 +1280,7 @@ export default function Home() {
                     otherService={otherService}
                     warehouse_id={warehouse_id}
                     disbaledService={isServiceDisabled(
-                      selectedWarehouseFrom ? selectedWarehouseFrom?.warehouse_bullet_setting : false
+                      selectedWarehouseFrom ? selectedWarehouseFrom?.warehouse_crossborder_service : false
                     )}
                   />
                 </SheetContent>
@@ -1398,7 +1367,7 @@ export default function Home() {
                 otherService={otherService}
                 warehouse_id={warehouse_id}
                 disbaledService={isServiceDisabled(
-                  selectedWarehouseFrom ? selectedWarehouseFrom?.warehouse_bullet_setting : false
+                  selectedWarehouseFrom ? selectedWarehouseFrom?.warehouse_crossborder_service : false
                 )}
               />
             </div>

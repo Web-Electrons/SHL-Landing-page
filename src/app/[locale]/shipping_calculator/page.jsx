@@ -176,8 +176,15 @@ export default function Home() {
     mode: "onChange",
   });
 
+  console.log("watch wh origin code", form.watch("shipped_from.warehouse_code"));
+
   const availableWarehousesDestination = warehouse.filter(
-    (item) => !isWarehouseDestinationDisabled(item, form.watch("shipped_from.country"))
+    (item) =>
+      !isWarehouseDestinationDisabled(
+        item,
+        form.watch("shipped_from.country"),
+        form.watch("shipped_from.warehouse_code")
+      )
   );
 
   useEffect(() => {

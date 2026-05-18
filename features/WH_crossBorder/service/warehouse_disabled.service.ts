@@ -26,7 +26,11 @@ export const isWarehouseDisabled = (warehouse: WarehouseItem): boolean => {
   return warehouse.warehouse_crossborder_service !== "active";
 };
 
-export const isWarehouseDestinationDisabled = (warehouse: WarehouseItem, whDestinationCrossBorder: string): boolean => {
+export const isWarehouseDestinationDisabled = (
+  warehouse: WarehouseItem,
+  whDestinationCrossBorder: string,
+  warehouseCode: string
+): boolean => {
   if (!warehouse.status) {
     return true;
   }
@@ -37,6 +41,10 @@ export const isWarehouseDestinationDisabled = (warehouse: WarehouseItem, whDesti
 
   // Warehouse country harus sesuai tujuan crossborder
   if (warehouse.country_code !== whDestinationCrossBorder) {
+    return true;
+  }
+
+  if (warehouse.warehouse_code === warehouseCode) {
     return true;
   }
 

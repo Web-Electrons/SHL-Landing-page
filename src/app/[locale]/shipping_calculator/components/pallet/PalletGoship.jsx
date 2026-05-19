@@ -11,7 +11,7 @@ export const PalletDetails = ({ form, open = true }) => {
   return (
     <div className="pr-2">
       <div className="h-fit">
-        <div className="border-b border-slate-200 pb-1">
+        <div className="pb-1">
           <p className="text-sm font-bold">Pallet Details</p>
         </div>
 

@@ -574,6 +574,12 @@ export default function Home() {
   //   form.setValue("warehouse_destination_country", data?.country_code);
   // };
 
+  const formWatch = form.watch();
+
+  const isPallet =
+    (selectedService === "cbf" || selectedService === "forward") &&
+    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight >= 90 : formWatch.dimension.weight >= 41);
+
   const handleSave = async (formData) => {
     const addressTo = formData.shipped_to;
     setRatesMessage([]);
@@ -648,7 +654,7 @@ export default function Home() {
         package_attributes: formData.package_attributes,
         total_package_value: Number(formData.total_package_value) || 0,
         currency_package_value: formData.currency_package_value,
-        package_attributes: formData.package_attributes,
+        package_attributes: isPallet ? formData.package_attributes : {},
       });
 
       if (response.data.status === true) {
@@ -737,8 +743,6 @@ export default function Home() {
       setOpen(true);
     }
   };
-
-  const formWatch = form.watch();
 
   const handleHFP = async () => {
     if (
@@ -923,10 +927,6 @@ export default function Home() {
       setWarehouseDestination_id("");
     }
   }, [selectedService, form]);
-
-  const isPallet =
-    (selectedService === "cbf" || selectedService === "forward") &&
-    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight >= 90 : formWatch.dimension.weight >= 41);
 
   return (
     <>

@@ -11,11 +11,11 @@ export const PalletDetails = ({ form, open = true }) => {
   return (
     <div className="pr-2">
       <div className="h-fit">
-        <div className="pb-1">
-          <p className="text-sm font-bold">Pallet Details</p>
+        <div className="">
+          <p className="text-xs font-bold">Pallet Details</p>
         </div>
 
-        <div className="mt-1 grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <div className="w-full">
             <PalletPackage form={form} isLoading={false} />
           </div>

@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { InfoRow } from "./components/InfoRow";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -45,11 +46,8 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
-              <Text style={s.routeLabel}>ORDER INFORMATION</Text>
-
-              <Text style={s.detailText}>
-                <strong>Order ID:</strong> {p.orderId}
-              </Text>
+              <Text style={s.label}>ORDER INFORMATION</Text>
+              <InfoRow label="Order ID" value={`${p.orderId}`} />
             </Section>
 
             <Text style={s.description}>
@@ -60,14 +58,11 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
             <CustomButton
               style={{
                 marginTop: "0px",
+                marginBottom: "10px",
               }}
-              label="REVIEW UPDATE"
+              label="GO TO DASHBOARD"
               link={p.dashboardLink}
             />
-
-            <Text style={s.description}>
-              If you have any questions regarding this update, our support team will be ready to assist you.
-            </Text>
 
             <SupportSignature supportUrl="{URL}" />
           </Section>

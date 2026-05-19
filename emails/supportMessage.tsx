@@ -3,32 +3,29 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
-import { InfoRow } from "./components/InfoRow";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
-interface BrokerageClearedEmailProps {
+interface SupportReplyEmailProps {
   companyName?: string;
-  orderId?: string;
-  packageId?: string;
+  message?: string;
   dashboardLink?: string;
 }
 
-const defaults: Required<BrokerageClearedEmailProps> = {
+const defaults: Required<SupportReplyEmailProps> = {
   companyName: "ShipLink",
-  orderId: "ORD-2026-0001",
-  packageId: "PKG-2026-0001",
-  dashboardLink: "https://shiplink.com/dashboard",
+  message: "Your shipment is currently being reviewed by our operations team. We will provide another update shortly.",
+  dashboardLink: "https://app.shiplink.com/dashboard/support",
 };
 
-export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
+export const SupportReplyEmail = (props: SupportReplyEmailProps) => {
   const p = { ...defaults, ...props };
 
   return (
     <Html>
       <Head />
-      <Preview>Your order has been successfully cleared by brokerage.</Preview>
+      <Preview>Your support ticket has received a new reply.</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -37,25 +34,32 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
 
           {/* CONTENT */}
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>Brokerage Update</Text>
+            <Text style={s.eyebrow}>Support Update</Text>
 
-            <Text style={s.headline}>Your order has been cleared successfully.</Text>
+            <Text style={s.headline}>Your support ticket has been replied.</Text>
 
             <Text style={s.description}>
-              We are pleased to inform you that your shipment has successfully completed the brokerage clearance process
-              and is now ready for the next stage of handling.
+              Our support team has replied to your ticket. Please log in to your {p.companyName} account to review the
+              latest response and continue the conversation if additional assistance is needed.
             </Text>
 
-            {/* ORDER INFO */}
+            {/* MESSAGE */}
             <Section style={s.routeContent}>
-              <Text style={s.label}>ORDER INFORMATION</Text>
+              <Text style={s.label}>LATEST RESPONSE</Text>
 
-              <InfoRow label="Order ID" value={`${p.orderId}`} />
+              <Text
+                style={{
+                  ...s.detailText,
+                  lineHeight: "1.7",
+                }}
+              >
+                {p.message}
+              </Text>
             </Section>
 
             <Text style={s.description}>
-              Please log in to your account dashboard to review the latest shipment status and continue with any
-              remaining steps if required.
+              We recommend reviewing the update as soon as possible to avoid delays in shipment handling or support
+              resolution.
             </Text>
 
             {/* CTA */}
@@ -64,10 +68,11 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="GO TO DASHBOARD"
+              label="VIEW SUPPORT TICKET"
               link={p.dashboardLink}
             />
 
+            {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>
 
@@ -79,4 +84,4 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
   );
 };
 
-export default BrokerageClearedEmail;
+export default SupportReplyEmail;

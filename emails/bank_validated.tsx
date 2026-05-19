@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { InfoRow } from "./components/InfoRow";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -10,13 +11,11 @@ import { emailStyles as s } from "./style/styles";
 interface BankValidationProps {
   companyName?: string;
   orderId?: string;
-  invoiceLink?: string;
 }
 
 const defaults: Required<BankValidationProps> = {
   companyName: "ShipLink",
   orderId: "PKG-2026-0001",
-  invoiceLink: "https://app.shiplink.com/invoice",
 };
 
 export const BankValidation = (props: BankValidationProps) => {
@@ -44,11 +43,17 @@ export const BankValidation = (props: BankValidationProps) => {
 
             {/* PACKAGE INFO */}
             <Section style={s.routeContent}>
-              <Text style={s.routeLabel}>PACKAGE INFORMATION</Text>
+              <Text style={s.label}>PACKAGE INFORMATION</Text>
 
-              <Text style={s.detailText}>
-                <strong>Package ID:</strong> {p.orderId}
-              </Text>
+              {/* <Text style={s.detailText}>
+                <strong
+                  style={{
+                    display: "inline-block",
+                    width: "100px",
+                  }}
+                >Package ID</strong>{""}: {p.orderId}
+              </Text> */}
+              <InfoRow label="Package ID" value={`${p.orderId}`} />
             </Section>
 
             <Text style={s.description}>
@@ -61,11 +66,11 @@ export const BankValidation = (props: BankValidationProps) => {
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="VIEW INVOICE"
-              link={p.invoiceLink}
+              label="GO TO DASHBOARD"
+              link={"https://www.shiplink.com/"}
             />
 
-            <SupportSignature supportUrl="{URL}" />
+            <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>
 
           {/* FOOTER */}

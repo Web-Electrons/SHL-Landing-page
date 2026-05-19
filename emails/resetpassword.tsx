@@ -39,7 +39,8 @@ export const ResetPasswordEmail = (props: ResetPasswordEmailProps) => {
             <Text style={s.headline}>Reset your password</Text>
 
             <Text style={s.description}>
-              We received a request to reset the password associated with your ShipLink account.
+              We received a request to reset the password associated with your ShipLink account {""}
+              <strong>{p.email}</strong>.
             </Text>
 
             <Text style={s.description}>

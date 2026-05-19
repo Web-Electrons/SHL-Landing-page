@@ -223,7 +223,7 @@ export const ShipLinkTransportEmail = (props: ShipLinkTransportEmailProps) => {
                   <Row>
                     <Column style={s.accentRed} width={3} />
                     <Column style={s.routeContent}>
-                      <Text style={s.routeLabel}>ORIGIN</Text>
+                      <Text style={s.label}>ORIGIN</Text>
                       <Img
                         src={`https://flagcdn.com/h20/${p.originCountryCode}.png`}
                         alt={p.originCountry}
@@ -245,7 +245,7 @@ export const ShipLinkTransportEmail = (props: ShipLinkTransportEmailProps) => {
                   <Row>
                     <Column style={s.accentBlack} width={3} />
                     <Column style={s.routeContent}>
-                      <Text style={s.routeLabel}>DESTINATION</Text>
+                      <Text style={s.label}>DESTINATION</Text>
                       <Img
                         src={`https://flagcdn.com/h20/${p.destinationCountryCode}.png`}
                         alt={p.destinationCountry}
@@ -465,7 +465,7 @@ const s: Record<string, React.CSSProperties> = {
     paddingRight: "14px",
   },
 
-  routeLabel: {
+  label: {
     fontFamily: FONT,
     fontSize: "10px",
     color: C.label,

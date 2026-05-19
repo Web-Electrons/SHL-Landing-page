@@ -3,22 +3,8 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { InfoRow } from "./components/InfoRow";
 import { emailStyles as s } from "./style/styles";
-
-// ─── Color System (match design sebelumnya) ───
-const C = {
-  red: "#C8102E",
-  black: "#1A1A1A",
-  secondary: "#385196",
-  muted: "#666666",
-  label: "#999999",
-  pageBg: "#F0EFED",
-  white: "#ffffff",
-  offWhite: "#F9F8F6",
-  border: "#E0DDD8",
-};
-
-const FONT = "Arial, Helvetica, sans-serif";
 
 // ─── Props ───
 interface NewUserEmailProps {
@@ -61,18 +47,14 @@ export const NewUserEmail = (props: NewUserEmailProps) => {
 
             {/* USER CARD */}
             <Section style={s.routeContent}>
-              <Text style={s.routeLabel}>USER DETAILS</Text>
-
-              <Text style={s.detailText}>
-                <strong>Name:</strong> {p.userName}
-                <br />
-                <strong>Email:</strong> {p.userEmail}
-                <br />
-                <strong>Registration Date:</strong> {p.registrationDate}
-              </Text>
+              <Text style={s.label}>USER DETAILS</Text>
+              <InfoRow style={{ width: "110px" }} label={"Name"} value={`${p.userName}`} />
+              <InfoRow style={{ width: "110px" }} label={"Email"} value={`${p.userEmail}`} />
+              <InfoRow style={{ width: "110px" }} label={"Registration Date"} value={`${p.registrationDate}`} />
             </Section>
 
             <Text style={s.description}>Please review this user and take action if necessary.</Text>
+
             {/* CTA */}
             <CustomButton
               style={{

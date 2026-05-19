@@ -8,27 +8,27 @@ import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
-interface BrokerageClearedEmailProps {
+interface NewOrderPaymentRequiredEmailProps {
   companyName?: string;
-  orderId?: string;
-  packageId?: string;
-  dashboardLink?: string;
+  customerName?: string;
+  orderCode?: string;
+  paymentLink?: string;
 }
 
-const defaults: Required<BrokerageClearedEmailProps> = {
+const defaults: Required<NewOrderPaymentRequiredEmailProps> = {
   companyName: "ShipLink",
-  orderId: "ORD-2026-0001",
-  packageId: "PKG-2026-0001",
-  dashboardLink: "https://shiplink.com/dashboard",
+  customerName: "John Doe",
+  orderCode: "ORD-2026-0001",
+  paymentLink: "https://shiplink.com/orders",
 };
 
-export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
+export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmailProps) => {
   const p = { ...defaults, ...props };
 
   return (
     <Html>
       <Head />
-      <Preview>Your order has been successfully cleared by brokerage.</Preview>
+      <Preview>Payment is required to proceed with order {p.orderCode}.</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -37,25 +37,29 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
 
           {/* CONTENT */}
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>Brokerage Update</Text>
+            <Text style={s.eyebrow}>Payment Required</Text>
 
-            <Text style={s.headline}>Your order has been cleared successfully.</Text>
+            <Text style={s.headline}>Your order is ready for payment.</Text>
 
             <Text style={s.description}>
-              We are pleased to inform you that your shipment has successfully completed the brokerage clearance process
-              and is now ready for the next stage of handling.
+              Dear <strong>{p.customerName},</strong>
+            </Text>
+
+            <Text style={s.description}>
+              Your shipment order has been successfully generated and is currently awaiting payment confirmation before
+              processing can begin.
             </Text>
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>ORDER INFORMATION</Text>
 
-              <InfoRow label="Order ID" value={`${p.orderId}`} />
+              <InfoRow label={"Order ID"} value={`${p.orderCode}`} />
             </Section>
 
             <Text style={s.description}>
-              Please log in to your account dashboard to review the latest shipment status and continue with any
-              remaining steps if required.
+              To continue, please log in to your {p.companyName} account and access the Orders page to review your order
+              details and complete the payment process.
             </Text>
 
             {/* CTA */}
@@ -64,10 +68,11 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="GO TO DASHBOARD"
-              link={p.dashboardLink}
+              label="COMPLETE PAYMENT"
+              link={p.paymentLink}
             />
 
+            {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>
 
@@ -79,4 +84,4 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
   );
 };
 
-export default BrokerageClearedEmail;
+export default NewOrderPaymentRequiredEmail;

@@ -8,27 +8,33 @@ import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
-interface BrokerageClearedEmailProps {
+interface TransportRequestDeclinedEmailProps {
   companyName?: string;
   orderId?: string;
-  packageId?: string;
+  originCity?: string;
+  originCountry?: string;
+  destinationCity?: string;
+  destinationCountry?: string;
   dashboardLink?: string;
 }
 
-const defaults: Required<BrokerageClearedEmailProps> = {
+const defaults: Required<TransportRequestDeclinedEmailProps> = {
   companyName: "ShipLink",
   orderId: "ORD-2026-0001",
-  packageId: "PKG-2026-0001",
+  originCity: "Los Angeles",
+  originCountry: "United States",
+  destinationCity: "Toronto",
+  destinationCountry: "Canada",
   dashboardLink: "https://shiplink.com/dashboard",
 };
 
-export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
+export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEmailProps) => {
   const p = { ...defaults, ...props };
 
   return (
     <Html>
       <Head />
-      <Preview>Your order has been successfully cleared by brokerage.</Preview>
+      <Preview>Your transport request for order {p.orderId} has been declined.</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -37,25 +43,26 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
 
           {/* CONTENT */}
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>Brokerage Update</Text>
+            <Text style={s.eyebrow}>DECLINED REQUEST</Text>
 
-            <Text style={s.headline}>Your order has been cleared successfully.</Text>
+            <Text style={s.headline}>Your shipment request has been declined.</Text>
 
             <Text style={s.description}>
-              We are pleased to inform you that your shipment has successfully completed the brokerage clearance process
-              and is now ready for the next stage of handling.
+              The carrier assigned to your shipment request was unable to accept the transport request at this time.
+              Please review the shipment details below and submit an alternative shipping request from your dashboard.
             </Text>
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
-              <Text style={s.label}>ORDER INFORMATION</Text>
-
-              <InfoRow label="Order ID" value={`${p.orderId}`} />
+              <Text style={s.label}>SHIPMENT INFORMATION</Text>
+              <InfoRow label="Order ID" value={p.orderId} />
+              <InfoRow label="Origin" value={`${p.originCity}, ${p.originCountry}`} />
+              <InfoRow label="Destination" value={`${p.destinationCity}, ${p.destinationCountry}`} />
             </Section>
 
             <Text style={s.description}>
-              Please log in to your account dashboard to review the latest shipment status and continue with any
-              remaining steps if required.
+              To continue with the shipment process, please log in to your account and request an alternative shipping
+              option.
             </Text>
 
             {/* CTA */}
@@ -64,10 +71,11 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="GO TO DASHBOARD"
+              label="VIEW DASHBOARD"
               link={p.dashboardLink}
             />
 
+            {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>
 
@@ -79,4 +87,4 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
   );
 };
 
-export default BrokerageClearedEmail;
+export default TransportRequestDeclinedEmail;

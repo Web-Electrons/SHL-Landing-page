@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { InfoRow } from "./components/InfoRow";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -47,13 +48,10 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
-              <Text style={s.routeLabel}>SHIPMENT INFORMATION</Text>
+              <Text style={s.label}>SHIPMENT INFORMATION</Text>
 
-              <Text style={s.detailText}>
-                <strong>Order ID:</strong> {p.orderId}
-                <br />
-                <strong>Package ID:</strong> {p.packageId}
-              </Text>
+              <InfoRow label={"Order ID"} value={`${p.orderId}`} />
+              <InfoRow label={"Package ID"} value={`${p.packageId}`} />
             </Section>
 
             <Text style={s.description}>

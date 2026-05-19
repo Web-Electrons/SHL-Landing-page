@@ -8,27 +8,29 @@ import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
-interface PackageImportedEmailProps {
+interface WalletTopUpConfirmedEmailProps {
   companyName?: string;
-  packageType?: string;
-  packageId?: string;
-  trackingLink?: string;
+  customerName?: string;
+  paymentDate?: string;
+  totalAmount?: string;
+  walletLink?: string;
 }
 
-const defaults: Required<PackageImportedEmailProps> = {
+const defaults: Required<WalletTopUpConfirmedEmailProps> = {
   companyName: "ShipLink",
-  packageType: "Package",
-  packageId: "PKG-2026-0001",
-  trackingLink: "https://shiplink.com/dashboard",
+  customerName: "John Doe",
+  paymentDate: "May 18, 2026",
+  totalAmount: "$250.00 USD",
+  walletLink: "https://app.shiplink.com/wallet",
 };
 
-export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
+export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps) => {
   const p = { ...defaults, ...props };
 
   return (
     <Html>
       <Head />
-      <Preview>Your shipment has arrived in the destination country.</Preview>
+      <Preview>Deposit Confirmed</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -37,23 +39,28 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
 
           {/* CONTENT */}
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>Shipment Update</Text>
+            <Text style={s.eyebrow}>Wallet Update</Text>
 
-            <Text style={s.headline}>Your package has arrived in the destination country.</Text>
+            <Text style={s.headline}>Your wallet top-up has been confirmed.</Text>
 
             <Text style={s.description}>
-              Your shipment has successfully completed the international transit process and has now been transferred to
-              the domestic carrier for local delivery handling.
+              Dear <strong>{p.customerName},</strong>
             </Text>
 
-            {/* PACKAGE INFO */}
+            <Text style={s.description}>
+              Thank you for your payment. The funds have been successfully added to your wallet balance and are now
+              available for transactions and shipment payments within your account.
+            </Text>
+
+            {/* TOP UP INFO */}
             <Section style={s.routeContent}>
-              <Text style={s.label}>PACKAGE INFORMATION</Text>
-              <InfoRow label={`${p.packageType} ID`} value={`${p.packageId}`} />
+              <Text style={s.label}>TOP-UP DETAILS</Text>
+              <InfoRow label={"Payment Date"} value={`${p.paymentDate}`} />
+              <InfoRow label={"Total Amount"} value={`${p.totalAmount}`} />
             </Section>
 
             <Text style={s.description}>
-              You can follow the latest tracking activity and delivery progress directly from your account dashboard.
+              You can review your updated wallet balance and transaction history directly from your account dashboard.
             </Text>
 
             {/* CTA */}
@@ -62,10 +69,11 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="TRACK PACKAGE"
-              link={p.trackingLink}
+              label="VIEW WALLET"
+              link={p.walletLink}
             />
 
+            {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>
 
@@ -77,4 +85,4 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
   );
 };
 
-export default PackageImportedEmail;
+export default WalletTopUpConfirmedEmail;

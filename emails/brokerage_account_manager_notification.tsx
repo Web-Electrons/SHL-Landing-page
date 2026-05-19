@@ -8,27 +8,37 @@ import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
-interface BrokerageClearedEmailProps {
+interface BrokerageStatusEmailProps {
   companyName?: string;
-  orderId?: string;
-  packageId?: string;
+  title?: string;
+  brokerageStatus?: string;
+  orderCode?: string;
+  originCity?: string;
+  originCountry?: string;
+  destinationCity?: string;
+  destinationCountry?: string;
   dashboardLink?: string;
 }
 
-const defaults: Required<BrokerageClearedEmailProps> = {
+const defaults: Required<BrokerageStatusEmailProps> = {
   companyName: "ShipLink",
-  orderId: "ORD-2026-0001",
-  packageId: "PKG-2026-0001",
+  title: "Brokerage Request Updated",
+  brokerageStatus: "approved",
+  orderCode: "ORD-2026-0001",
+  originCity: "Los Angeles",
+  originCountry: "United States",
+  destinationCity: "Toronto",
+  destinationCountry: "Canada",
   dashboardLink: "https://shiplink.com/dashboard",
 };
 
-export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
+export const BrokerageStatusEmail = (props: BrokerageStatusEmailProps) => {
   const p = { ...defaults, ...props };
 
   return (
     <Html>
       <Head />
-      <Preview>Your order has been successfully cleared by brokerage.</Preview>
+      <Preview>Brokerage request status updated for order {p.orderCode}.</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -39,23 +49,23 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
           <Section style={s.bodySection}>
             <Text style={s.eyebrow}>Brokerage Update</Text>
 
-            <Text style={s.headline}>Your order has been cleared successfully.</Text>
+            <Text style={s.headline}>{p.title}</Text>
 
             <Text style={s.description}>
-              We are pleased to inform you that your shipment has successfully completed the brokerage clearance process
-              and is now ready for the next stage of handling.
+              The brokerage request been <strong>{p.brokerageStatus}</strong>. Please review the updated information
+              from your dashboard.
             </Text>
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
-              <Text style={s.label}>ORDER INFORMATION</Text>
-
-              <InfoRow label="Order ID" value={`${p.orderId}`} />
+              <Text style={s.label}>SHIPMENT INFORMATION</Text>
+              <InfoRow label="Order ID" value={`${p.orderCode}`} />
+              <InfoRow label="Origin" value={`${p.originCity}, ${p.originCountry}`} />
+              <InfoRow label="Destination" value={`${p.destinationCity}, ${p.destinationCountry}`} />
             </Section>
 
             <Text style={s.description}>
-              Please log in to your account dashboard to review the latest shipment status and continue with any
-              remaining steps if required.
+              You can access your shipment dashboard to review the latest brokerage activity and shipment details.
             </Text>
 
             {/* CTA */}
@@ -64,10 +74,11 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="GO TO DASHBOARD"
+              label="VIEW SHIPMENT"
               link={p.dashboardLink}
             />
 
+            {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>
 
@@ -79,4 +90,4 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
   );
 };
 
-export default BrokerageClearedEmail;
+export default BrokerageStatusEmail;

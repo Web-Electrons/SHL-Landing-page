@@ -3,32 +3,29 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
-import { InfoRow } from "./components/InfoRow";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
-interface BrokerageClearedEmailProps {
+interface PackageImageReadyEmailProps {
   companyName?: string;
-  orderId?: string;
-  packageId?: string;
+  trackingId?: string;
   dashboardLink?: string;
 }
 
-const defaults: Required<BrokerageClearedEmailProps> = {
+const defaults: Required<PackageImageReadyEmailProps> = {
   companyName: "ShipLink",
-  orderId: "ORD-2026-0001",
-  packageId: "PKG-2026-0001",
+  trackingId: "PKG-2026-0001",
   dashboardLink: "https://shiplink.com/dashboard",
 };
 
-export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
+export const PackageImageReadyEmail = (props: PackageImageReadyEmailProps) => {
   const p = { ...defaults, ...props };
 
   return (
     <Html>
       <Head />
-      <Preview>Your order has been successfully cleared by brokerage.</Preview>
+      <Preview>Package images are now available for shipment {p.trackingId}.</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -37,25 +34,19 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
 
           {/* CONTENT */}
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>Brokerage Update</Text>
+            <Text style={s.eyebrow}>Package Update</Text>
 
-            <Text style={s.headline}>Your order has been cleared successfully.</Text>
+            <Text style={s.headline}>Your package images are now available.</Text>
 
             <Text style={s.description}>
-              We are pleased to inform you that your shipment has successfully completed the brokerage clearance process
-              and is now ready for the next stage of handling.
+              {" "}
+              Images for shipment <strong>#{p.trackingId}</strong> have been uploaded and are now available in your
+              dashboard. You may review the uploaded photos to verify package condition, shipment contents, and other
+              handling details before continuing with the next step.{" "}
             </Text>
 
-            {/* ORDER INFO */}
-            <Section style={s.routeContent}>
-              <Text style={s.label}>ORDER INFORMATION</Text>
-
-              <InfoRow label="Order ID" value={`${p.orderId}`} />
-            </Section>
-
             <Text style={s.description}>
-              Please log in to your account dashboard to review the latest shipment status and continue with any
-              remaining steps if required.
+              Please log in to your dashboard to review the uploaded images and manage the next shipment process.
             </Text>
 
             {/* CTA */}
@@ -68,6 +59,7 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
               link={p.dashboardLink}
             />
 
+            {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>
 
@@ -79,4 +71,4 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
   );
 };
 
-export default BrokerageClearedEmail;
+export default PackageImageReadyEmail;

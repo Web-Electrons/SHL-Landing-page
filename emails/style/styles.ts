@@ -133,6 +133,46 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   },
 
   // ────────────────────────────────────────────────────────
+  // CARD DETAIL TEXT
+  // ────────────────────────────────────────────────────────
+
+  infoLabel: {
+    width: "100px",
+    display: "inline",
+    fontWeight: 700,
+  },
+
+  rowWrap: {
+    paddingTop: "2px",
+    paddingBottom: "2px",
+  },
+  cellLabel: {
+    width: "100px",
+    minWidth: "100px",
+    verticalAlign: "top" as const,
+    paddingBottom: "6px",
+    paddingRight: "8px",
+    fontSize: "13px",
+    fontWeight: 700,
+    color: "#374151",
+    fontFamily: "Arial, sans-serif",
+  },
+  cellValue: {
+    verticalAlign: "top" as const,
+    paddingBottom: "6px",
+    fontSize: "13px",
+    color: "#374151",
+    fontFamily: "Arial, sans-serif",
+  },
+  colon: {
+    paddingRight: "8px",
+    verticalAlign: "top" as const,
+    fontSize: "13px",
+    color: "#374151",
+    fontFamily: "Arial, sans-serif",
+  },
+
+  // ────────────────────────────────────────────────────────
   // ROUTE BLOCK (Origin / Destination cards)
   // ────────────────────────────────────────────────────────
 
@@ -211,17 +251,18 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   routeContent: {
     backgroundColor: COLOR.offWhite,
     paddingTop: `${SPACE[3]}px`,
-    paddingBottom: `${SPACE[6]}px`,
+    paddingBottom: `${SPACE[3]}px`,
     paddingLeft: `${SPACE[5]}px`,
     paddingRight: `${SPACE[5]}px`,
     verticalAlign: "top" as const,
+    borderLeft: `${ACCENT_WIDTH}px solid ${COLOR.brand}`,
   },
 
-  routeLabel: {
+  label: {
     fontFamily: FONT.family,
     fontSize: `${FONT_SIZE.label}px`,
     color: COLOR.textLabel,
-    lineHeight: "24px",
+    lineHeight: 1,
     margin: "0 0 6px",
     padding: "0",
   },
@@ -253,6 +294,77 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     padding: "0",
   },
 
+  // ────────────────────────────────────────────────────────
+  // TRANSPORT REQUEST
+  // ────────────────────────────────────────────────────────
+  locationRow: {
+    width: "100%",
+  },
+
+  locationCellLeft: {
+    width: "50%",
+    verticalAlign: "top" as const,
+    paddingRight: "6px",
+  },
+
+  locationCellRight: {
+    width: "50%",
+    verticalAlign: "top" as const,
+    paddingLeft: "6px",
+  },
+
+  locationContent: {
+    padding: "16px 16px 16px 16px",
+    verticalAlign: "top" as const,
+  },
+
+  locationLabel: {
+    fontSize: "10px",
+    color: "#999",
+    fontFamily: "Arial,Helvetica,sans-serif",
+    lineHeight: "1",
+    paddingBottom: "6px",
+  },
+
+  locationFlagWrapper: {
+    paddingBottom: "10px",
+    fontSize: "0",
+    lineHeight: "0",
+  },
+
+  locationFlag: {
+    display: "block",
+    border: "0",
+  },
+
+  locationName: {
+    fontSize: "14px",
+    fontWeight: "700",
+    lineHeight: 1.3,
+    fontFamily: "Arial,Helvetica,sans-serif",
+    margin: 0,
+    padding: 0,
+    paddingBottom: "6px",
+  },
+
+  locationAddress: {
+    fontSize: "13px",
+    color: "#555",
+    lineHeight: "1.5",
+    fontFamily: "Arial,Helvetica,sans-serif",
+    padding: 0,
+    margin: 0,
+  },
+
+  originCard: {
+    background: "#F9F8F6",
+    borderLeft: "3px solid #C8102E",
+  },
+
+  destinationCard: {
+    background: "#F9F8F6",
+    borderLeft: "3px solid #1A1A1A",
+  },
   // ────────────────────────────────────────────────────────
   // CTA BUTTON
   // ────────────────────────────────────────────────────────
@@ -368,5 +480,140 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     paddingBottom: `${SPACE[8]}px`,
     paddingLeft: `${CONTAINER.paddingH}px`,
     paddingRight: `${CONTAINER.paddingH}px`,
+  },
+
+  // ────────────────────────────────────────────────────────
+  // Table
+  // ────────────────────────────────────────────────────────
+
+  tableBlock: {
+    backgroundColor: COLOR.offWhite,
+    border: `1px solid ${COLOR.containerBorder}`,
+    paddingTop: `${SPACE[4]}px`,
+    paddingBottom: `${SPACE[4]}px`,
+    paddingLeft: `${SPACE[5]}px`,
+    paddingRight: `${SPACE[5]}px`,
+  },
+
+  tableHeader: {
+    fontSize: "11px",
+    fontWeight: FONT.weight.bold,
+    color: COLOR.textLabel,
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+    paddingBottom: "8px",
+  },
+
+  tableRow: {
+    fontSize: "13px",
+    color: COLOR.textPrimary,
+    paddingTop: "6px",
+    paddingBottom: "6px",
+    borderTop: `1px solid ${COLOR.containerBorder}`,
+  },
+
+  tableCell: {
+    fontSize: "13px",
+    color: COLOR.textPrimary,
+    paddingRight: "10px",
+  },
+
+  wrapper: {
+    padding: "0",
+    overflow: "hidden",
+    // marginTop: "20px",
+    // marginBottom: "20px",
+  },
+
+  titleBar: {
+    backgroundColor: "#1A1A1A",
+    paddingTop: "5px",
+    paddingBottom: "5px",
+    paddingLeft: "16px",
+    paddingRight: "16px",
+    borderLeft: "2px solid #C8102E",
+  },
+  titleText: {
+    fontFamily: "Arial, Helvetica, sans-serif",
+    fontSize: "10px",
+    fontWeight: 700,
+    letterSpacing: "1.5px",
+    textTransform: "uppercase" as const,
+    color: "#FFFFFF",
+    margin: "0",
+    padding: "0",
+    lineHeight: "10px", // penting
+  },
+
+  headRow: {
+    backgroundColor: "#F2F1EF",
+    borderBottom: "1px solid #DDDBD7",
+  },
+
+  headCell: {
+    fontFamily: "Arial, Helvetica, sans-serif",
+    fontSize: "10px",
+    fontWeight: 700,
+    letterSpacing: "0.8px",
+    textTransform: "uppercase" as const,
+    color: "#888888",
+    paddingTop: "8px",
+    paddingBottom: "8px",
+    paddingLeft: "16px",
+    paddingRight: "8px",
+  },
+
+  dataRow: {
+    borderBottom: "1px solid #EBEBEB",
+  },
+
+  dataRowAlt: {
+    backgroundColor: "#FAFAF9",
+    borderBottom: "1px solid #EBEBEB",
+  },
+
+  dataCell: {
+    fontFamily: "Arial, Helvetica, sans-serif",
+    fontSize: "10px",
+    color: "#1A1A1A",
+    paddingTop: "8px",
+    paddingBottom: "8px",
+    paddingLeft: "16px",
+    paddingRight: "8px",
+    lineHeight: "1.4",
+    verticalAlign: "top" as const,
+  },
+
+  emptyCell: {
+    fontFamily: "Arial, Helvetica, sans-serif",
+    fontSize: "11px",
+    color: "#BBBBBB",
+    paddingTop: "11px",
+    paddingBottom: "11px",
+    paddingLeft: "16px",
+    paddingRight: "8px",
+  },
+
+  accentStrip: {
+    width: "3px",
+    backgroundColor: "#C8102E", // brand red
+    fontSize: "0",
+    lineHeight: "0",
+    padding: "0",
+  },
+
+  footerRow: {
+    backgroundColor: "#F2F1EF",
+    borderTop: "1px solid #DDDBD7",
+  },
+
+  footerCell: {
+    fontFamily: "Arial, Helvetica, sans-serif",
+    fontSize: "10px",
+    color: "#999999",
+    paddingTop: "8px",
+    paddingBottom: "8px",
+    paddingLeft: "16px",
+    paddingRight: "16px",
   },
 };

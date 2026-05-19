@@ -16,7 +16,7 @@ interface ResetWalletPinEmailProps {
 const defaults: Required<ResetWalletPinEmailProps> = {
   companyName: "ShipLink",
   email: "john@example.com",
-  link: "https://app.shiplink.com/reset-wallet-pin",
+  link: "https://shiplink.com",
 };
 
 export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
@@ -37,14 +37,12 @@ export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
             <Text style={s.eyebrow}>Wallet Security</Text>
 
             <Text style={s.headline}>Reset your wallet PIN</Text>
-
             <Text style={s.description}>
-              We received a request to reset the wallet PIN associated with your ShipLink account.
+              We received a request to reset the wallet PIN associated with your ShipLink account{" "}
+              <strong>{p.email}</strong>.
             </Text>
 
-            <Text style={s.description}>
-              For security purposes, please confirm this request by creating a new wallet PIN using the button below.
-            </Text>
+            <Text style={s.description}>To continue securely, please create a new PIN using the button below.</Text>
 
             {/* CTA */}
             <CustomButton
@@ -71,14 +69,6 @@ export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
               </span>
             </Text>
 
-            <Section style={s.routeContent}>
-              <Text style={s.routeLabel}>ACCOUNT</Text>
-
-              <Text style={s.detailText}>
-                <strong>Email:</strong> {p.email}
-              </Text>
-            </Section>
-
             <Text style={s.description}>
               If you did not request this change, you can safely ignore this email. Your wallet PIN will remain
               unchanged unless the reset process is completed.
@@ -88,7 +78,7 @@ export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter companyName={p.companyName} />
+          <EmailFooter displayThankYouFooter companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

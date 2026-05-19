@@ -16,6 +16,7 @@ export async function POST(request) {
       currency_package_value,
       service,
       location,
+      package_attributes,
     } = await request.json();
 
     const response = await axios.post(
@@ -30,6 +31,7 @@ export async function POST(request) {
         currency_package_value: currency_package_value,
         service: service,
         location: location,
+        package_attributes: package_attributes,
       },
       {
         httpsAgent: agent,

@@ -25,11 +25,13 @@ import * as yup from "yup";
 import { ServiceTable } from "./components/ServiceTable";
 import DeclareTable from "./components/forms/DeclareTable";
 import { Dimension } from "./components/forms/Dimension";
+
 import { ShippedTo } from "./components/forms/ShippedTo";
 import { RatesOption } from "./components/panel/RatesOption";
 import { ServiceOptions } from "./components/panel/ServiceOptions";
 import { SummaryPanel } from "./components/panel/SummaryPanel";
 import { ShiptoForm } from "./components/shiptoForm";
+import { PalletDetails } from "./components/pallet/PalletGoship";
 
 import { isWarehouseDestinationDisabled } from "@/features/WH_crossBorder/service/warehouse_disabled.service";
 import styles from "./styles.module.scss";
@@ -104,6 +106,61 @@ const formSchema = yup.object().shape({
   ),
   total_package_value: yup.number(),
   currency_package_value: yup.string(),
+  package_attributes: yup
+    .object({
+      tracking_id: yup.string(),
+      condition_new: yup.string().notRequired(),
+
+      stackable: yup.boolean().default(false),
+      hazardous: yup.boolean().default(false),
+
+      un_number: yup.string(),
+      reportable_qty: yup.boolean().notRequired(),
+
+      pack_group_number: yup.string().when("hazardous", {
+        is: true,
+        then: (schema) => schema.required("Packing Group Number is required"),
+      }),
+
+      emergency_contact_company: yup.string().when("hazardous", {
+        is: true,
+        then: (schema) => schema.required("Emergency Contact Company is required"),
+      }),
+
+      emergency_contact_phone: yup.string().when("hazardous", {
+        is: true,
+        then: (schema) => schema.required("Emergency Contact Phone is required").min(5, "Phone number is invalid"),
+      }),
+
+      contract_number: yup.string().when("hazardous", {
+        is: true,
+        then: (schema) => schema.required("Contract Number is required"),
+      }),
+
+      hazmat_class: yup.string().when("hazardous", {
+        is: true,
+        then: (schema) => schema.required("Hazmat Class is required"),
+      }),
+
+      instructions: yup.string().when("hazardous", {
+        is: true,
+        then: (schema) => schema.required("Instructions are required"),
+      }),
+    })
+    .test("stackable-or-hazardous", "Either Stackable or Hazardous must be selected", function (values) {
+      if (!values) return true;
+
+      if (!values.condition_new) return true;
+
+      if (!values.stackable && !values.hazardous) {
+        return this.createError({
+          path: "hazardous",
+          message: "Either Stackable or Hazardous must be selected",
+        });
+      }
+
+      return true;
+    }),
 });
 
 export default function Home() {
@@ -165,6 +222,7 @@ export default function Home() {
       shipped_from: {
         address2: "",
       },
+      package_attributes: {},
       shippingType: "",
       warehouse_destination: "",
       warehouse_destination_country: "",
@@ -587,8 +645,10 @@ export default function Home() {
           height: formData.dimension.height,
           distance_unit: formData.dimension.dimension_unit,
         },
+        package_attributes: formData.package_attributes,
         total_package_value: Number(formData.total_package_value) || 0,
         currency_package_value: formData.currency_package_value,
+        package_attributes: formData.package_attributes,
       });
 
       if (response.data.status === true) {
@@ -864,6 +924,10 @@ export default function Home() {
     }
   }, [selectedService, form]);
 
+  const isPallet =
+    (selectedService === "cbf" || selectedService === "forward") &&
+    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight >= 60 : formWatch.dimension.weight >= 27.2);
+
   return (
     <>
       {loading_rates && <Loading />}
@@ -934,22 +998,23 @@ export default function Home() {
                   <div className="flex h-max flex-col justify-evenly gap-3">
                     <div className="">
                       {tabsName === "mailbox" ? (
-                        <FormField
-                          control={form.control}
-                          name="mailboxSelected"
-                          render={({ field }) => (
-                            <>
-                              <div className="">
-                                <FormLabel className="font-bold">
-                                  Select Your Mailbox <span className="text-red-600">*</span>
-                                </FormLabel>
-                                <FormControl className="w-full">
-                                  <Select
-                                    className="text-xs"
-                                    onValueChange={handleValueChange}
-                                    defaultValue={selectedData}
-                                  >
-                                    <FormControl>
+                        <div>
+                          <FormField
+                            control={form.control}
+                            name="mailboxSelected"
+                            render={({ field }) => (
+                              <>
+                                <div>
+                                  <FormLabel className="font-bold">
+                                    Select Your Mailbox <span className="text-red-600">*</span>
+                                  </FormLabel>
+
+                                  <FormControl className="w-full">
+                                    <Select
+                                      className="text-xs"
+                                      onValueChange={handleValueChange}
+                                      defaultValue={selectedData}
+                                    >
                                       <SelectTrigger
                                         name="mailboxSelected"
                                         id="mailboxSelected"
@@ -961,127 +1026,139 @@ export default function Home() {
                                           ) : (
                                             <div className="flex flex-row items-center gap-2">
                                               <img
-                                                src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("shipped_from.country"))}.jpg`}
-                                                srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("shipped_from.country"))}.jpg 2x`}
+                                                src={`https://flagcdn.com/h80/${checkCoutryCode(
+                                                  form.watch("shipped_from.country")
+                                                )}.jpg`}
+                                                srcSet={`https://flagcdn.com/h80/${checkCoutryCode(
+                                                  form.watch("shipped_from.country")
+                                                )}.jpg 2x`}
                                                 alt=""
                                                 className="h-6 w-6 rounded-full border border-blue-50 object-cover object-center"
                                               />
-                                              <p>{selectedData()}</p>
+                                              <p>
+                                                {typeof selectedData === "function" ? selectedData() : selectedData}
+                                              </p>
                                             </div>
                                           )}
                                         </SelectValue>
                                       </SelectTrigger>
-                                    </FormControl>
 
-                                    <SelectContent id="warehouseContentSelect">
-                                      {loadingWarehouse ? (
-                                        <Skeleton className="h-[20px] w-full" />
-                                      ) : (
-                                        warehouse?.map((item, index) => (
-                                          <SelectItem
-                                            key={index}
-                                            className="text-xs"
-                                            value={item?.warehouse_code}
-                                            id={item?.warehouse_code}
-                                          >
-                                            {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
-                                          </SelectItem>
-                                        ))
-                                      )}
-                                    </SelectContent>
-                                  </Select>
-                                </FormControl>
-
-                                <FormItem className="w-full">
-                                  <div className="">
-                                    <Dimension form={form} />
-                                  </div>
-                                  {/* ReshipedTo */}
-                                  {selectedService === "hfp" ? (
-                                    <></>
-                                  ) : selectedService === "cbp" ? (
-                                    <div>
-                                      <div className="my-4 grid w-full grid-cols-3">
-                                        <DeclareTable form={form} />
-                                      </div>
-                                      <Form {...form}>
-                                        <form disabled={disabledForm}>
-                                          <FormLabel className="font-bold">Warehouse Destination</FormLabel>
-                                          <FormControl className="w-full">
-                                            <Select
+                                      <SelectContent id="warehouseContentSelect">
+                                        {loadingWarehouse ? (
+                                          <Skeleton className="h-[20px] w-full" />
+                                        ) : (
+                                          warehouse?.map((item, index) => (
+                                            <SelectItem
+                                              key={index}
                                               className="text-xs"
-                                              onValueChange={handlewarehouseDestination}
-                                              value={form.watch("warehouse_destination") || ""}
+                                              value={item?.warehouse_code}
+                                              id={item?.warehouse_code}
                                             >
-                                              <FormControl>
-                                                <SelectTrigger
-                                                  name="warehouse_destination"
-                                                  id="warehouse_destination"
-                                                  className="h-[36px] text-xs"
-                                                >
-                                                  <SelectValue placeholder="Select Warehouse Destination">
-                                                    {loadingWarehouse && selectedDataDestination === undefined ? (
-                                                      <Skeleton className="h-[20px] w-full" />
-                                                    ) : (
-                                                      <div className="flex flex-row items-center gap-2">
-                                                        {selectedDataDestination() ===
-                                                        "Select Warehouse Destination" ? (
-                                                          <></>
-                                                        ) : (
-                                                          <img
-                                                            src={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg`}
-                                                            srcSet={`https://flagcdn.com/h80/${checkCoutryCode(form.watch("warehouse_destination_country"))}.jpg 2x`}
-                                                            alt=""
-                                                            className="h-6 w-6 rounded-full border border-blue-50 object-cover object-center"
-                                                          />
-                                                        )}
-                                                        <p>{selectedDataDestination()}</p>
-                                                      </div>
-                                                    )}
-                                                  </SelectValue>
-                                                </SelectTrigger>
-                                              </FormControl>
+                                              {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                            </SelectItem>
+                                          ))
+                                        )}
+                                      </SelectContent>
+                                    </Select>
+                                  </FormControl>
+                                </div>
 
-                                              <SelectContent id="warehouse_destination_select">
-                                                {loadingWarehouse ? (
+                                <div>
+                                  <Dimension form={form} />
+
+                                  {isPallet && (
+                                    <div className="mt-4 w-full text-xs font-bold">
+                                      <PalletDetails form={form} open={open} />
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* ReshipedTo */}
+                                {selectedService === "hfp" ? (
+                                  <></>
+                                ) : selectedService === "cbp" ? (
+                                  <div>
+                                    <div className="my-4 grid w-full grid-cols-3">
+                                      <DeclareTable form={form} />
+                                    </div>
+
+                                    <Form {...form}>
+                                      <form disabled={disabledForm}>
+                                        <FormLabel className="font-bold">Warehouse Destination</FormLabel>
+
+                                        <FormControl className="w-full">
+                                          <Select
+                                            className="text-xs"
+                                            onValueChange={handlewarehouseDestination}
+                                            value={form.watch("warehouse_destination") || ""}
+                                          >
+                                            <SelectTrigger
+                                              name="warehouse_destination"
+                                              id="warehouse_destination"
+                                              className="h-[36px] text-xs"
+                                            >
+                                              <SelectValue placeholder="Select Warehouse Destination">
+                                                {loadingWarehouse && selectedDataDestination === undefined ? (
                                                   <Skeleton className="h-[20px] w-full" />
                                                 ) : (
-                                                  availableWarehousesDestination?.map((item, index) => (
-                                                    <SelectItem
-                                                      key={index}
-                                                      className="text-xs"
-                                                      value={item?.warehouse_code}
-                                                      id={item?.warehouse_code}
-                                                    >
-                                                      {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
-                                                    </SelectItem>
-                                                  ))
+                                                  <div className="flex flex-row items-center gap-2">
+                                                    {selectedDataDestination() !== "Select Warehouse Destination" && (
+                                                      <img
+                                                        src={`https://flagcdn.com/h80/${checkCoutryCode(
+                                                          form.watch("warehouse_destination_country")
+                                                        )}.jpg`}
+                                                        srcSet={`https://flagcdn.com/h80/${checkCoutryCode(
+                                                          form.watch("warehouse_destination_country")
+                                                        )}.jpg 2x`}
+                                                        alt=""
+                                                        className="h-6 w-6 rounded-full border border-blue-50 object-cover object-center"
+                                                      />
+                                                    )}
+                                                    <p>{selectedDataDestination()}</p>
+                                                  </div>
                                                 )}
-                                              </SelectContent>
-                                            </Select>
-                                          </FormControl>
-                                        </form>
-                                      </Form>
+                                              </SelectValue>
+                                            </SelectTrigger>
+
+                                            <SelectContent id="warehouse_destination_select">
+                                              {loadingWarehouse ? (
+                                                <Skeleton className="h-[20px] w-full" />
+                                              ) : (
+                                                availableWarehousesDestination?.map((item, index) => (
+                                                  <SelectItem
+                                                    key={index}
+                                                    className="text-xs"
+                                                    value={item?.warehouse_code}
+                                                    id={item?.warehouse_code}
+                                                  >
+                                                    {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
+                                                  </SelectItem>
+                                                ))
+                                              )}
+                                            </SelectContent>
+                                          </Select>
+                                        </FormControl>
+                                      </form>
+                                    </Form>
+                                  </div>
+                                ) : selectedService === "cbf" ? (
+                                  <>
+                                    <div className="my-4 grid w-full grid-cols-3">
+                                      <DeclareTable form={form} />
                                     </div>
-                                  ) : selectedService === "cbf" ? (
-                                    <>
-                                      <div className="my-4 grid w-full grid-cols-3">
-                                        <DeclareTable form={form} />
-                                      </div>
-                                      <ShippedTo form={form} country_list={country} />
-                                    </>
-                                  ) : (
-                                    <>
-                                      <div className="my-4 grid w-full grid-cols-3">
-                                        <DeclareTable form={form} />
-                                      </div>
-                                      <ShippedTo form={form} country_list={country} />
-                                    </>
-                                  )}
-                                </FormItem>
+                                    <ShippedTo form={form} country_list={country} />
+                                  </>
+                                ) : (
+                                  <>
+                                    <div className="my-4 grid w-full grid-cols-3">
+                                      <DeclareTable form={form} />
+                                    </div>
+                                    <ShippedTo form={form} country_list={country} />
+                                  </>
+                                )}
 
                                 <Button
-                                  className={`${tableMode ? "bloc" : "hidden"} mt-5 w-full`}
+                                  className={`${tableMode ? "block" : "hidden"} mt-5 w-full`}
                                   variant="destructive"
                                   onClick={() => {
                                     triggerContinue();
@@ -1089,10 +1166,10 @@ export default function Home() {
                                 >
                                   Continue
                                 </Button>
-                              </div>
-                            </>
-                          )}
-                        />
+                              </>
+                            )}
+                          />
+                        </div>
                       ) : tabsName === "custom" ? (
                         <>
                           <ShiptoForm form={form} country_list={country} />

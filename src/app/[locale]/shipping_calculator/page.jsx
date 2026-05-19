@@ -926,7 +926,7 @@ export default function Home() {
 
   const isPallet =
     (selectedService === "cbf" || selectedService === "forward") &&
-    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight >= 60 : formWatch.dimension.weight >= 27.2);
+    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight >= 90 : formWatch.dimension.weight >= 41);
 
   return (
     <>

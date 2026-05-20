@@ -8,7 +8,7 @@
 "use client";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormLabel } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -27,11 +27,11 @@ import DeclareTable from "./components/forms/DeclareTable";
 import { Dimension } from "./components/forms/Dimension";
 
 import { ShippedTo } from "./components/forms/ShippedTo";
+import { PalletDetails } from "./components/pallet/PalletGoship";
 import { RatesOption } from "./components/panel/RatesOption";
 import { ServiceOptions } from "./components/panel/ServiceOptions";
 import { SummaryPanel } from "./components/panel/SummaryPanel";
 import { ShiptoForm } from "./components/shiptoForm";
-import { PalletDetails } from "./components/pallet/PalletGoship";
 
 import { isWarehouseDestinationDisabled } from "@/features/WH_crossBorder/service/warehouse_disabled.service";
 import styles from "./styles.module.scss";
@@ -512,7 +512,7 @@ export default function Home() {
       return "Select Warehouse Destination";
     }
 
-    const data = warehouse.find((item) => item.warehouse_code === destination);
+    const data = warehouse.find((item) => item.warehouse_id === destination);
 
     return data?.city
       ? `${data.city}, ${data.province_code}, ${data.postal_code}, ${data.country_code}`
@@ -558,11 +558,11 @@ export default function Home() {
     form.setValue("warehouse_destination_country", "");
   };
   const handlewarehouseDestination = (value) => {
-    const data = warehouse.find((item) => item.warehouse_code === value);
+    const data = warehouse.find((item) => item.warehouse_id === value);
 
     setWarehouseDestination_id(data?.warehouse_id);
 
-    form.setValue("warehouse_destination", data?.warehouse_code);
+    form.setValue("warehouse_destination", data?.warehouse_id);
 
     form.setValue("warehouse_destination_country", data?.country_code);
   };
@@ -1128,8 +1128,8 @@ export default function Home() {
                                                   <SelectItem
                                                     key={index}
                                                     className="text-xs"
-                                                    value={item?.warehouse_code}
-                                                    id={item?.warehouse_code}
+                                                    value={item?.warehouse_id}
+                                                    id={item?.warehouse_id}
                                                   >
                                                     {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
                                                   </SelectItem>
@@ -1228,8 +1228,8 @@ export default function Home() {
                                             <SelectItem
                                               key={index}
                                               className="text-xs"
-                                              value={item?.warehouse_code}
-                                              id={item?.warehouse_code}
+                                              value={item?.warehouse_id}
+                                              id={item?.warehouse_id}
                                               disabled={form.watch("shipped_from.country") === item?.country_code}
                                             >
                                               {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}
@@ -1293,8 +1293,8 @@ export default function Home() {
                                             <SelectItem
                                               key={index}
                                               className="text-xs"
-                                              value={item?.warehouse_code}
-                                              id={item?.warehouse_code}
+                                              value={item?.warehouse_id}
+                                              id={item?.warehouse_id}
                                               disabled={form.watch("shipped_from.country") === item?.country_code}
                                             >
                                               {`${item?.city}, ${item?.province_code}, ${item?.postal_code}, ${item?.country_code}`}

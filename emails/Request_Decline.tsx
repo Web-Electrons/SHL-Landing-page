@@ -40,8 +40,6 @@ export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEma
         <Container style={s.container} className="mx-auto">
           {/* HEADER */}
           <EmailHeader companyName={p.companyName} />
-
-          {/* CONTENT */}
           <Section style={s.bodySection}>
             <Text style={s.eyebrow}>DECLINED REQUEST</Text>
 
@@ -81,6 +79,7 @@ export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEma
 
           {/* FOOTER */}
           <EmailFooter displayThankYouFooter companyName={p.companyName} />
+          {/* CONTENT */}
         </Container>
       </Body>
     </Html>

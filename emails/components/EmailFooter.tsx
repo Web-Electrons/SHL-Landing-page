@@ -41,9 +41,7 @@ export const EmailFooter = ({
 
         <Row>
           <Column>
-            <Text style={s.footerCopy}>
-              &copy; {year} {companyName} Services Inc. All rights reserved.
-            </Text>
+            <Text style={s.footerCopy}>&copy; {companyName} Services Inc. All rights reserved.</Text>
           </Column>
         </Row>
       </Section>

@@ -27,18 +27,18 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   body: {
     backgroundColor: COLOR.pageBg,
     margin: "0",
-    paddingTop: "20px",
-    paddingBottom: "20px",
+    paddingTop: "10px",
+    paddingBottom: "10px",
     fontFamily: FONT.family,
   },
 
   container: {
     maxWidth: `${CONTAINER.maxWidth}px`,
-    backgroundColor: COLOR.white,
-    borderTop: `1px solid ${COLOR.containerBorder}`,
-    borderRight: `1px solid ${COLOR.containerBorder}`,
-    borderBottom: `1px solid ${COLOR.containerBorder}`,
-    borderLeft: `1px solid ${COLOR.containerBorder}`,
+    // backgroundColor: COLOR.white,
+    // // borderTop: `1px solid ${COLOR.containerBorder}`,
+    // borderRight: `1px solid ${COLOR.containerBorder}`,
+    // borderBottom: `1px solid ${COLOR.containerBorder}`,
+    // borderLeft: `1px solid ${COLOR.containerBorder}`,
     margin: `${CONTAINER.outerGap}px auto`,
   },
 
@@ -47,12 +47,12 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   // ────────────────────────────────────────────────────────
 
   header: {
-    backgroundColor: COLOR.brand,
-    paddingTop: `${SPACE[4]}px`,
-    paddingBottom: `${SPACE[4]}px`,
-    paddingLeft: `${SPACE[11]}px`,
-    paddingRight: `${SPACE[11]}px`,
-    borderBottom: `3px solid ${COLOR.brandDark}`,
+    // backgroundColor: COLOR.brand,
+    // paddingTop: `${SPACE[4]}px`,
+    // paddingBottom: `${SPACE[4]}px`,
+    // paddingLeft: `${SPACE[11]}px`,
+    // paddingRight: `${SPACE[11]}px`,
+    // borderBottom: `3px solid ${COLOR.brandDark}`,
   },
 
   headerAccent: {
@@ -60,6 +60,13 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     backgroundColor: COLOR.brandDark,
   },
 
+  logoHeader: {
+    width: "auto",
+    height: "28px",
+    padding: "0",
+    margin: "0",
+    lineHeight: "1",
+  },
   logoText: {
     fontFamily: FONT.family,
     fontSize: `${FONT_SIZE.logo}px`,
@@ -92,10 +99,15 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   // ────────────────────────────────────────────────────────
 
   bodySection: {
+    backgroundColor: COLOR.white,
     paddingTop: `${SPACE[3]}px`,
     paddingBottom: `${SPACE[3]}px`,
     paddingLeft: `${CONTAINER.paddingH}px`,
     paddingRight: `${CONTAINER.paddingH}px`,
+    // borderTop: `1px solid ${COLOR.containerBorder}`,
+    // borderRight: `1px solid ${COLOR.containerBorder}`,
+    // borderBottom: `1px solid ${COLOR.containerBorder}`,
+    // borderLeft: `1px solid ${COLOR.containerBorder}`,
   },
 
   // "NEW TRANSPORT REQUEST" — all-caps micro text di atas headline
@@ -256,6 +268,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     paddingRight: `${SPACE[5]}px`,
     verticalAlign: "top" as const,
     borderLeft: `${ACCENT_WIDTH}px solid ${COLOR.brand}`,
+    // fontWeight: 600,
   },
 
   label: {
@@ -265,6 +278,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     lineHeight: 1,
     margin: "0 0 6px",
     padding: "0",
+    fontWeight: 600,
   },
 
   flag: {
@@ -441,12 +455,19 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     paddingRight: `${CONTAINER.paddingH}px`,
   },
 
+  footerLogo: {
+    display: "block",
+    margin: "0",
+    paddingTop: "1px",
+    paddingBottom: "1px",
+  },
+
   footerBottom: {
     paddingTop: `${SPACE[3]}px`,
   },
 
   footerBrand: {
-    fontFamily: FONT.family,
+    fontFamily: "Arial, Helvetica, sans-serif",
     fontSize: `${FONT_SIZE.body}px`,
     fontWeight: FONT.weight.black,
     color: COLOR.brand,

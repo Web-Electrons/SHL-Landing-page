@@ -16,7 +16,7 @@
 // ─── Color Palette ────────────────────────────────────────────────────────────
 export const COLOR = {
   // Brand — ubah di sini untuk rebranding
-  brand: "#C8102E", // primary red (CTA, accents, eyebrow)
+  brand: "#c42626", // primary red (CTA, accents, eyebrow)
   brandDark: "#A50D24", // hover / shadow strip bawah header
   brandFade: "#E8899A", // teks di atas background merah (solid, no rgba)
   brandBorder: "#8B3040", // border badge di atas background merah
@@ -35,7 +35,7 @@ export const COLOR = {
   // Text hierarchy
   textPrimary: "#1A1A1A", // = black, untuk judul
   textBody: "#666666", // body / description (muted)
-  textLabel: "#999999", // micro-label (ORIGIN, DESTINATION, footer)
+  textLabel: "#6B7280", // micro-label (ORIGIN, DESTINATION, footer)
   textAddress: "#555555", // alamat, sign-off
   textLink: "#C8102E", // = brand, untuk inline link
 } as const;

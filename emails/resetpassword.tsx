@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -46,7 +47,7 @@ export const ResetPasswordEmail = (props: ResetPasswordEmailProps) => {
             <Text style={s.description}>
               To continue securely, please create a new password using the button below.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -55,7 +56,7 @@ export const ResetPasswordEmail = (props: ResetPasswordEmailProps) => {
               label="RESET PASSWORD"
               link={p.link}
             />
-
+            <Spacer />
             <Text
               style={{
                 ...s.description,
@@ -76,8 +77,9 @@ export const ResetPasswordEmail = (props: ResetPasswordEmailProps) => {
               If you did not request a password reset, no further action is required. Your account and password will
               remain unchanged unless the reset process is completed.
             </Text>
-
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -40,6 +41,7 @@ export const BankValidation = (props: BankValidationProps) => {
             <Text style={s.description}>
               We have successfully verified your bank payment and your transaction is now being processed by our system.
             </Text>
+            <Spacer />
 
             {/* PACKAGE INFO */}
             <Section style={s.routeContent}>
@@ -59,7 +61,7 @@ export const BankValidation = (props: BankValidationProps) => {
             <Text style={s.description}>
               You can now access your invoice and transaction details through your account dashboard.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -69,8 +71,10 @@ export const BankValidation = (props: BankValidationProps) => {
               label="GO TO DASHBOARD"
               link={"https://www.shiplink.com/"}
             />
+            <Spacer />
 
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -43,6 +44,7 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
               Our brokerage team has submitted an update related to your shipment order. Please review the latest
               information to ensure all details are accurate and up to date.
             </Text>
+            <Spacer />
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
@@ -54,6 +56,7 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
               You can review the updated brokerage information directly from your account dashboard.
             </Text>
 
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -63,8 +66,9 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
               label="GO TO DASHBOARD"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             <SupportSignature supportUrl="{URL}" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

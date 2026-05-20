@@ -5,6 +5,7 @@ import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
 import { PackageRow, PackageTable } from "./components/PakcageTable";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -85,6 +86,7 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
                             available in your dashboard for forwarding,
                             consolidation, or shipping requests. */}
             </Text>
+            <Spacer />
 
             {/* PACKAGE INFO */}
             <Section style={s.routeContent}>
@@ -93,9 +95,10 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
             </Section>
 
             <Text style={s.description}>
-              Please log in to your account to select a shipping service and continue with the next shipment process.
+              Please login to your account to select a shipping service and continue with the next shipment process.
             </Text>
 
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -104,6 +107,7 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
               label="SELECT SERVICE"
               link={p.serviceLink}
             />
+            <Spacer />
 
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
             {/* PACKAGE TABLE */}
@@ -132,6 +136,7 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
 
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

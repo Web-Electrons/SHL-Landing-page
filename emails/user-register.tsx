@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
@@ -44,7 +45,7 @@ export const NewUserEmail = (props: NewUserEmailProps) => {
             <Text style={s.headline}>A new user has just registered.</Text>
 
             <Text style={s.description}>Below are the details of the newly registered user.</Text>
-
+            <Spacer />
             {/* USER CARD */}
             <Section style={s.routeContent}>
               <Text style={s.label}>USER DETAILS</Text>
@@ -54,7 +55,7 @@ export const NewUserEmail = (props: NewUserEmailProps) => {
             </Section>
 
             <Text style={s.description}>Please review this user and take action if necessary.</Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -63,6 +64,7 @@ export const NewUserEmail = (props: NewUserEmailProps) => {
               label="VIEW USER"
               link={p.link}
             />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

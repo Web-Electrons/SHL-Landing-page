@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -56,6 +57,8 @@ export const BrokerageStatusEmail = (props: BrokerageStatusEmailProps) => {
               from your dashboard.
             </Text>
 
+            <Spacer />
+
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>SHIPMENT INFORMATION</Text>
@@ -68,6 +71,7 @@ export const BrokerageStatusEmail = (props: BrokerageStatusEmailProps) => {
               You can access your shipment dashboard to review the latest brokerage activity and shipment details.
             </Text>
 
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -77,9 +81,10 @@ export const BrokerageStatusEmail = (props: BrokerageStatusEmailProps) => {
               label="VIEW SHIPMENT"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

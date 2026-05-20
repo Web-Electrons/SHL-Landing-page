@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -44,6 +45,7 @@ export const ContentImageRequestEmail = (props: ContentImageRequestEmailProps) =
               A customer has requested additional package content images for shipment <strong>#{p.trackingId}</strong>.
               Please review the request details below and proceed with the image handling process.
             </Text>
+            <Spacer />
 
             {/* REQUEST DETAILS */}
             <Section style={s.routeContent}>
@@ -59,9 +61,10 @@ export const ContentImageRequestEmail = (props: ContentImageRequestEmailProps) =
               This notification was generated automatically by the {p.companyName} system to help warehouse and
               operations teams manage package inspection requests efficiently.
             </Text>
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

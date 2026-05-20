@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { PackageRow, PackageTable } from "./components/PakcageTable";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -84,10 +85,10 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
             <Text style={s.headline}> Consolidation #{p.orderId} has been completed. </Text>
 
             <Text style={s.description}>
-              Your shipment consolidation request has been successfully completed. Please log in to your account to
+              Your shipment consolidation request has been successfully completed. Please login to your account to
               select a service and continue with the next steps.
             </Text>
-
+            <Spacer />
             {/* WAREHOUSE */}
             <Section
               style={{
@@ -186,6 +187,7 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

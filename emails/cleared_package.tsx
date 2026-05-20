@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -45,7 +46,7 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
               Your shipment has successfully passed the transport clearance process and is now moving forward to the
               next stage within our delivery network.
             </Text>
-
+            <Spacer />
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>SHIPMENT INFORMATION</Text>
@@ -53,12 +54,12 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
               <InfoRow label={"Order ID"} value={`${p.orderId}`} />
               <InfoRow label={"Package ID"} value={`${p.packageId}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
-              Please log in to your account dashboard to review the latest shipment updates and continue with any
+              Please login to your account dashboard to review the latest shipment updates and continue with any
               required actions.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -67,11 +68,13 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
               label="VIEW SHIPMENT DETAILS"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             <Text style={s.description}>
               If you require assistance regarding your shipment, our support team will be available to help you.
             </Text>
+            <Spacer />
             <SupportSignature supportUrl="{URL}" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

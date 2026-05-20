@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -48,6 +49,8 @@ export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
               This is a final reminder that payment for your order is due today. To avoid automatic credit card
               processing fees, please ensure your bank transfer is received before the end of the day.
             </Text>
+
+            <Spacer />
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>PAYMENT INFORMATION</Text>
@@ -70,7 +73,9 @@ export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
                         /> */}
 
             {/* SUPPORT */}
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

@@ -164,7 +164,6 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     width: "100px",
     minWidth: "100px",
     verticalAlign: "top" as const,
-    paddingBottom: "6px",
     paddingRight: "8px",
     fontSize: "13px",
     fontWeight: 700,
@@ -173,7 +172,6 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   },
   cellValue: {
     verticalAlign: "top" as const,
-    paddingBottom: "6px",
     fontSize: "13px",
     color: "#374151",
     fontFamily: "Arial, sans-serif",
@@ -477,6 +475,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     letterSpacing: "0px",
     margin: "0",
     padding: "0",
+    // paddingRight: "4px",
   },
 
   footerLink: {

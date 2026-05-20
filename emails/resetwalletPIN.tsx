@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -43,7 +44,7 @@ export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
             </Text>
 
             <Text style={s.description}>To continue securely, please create a new PIN using the button below.</Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -52,7 +53,7 @@ export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
               label="RESET WALLET PIN"
               link={p.link}
             />
-
+            <Spacer />
             <Text
               style={{
                 ...s.description,
@@ -73,8 +74,9 @@ export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
               If you did not request this change, you can safely ignore this email. Your wallet PIN will remain
               unchanged unless the reset process is completed.
             </Text>
-
+            <Spacer />
             <SupportSignature supportUrl="{URL}" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

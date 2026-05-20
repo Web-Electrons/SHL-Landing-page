@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { PackageRow, PackageTable } from "./components/PakcageTable";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -86,7 +87,7 @@ export const PackageArrivedEmail = (props: PackageArrivedEmailProps) => {
             <Text style={s.description}>
               {p.packageType} ID <strong>#{p.orderId}</strong> has been received at our warehouse.
             </Text>
-
+            <Spacer />
             {/* WAREHOUSE BLOCK */}
             <Section
               style={{
@@ -120,15 +121,18 @@ export const PackageArrivedEmail = (props: PackageArrivedEmailProps) => {
             </Section>
 
             <Text style={s.description}>
-              Please log in to your account to select a service and proceed with the next step of your shipment process.
+              Please login to your account to select a service and proceed with the next step of your shipment process.
             </Text>
-
+            <Spacer />
             <CustomButton style={{ marginTop: "0px" }} label="SELECT SERVICE" link={p.serviceLink} />
+            <Spacer />
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
             {/* PACKAGE TABLE — now a standalone component */}
             <PackageTable title="Package Details" rows={tableRows} />
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           <EmailFooter displayThankYouFooter companyName={p.companyName} />

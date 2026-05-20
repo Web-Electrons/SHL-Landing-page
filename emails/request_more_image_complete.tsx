@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -46,9 +47,9 @@ export const PackageImageReadyEmail = (props: PackageImageReadyEmailProps) => {
             </Text>
 
             <Text style={s.description}>
-              Please log in to your dashboard to review the uploaded images and manage the next shipment process.
+              Please login to your dashboard to review the uploaded images and manage the next shipment process.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -58,9 +59,10 @@ export const PackageImageReadyEmail = (props: PackageImageReadyEmailProps) => {
               label="GO TO DASHBOARD"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

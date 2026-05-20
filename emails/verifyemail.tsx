@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -44,6 +45,7 @@ export const VerifyEmail = (props: VerifyEmailProps) => {
               Please confirm that <strong>{p.email}</strong> is your email address by clicking the button below within
               48 hours.
             </Text>
+            <Spacer />
 
             {/* CTA */}
             <CustomButton
@@ -69,7 +71,9 @@ export const VerifyEmail = (props: VerifyEmailProps) => {
                 {p.link}
               </span>
             </Text>
+            <Spacer />
             <SupportSignature supportUrl={`mailto:${p.contactEmail}`} />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

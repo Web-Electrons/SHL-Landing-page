@@ -244,7 +244,7 @@ export const ShipLinkTransportEmail = (props: ShipLinkTransportEmailProps) => {
                           }}
                         >
                           A new transport request has been created and assigned to your dispatch. Please review the
-                          shipment details below and log in to your account to proceed with the next steps.
+                          shipment details below and login to your account to proceed with the next steps.
                         </p>
 
                         {/* ── ROUTE BLOCK ──

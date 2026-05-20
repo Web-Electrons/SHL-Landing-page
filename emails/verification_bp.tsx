@@ -3,7 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
-import { SupportSignature } from "./components/SupportSingature";
+import { Spacer } from "./components/Spacer";
 import { emailStyles as s } from "./style/styles";
 
 // ─── Props ───
@@ -48,6 +48,7 @@ export const BankPaymentReceivedEmail = (props: BankPaymentReceivedEmailProps) =
               A new bank transfer payment has been recorded in the system for order <strong>#{p.orderId}</strong>.
               Please review the details below to proceed with verification.
             </Text>
+            <Spacer />
 
             {/* PAYMENT DETAILS */}
             <Section style={s.routeContent}>
@@ -65,7 +66,7 @@ export const BankPaymentReceivedEmail = (props: BankPaymentReceivedEmailProps) =
             </Text>
 
             {/* SUPPORT */}
-            <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            {/* <SupportSignature supportUrl="mailto:support@shiplink.com" /> */}
           </Section>
 
           {/* FOOTER */}

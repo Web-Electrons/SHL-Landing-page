@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -45,7 +46,7 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
               We are pleased to inform you that your shipment has successfully completed the brokerage clearance process
               and is now ready for the next stage of handling.
             </Text>
-
+            <Spacer />
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>ORDER INFORMATION</Text>
@@ -54,11 +55,12 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
             </Section>
 
             <Text style={s.description}>
-              Please log in to your account dashboard to review the latest shipment status and continue with any
+              Please login to your account dashboard to review the latest shipment status and continue with any
               remaining steps if required.
             </Text>
 
             {/* CTA */}
+            <Spacer />
             <CustomButton
               style={{
                 marginTop: "0px",
@@ -67,8 +69,9 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
               label="GO TO DASHBOARD"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

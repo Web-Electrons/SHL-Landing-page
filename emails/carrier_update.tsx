@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -42,7 +43,7 @@ export const CarrierUpdateEmail = (props: CarrierUpdateEmailProps) => {
               The transport request associated with your shipment order has been updated with new carrier-related
               information. Please review the latest details below.
             </Text>
-
+            <Spacer />
             {/* UPDATE INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>UPDATE DETAILS</Text>
@@ -55,9 +56,10 @@ export const CarrierUpdateEmail = (props: CarrierUpdateEmailProps) => {
               This notification was generated automatically by the {p.companyName} system to keep your shipment activity
               and transport information up to date.
             </Text>
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

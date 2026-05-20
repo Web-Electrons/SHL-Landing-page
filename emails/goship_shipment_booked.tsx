@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -44,6 +45,7 @@ export const GoShipShipmentBookedEmail = (props: GoShipShipmentBookedEmailProps)
               The shipment booking has been successfully created through GoShip and is currently awaiting payment
               confirmation before processing can continue.
             </Text>
+            <Spacer />
 
             {/* SHIPMENT INFO */}
             <Section style={s.routeContent}>
@@ -68,7 +70,9 @@ export const GoShipShipmentBookedEmail = (props: GoShipShipmentBookedEmailProps)
                         /> */}
 
             {/* SUPPORT */}
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

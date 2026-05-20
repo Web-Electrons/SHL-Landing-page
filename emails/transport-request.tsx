@@ -3,6 +3,7 @@ import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text }
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 export interface ShipLinkTransportEmailProps {
@@ -56,6 +57,7 @@ export const TransportRequest = (props: ShipLinkTransportEmailProps) => {
               dashboard.
             </Text>
 
+            <Spacer />
             {/* USER CARD */}
             {/* USER CARD */}
             <Row style={s.locationRow}>
@@ -108,6 +110,7 @@ export const TransportRequest = (props: ShipLinkTransportEmailProps) => {
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
 
             {/* CTA */}
+            <Spacer />
             <CustomButton
               style={{
                 marginTop: "0px",
@@ -116,8 +119,9 @@ export const TransportRequest = (props: ShipLinkTransportEmailProps) => {
               label="ACCESS YOUR ACCOUNT"
               link={"shiplink.com"}
             />
-
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

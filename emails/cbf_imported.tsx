@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -45,7 +46,7 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
               Your shipment has successfully completed the international transit process and has now been transferred to
               the domestic carrier for local delivery handling.
             </Text>
-
+            <Spacer />
             {/* PACKAGE INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>PACKAGE INFORMATION</Text>
@@ -55,7 +56,7 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
             <Text style={s.description}>
               You can follow the latest tracking activity and delivery progress directly from your account dashboard.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -65,8 +66,9 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
               label="TRACK PACKAGE"
               link={p.trackingLink}
             />
-
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

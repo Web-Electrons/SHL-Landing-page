@@ -2,6 +2,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -52,7 +53,7 @@ export const PickupVoucherExpiredEmail = (props: PickupVoucherExpiredEmailProps)
               The complimentary storage period for your shipment has ended before the pickup process was completed. As a
               result, the pickup voucher associated with this shipment is no longer valid.
             </Text>
-
+            <Spacer />
             {/* PICKUP INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>PICKUP INFORMATION</Text>
@@ -105,7 +106,9 @@ export const PickupVoucherExpiredEmail = (props: PickupVoucherExpiredEmailProps)
             </Text>
 
             {/* SUPPORT */}
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

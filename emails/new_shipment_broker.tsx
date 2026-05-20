@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -65,6 +66,7 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
               A new shipment has been assigned to your brokerage team for import clearance processing. Please review the
               shipment details below and proceed with the customs handling process through your brokerage dashboard.
             </Text>
+            <Spacer />
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
@@ -131,7 +133,7 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
             </Section>
 
             <Text style={s.description}>
-              Please log in to your ShipLink Customs Broker account to begin processing the clearance request and manage
+              Please login to your ShipLink Customs Broker account to begin processing the clearance request and manage
               the next operational steps.
             </Text>
 
@@ -149,7 +151,9 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
               Thank you for being a valued <strong>{p.companyName}</strong> patner.
             </Text>
             {/* SUPPORT */}
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

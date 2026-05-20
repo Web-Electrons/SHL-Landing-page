@@ -10,7 +10,7 @@ export const NotionMagicLinkEmail = ({ loginCode }: NotionMagicLinkEmailProps) =
   <Html>
     <Head />
     <Body style={main}>
-      <Preview>Log in with this magic link</Preview>
+      <Preview>Login with this magic link</Preview>
       <Container style={container}>
         <Heading style={h1}>Login</Heading>
         <Link
@@ -22,7 +22,7 @@ export const NotionMagicLinkEmail = ({ loginCode }: NotionMagicLinkEmailProps) =
             marginBottom: "16px",
           }}
         >
-          Click here to log in with this magic link
+          Click here to login with this magic link
         </Link>
         <Text style={{ ...text, marginBottom: "14px" }}>Or, copy and paste this temporary login code:</Text>
         <code style={code}>{loginCode}</code>

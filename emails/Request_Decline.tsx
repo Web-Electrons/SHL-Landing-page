@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -25,7 +26,7 @@ const defaults: Required<TransportRequestDeclinedEmailProps> = {
   originCountry: "United States",
   destinationCity: "Toronto",
   destinationCountry: "Canada",
-  dashboardLink: "https://shiplink.com/dashboard",
+  dashboardLink: "https://shiplink.com",
 };
 
 export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEmailProps) => {
@@ -49,7 +50,7 @@ export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEma
               The carrier assigned to your shipment request was unable to accept the transport request at this time.
               Please review the shipment details below and submit an alternative shipping request from your dashboard.
             </Text>
-
+            <Spacer />
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>SHIPMENT INFORMATION</Text>
@@ -59,10 +60,10 @@ export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEma
             </Section>
 
             <Text style={s.description}>
-              To continue with the shipment process, please log in to your account and request an alternative shipping
+              To continue with the shipment process, please login to your account and request an alternative shipping
               option.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -72,9 +73,10 @@ export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEma
               label="VIEW DASHBOARD"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

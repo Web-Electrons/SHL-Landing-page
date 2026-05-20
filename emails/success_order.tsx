@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -55,6 +56,7 @@ export const PaymentSuccessfulEmail = (props: PaymentSuccessfulEmailProps) => {
               Thank you for your payment. We are pleased to confirm that your checkout process has been completed
               successfully and your transaction has been securely recorded in our system.
             </Text>
+            <Spacer />
 
             {/* PAYMENT INFO */}
             <Section style={s.routeContent}>
@@ -69,7 +71,7 @@ export const PaymentSuccessfulEmail = (props: PaymentSuccessfulEmailProps) => {
             <Text style={s.description}>
               You can review your invoice and payment details anytime through your account dashboard.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -79,9 +81,10 @@ export const PaymentSuccessfulEmail = (props: PaymentSuccessfulEmailProps) => {
               label="VIEW INVOICE"
               link={p.invoiceLink}
             />
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

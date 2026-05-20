@@ -34,7 +34,7 @@ export const EmailFooter = ({
       )}
       <Section style={s.footerBottom}>
         <Row>
-          <Column valign="middle" align="right">
+          <Column valign="middle" align="right" style={{ paddingRight: "4px" }}>
             <Text style={s.footerBrand}>{companyName}</Text>
           </Column>
         </Row>

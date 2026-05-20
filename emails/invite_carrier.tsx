@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -55,6 +56,7 @@ export const CarrierInvitationEmail = (props: CarrierInvitationEmailProps) => {
             </Text>
 
             {/* CTA */}
+
             <CustomButton
               style={{
                 marginTop: "0px",
@@ -68,9 +70,10 @@ export const CarrierInvitationEmail = (props: CarrierInvitationEmailProps) => {
               If you require any assistance during registration or onboarding, our support team will be happy to assist
               you.
             </Text>
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

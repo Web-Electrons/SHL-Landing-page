@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -39,10 +40,11 @@ export const SupportReplyEmail = (props: SupportReplyEmailProps) => {
             <Text style={s.headline}>Your support ticket has been replied.</Text>
 
             <Text style={s.description}>
-              Our support team has replied to your ticket. Please log in to your {p.companyName} account to review the
+              Our support team has replied to your ticket. Please login to your {p.companyName} account to review the
               latest response and continue the conversation if additional assistance is needed.
             </Text>
 
+            <Spacer />
             {/* MESSAGE */}
             <Section style={s.routeContent}>
               <Text style={s.label}>LATEST RESPONSE</Text>
@@ -61,7 +63,7 @@ export const SupportReplyEmail = (props: SupportReplyEmailProps) => {
               We recommend reviewing the update as soon as possible to avoid delays in shipment handling or support
               resolution.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -71,9 +73,10 @@ export const SupportReplyEmail = (props: SupportReplyEmailProps) => {
               label="VIEW SUPPORT TICKET"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

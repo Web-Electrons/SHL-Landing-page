@@ -59,8 +59,8 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
             </Section>
 
             <Text style={s.description}>
-              To continue, please log in to your {p.companyName} account and access the Orders page to review your order
-              details and complete the payment process.
+              To continue, please login to your {p.companyName} account and access the Orders page to review and
+              complete the payment process.
             </Text>
 
             <Spacer />
@@ -77,6 +77,7 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
             <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

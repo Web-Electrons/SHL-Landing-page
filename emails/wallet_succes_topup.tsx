@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -51,7 +52,7 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
               Thank you for your payment. The funds have been successfully added to your wallet balance and are now
               available for transactions and shipment payments within your account.
             </Text>
-
+            <Spacer />
             {/* TOP UP INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>TOP-UP DETAILS</Text>
@@ -62,7 +63,7 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
             <Text style={s.description}>
               You can review your updated wallet balance and transaction history directly from your account dashboard.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -72,9 +73,11 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
               label="VIEW WALLET"
               link={p.walletLink}
             />
+            <Spacer />
 
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

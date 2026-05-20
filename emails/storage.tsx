@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -56,6 +57,7 @@ export const WarehouseReminderEmail = (props: WarehouseReminderEmailProps) => {
               such as
               <strong> Consolidation</strong>, <strong>Pick-Up</strong>, or <strong>Forwarding</strong> service.
             </Text>
+            <Spacer />
 
             {/* CTA */}
             <CustomButton
@@ -66,14 +68,15 @@ export const WarehouseReminderEmail = (props: WarehouseReminderEmailProps) => {
               label="MANAGE PACKAGES"
               link={p.dashboardLink}
             />
-
             <Text style={s.description}>
               If you need assistance selecting the appropriate shipping option, our support team is available to help
               you.
             </Text>
 
             {/* SUPPORT */}
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

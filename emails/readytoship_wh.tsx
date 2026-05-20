@@ -3,6 +3,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -43,7 +44,7 @@ export const PackageReadyToShipEmail = (props: PackageReadyToShipEmailProps) => 
             <Text style={s.description}>
               The package has completed warehouse processing and is now marked as ready to ship.
             </Text>
-
+            <Spacer />
             {/* PACKAGE INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>PACKAGE INFORMATION</Text>
@@ -60,7 +61,9 @@ export const PackageReadyToShipEmail = (props: PackageReadyToShipEmailProps) => 
             </Text>
 
             {/* SUPPORT */}
+            <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

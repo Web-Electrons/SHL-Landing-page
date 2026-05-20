@@ -3,6 +3,7 @@ import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text }
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -68,6 +69,7 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
               Your package <strong>#{p.packageId}</strong> has successfully arrived at our warehouse and is now ready to
               be picked up.
             </Text>
+            <Spacer />
 
             {/* ROUTE CARDS */}
             <Section
@@ -108,6 +110,7 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
               releasing the package.{" "}
             </Text>
 
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -118,8 +121,10 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
               link={p.dashboardLink}
             />
 
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
+            <Spacer />
           </Section>
 
           {/* FOOTER */}

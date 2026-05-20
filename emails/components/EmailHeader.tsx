@@ -24,42 +24,58 @@ export const EmailHeader = ({ companyName = "ShipLink" }: EmailHeaderProps) => {
         </Row>
       </Section> */}
       <Section style={s.header} className="header-section">
-        <tr
+        {/* Fixing Yahoo Mail issues it didnt work with pt */}
+        <table
+          role="presentation"
+          width="100%"
+          cellPadding={0}
+          cellSpacing={0}
+          border={0}
           style={{
-            height: "39pt",
+            width: "100%",
+            borderCollapse: "collapse",
+            backgroundColor: "#c42626",
           }}
         >
-          <td
-            width="100%"
-            style={{
-              width: "100%",
-              background: "#c42626",
-              padding: "0px 10pt 0px 20pt",
-              height: "39pt",
-              verticalAlign: "middle",
-              // borderBottom: "1px solid #A50D24",
-            }}
-          >
-            <p
+          <tbody>
+            <tr
               style={{
-                margin: 0,
-                padding: 0,
-                fontFamily: "Arial, Helvetica, sans-serif",
-                lineHeight: "16pt",
+                height: "52px",
               }}
             >
-              <span
+              <td
+                width="100%"
                 style={{
-                  color: "#ffffff",
-                  fontSize: "18pt",
-                  fontWeight: "bold",
+                  width: "100%",
+                  background: "#c42626",
+                  padding: "0px 13px 0px 26px",
+                  height: "52px",
+                  verticalAlign: "middle",
+                  // borderBottom: "1px solid #A50D24",
                 }}
               >
-                ShipLink
-              </span>
-            </p>
-          </td>
-        </tr>
+                <p
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                    fontFamily: "Arial, Helvetica, sans-serif",
+                    lineHeight: "21px",
+                  }}
+                >
+                  <span
+                    style={{
+                      color: "#ffffff",
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ShipLink
+                  </span>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </Section>
     </>
   );

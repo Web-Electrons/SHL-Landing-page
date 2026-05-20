@@ -34,13 +34,13 @@ export const EmailFooter = ({
       )}
       <Section style={s.footerBottom}>
         <Row>
-          <Column valign="middle">
+          <Column valign="middle" align="right">
             <Text style={s.footerBrand}>{companyName}</Text>
           </Column>
         </Row>
 
         <Row>
-          <Column>
+          <Column align="right">
             <Text style={s.footerCopy}>&copy; {companyName} Services Inc. All rights reserved.</Text>
           </Column>
         </Row>

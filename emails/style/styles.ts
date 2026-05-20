@@ -27,8 +27,9 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   body: {
     backgroundColor: COLOR.pageBg,
     margin: "0",
-    paddingTop: "10px",
-    paddingBottom: "10px",
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    paddingBottom: "35px",
     fontFamily: FONT.family,
   },
 
@@ -39,7 +40,8 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     // borderRight: `1px solid ${COLOR.containerBorder}`,
     // borderBottom: `1px solid ${COLOR.containerBorder}`,
     // borderLeft: `1px solid ${COLOR.containerBorder}`,
-    margin: `${CONTAINER.outerGap}px auto`,
+    // margin: `${CONTAINER.outerGap}px auto`,
+    margin: "0 auto",
   },
 
   // ────────────────────────────────────────────────────────
@@ -130,7 +132,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     color: COLOR.textPrimary,
     lineHeight: "1.2",
     marginTop: `${SPACE[3]}px`,
-    marginBottom: `${SPACE[3]}px`,
+    marginBottom: `${SPACE[7]}px`,
     padding: "0",
   },
 
@@ -464,6 +466,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
 
   footerBottom: {
     paddingTop: `${SPACE[3]}px`,
+    textAlign: "right",
   },
 
   footerBrand: {

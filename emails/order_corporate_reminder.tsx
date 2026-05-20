@@ -4,6 +4,7 @@ import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
+import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
 
@@ -40,7 +41,6 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
             <Text style={s.eyebrow}>Payment Required</Text>
 
             <Text style={s.headline}>Your order is ready for payment.</Text>
-
             <Text style={s.description}>
               Dear <strong>{p.customerName},</strong>
             </Text>
@@ -49,6 +49,7 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
               Your shipment order has been successfully generated and is currently awaiting payment confirmation before
               processing can begin.
             </Text>
+            <Spacer />
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
@@ -62,6 +63,7 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
               details and complete the payment process.
             </Text>
 
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -72,6 +74,7 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
               link={p.paymentLink}
             />
 
+            <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
           </Section>

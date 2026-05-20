@@ -20,7 +20,7 @@ const HazardousMaterialDetails = ({ form }) => {
   } = useQuery({
     queryKey: ["hazardousPackageGroupData"],
     queryFn: async () => {
-      const res = await axios.get("/api/admin/shipping/list_hazardous_package_group");
+      const res = await axios.get("/api/Calculator/list_hazardous_package_group");
       return res.data.data;
     },
     staleTime: 1000 * 60 * 60,
@@ -109,7 +109,7 @@ const HazardousMaterialDetails = ({ form }) => {
               <FormControl>
                 <Input
                   type="text"
-                  className="h-[30px] w-full text-xs"
+                  className="h-[30px] w-full text-xs font-normal"
                   placeholder="Emergency Contact Company"
                   {...field}
                 />
@@ -130,8 +130,7 @@ const HazardousMaterialDetails = ({ form }) => {
                     country="us" // default country
                     value={field.value}
                     onChange={(phone) => {
-                      console.log("🚀 ~ phone:", phone);
-                      form.setValue("emergency_contact_phone", phone, {
+                      form.setValue("package_attributes.emergency_contact_phone", phone, {
                         shouldValidate: true,
                         shouldDirty: true,
                       });
@@ -142,7 +141,8 @@ const HazardousMaterialDetails = ({ form }) => {
                       name: "phone",
                       required: true,
                       autoFocus: false,
-                      className: "flex-1 h-9 px-2 text-xs bg-transparent placeholder:text-zinc-400 focus:outline-none",
+                      className:
+                        "flex-1 h-9 px-2 text-xs bg-transparent placeholder:text-zinc-400 focus:outline-none font-normal",
                       placeholder: "+1 123 456 7890",
                     }}
                     countrySelectorStyleProps={{
@@ -230,7 +230,7 @@ const HazardousMaterialDetails = ({ form }) => {
               <FormControl>
                 <Input
                   type="text"
-                  className="h-[30px] w-full text-xs"
+                  className="h-[30px] w-full text-xs font-normal"
                   placeholder="Select UN number to get hazmat class"
                   disabled
                   {...field}
@@ -253,7 +253,7 @@ const HazardousMaterialDetails = ({ form }) => {
                       <Info className="h-3 w-3 cursor-pointer text-muted-foreground" />
                     </TooltipTrigger>
                     <TooltipContent side="top">
-                      <div className="max-w-xs text-xs">
+                      <div className="max-w-xs text-xs font-normal">
                         <p className="mb-2">
                           If you have a contract with a 3rd party chemical spill emergency response and/or incident
                           management company, you can include that contract number here.
@@ -264,7 +264,7 @@ const HazardousMaterialDetails = ({ form }) => {
                 </TooltipProvider>
               </FormLabel>
               <FormControl>
-                <Input type="text" className="h-[30px] w-full text-xs" placeholder="" {...field} />
+                <Input type="text" className="h-[30px] w-full text-xs font-normal" placeholder="" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -292,7 +292,7 @@ const HazardousMaterialDetails = ({ form }) => {
                 </TooltipProvider>
               </FormLabel>
               <FormControl>
-                <Input type="text" className="h-[30px] w-full text-xs" placeholder="" {...field} />
+                <Input type="text" className="h-[30px] w-full text-xs font-normal" placeholder="" {...field} />
               </FormControl>
             </FormItem>
           )}

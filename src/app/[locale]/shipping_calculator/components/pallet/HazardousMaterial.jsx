@@ -15,7 +15,7 @@ const HazardousMaterial = ({ form }) => {
   } = useQuery({
     queryKey: ["hazmatClassData"],
     queryFn: async () => {
-      const res = await axios.get("/api/admin/shipping/list_hazmat_class");
+      const res = await axios.get("/api/Calculator/list_hazmat_class");
       return res.data.data;
     },
     staleTime: 1000 * 60 * 60,
@@ -64,16 +64,13 @@ const HazardousMaterial = ({ form }) => {
                 const selected = hazmatClassData?.find((item) => item.id.toString() === value);
 
                 if (selected) {
-                  // ✅ simpan UN number ke form
-                  form.setValue("un_number", selected.un_number, {
+                  form.setValue("package_attributes.un_number", selected.un_number, {
                     shouldValidate: true,
                   });
 
-                  form.setValue("hazmat_class", selected.hazmat_class, {
+                  form.setValue("package_attributes.hazmat_class", selected.hazmat_class, {
                     shouldValidate: true,
                   });
-
-                  // kalau kamu mau simpan id juga
                   field.onChange(value);
                 }
               }}

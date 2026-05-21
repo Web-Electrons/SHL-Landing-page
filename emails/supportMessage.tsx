@@ -58,7 +58,7 @@ export const SupportReplyEmail = (props: SupportReplyEmailProps) => {
                 {p.message}
               </Text>
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               We recommend reviewing the update as soon as possible to avoid delays in shipment handling or support
               resolution.

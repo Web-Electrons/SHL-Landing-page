@@ -94,7 +94,7 @@ export const PickupVoucherExpiredEmail = (props: PickupVoucherExpiredEmailProps)
                 : {p.voucherStatus}
               </Text>
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               Your shipment has been returned to warehouse received status. Please review the outstanding storage
               balance and complete checkout again to generate a new pickup voucher.

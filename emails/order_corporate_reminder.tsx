@@ -57,7 +57,7 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
 
               <InfoRow label={"Order ID"} value={`${p.orderCode}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               To continue, please login to your {p.companyName} account and access the Orders page to review and
               complete the payment process.

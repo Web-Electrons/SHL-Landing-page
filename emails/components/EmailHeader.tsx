@@ -48,8 +48,11 @@ export const EmailHeader = ({ companyName = "ShipLink" }: EmailHeaderProps) => {
                 style={{
                   width: "100%",
                   background: "#c42626",
-                  padding: "0px 13px 0px 26px",
-                  height: "52px",
+                  // padding: "0px 13px 0px 26px",
+                  // Yahoo dindnt work with td height properties change it to padding
+                  // height: "52px",
+                  padding: "14px 13px 14px 26px",
+
                   verticalAlign: "middle",
                   // borderBottom: "1px solid #A50D24",
                 }}

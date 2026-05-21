@@ -52,7 +52,7 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
               <Text style={s.label}>PACKAGE INFORMATION</Text>
               <InfoRow label={`${p.packageType} ID`} value={`${p.packageId}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               You can follow the latest tracking activity and delivery progress directly from your account dashboard.
             </Text>

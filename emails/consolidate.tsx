@@ -42,12 +42,12 @@ const defaults: Required<ConsolidationCompletedEmailProps> = {
   originalPackages: [
     {
       packageId: "PKG-10001",
-      dimensions: "10 x 10 x 8 in / 3 lbs",
+      dimensions: "10 x 10 x 8 in, 3 lbs",
       qty: "1",
     },
     {
       packageId: "PKG-10002",
-      dimensions: "14 x 12 x 10 in / 5 lbs",
+      dimensions: "14 x 12 x 10 in, 5 lbs",
       qty: "1",
     },
   ],
@@ -55,7 +55,7 @@ const defaults: Required<ConsolidationCompletedEmailProps> = {
   consolidatedPackages: [
     {
       packageId: "CON-2026-0001",
-      dimensions: "18 x 16 x 14 in / 8 lbs",
+      dimensions: "18 x 16 x 14 in, 8 lbs",
       qty: "2",
     },
   ],

@@ -102,7 +102,7 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
                 </Column>
               </Row>
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               {" "}
               To collect your shipment, please ensure that you bring your Pickup Voucher when visiting the pickup

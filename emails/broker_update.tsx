@@ -51,7 +51,7 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
               <Text style={s.label}>ORDER INFORMATION</Text>
               <InfoRow label="Order ID" value={`${p.orderId}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               You can review the updated brokerage information directly from your account dashboard.
             </Text>

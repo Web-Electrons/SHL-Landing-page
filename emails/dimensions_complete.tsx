@@ -93,7 +93,7 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
               <Text style={s.label}>PACKAGE INFORMATION</Text>
               <InfoRow style={{ width: "110px" }} label={"Account Number"} value={`${p.orderId}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               Please login to your account to select a shipping service and continue with the next shipment process.
             </Text>

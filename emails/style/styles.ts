@@ -436,9 +436,9 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     fontFamily: FONT.family,
     fontSize: `${FONT_SIZE.body}px`,
     color: COLOR.textAddress,
-    lineHeight: "24px",
+    // lineHeight: "24px",
     marginTop: `5px`,
-    marginBottom: `5px`,
+    marginBottom: "0",
     padding: "0",
   },
 
@@ -463,7 +463,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
   },
 
   footerBottom: {
-    paddingTop: `${SPACE[3]}px`,
+    // paddingTop: `${SPACE[3]}px`,
     textAlign: "right",
   },
 

@@ -59,7 +59,7 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
               <InfoRow label={"Payment Date"} value={`${p.paymentDate}`} />
               <InfoRow label={"Total Amount"} value={`${p.totalAmount}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               You can review your updated wallet balance and transaction history directly from your account dashboard.
             </Text>

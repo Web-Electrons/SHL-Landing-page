@@ -119,7 +119,7 @@ export const PackageArrivedEmail = (props: PackageArrivedEmailProps) => {
                 </Column>
               </Row>
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               Please login to your account to select a service and proceed with the next step of your shipment process.
             </Text>

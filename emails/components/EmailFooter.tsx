@@ -6,20 +6,16 @@ interface EmailFooterProps {
   landingPageUrl?: string;
   year?: number;
   displayThankYouFooter?: boolean;
+  style?: React.CSSProperties;
 }
 
-export const EmailFooter = ({
-  companyName = "ShipLink",
-  landingPageUrl = "https://shiplink.com",
-  displayThankYouFooter = false,
-  year = new Date().getFullYear(),
-}: EmailFooterProps) => {
+export const EmailFooter = ({ companyName = "ShipLink", displayThankYouFooter = false, style }: EmailFooterProps) => {
   return (
     <Section style={s.footer} className="footer-section">
       {displayThankYouFooter && (
         <Row>
           <Column>
-            <Text style={s.signoffText}>
+            <Text style={s.signoffText} className="signoff-text">
               Thank You for using{" "}
               <span
                 style={{
@@ -32,7 +28,7 @@ export const EmailFooter = ({
           </Column>
         </Row>
       )}
-      <Section style={s.footerBottom}>
+      <Section style={{ ...s.footerContent, ...style }}>
         <Row>
           <Column valign="middle" align="right" style={{ paddingRight: "4px" }}>
             <Text style={s.footerBrand}>{companyName}</Text>

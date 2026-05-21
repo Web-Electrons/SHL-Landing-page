@@ -57,7 +57,7 @@ export const BankValidation = (props: BankValidationProps) => {
               </Text> */}
               <InfoRow label="Package ID" value={`${p.orderId}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               You can now access your invoice and transaction details through your account dashboard.
             </Text>

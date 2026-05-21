@@ -64,7 +64,7 @@ export const PaymentReminderEmail = (props: PaymentReminderEmailProps) => {
               <InfoRow label={"Order ID"} value={`${p.orderCode}`} />
               <InfoRow label={"Invoice Status"} value={`${p.dueDateTitle}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               If payment is not received by the end of the due date, the credit card associated with your account may be
               charged automatically, including an additional 5% processing fee.

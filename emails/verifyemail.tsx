@@ -55,7 +55,7 @@ export const VerifyEmail = (props: VerifyEmailProps) => {
               label="CONFIRM EMAIL"
               link={p.link}
             />
-
+            <Spacer />
             <Text
               style={{
                 ...s.description,

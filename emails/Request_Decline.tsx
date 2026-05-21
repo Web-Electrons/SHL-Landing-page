@@ -58,7 +58,7 @@ export const TransportRequestDeclinedEmail = (props: TransportRequestDeclinedEma
               <InfoRow label="Origin" value={`${p.originCity}, ${p.originCountry}`} />
               <InfoRow label="Destination" value={`${p.destinationCity}, ${p.destinationCountry}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               To continue with the shipment process, please login to your account and request an alternative shipping
               option.

@@ -53,7 +53,7 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
 
               <InfoRow label="Order ID" value={`${p.orderId}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               Please login to your account dashboard to review the latest shipment status and continue with any
               remaining steps if required.

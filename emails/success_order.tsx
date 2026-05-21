@@ -67,7 +67,7 @@ export const PaymentSuccessfulEmail = (props: PaymentSuccessfulEmailProps) => {
               <InfoRow label={"Payment Date"} value={`${p.paymentDate}`} />
               <InfoRow label={"Total Amount"} value={`${p.totalAmount}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               You can review your invoice and payment details anytime through your account dashboard.
             </Text>

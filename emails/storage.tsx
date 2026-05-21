@@ -68,6 +68,7 @@ export const WarehouseReminderEmail = (props: WarehouseReminderEmailProps) => {
               label="MANAGE PACKAGES"
               link={p.dashboardLink}
             />
+            <Spacer />
             <Text style={s.description}>
               If you need assistance selecting the appropriate shipping option, our support team is available to help
               you.

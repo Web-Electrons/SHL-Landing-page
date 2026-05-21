@@ -59,10 +59,10 @@ export const BankPaymentReceivedEmail = (props: BankPaymentReceivedEmailProps) =
               <InfoRow style={{ width: "120px" }} label={"Account Number"} value={`${p.customerId}`} />
               <InfoRow style={{ width: "120px" }} label={"Amount Deposited"} value={`${p.currency}${p.amount}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               This transaction is now pending review in the administrative dashboard. Please ensure the payment is
-              validated before confirming order processing.
+              validated correctly.
             </Text>
 
             {/* SUPPORT */}
@@ -70,7 +70,7 @@ export const BankPaymentReceivedEmail = (props: BankPaymentReceivedEmailProps) =
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter displayThankYouFooter={false} companyName={p.companyName} />
+          <EmailFooter style={{ paddingTop: "16px" }} displayThankYouFooter={false} companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

@@ -56,7 +56,7 @@ export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
               <Text style={s.label}>PAYMENT INFORMATION</Text>
               <InfoRow label={"Order ID"} value={`${p.orderCode}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               If payment is not received by today, the credit card associated with your account may be charged
               automatically tomorrow, including an additional 3% processing fee.

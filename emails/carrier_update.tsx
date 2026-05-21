@@ -51,7 +51,7 @@ export const CarrierUpdateEmail = (props: CarrierUpdateEmailProps) => {
               <InfoRow label="Order ID" value={`${p.orderId}`} />
               <InfoRow label="Updated Data" value={`${p.carrierUpdatedData}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               This notification was generated automatically by the {p.companyName} system to keep your shipment activity
               and transport information up to date.
@@ -63,7 +63,7 @@ export const CarrierUpdateEmail = (props: CarrierUpdateEmailProps) => {
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter displayThankYouFooter={false} companyName={p.companyName} />
+          <EmailFooter style={{ paddingTop: "16px" }} displayThankYouFooter={false} companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

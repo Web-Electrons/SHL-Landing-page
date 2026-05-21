@@ -66,7 +66,7 @@ export const BrokerageStatusEmail = (props: BrokerageStatusEmailProps) => {
               <InfoRow label="Origin" value={`${p.originCity}, ${p.originCountry}`} />
               <InfoRow label="Destination" value={`${p.destinationCity}, ${p.destinationCountry}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               You can access your shipment dashboard to review the latest brokerage activity and shipment details.
             </Text>

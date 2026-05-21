@@ -56,7 +56,7 @@ export const ContentImageRequestEmail = (props: ContentImageRequestEmailProps) =
               <InfoRow label={"Customer Name"} value={`${p.customerName}`} />
               <InfoRow label={"Customer ID"} value={`${p.customerId}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               This notification was generated automatically by the {p.companyName} system to help warehouse and
               operations teams manage package inspection requests efficiently.
@@ -68,7 +68,7 @@ export const ContentImageRequestEmail = (props: ContentImageRequestEmailProps) =
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter displayThankYouFooter={false} companyName={p.companyName} />
+          <EmailFooter style={{ paddingTop: "16px" }} displayThankYouFooter={false} companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

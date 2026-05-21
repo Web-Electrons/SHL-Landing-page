@@ -64,6 +64,8 @@ export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps)
               />
             </Section>
 
+            <Spacer />
+
             <Text style={s.description}>
               This notification was generated automatically by the {p.companyName} system to keep shipment and warehouse
               operations updated in real time.
@@ -75,7 +77,7 @@ export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps)
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter displayThankYouFooter={false} companyName={p.companyName} />
+          <EmailFooter style={{ paddingTop: "16px" }} displayThankYouFooter={false} companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

@@ -131,12 +131,12 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
                 </Column>
               </Row>
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               Please login to your ShipLink Customs Broker account to begin processing the clearance request and manage
               the next operational steps.
             </Text>
-
+            <Spacer />
             {/* CTA */}
             <CustomButton
               style={{
@@ -146,7 +146,7 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
               label="OPEN BROKERAGE DASHBOARD"
               link={p.dashboardLink}
             />
-
+            <Spacer />
             <Text style={s.description}>
               Thank you for being a valued <strong>{p.companyName}</strong> patner.
             </Text>
@@ -157,7 +157,7 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter companyName={p.companyName} />
+          <EmailFooter style={{ paddingTop: "16px" }} companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

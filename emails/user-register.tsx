@@ -53,7 +53,7 @@ export const NewUserEmail = (props: NewUserEmailProps) => {
               <InfoRow style={{ width: "110px" }} label={"Email"} value={`${p.userEmail}`} />
               <InfoRow style={{ width: "110px" }} label={"Registration Date"} value={`${p.registrationDate}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>Please review this user and take action if necessary.</Text>
             <Spacer />
             {/* CTA */}

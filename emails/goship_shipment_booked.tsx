@@ -53,7 +53,7 @@ export const GoShipShipmentBookedEmail = (props: GoShipShipmentBookedEmailProps)
               <InfoRow style={{ width: "120px" }} label={"Package ID"} value={`${p.trackingId}`} />
               <InfoRow style={{ width: "120px" }} label={"Order Date"} value={`${p.date}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               Please proceed with the payment directly through your GoShip dashboard to finalize the shipment booking
               and continue the delivery process.
@@ -76,7 +76,7 @@ export const GoShipShipmentBookedEmail = (props: GoShipShipmentBookedEmailProps)
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter displayThankYouFooter={false} companyName={p.companyName} />
+          <EmailFooter style={{ paddingTop: "16px" }} displayThankYouFooter={false} companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

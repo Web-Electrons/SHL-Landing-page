@@ -54,7 +54,7 @@ export const PackageReadyToShipEmail = (props: PackageReadyToShipEmailProps) => 
               <InfoRow label={"Warehouse"} value={`${p.warehouseName}`} />
               <InfoRow label={"Status"} value={`${p.status}`} />
             </Section>
-
+            <Spacer />
             <Text style={s.description}>
               This notification was generated automatically by the {p.companyName} system to keep your shipment activity
               updated in real time.
@@ -67,7 +67,7 @@ export const PackageReadyToShipEmail = (props: PackageReadyToShipEmailProps) => 
           </Section>
 
           {/* FOOTER */}
-          <EmailFooter displayThankYouFooter={false} companyName={p.companyName} />
+          <EmailFooter style={{ paddingTop: "16px" }} displayThankYouFooter={false} companyName={p.companyName} />
         </Container>
       </Body>
     </Html>

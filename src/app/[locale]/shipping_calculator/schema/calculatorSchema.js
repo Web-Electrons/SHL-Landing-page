@@ -13,7 +13,7 @@ export const declareFormSchema = yup.object({
     state: yup.string().required("State/Province is required"),
     zip: yup.string().required("Postal code is required"),
     country: yup.string().required("Country is required"),
-    phone: yup.string().required("Phone number is required"),
+    phone: yup.string(),
     email: yup.string().email("Invalid email format").required("Email is required"),
   }),
 

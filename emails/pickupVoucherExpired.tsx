@@ -2,6 +2,7 @@ import { Body, Container, Head, Html, Preview, Section, Text } from "react-email
 
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { InfoRow } from "./components/InfoRow";
 import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
@@ -58,41 +59,9 @@ export const PickupVoucherExpiredEmail = (props: PickupVoucherExpiredEmailProps)
             <Section style={s.routeContent}>
               <Text style={s.label}>PICKUP INFORMATION</Text>
 
-              <Text style={s.detailText}>
-                <strong
-                  style={{
-                    display: "inline-block",
-                    width: "140px",
-                  }}
-                >
-                  Package ID
-                </strong>
-                : {p.packageId}
-              </Text>
-
-              <Text style={s.detailText}>
-                <strong
-                  style={{
-                    display: "inline-block",
-                    width: "140px",
-                  }}
-                >
-                  Warehouse
-                </strong>
-                : {p.warehouseName}
-              </Text>
-
-              <Text style={s.detailText}>
-                <strong
-                  style={{
-                    display: "inline-block",
-                    width: "140px",
-                  }}
-                >
-                  Voucher Status
-                </strong>
-                : {p.voucherStatus}
-              </Text>
+              <InfoRow label={"Package ID"} value={`${p.packageId}`} />
+              <InfoRow label={"Warehouse"} value={`${p.warehouseName}`} />
+              <InfoRow label={"Voucher Status"} value={`${p.voucherStatus}`} />
             </Section>
             <Spacer />
             <Text style={s.description}>
@@ -108,7 +77,6 @@ export const PickupVoucherExpiredEmail = (props: PickupVoucherExpiredEmailProps)
             {/* SUPPORT */}
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

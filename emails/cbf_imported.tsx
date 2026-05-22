@@ -68,7 +68,6 @@ export const PackageImportedEmail = (props: PackageImportedEmailProps) => {
             />
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

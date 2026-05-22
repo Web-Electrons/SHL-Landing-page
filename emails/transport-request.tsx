@@ -121,7 +121,6 @@ export const TransportRequest = (props: ShipLinkTransportEmailProps) => {
             />
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

@@ -75,7 +75,6 @@ export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
             {/* SUPPORT */}
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

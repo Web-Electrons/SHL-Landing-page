@@ -77,7 +77,6 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
 
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

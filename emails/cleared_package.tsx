@@ -74,7 +74,6 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
             </Text>
             <Spacer />
             <SupportSignature supportUrl="{URL}" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

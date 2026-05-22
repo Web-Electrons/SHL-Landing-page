@@ -1,8 +1,9 @@
-import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text } from "react-email";
+import { Body, Column, Container, Head, Html, Preview, Row, Section, Text } from "react-email";
 
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { FlagLocationRow } from "./components/FlagLocationRow";
 import { PackageRow, PackageTable } from "./components/PakcageTable";
 import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
@@ -71,22 +72,22 @@ export const PackageArrivedEmail = (props: PackageArrivedEmailProps) => {
   const tableRows: PackageRow[] = p.packageRows.length > 0 ? p.packageRows : [{ packageId: p.orderId }];
 
   return (
-    <Html>
+    <Html title="Package Arrival">
+      {/* SUBJECT : Package Arrival */}
       <Head />
-      <Preview>Your package has arrived at our warehouse.</Preview>
+
+      <Preview>Package Arrival</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
           <EmailHeader companyName={p.companyName} />
 
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>ARRIVAL PACKAGE</Text>
+            <Text style={s.eyebrow}>PACKAGE ARRIVAL</Text>
 
             <Text style={s.headline}>Your {p.packageType} has arrived.</Text>
 
-            <Text style={s.description}>
-              {p.packageType} ID <strong>#{p.orderId}</strong> has been received at our warehouse.
-            </Text>
+            <Text style={s.description}>Your {p.packageType} has been received at a warehouse.</Text>
             <Spacer />
             {/* WAREHOUSE BLOCK */}
             <Section
@@ -101,19 +102,13 @@ export const PackageArrivedEmail = (props: PackageArrivedEmailProps) => {
                     <Section style={s.locationContent}>
                       <Text style={s.label}>WAREHOUSE LOCATION</Text>
 
-                      <Section style={s.locationFlagWrapper}>
-                        <Img
-                          height="20"
-                          width="36"
-                          alt="flag"
-                          src="https://flagcdn.com/h120/us.jpg"
-                          style={s.locationFlag}
-                        />
-                      </Section>
+                      {/* NEW */}
 
-                      <Text style={s.locationName}>Mooers - CanAm</Text>
-
-                      <Text style={s.locationAddress}>1702 State Route 11, PMB 1 Mooers, NY, 12958 United States</Text>
+                      <FlagLocationRow
+                        flagSrc="https://flagcdn.com/h120/us.jpg"
+                        name={p.warehouse}
+                        address={`${p.warehouseAddress}${p.warehouseCity}, ${p.warehouseProvinceCode}, ${p.warehousePostalCode}, ${p.warehouseCountry}`}
+                      />
                     </Section>
                   </Section>
                 </Column>
@@ -121,7 +116,7 @@ export const PackageArrivedEmail = (props: PackageArrivedEmailProps) => {
             </Section>
             <Spacer />
             <Text style={s.description}>
-              Please login to your account to select a service and proceed with the next step of your shipment process.
+              Please login to your account to select a service and proceed with the next steps
             </Text>
             <Spacer />
             <CustomButton style={{ marginTop: "0px" }} label="SELECT SERVICE" link={p.serviceLink} />
@@ -132,7 +127,6 @@ export const PackageArrivedEmail = (props: PackageArrivedEmailProps) => {
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           <EmailFooter displayThankYouFooter companyName={p.companyName} />

@@ -54,10 +54,10 @@ export const BankPaymentReceivedEmail = (props: BankPaymentReceivedEmailProps) =
             <Section style={s.routeContent}>
               <Text style={s.label}>PAYMENT DETAILS</Text>
 
-              <InfoRow style={{ width: "120px" }} label={"Order ID"} value={`${p.orderId}`} />
-              <InfoRow style={{ width: "120px" }} label={"Customer Name"} value={`${p.customerName}`} />
-              <InfoRow style={{ width: "120px" }} label={"Account Number"} value={`${p.customerId}`} />
-              <InfoRow style={{ width: "120px" }} label={"Amount Deposited"} value={`${p.currency}${p.amount}`} />
+              <InfoRow label={"Order ID"} value={`${p.orderId}`} />
+              <InfoRow label={"Customer Name"} value={`${p.customerName}`} />
+              <InfoRow label={"Account Number"} value={`${p.customerId}`} />
+              <InfoRow label={"Amount Deposited"} value={`${p.currency}${p.amount}`} />
             </Section>
             <Spacer />
             <Text style={s.description}>

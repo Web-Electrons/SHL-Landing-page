@@ -37,7 +37,8 @@ export const EmailFooter = ({ companyName = "ShipLink", displayThankYouFooter = 
 
         <Row>
           <Column align="right">
-            <Text style={s.footerCopy}>&copy; {companyName} Services Inc. All rights reserved.</Text>
+            <Text style={s.footerCopy}>&copy; {companyName} Services Inc.</Text>
+            <Text style={s.footerCopy}>All rights reserved.</Text>
           </Column>
         </Row>
       </Section>

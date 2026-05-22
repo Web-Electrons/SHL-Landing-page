@@ -155,16 +155,19 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     display: "inline",
     fontWeight: 700,
   },
-
+  row: {
+    width: "auto",
+  },
   rowWrap: {
     paddingTop: "2px",
     paddingBottom: "2px",
   },
   cellLabel: {
-    width: "100px",
-    minWidth: "100px",
+    width: "1%",
+    whiteSpace: "nowrap" as const,
     verticalAlign: "top" as const,
-    paddingRight: "8px",
+    textAlign: "left" as const,
+
     fontSize: "13px",
     fontWeight: 700,
     color: "#374151",
@@ -174,6 +177,7 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     verticalAlign: "top" as const,
     fontSize: "13px",
     color: "#374151",
+    paddingLeft: "4px",
     fontFamily: "Arial, sans-serif",
   },
   colon: {
@@ -350,15 +354,24 @@ export const emailStyles: Record<string, React.CSSProperties> = {
     display: "block",
     border: "0",
   },
+  locationInfoColumn: {
+    // paddingLeft: "10px",
+  },
+  locationWrap: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "10px",
+  },
 
   locationName: {
     fontSize: "14px",
     fontWeight: "700",
-    lineHeight: 1.3,
+    // lineHeight: 1.3,
     fontFamily: "Arial,Helvetica,sans-serif",
     margin: 0,
     padding: 0,
-    paddingBottom: "6px",
+    lineHeight: "1",
+    // paddingBottom: "6px",
   },
 
   locationAddress: {

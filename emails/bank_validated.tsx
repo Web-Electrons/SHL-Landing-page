@@ -25,7 +25,7 @@ export const BankValidation = (props: BankValidationProps) => {
   return (
     <Html>
       <Head />
-      <Preview>Your payment has been successfully verified.</Preview>
+      <Preview>Bank Payment Confirmed</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -34,12 +34,12 @@ export const BankValidation = (props: BankValidationProps) => {
 
           {/* CONTENT */}
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>Payment Confirmation</Text>
+            <Text style={s.eyebrow}>Payment Verified</Text>
 
             <Text style={s.headline}>Your payment has been verified successfully.</Text>
 
             <Text style={s.description}>
-              We have successfully verified your bank payment and your transaction is now being processed by our system.
+              We have successfully verified your bank payment and it has been applied to your account.
             </Text>
             <Spacer />
 
@@ -59,7 +59,7 @@ export const BankValidation = (props: BankValidationProps) => {
             </Section>
             <Spacer />
             <Text style={s.description}>
-              You can now access your invoice and transaction details through your account dashboard.
+              You can now access your transaction details through your account dashboard.
             </Text>
             <Spacer />
             {/* CTA */}
@@ -74,7 +74,6 @@ export const BankValidation = (props: BankValidationProps) => {
             <Spacer />
 
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

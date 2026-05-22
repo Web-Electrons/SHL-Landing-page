@@ -1,8 +1,9 @@
-import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text } from "react-email";
+import { Body, Column, Container, Head, Html, Preview, Row, Section, Text } from "react-email";
 
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { FlagLocationRow } from "./components/FlagLocationRow";
 import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
 import { emailStyles as s } from "./style/styles";
@@ -84,19 +85,11 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
                     <Section style={s.locationContent}>
                       <Text style={s.label}>PICKUP LOCATION</Text>
 
-                      <Section style={s.locationFlagWrapper}>
-                        <Img
-                          height="20"
-                          width="36"
-                          alt="flag"
-                          src="https://flagcdn.com/h80/us.jpg"
-                          style={s.locationFlag}
-                        />
-                      </Section>
-
-                      <Text style={s.locationName}>John Doe</Text>
-
-                      <Text style={s.locationAddress}>1234 Industrial Ave, Los Angeles, CA, 90001, United States</Text>
+                      <FlagLocationRow
+                        flagSrc="https://flagcdn.com/h120/us.jpg"
+                        name={p.warehouseName}
+                        address={`${p.warehouseAddress}${p.warehouseCity}, ${p.warehouseProvinceCode}, ${p.warehousePostalCode}, ${p.warehouseCountry}`}
+                      />
                     </Section>
                   </Section>
                 </Column>
@@ -124,7 +117,6 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
             <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

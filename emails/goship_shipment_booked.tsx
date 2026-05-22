@@ -50,8 +50,8 @@ export const GoShipShipmentBookedEmail = (props: GoShipShipmentBookedEmailProps)
             {/* SHIPMENT INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>SHIPMENT DETAILS</Text>
-              <InfoRow style={{ width: "120px" }} label={"Package ID"} value={`${p.trackingId}`} />
-              <InfoRow style={{ width: "120px" }} label={"Order Date"} value={`${p.date}`} />
+              <InfoRow label={"Package ID"} value={`${p.trackingId}`} />
+              <InfoRow label={"Order Date"} value={`${p.date}`} />
             </Section>
             <Spacer />
             <Text style={s.description}>
@@ -72,7 +72,6 @@ export const GoShipShipmentBookedEmail = (props: GoShipShipmentBookedEmailProps)
             {/* SUPPORT */}
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

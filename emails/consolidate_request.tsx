@@ -51,17 +51,9 @@ export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps)
             <Section style={s.routeContent}>
               <Text style={s.label}>REQUEST DETAILS</Text>
 
-              <InfoRow style={{ width: "110px", minWidth: "110px" }} label={"Warehouse"} value={`${p.warehouseName}`} />
-              <InfoRow
-                style={{ width: "110px", minWidth: "110px" }}
-                label={"Customer Name"}
-                value={`${p.customerName}`}
-              />
-              <InfoRow
-                style={{ width: "110px", minWidth: "110px" }}
-                label={"Account Number"}
-                value={`${p.customerId}`}
-              />
+              <InfoRow label={"Warehouse"} value={`${p.warehouseName}`} />
+              <InfoRow label={"Customer Name"} value={`${p.customerName}`} />
+              <InfoRow label={"Account Number"} value={`${p.customerId}`} />
             </Section>
 
             <Spacer />
@@ -73,7 +65,6 @@ export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps)
 
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

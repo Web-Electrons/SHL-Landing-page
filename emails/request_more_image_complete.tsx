@@ -62,7 +62,6 @@ export const PackageImageReadyEmail = (props: PackageImageReadyEmailProps) => {
             <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

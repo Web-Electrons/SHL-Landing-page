@@ -73,7 +73,6 @@ export const VerifyEmail = (props: VerifyEmailProps) => {
             </Text>
             <Spacer />
             <SupportSignature supportUrl={`mailto:${p.contactEmail}`} />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

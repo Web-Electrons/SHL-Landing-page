@@ -68,7 +68,6 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
             />
             <Spacer />
             <SupportSignature supportUrl="{URL}" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

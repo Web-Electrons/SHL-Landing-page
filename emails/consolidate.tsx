@@ -1,8 +1,9 @@
-import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text } from "react-email";
+import { Body, Column, Container, Head, Html, Preview, Row, Section, Text } from "react-email";
 
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { FlagLocationRow } from "./components/FlagLocationRow";
 import { PackageRow, PackageTable } from "./components/PakcageTable";
 import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
@@ -71,7 +72,8 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
   return (
     <Html>
       <Head />
-      <Preview>Your package consolidation has been completed.</Preview>
+      {/* SUBJECT : CONSOLIDATION COMPLETE */}
+      <Preview>Consolidation Completed</Preview>
 
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
@@ -80,13 +82,13 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
 
           {/* CONTENT */}
           <Section style={s.bodySection}>
-            <Text style={s.eyebrow}>Consolidation Update</Text>
+            <Text style={s.eyebrow}>Consolidation Completed</Text>
 
             <Text style={s.headline}> Consolidation #{p.orderId} has been completed. </Text>
 
             <Text style={s.description}>
-              Your shipment consolidation request has been successfully completed. Please login to your account to
-              select a service and continue with the next steps.
+              Your consolidation request has been completed. Please login to your account to select a service and
+              continue with the next steps.
             </Text>
             <Spacer />
             {/* WAREHOUSE */}
@@ -102,23 +104,11 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
                     <Section style={s.locationContent}>
                       <Text style={s.label}>WAREHOUSE LOCATION</Text>
 
-                      <Section style={s.locationFlagWrapper}>
-                        <Img
-                          height="20"
-                          width="36"
-                          alt="flag"
-                          src="https://flagcdn.com/h120/us.jpg"
-                          style={s.locationFlag}
-                        />
-                      </Section>
-
-                      <Text style={s.locationName}>{p.warehouse}</Text>
-
-                      <Text style={s.locationAddress}>
-                        {p.warehouseAddress}
-                        {p.warehouseCity}, {p.warehouseProvinceCode} {p.warehousePostalCode}
-                        {p.warehouseCountry}
-                      </Text>
+                      <FlagLocationRow
+                        flagSrc="https://flagcdn.com/h120/us.jpg"
+                        name={p.warehouse}
+                        address={`${p.warehouseAddress}${p.warehouseCity}, ${p.warehouseProvinceCode}, ${p.warehousePostalCode}, ${p.warehouseCountry}`}
+                      />
                     </Section>
                   </Section>
                 </Column>
@@ -136,32 +126,7 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
             />
 
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
-            {/* ORIGINAL PACKAGES */}
-            <PackageTable
-              title="Original Packages"
-              rows={p.originalPackages}
-              columns={[
-                {
-                  key: "packageId",
-                  label: "Package ID",
-                  width: "40%",
-                },
-                {
-                  key: "dimensions",
-                  label: "Dimensions",
-                  width: "40%",
-                },
-                {
-                  key: "qty",
-                  label: "Qty",
-                  width: "20%",
-                },
-              ]}
-            />
-
-            {/* SPACING */}
-            <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
-            {/* CONSOLIDATED PACKAGE */}
+            {/* CONSOLIDATE PACKAGES */}
             <PackageTable
               title="Consolidated Package"
               rows={p.consolidatedPackages}
@@ -184,10 +149,34 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
               ]}
             />
 
+            {/* SPACING */}
+            <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
+            {/* ORIGINAL PACKAGE */}
+            <PackageTable
+              title="Original Packages"
+              rows={p.originalPackages}
+              columns={[
+                {
+                  key: "packageId",
+                  label: "Package ID",
+                  width: "40%",
+                },
+                {
+                  key: "dimensions",
+                  label: "Dimensions",
+                  width: "40%",
+                },
+                {
+                  key: "qty",
+                  label: "Qty",
+                  width: "20%",
+                },
+              ]}
+            />
+
             <Row style={{ lineHeight: "16px", fontSize: "0" }}>&nbsp;</Row>
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

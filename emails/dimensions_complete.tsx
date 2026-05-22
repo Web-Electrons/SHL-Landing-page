@@ -91,7 +91,7 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
             {/* PACKAGE INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>PACKAGE INFORMATION</Text>
-              <InfoRow style={{ width: "110px" }} label={"Account Number"} value={`${p.orderId}`} />
+              <InfoRow label={"Account Number"} value={`${p.orderId}`} />
             </Section>
             <Spacer />
             <Text style={s.description}>
@@ -136,7 +136,6 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
 
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

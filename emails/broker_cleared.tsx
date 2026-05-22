@@ -71,7 +71,6 @@ export const BrokerageClearedEmail = (props: BrokerageClearedEmailProps) => {
             />
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

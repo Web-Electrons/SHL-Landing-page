@@ -1,8 +1,9 @@
-import { Body, Column, Container, Head, Html, Img, Preview, Row, Section, Text } from "react-email";
+import { Body, Column, Container, Head, Html, Preview, Row, Section, Text } from "react-email";
 
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { FlagLocationRow } from "./components/FlagLocationRow";
 import { InfoRow } from "./components/InfoRow";
 import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
@@ -90,18 +91,11 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
                     }}
                   >
                     <Text style={s.label}>ORIGIN</Text>
-                    <Section style={s.locationFlagWrapper}>
-                      <Img
-                        height="20"
-                        width="36"
-                        alt="flag"
-                        src="https://flagcdn.com/h80/us.jpg"
-                        style={s.locationFlag}
-                      />
-                    </Section>
-                    <Text style={s.routeName}>{p.cityOrigin}</Text>
-
-                    <Text style={s.routeAddress}>{p.countryOrigin}</Text>
+                    <FlagLocationRow
+                      flagSrc="https://flagcdn.com/h120/us.jpg"
+                      name={p.cityOrigin}
+                      address={p.countryOrigin}
+                    />
                   </Section>
                 </Column>
 
@@ -115,18 +109,11 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
                   >
                     <Text style={s.label}>DESTINATION</Text>
 
-                    <Section style={s.locationFlagWrapper}>
-                      <Img
-                        height="20"
-                        width="36"
-                        alt="flag"
-                        src="https://flagcdn.com/h80/ca.jpg"
-                        style={s.locationFlag}
-                      />
-                    </Section>
-                    <Text style={s.routeName}>{p.cityDestination}</Text>
-
-                    <Text style={s.routeAddress}>{p.countryDestination}</Text>
+                    <FlagLocationRow
+                      flagSrc="https://flagcdn.com/h120/ca.jpg"
+                      name={p.cityOrigin}
+                      address={p.countryDestination}
+                    />
                   </Section>
                 </Column>
               </Row>
@@ -153,7 +140,6 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
             {/* SUPPORT */}
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

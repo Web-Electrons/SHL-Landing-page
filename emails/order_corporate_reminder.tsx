@@ -77,7 +77,6 @@ export const NewOrderPaymentRequiredEmail = (props: NewOrderPaymentRequiredEmail
             <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

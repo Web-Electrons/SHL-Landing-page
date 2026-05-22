@@ -77,7 +77,6 @@ export const WarehouseReminderEmail = (props: WarehouseReminderEmailProps) => {
             {/* SUPPORT */}
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

@@ -49,9 +49,9 @@ export const NewUserEmail = (props: NewUserEmailProps) => {
             {/* USER CARD */}
             <Section style={s.routeContent}>
               <Text style={s.label}>USER DETAILS</Text>
-              <InfoRow style={{ width: "110px" }} label={"Name"} value={`${p.userName}`} />
-              <InfoRow style={{ width: "110px" }} label={"Email"} value={`${p.userEmail}`} />
-              <InfoRow style={{ width: "110px" }} label={"Registration Date"} value={`${p.registrationDate}`} />
+              <InfoRow label={"Name"} value={`${p.userName}`} />
+              <InfoRow label={"Email"} value={`${p.userEmail}`} />
+              <InfoRow label={"Registration Date"} value={`${p.registrationDate}`} />
             </Section>
             <Spacer />
             <Text style={s.description}>Please review this user and take action if necessary.</Text>

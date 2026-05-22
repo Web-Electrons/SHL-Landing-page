@@ -79,7 +79,6 @@ export const ResetPasswordEmail = (props: ResetPasswordEmailProps) => {
             </Text>
             <Spacer />
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

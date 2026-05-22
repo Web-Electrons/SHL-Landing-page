@@ -73,7 +73,6 @@ export const CarrierInvitationEmail = (props: CarrierInvitationEmailProps) => {
             <Spacer />
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

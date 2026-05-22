@@ -76,7 +76,6 @@ export const ResetWalletPinEmail = (props: ResetWalletPinEmailProps) => {
             </Text>
             <Spacer />
             <SupportSignature supportUrl="{URL}" />
-            <Spacer />
           </Section>
 
           {/* FOOTER */}

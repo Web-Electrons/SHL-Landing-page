@@ -41,20 +41,20 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
             <Text style={s.headline}>Your brokerage details have been updated.</Text>
 
             <Text style={s.description}>
-              Our brokerage team has submitted an update related to your shipment order. Please review the latest
-              information to ensure all details are accurate and up to date.
+              The brokerage has submitted an update to your order. Please login to your account to review the updated
+              details
             </Text>
             <Spacer />
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>ORDER INFORMATION</Text>
-              <InfoRow label="Order ID" value={`${p.orderId}`} />
+              <InfoRow label="Package ID" value={`${p.orderId}`} />
             </Section>
             <Spacer />
-            <Text style={s.description}>
+            {/* <Text style={s.description}>
               You can review the updated brokerage information directly from your account dashboard.
-            </Text>
+            </Text> */}
 
             <Spacer />
             {/* CTA */}
@@ -63,7 +63,7 @@ export const BrokerageUpdatedEmail = (props: BrokerageUpdatedEmailProps) => {
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="GO TO DASHBOARD"
+              label="ACCESS YOUR ACCOUNT"
               link={p.dashboardLink}
             />
             <Spacer />

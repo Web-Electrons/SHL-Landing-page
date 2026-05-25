@@ -1,8 +1,9 @@
-import { Body, Container, Head, Html, Preview, Section, Text } from "react-email";
+import { Body, Column, Container, Head, Html, Preview, Row, Section, Text } from "react-email";
 
 import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
+import { FlagLocationRow } from "./components/FlagLocationRow";
 import { InfoRow } from "./components/InfoRow";
 import { Spacer } from "./components/Spacer";
 import { SupportSignature } from "./components/SupportSingature";
@@ -61,15 +62,56 @@ export const BrokerageStatusEmail = (props: BrokerageStatusEmailProps) => {
 
             {/* ORDER INFO */}
             <Section style={s.routeContent}>
-              <Text style={s.label}>SHIPMENT INFORMATION</Text>
-              <InfoRow label="Order ID" value={`${p.orderCode}`} />
-              <InfoRow label="Origin" value={`${p.originCity}, ${p.originCountry}`} />
-              <InfoRow label="Destination" value={`${p.destinationCity}, ${p.destinationCountry}`} />
+              <Text style={s.label}>ORDER INFORMATION</Text>
+              <InfoRow label={"Order ID"} value={`${p.orderCode}`} />
             </Section>
+
+            {/* ROUTE */}
+            <Section
+              style={{
+                marginTop: "10px",
+              }}
+            >
+              <Row>
+                {/* ORIGIN */}
+                <Column style={s.originColumn}>
+                  <Section
+                    style={{
+                      ...s.routeContent,
+                      borderLeft: "3px solid #C8102E",
+                    }}
+                  >
+                    <Text style={s.label}>ORIGIN</Text>
+                    <FlagLocationRow
+                      flagSrc="https://flagcdn.com/h120/us.jpg"
+                      name={p.originCity}
+                      address={p.originCountry}
+                    />
+                  </Section>
+                </Column>
+
+                {/* DESTINATION */}
+                <Column style={s.destinationColumn}>
+                  <Section
+                    style={{
+                      ...s.routeContent,
+                      borderLeft: "3px solid #1A1A1A",
+                    }}
+                  >
+                    <Text style={s.label}>DESTINATION</Text>
+
+                    <FlagLocationRow
+                      flagSrc="https://flagcdn.com/h120/ca.jpg"
+                      name={p.destinationCity}
+                      address={p.destinationCountry}
+                    />
+                  </Section>
+                </Column>
+              </Row>
+            </Section>
+
             <Spacer />
-            <Text style={s.description}>
-              You can access your shipment dashboard to review the latest brokerage activity and shipment details.
-            </Text>
+            <Text style={s.description}>You can access your dashboard to review the latest brokerage activity.</Text>
 
             <Spacer />
             {/* CTA */}

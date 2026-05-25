@@ -31,8 +31,8 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
   return (
     <Html>
       <Head />
-      <Preview>Deposit Confirmed</Preview>
-
+      <Preview>Bank Payment Confirmed</Preview>
+      {/* SUBJECT : Bank Payment Confirmed */}
       <Body style={s.body}>
         <Container style={s.container} className="mx-auto">
           {/* HEADER */}
@@ -42,15 +42,15 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
           <Section style={s.bodySection}>
             <Text style={s.eyebrow}>Wallet Update</Text>
 
-            <Text style={s.headline}>Your wallet top-up has been confirmed.</Text>
+            <Text style={s.headline}>Your wallet Top-Up has been confirmed.</Text>
 
             <Text style={s.description}>
               Dear <strong>{p.customerName},</strong>
             </Text>
 
             <Text style={s.description}>
-              Thank you for your payment. The funds have been successfully added to your wallet balance and are now
-              available for transactions and shipment payments within your account.
+              Thank you for your payment. The funds have been successfully added to your wallet balance and now
+              available for use.
             </Text>
             <Spacer />
             {/* TOP UP INFO */}
@@ -60,9 +60,9 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
               <InfoRow label={"Total Amount"} value={`${p.totalAmount}`} />
             </Section>
             <Spacer />
-            <Text style={s.description}>
+            {/* <Text style={s.description}>
               You can review your updated wallet balance and transaction history directly from your account dashboard.
-            </Text>
+            </Text> */}
             <Spacer />
             {/* CTA */}
             <CustomButton
@@ -70,7 +70,7 @@ export const WalletTopUpConfirmedEmail = (props: WalletTopUpConfirmedEmailProps)
                 marginTop: "0px",
                 marginBottom: "10px",
               }}
-              label="VIEW WALLET"
+              label="ACCESS YOUR ACCOUNT"
               link={p.walletLink}
             />
             <Spacer />

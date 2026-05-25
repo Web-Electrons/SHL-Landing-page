@@ -41,14 +41,13 @@ export const PackageImageReadyEmail = (props: PackageImageReadyEmailProps) => {
 
             <Text style={s.description}>
               {" "}
-              Images for shipment <strong>#{p.trackingId}</strong> have been uploaded and are now available in your
-              dashboard. You may review the uploaded photos to verify package condition, shipment contents, and other
-              handling details before continuing with the next step.{" "}
+              An image has been provided for your package <b>{p.trackingId}</b> and now available in your dashboard.
+              Please login to your dashboard to view the uploaded image and review your package contents.
             </Text>
 
-            <Text style={s.description}>
+            {/* <Text style={s.description}>
               Please login to your dashboard to review the uploaded images and manage the next shipment process.
-            </Text>
+            </Text> */}
             <Spacer />
             {/* CTA */}
             <CustomButton

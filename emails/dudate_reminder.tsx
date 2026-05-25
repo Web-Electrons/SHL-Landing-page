@@ -1,5 +1,6 @@
 import { Body, Container, Head, Html, Preview, Section, Text } from "react-email";
 
+import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
@@ -13,6 +14,7 @@ interface DueDateReminderEmailProps {
   customerName?: string;
   orderCode?: string;
   paymentLink?: string;
+  processingFee?: string;
 }
 
 const defaults: Required<DueDateReminderEmailProps> = {
@@ -20,6 +22,7 @@ const defaults: Required<DueDateReminderEmailProps> = {
   customerName: "John Doe",
   orderCode: "ORD-2026-0001",
   paymentLink: "https://shiplink.com",
+  processingFee: "3.5",
 };
 
 export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
@@ -28,6 +31,7 @@ export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
   return (
     <Html>
       <Head />
+      {/* SUBJECT : Payment Due Today */}
       <Preview>Final reminder: payment for order {p.orderCode} is due today.</Preview>
 
       <Body style={s.body}>
@@ -46,8 +50,8 @@ export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
             </Text>
 
             <Text style={s.description}>
-              This is a final reminder that payment for your order is due today. To avoid automatic credit card
-              processing fees, please ensure your bank transfer is received before the end of the day.
+              This is a final reminder that payment for your order is due today. To avoid additional fees, please ensure
+              your payment is received before end of day.
             </Text>
 
             <Spacer />
@@ -58,19 +62,19 @@ export const DueDateReminderEmail = (props: DueDateReminderEmailProps) => {
             </Section>
             <Spacer />
             <Text style={s.description}>
-              If payment is not received by today, the credit card associated with your account may be charged
-              automatically tomorrow, including an additional 3% processing fee.
+              If payment is not received today, the credit card associated with your account may be charged
+              automatically, including additional processing fees.
             </Text>
-
+            <Spacer />
             {/* CTA */}
-            {/* <CustomButton
-                            style={{
-                                marginTop: "0px",
-                                marginBottom: "10px",
-                            }}
-                            label="COMPLETE PAYMENT"
-                            link={p.paymentLink}
-                        /> */}
+            <CustomButton
+              style={{
+                marginTop: "0px",
+                marginBottom: "10px",
+              }}
+              label="ACCESS YOUR ACCOUNT"
+              link={p.paymentLink}
+            />
 
             {/* SUPPORT */}
             <Spacer />

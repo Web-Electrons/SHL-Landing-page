@@ -107,7 +107,7 @@ export const ConsolidationCompletedEmail = (props: ConsolidationCompletedEmailPr
                       <FlagLocationRow
                         flagSrc="https://flagcdn.com/h120/us.jpg"
                         name={p.warehouse}
-                        address={`${p.warehouseAddress}${p.warehouseCity}, ${p.warehouseProvinceCode}, ${p.warehousePostalCode}, ${p.warehouseCountry}`}
+                        address={`${p.warehouseAddress}, ${p.warehouseCity}, ${p.warehouseProvinceCode}, ${p.warehousePostalCode}, ${p.warehouseCountry}`}
                       />
                     </Section>
                   </Section>

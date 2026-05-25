@@ -1,5 +1,6 @@
 import { Body, Container, Head, Html, Preview, Section, Text } from "react-email";
 
+import { CustomButton } from "./components/CustomButton";
 import { EmailFooter } from "./components/EmailFooter";
 import { EmailHeader } from "./components/EmailHeader";
 import { InfoRow } from "./components/InfoRow";
@@ -13,6 +14,7 @@ interface ConsolidationRequestEmailProps {
   warehouseName?: string;
   customerName?: string;
   customerId?: string;
+  serviceLink?: string;
 }
 
 const defaults: Required<ConsolidationRequestEmailProps> = {
@@ -20,6 +22,7 @@ const defaults: Required<ConsolidationRequestEmailProps> = {
   warehouseName: "Los Angeles Warehouse",
   customerName: "John Doe",
   customerId: "A10000",
+  serviceLink: "https://admin.shiplink.com/",
 };
 
 export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps) => {
@@ -27,6 +30,7 @@ export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps)
 
   return (
     <Html>
+      {/* SUBJECT : New Consolidation Request */}
       <Head />
       <Preview>A new consolidation request has been received.</Preview>
 
@@ -39,12 +43,9 @@ export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps)
           <Section style={s.bodySection}>
             <Text style={s.eyebrow}>Consolidation Request</Text>
 
-            <Text style={s.headline}>A new consolidation request has been received.</Text>
+            <Text style={s.headline}>A consolidation request has been received.</Text>
 
-            <Text style={s.description}>
-              A customer has submitted a new package consolidation request. Please review the warehouse and customer
-              information provided below.
-            </Text>
+            <Text style={s.description}>A customer has submitted a new consolidation request.</Text>
             <Spacer />
 
             {/* REQUEST INFO */}
@@ -58,10 +59,18 @@ export const ConsolidationRequestEmail = (props: ConsolidationRequestEmailProps)
 
             <Spacer />
 
-            <Text style={s.description}>
-              This notification was generated automatically by the {p.companyName} system to keep shipment and warehouse
-              operations updated in real time.
-            </Text>
+            <Text style={s.description}>This notification was generated automatically.</Text>
+            <Spacer />
+            {/* CTA */}
+            <CustomButton
+              style={{
+                marginTop: "0px",
+                marginBottom: "10px",
+              }}
+              label="ACCESS WAREHOUSE ACCOUNT"
+              link={p.serviceLink}
+            />
+            <Spacer />
 
             {/* SUPPORT */}
             <SupportSignature supportUrl="mailto:support@shiplink.com" />

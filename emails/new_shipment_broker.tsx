@@ -64,8 +64,8 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
             </Text>
 
             <Text style={s.description}>
-              A new shipment has been assigned to your brokerage team for import clearance processing. Please review the
-              shipment details below and proceed with the customs handling process through your brokerage dashboard.
+              A new shipment has been assigned to your brokerage team for import clearance. Please review the shipment
+              details below.
             </Text>
             <Spacer />
 
@@ -120,8 +120,7 @@ export const CustomsBrokerageRequestEmail = (props: CustomsBrokerageRequestEmail
             </Section>
             <Spacer />
             <Text style={s.description}>
-              Please login to your ShipLink Customs Broker account to begin processing the clearance request and manage
-              the next operational steps.
+              Please login to your <b>ShipLink Customs Broker</b> account to proceed.
             </Text>
             <Spacer />
             {/* CTA */}

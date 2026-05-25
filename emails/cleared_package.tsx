@@ -43,8 +43,8 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
             <Text style={s.headline}>Transport clearance completed successfully.</Text>
 
             <Text style={s.description}>
-              Your shipment has successfully passed the transport clearance process and is now moving forward to the
-              next stage within our delivery network.
+              Your order has successfully cleared by the brokerage team. Please login to your account to review the
+              latest update and continue with the next steps.
             </Text>
             <Spacer />
             {/* ORDER INFO */}
@@ -55,10 +55,7 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
               <InfoRow label={"Package ID"} value={`${p.packageId}`} />
             </Section>
             <Spacer />
-            <Text style={s.description}>
-              Please login to your account dashboard to review the latest shipment updates and continue with any
-              required actions.
-            </Text>
+
             <Spacer />
             {/* CTA */}
             <CustomButton
@@ -69,9 +66,6 @@ export const ClearedPackage = (props: ClearedPackageProps) => {
               link={p.dashboardLink}
             />
             <Spacer />
-            <Text style={s.description}>
-              If you require assistance regarding your shipment, our support team will be available to help you.
-            </Text>
             <Spacer />
             <SupportSignature supportUrl="{URL}" />
           </Section>

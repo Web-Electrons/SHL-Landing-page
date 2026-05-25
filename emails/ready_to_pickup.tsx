@@ -30,7 +30,7 @@ interface PackageReceivedEmailProps {
 
 const defaults: Required<PackageReceivedEmailProps> = {
   companyName: "ShipLink",
-  packageType: "Package",
+  packageType: "package",
   packageId: "PKG-2026-0001",
 
   originCountry: "United States",
@@ -64,10 +64,10 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
           <Section style={s.bodySection}>
             <Text style={s.eyebrow}>Ready to pickup</Text>
 
-            <Text style={s.headline}>Your shipment has been received.</Text>
+            <Text style={s.headline}>Your {p.packageType} has arrived.</Text>
 
             <Text style={s.description}>
-              Your package <strong>#{p.packageId}</strong> has successfully arrived at our warehouse and is now ready to
+              Your package <strong>#{p.packageId}</strong> has successfully arrived at a warehouse and is now ready to
               be picked up.
             </Text>
             <Spacer />
@@ -98,9 +98,8 @@ export const PackageReceivedEmail = (props: PackageReceivedEmailProps) => {
             <Spacer />
             <Text style={s.description}>
               {" "}
-              To collect your shipment, please ensure that you bring your Pickup Voucher when visiting the pickup
-              location. The warehouse team may require the voucher for identity and shipment verification before
-              releasing the package.{" "}
+              To collect your {p.packageType}, please ensure that you bring your pickup voucher when visiting the pickup
+              location. The warehouse team may require the voucher for verification before releasing the package.{" "}
             </Text>
 
             <Spacer />

@@ -58,8 +58,9 @@ export const ContentImageRequestEmail = (props: ContentImageRequestEmailProps) =
             </Section>
             <Spacer />
             <Text style={s.description}>
-              This notification was generated automatically by the {p.companyName} system to help warehouse and
-              operations teams manage package inspection requests efficiently.
+              {/* This notification was generated automatically by the {p.companyName} system to help warehouse and
+              operations teams manage package inspection requests efficiently. */}
+              This notification was generated automatically to keep operations updated in real time.
             </Text>
             <Spacer />
             {/* SUPPORT */}

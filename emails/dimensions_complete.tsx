@@ -91,11 +91,11 @@ export const PackageSizingCompletedEmail = (props: PackageSizingCompletedEmailPr
             {/* PACKAGE INFO */}
             <Section style={s.routeContent}>
               <Text style={s.label}>PACKAGE INFORMATION</Text>
-              <InfoRow label={"Account Number"} value={`${p.orderId}`} />
+              <InfoRow label={"Package ID"} value={`${p.orderId}`} />
             </Section>
             <Spacer />
             <Text style={s.description}>
-              Please login to your account to select a shipping service and continue with the next shipment process.
+              Please login to your account to select a service and proceed with the next steps
             </Text>
 
             <Spacer />

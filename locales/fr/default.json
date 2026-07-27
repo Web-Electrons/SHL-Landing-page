@@ -251,7 +251,10 @@
       "message": "Message",
       "msgPlaceholder": "Écrivez votre message...",
       "subject": "Objet",
-      "send": "Envoyer le message"
+      "send": "Envoyer le message",
+      "successTitle": "Message envoyé avec succès !",
+      "successMessage": "Merci de nous avoir contactés. Notre équipe d'assistance examinera votre message et vous répondra dans les plus brefs délais.",
+      "backBtn": "Envoyer un autre message"
     }
   }
 }

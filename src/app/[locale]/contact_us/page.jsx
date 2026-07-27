@@ -14,8 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { PhoneInput } from "react-international-phone";
 
-import { Loader2, Send } from "lucide-react";
-import { ContactFormValues, contactSchema } from "@/schemas/contact.schema";
+import { Send } from "lucide-react";
+import { contactSchema } from "@/schemas/contact.schema";
 import { useTranslations } from "next-intl";
 import axios from "axios";
 import { toast } from "@/src/components/ui/use-toast";
@@ -26,9 +26,9 @@ import { Loaders } from "@/src/components/ui/loaders";
 export default function ContactPage() {
   const t = useTranslations("default");
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
 
-  const form = useForm<ContactFormValues>({
+  const form = useForm({
     resolver: yupResolver(contactSchema),
     defaultValues: {
       full_name: "",
@@ -39,7 +39,7 @@ export default function ContactPage() {
     },
   });
 
-  const onSubmit = async (values: ContactFormValues) => {
+  const onSubmit = async (values) => {
     try {
       setLoading(true);
       const response = await axios.post("/api/ContactUs_set", values);
@@ -64,7 +64,7 @@ export default function ContactPage() {
         <div className="relative h-full w-full justify-start gap-[32px] bg-[#FFFFF] pt-[90px] text-center">
           <div className="mx-auto flex w-[70%] flex-col gap-5 py-10 pb-14 text-left">
             {submitted && (
-              <div className="absolute left-1/2 top-1/2 z-50 flex h-full w-full -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-4 bg-white py-10 text-center">
+              <div className="absolute left-1/2 top-1/2 z-40 flex h-full w-full -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-4 bg-white py-10 text-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -78,15 +78,13 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-semibold">Message Sent Successfully!</h2>
+                  <h2 className="text-2xl font-semibold">{t("contact.successTitle")}</h2>
 
-                  <p className="mt-2 text-sm text-gray-500">
-                    Thank you for contacting us. Our support team will review your message and get back to you shortly.
-                  </p>
+                  <p className="mt-2 text-sm text-gray-500">{t("contact.successMessage")}</p>
                 </div>
 
                 <Button className="mt-4" onClick={() => setSubmitted(false)} variant="destructive">
-                  Send Another Message
+                  {t("contact.backBtn")}
                 </Button>
               </div>
             )}

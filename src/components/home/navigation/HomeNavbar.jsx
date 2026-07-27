@@ -32,7 +32,7 @@ export const HomeNavbar = () => {
 
   return (
     <div
-      className={`z-[9999] flex h-[70px] w-full flex-row items-center justify-between px-10 transition-colors delay-300 duration-300 ease-in-out ${isSolidBackground && isHomeOnly ? "bg-gradient-to-r from-red-700 to-red-800" : isHomeOnly ? "bg-gradient-to-r from-red-700 to-transparent" : "bg-gradient-to-r from-red-700 to-red-800"} fixed`}
+      className={`z-50 flex h-[70px] w-full flex-row items-center justify-between px-10 transition-colors delay-300 duration-300 ease-in-out ${isSolidBackground && isHomeOnly ? "bg-gradient-to-r from-red-700 to-red-800" : isHomeOnly ? "bg-gradient-to-r from-red-700 to-transparent" : "bg-gradient-to-r from-red-700 to-red-800"} fixed`}
     >
       <NextLink
         passHref

@@ -252,7 +252,10 @@
       "message": "Message",
       "msgPlaceholder": "Write your message...",
       "subject": "Subject",
-      "send": "Send Message"
+      "send": "Send Message",
+      "successTitle": "Message Sent Successfully!",
+      "successMessage": "Thank you for contacting us. Our support team will review your message and get back to you shortly.",
+      "backBtn": "Send Another Message"
     }
   }
 }

@@ -62,8 +62,8 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children, params: { locale } }) {
-  const messages = getMessages({ locale });
+export default async function RootLayout({ children, params: { locale } }) {
+  const messages = await getMessages({ locale });
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>

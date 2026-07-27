@@ -1,28 +1,29 @@
 import React from "react";
 import styles from "../styles.module.scss";
-import { Separator } from "@/components/ui/separator";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { CardData } from "@/components/home/CardData";
 import header from "../../../public/assets/home/AboutUsHeading.png";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/src/navigation";
+
 export default function Home() {
   const t = useTranslations("default");
   return (
     <>
-      <div className={styles.container} >
-        <div className=" text-center justify-start gap-[32px] pt-[90px] w-full h-full bg-[#FFFFF]">
-          <div className="flex flex-col gap-4 justify-start text-left w-[90%] mx-auto pt-10">
-            <h1 className=" text-myBlue text-lg font-bold">{t("about.Header")}</h1>
-            <h1 className=" text-black text-3xl font-bold">
+      <div className={styles.container}>
+        <div className="h-full w-full justify-start gap-[32px] bg-[#FFFFF] pt-[90px] text-center">
+          <div className="mx-auto flex w-[90%] flex-col justify-start gap-4 pt-10 text-left">
+            <h1 className="text-lg font-bold text-myBlue">{t("about.Header")}</h1>
+            <h1 className="text-3xl font-bold text-black">
               {/* Closer to ShipLink */}
-              {t('about.SubHeader')}
+              {t("about.SubHeader")}
             </h1>
 
-            <div className="text-[#5A5A5A] text-base">
+            <div className="text-base text-[#5A5A5A]">
               <p>
-                {t('about.Header_Title')}
+                {t("about.Header_Title")}
                 {/* We are the best-in-className platform for national and international
                 shipping services. Our many years of experience, customer
                 satisfaction. */}
@@ -45,15 +46,11 @@ export default function Home() {
           </div>
         </div>
         {/* seection */}
-        <div
-          className={`${styles.works} py-20 gap-10 bg-gradient-to-br from-blue-50 to-white`}
-        >
-          <div className="flex flex-row gap-5 justify-between items-center mx-auto w-[90%] flex-wrap">
-            <div className="left  flex flex-col justify-start gap-5 md:w-[50%] sm:w-full">
-              <h2 className="text-4xl text-myBlue font-bold">
-                {t("about.Service_Title")}
-              </h2>
-              <div className="text-[#5A5A5A] text-base">
+        <div className={`${styles.works} gap-10 bg-gradient-to-br from-blue-50 to-white py-20`}>
+          <div className="mx-auto flex w-[90%] flex-row flex-wrap items-center justify-between gap-5">
+            <div className="left flex flex-col justify-start gap-5 sm:w-full md:w-[50%]">
+              <h2 className="text-4xl font-bold text-myBlue">{t("about.Service_Title")}</h2>
+              <div className="text-base text-[#5A5A5A]">
                 <p className="w-[90%] leading-loose">
                   {t("about.Service_Param")}
                   {/* We are a comprehensive personal and business solutions service
@@ -63,29 +60,19 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="right w-max flex flex-col gap-5 items-start">
-              <div className="flex flex-row gap-3 items-center">
-                <p className="bg-opacity-10 w-[30px] text-center bg-slate-600 rounded px-1 py-1 h-[30px]">
-                  1
-                </p>
-                <p>
-                  {t('about.Service_list1')}
-                </p>
+            <div className="right flex w-max flex-col items-start gap-5">
+              <div className="flex flex-row items-center gap-3">
+                <p className="h-[30px] w-[30px] rounded bg-slate-600 bg-opacity-10 px-1 py-1 text-center">1</p>
+                <p>{t("about.Service_list1")}</p>
               </div>
               <div className="flex flex-row gap-3">
-                <p className="bg-opacity-10  w-[30px] text-center bg-slate-600 rounded px-1 py-1 h-[30px]">
-                  2
-                </p>
-                <p>
-                  {t('about.Service_list2')}
-                </p>
+                <p className="h-[30px] w-[30px] rounded bg-slate-600 bg-opacity-10 px-1 py-1 text-center">2</p>
+                <p>{t("about.Service_list2")}</p>
               </div>
               <div className="flex flex-row gap-3">
-                <p className="bg-opacity-10  w-[30px] text-center bg-slate-600 rounded px-1 py-1 h-[30px]">
-                  3
-                </p>
+                <p className="h-[30px] w-[30px] rounded bg-slate-600 bg-opacity-10 px-1 py-1 text-center">3</p>
                 <p>
-                  {t('about.Service_list3')}
+                  {t("about.Service_list3")}
                   {/* Cross-Border Mailboxes (Import, Export, Internet Purchases,
                   Courier) */}
                 </p>
@@ -96,60 +83,51 @@ export default function Home() {
 
         {/* section */}
         <div className="w-[100%] bg-white py-14">
-          <div className={`flex flex-col gap-10 w-[90%] mx-auto my-10 `}>
-            <h2 className="text-4xl text-black font-bold text-center">
+          <div className={`mx-auto my-10 flex w-[90%] flex-col gap-10`}>
+            <h2 className="text-center text-4xl font-bold text-black">
               {/* Other Important Data */}
-              {t('about.Other')}
+              {t("about.Other")}
             </h2>
-            <div className=" w-full rounded-sm p-[32px]">
-              <CardData
-                param={t}
-              />
+            <div className="w-full rounded-sm p-[32px]">
+              <CardData param={t} />
             </div>
           </div>
         </div>
 
         {/* section */}
-        <div className="vision w-full border-t py-20  ">
-          <div className="flex flex-col md:flex-row gap-5 bg-[#FAFAFA] p-10 w-[90%] mx-auto flex-wrap">
-            <div className="w-full md:w-[40%] p-5 gap-4 flex flex-col">
-              <h2 className="text-black font-bold text-2xl">{t('about.Vision')}</h2>
-              <p>
-                {t('about.Vision_param')}
-              </p>
+        <div className="vision w-full border-t py-20">
+          <div className="mx-auto flex w-[90%] flex-col flex-wrap gap-5 bg-[#FAFAFA] p-10 md:flex-row">
+            <div className="flex w-full flex-col gap-4 p-5 md:w-[40%]">
+              <h2 className="text-2xl font-bold text-black">{t("about.Vision")}</h2>
+              <p>{t("about.Vision_param")}</p>
             </div>
-            <div className="w-full md:w-[10%] flex items-center md:block">
-              <div className="border border-solid w-full md:w-[1px] md:h-full h-[1px] mx-auto" />
+            <div className="flex w-full items-center md:block md:w-[10%]">
+              <div className="mx-auto h-[1px] w-full border border-solid md:h-full md:w-[1px]" />
             </div>
-            <div className="w-full md:w-[40%] p-5 gap-4 flex flex-col">
-              <h2 className="text-black font-bold text-2xl">{t('about.Mission')}</h2>
-              <p>
-                {t('about.Mission_param')}
-              </p>
+            <div className="flex w-full flex-col gap-4 p-5 md:w-[40%]">
+              <h2 className="text-2xl font-bold text-black">{t("about.Mission")}</h2>
+              <p>{t("about.Mission_param")}</p>
             </div>
           </div>
         </div>
 
         <div className="w-full py-10">
           <div className={`${styles.aboutContentFrame} mx-auto my-[20px]`}>
-            <div className="flex flex-col gap-5 justify-center items-center text-center px-10 py-16 h-[100%]">
-              <div className="py-5 gap-4 flex flex-col">
-                <h3 className="text-3xl text-center font-bold text-white">
-                  {t('about.MoreQuestion')}
-                </h3>
+            <div className="flex h-[100%] flex-col items-center justify-center gap-5 px-10 py-16 text-center">
+              <div className="flex flex-col gap-4 py-5">
+                <h3 className="text-center text-3xl font-bold text-white">{t("about.MoreQuestion")}</h3>
               </div>
-              <Link
-                href={'mailto:contact@shiplink.com'}
-                passHref
+
+              <Button
+                variant="destructive"
+                size="lg"
+                asChild
+                className="rounded px-20 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
               >
-                <Button
-                  variant="destructive"
-                  size="lg"
-                  className="rounded px-20 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
-                >
-                  <p className="text-base"> {t('about.CTA')}</p>
-                </Button>
-              </Link>
+                <Link href="/contact_us">
+                  <p className="text-base"> {t("about.CTA")}</p>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

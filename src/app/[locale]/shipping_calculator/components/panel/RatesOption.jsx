@@ -28,6 +28,7 @@ export const RatesOption = ({
   ratesMessage,
   formWatch,
 }) => {
+  console.log("FORM WATCH test", formWatch);
   const [sortedRates, setSortedRates] = useState([]);
   const { data: location } = useLocation();
   const locationData = `${location?.ip}, ${location?.lat} ${location?.lng}, ${location?.country}`;
@@ -97,7 +98,7 @@ export const RatesOption = ({
           height: formWatch.dimension.height,
           distance_unit: formWatch.dimension.dimension_unit,
         },
-        total_package_value: formWatch?.amountLocal,
+        total_package_value: formWatch?.total_package_value,
         currency_package_value: formWatch?.currencyLocal,
       });
 

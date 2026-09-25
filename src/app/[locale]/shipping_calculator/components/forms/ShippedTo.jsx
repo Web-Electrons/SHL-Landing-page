@@ -18,6 +18,7 @@ import React, { useEffect } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import "./style.css";
+import { Checkbox } from "@/src/components/ui/checkbox";
 
 export const ShippedTo = ({ form, country_list }) => {
   const queryClient = useQueryClient();
@@ -269,6 +270,39 @@ export const ShippedTo = ({ form, country_list }) => {
                 </FormControl>
                 <FormMessage className="text-xs" />
               </FormItem>
+            )}
+          />
+        </div>
+        <div className="mt-4 flex flex-row justify-start gap-10 px-1">
+          <FormField
+            name="shipped_to.residential"
+            className="w-fit space-y-0"
+            control={form.control}
+            render={({ field }) => (
+              <>
+                <FormItem className="flex flex-row items-center gap-3 space-y-0">
+                  <FormControl>
+                    <Checkbox type="button" checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <FormLabel>Residential</FormLabel>
+                </FormItem>
+              </>
+            )}
+          />
+
+          <FormField
+            name="shipped_to.tailgate"
+            className="w-fit space-y-0"
+            control={form.control}
+            render={({ field }) => (
+              <>
+                <FormItem className="flex flex-row items-center gap-3 space-y-0">
+                  <FormControl>
+                    <Checkbox type="button" checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <FormLabel>Tailgate</FormLabel>
+                </FormItem>
+              </>
             )}
           />
         </div>

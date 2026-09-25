@@ -45,59 +45,44 @@ export const declareFormSchema = yup.object({
       subtotal: yup.number(),
     })
   ),
-  package_attributes: yup
-    .object({
-      tracking_id: yup.string(),
-      condition_new: yup.string().notRequired(),
+  package_attributes: yup.object({
+    tracking_id: yup.string(),
+    condition_new: yup.string().notRequired(),
 
-      stackable: yup.boolean().default(false),
-      hazardous: yup.boolean().default(false),
+    stackable: yup.boolean().default(false),
+    hazardous: yup.boolean().default(false),
 
-      un_number: yup.string(),
-      reportable_qty: yup.boolean().notRequired(),
+    un_number: yup.string(),
+    reportable_qty: yup.boolean().notRequired(),
 
-      pack_group_number: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Packing Group Number is required"),
-      }),
-
-      emergency_contact_company: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Emergency Contact Company is required"),
-      }),
-
-      emergency_contact_phone: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Emergency Contact Phone is required").min(5, "Phone number is invalid"),
-      }),
-
-      contract_number: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Contract Number is required"),
-      }),
-
-      hazmat_class: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Hazmat Class is required"),
-      }),
-
-      instructions: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Instructions are required"),
-      }),
-    })
-    .test("stackable-or-hazardous", "Either Stackable or Hazardous must be selected", function (values) {
-      if (!values) return true;
-
-      if (!values.condition_new) return true;
-
-      if (!values.stackable && !values.hazardous) {
-        return this.createError({
-          path: "hazardous",
-          message: "Either Stackable or Hazardous must be selected",
-        });
-      }
-
-      return true;
+    pack_group_number: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Packing Group Number is required"),
     }),
+
+    emergency_contact_company: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Emergency Contact Company is required"),
+    }),
+
+    emergency_contact_phone: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Emergency Contact Phone is required").min(5, "Phone number is invalid"),
+    }),
+
+    contract_number: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Contract Number is required"),
+    }),
+
+    hazmat_class: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Hazmat Class is required"),
+    }),
+
+    instructions: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Instructions are required"),
+    }),
+  }),
 });

@@ -89,6 +89,8 @@ export const RatesOption = ({
           zip: formWatch.shipped_to.zip,
           street1: formWatch.shipped_to.address,
           street2: formWatch.shipped_to.address2,
+          residential: formWatch.shipped_to.residential,
+          tailgate: formWatch.shipped_to.tailgate,
         },
         parcels: {
           weight: formWatch.dimension.weight,
@@ -157,6 +159,8 @@ export const RatesOption = ({
           street1: formWatch.shipped_to.address,
           street2: formWatch.shipped_to.address2,
           phone: "",
+          residential: formWatch.shipped_to.residential,
+          tailgate: formWatch.shipped_to.tailgate,
         },
       });
 

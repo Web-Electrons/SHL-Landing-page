@@ -84,6 +84,8 @@ const formSchema = yup.object().shape({
     address2: yup.string(),
     email: yup.string(),
     phone: yup.string().min(10, "Phone number must be at least 10 digits"),
+    residential: yup.boolean(),
+    tailgate: yup.boolean(),
   }),
   shippingType: yup.string(),
   warehouse_destination: yup.string(),
@@ -106,61 +108,46 @@ const formSchema = yup.object().shape({
   ),
   total_package_value: yup.number(),
   currency_package_value: yup.string(),
-  package_attributes: yup
-    .object({
-      tracking_id: yup.string(),
-      condition_new: yup.string().notRequired(),
+  package_attributes: yup.object({
+    tracking_id: yup.string(),
+    condition_new: yup.string().notRequired(),
 
-      stackable: yup.boolean().default(false),
-      hazardous: yup.boolean().default(false),
+    stackable: yup.boolean().default(false),
+    hazardous: yup.boolean().default(false),
 
-      un_number: yup.string(),
-      reportable_qty: yup.boolean().notRequired(),
+    un_number: yup.string(),
+    reportable_qty: yup.boolean().notRequired(),
 
-      pack_group_number: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Packing Group Number is required"),
-      }),
-
-      emergency_contact_company: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Emergency Contact Company is required"),
-      }),
-
-      emergency_contact_phone: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Emergency Contact Phone is required").min(5, "Phone number is invalid"),
-      }),
-
-      contract_number: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Contract Number is required"),
-      }),
-
-      hazmat_class: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Hazmat Class is required"),
-      }),
-
-      instructions: yup.string().when("hazardous", {
-        is: true,
-        then: (schema) => schema.required("Instructions are required"),
-      }),
-    })
-    .test("stackable-or-hazardous", "Either Stackable or Hazardous must be selected", function (values) {
-      if (!values) return true;
-
-      if (!values.condition_new) return true;
-
-      if (!values.stackable && !values.hazardous) {
-        return this.createError({
-          path: "hazardous",
-          message: "Either Stackable or Hazardous must be selected",
-        });
-      }
-
-      return true;
+    pack_group_number: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Packing Group Number is required"),
     }),
+
+    emergency_contact_company: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Emergency Contact Company is required"),
+    }),
+
+    emergency_contact_phone: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Emergency Contact Phone is required").min(5, "Phone number is invalid"),
+    }),
+
+    contract_number: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Contract Number is required"),
+    }),
+
+    hazmat_class: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Hazmat Class is required"),
+    }),
+
+    instructions: yup.string().when("hazardous", {
+      is: true,
+      then: (schema) => schema.required("Instructions are required"),
+    }),
+  }),
 });
 
 export default function Home() {
@@ -218,6 +205,8 @@ export default function Home() {
         zip: "",
         address: "",
         address2: "",
+        residential: false,
+        tailgate: false,
       },
       shipped_from: {
         address2: "",
@@ -642,6 +631,8 @@ export default function Home() {
           street1: formData.shipped_to.address,
           street2: formData.shipped_to.address2,
           phone: formData.shipped_to.phone,
+          residential: formData.shipped_to.residential,
+          tailgate: formData.shipped_to.tailgate,
         },
         parcels: {
           weight: formData.dimension.weight,

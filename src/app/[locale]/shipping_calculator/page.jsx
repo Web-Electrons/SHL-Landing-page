@@ -567,7 +567,7 @@ export default function Home() {
 
   const isPallet =
     (selectedService === "cbf" || selectedService === "forward") &&
-    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight >= 60 : formWatch.dimension.weight >= 27);
+    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight > 60 : formWatch.dimension.weight > 27.22);
 
   const handleSave = async (formData) => {
     const addressTo = formData.shipped_to;

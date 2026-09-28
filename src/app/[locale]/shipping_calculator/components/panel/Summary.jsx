@@ -41,6 +41,16 @@ export const Summary = ({
     setTotal(total + carrierTotal);
   }, [summaryData, selecetedData]);
 
+  const dataDetails = summaryData?.data?.services?.filter(
+    (item) =>
+      !item.service?.toLowerCase().includes("brokerage") && !item.service?.toLowerCase().includes("charge fee for")
+  );
+
+  const dataBrokerage = summaryData?.data?.services?.filter(
+    (item) =>
+      item.service?.toLowerCase().includes("brokerage") || item.service?.toLowerCase().includes("charge fee for")
+  );
+
   return (
     <div className="flex h-full flex-col">
       <div className="flex flex-row justify-between">
@@ -62,7 +72,7 @@ export const Summary = ({
               <CardContent className="space-y-2 px-0">
                 <div className="">
                   <p className="p-1 text-sm font-bold">Summary</p>
-                  {summaryData?.data?.services?.map((item, index) => (
+                  {dataDetails?.map((item, index) => (
                     <div key={index} className="flex w-full items-center justify-between gap-2 rounded-lg p-1">
                       <div className="inline-flex gap-2">
                         <span className="text-left text-xs font-medium">{item?.service}</span>
@@ -74,17 +84,37 @@ export const Summary = ({
                     </div>
                   ))}
 
-                  {summaryData?.data?.taxes?.length > 0 && (
+                  {(summaryData?.data?.taxes?.length > 0 || dataBrokerage?.length > 0) && (
+                    <div className="mt-2 flex w-full items-center justify-between gap-2 border-b border-t p-1 py-2">
+                      <span className="text-left text-xs font-bold">Subtotal</span>
+                      <span className="text-xs font-bold">
+                        {formatCurrency(summaryData?.data?.currency)}
+                        {formatDecimal(summaryData?.data?.subtotal_summary)}
+                      </span>
+                    </div>
+                  )}
+
+                  {dataBrokerage?.length > 0 && (
                     <>
-                      <div className="mt-2 flex w-full items-center justify-between gap-2 border-b border-t p-1 py-2">
-                        <span className="text-left text-xs font-bold">Subtotal</span>
-                        <span className="text-xs font-bold">
-                          {formatCurrency(summaryData?.data?.currency)}
-                          {formatDecimal(summaryData?.data?.subtotal)}
-                        </span>
-                      </div>
-                      <p className="mt-1 p-1 text-sm font-bold">Taxes</p>
+                      <p className="mt-2 p-1 text-xs font-bold">Brokerage</p>
+                      {dataBrokerage?.map((item, index) => (
+                        <div key={index} className="flex w-full items-center justify-between gap-2 rounded-lg p-1">
+                          <div className="inline-flex gap-2">
+                            <span className="text-left text-xs font-medium">{item?.service}</span>
+                          </div>
+                          <span className="text-xs">
+                            {formatCurrency(item?.currency)}
+                            {formatDecimal(item?.price)}
+                          </span>
+                        </div>
+                      ))}
                     </>
+                  )}
+
+                  {summaryData?.data?.taxes?.length > 0 && (
+                    <p className={`mt-2 p-1 text-xs font-bold ${dataBrokerage?.length > 0 ? "border-t pt-2" : ""}`}>
+                      Taxes
+                    </p>
                   )}
                   {summaryData?.data?.taxes?.map((item, index) => (
                     <div key={index} className="flex w-full items-center justify-between gap-2 rounded-lg p-1">

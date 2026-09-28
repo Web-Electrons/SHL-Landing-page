@@ -119,7 +119,9 @@ export const Summary = ({
                   {summaryData?.data?.taxes?.map((item, index) => (
                     <div key={index} className="flex w-full items-center justify-between gap-2 rounded-lg p-1">
                       <div className="inline-flex gap-2">
-                        <span className="text-left text-xs font-medium">{item?.tax_abbreviation}</span>
+                        <span className="text-left text-xs font-medium">
+                          {item?.tax_abbreviation} ({item?.tax_rate}%)
+                        </span>
                       </div>
                       <span className="text-xs">
                         {formatCurrency(summaryData?.data?.currency)}

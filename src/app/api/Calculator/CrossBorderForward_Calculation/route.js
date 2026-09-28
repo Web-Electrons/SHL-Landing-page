@@ -49,6 +49,8 @@ export async function POST(request) {
         rates: response.data.rates,
         total: response.data.total,
         total_usd: response.data.total_usd,
+        taxes: response.data.taxes,
+        subtotal: response.data.subtotal,
       };
       return NextResponse.json(responseData, { status: 200 });
     } else {

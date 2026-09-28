@@ -169,6 +169,7 @@ export default function Home() {
   const [openRates, setOpenRates] = useState(false);
   const [openServicesOption, setOpenServicesOption] = useState(false);
   const [summaryData, setSummaryData] = useState([]);
+  console.log("SUMMARY DATA", summaryData);
   const [selecetedData, setSelectedData] = useState(null);
   const [openRatesOption, setOpenRatesOption] = useState(false);
   const [openSummary, setOpenSummary] = useState(false);

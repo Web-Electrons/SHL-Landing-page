@@ -61,19 +61,7 @@ export const Summary = ({
             <Card className="border-none p-0">
               <CardContent className="space-y-2 px-0">
                 <div className="">
-                  {/* {selecetedData && selectedService !== 'hfp' && selectedService !== 'cbp' && (
-                    <div className="flex flex-row gap-2 items-center  p-1">
-                      <div className="flex flex-col w-[70%]">
-                        <p className="text-xs">
-                          {selecetedData.provider} - {selecetedData.servicelevel?.name}
-                        </p>
-                        <p className="text-[10px] text-gray-500">
-                          Estimate {selecetedData.estimatedDays || '-'} Days
-                        </p>
-                      </div>
-                      <p className="text-xs w-[30%] text-right">{`$ ${selecetedData.amountLocal.toFixed(2)}`}</p>
-                    </div>
-                  )} */}
+                  <p className="p-1 text-sm font-bold">Summary</p>
                   {summaryData?.data?.services?.map((item, index) => (
                     <div key={index} className="flex w-full items-center justify-between gap-2 rounded-lg p-1">
                       <div className="inline-flex gap-2">
@@ -85,20 +73,44 @@ export const Summary = ({
                       </span>
                     </div>
                   ))}
+
+                  {summaryData?.data?.taxes?.length > 0 && (
+                    <>
+                      <div className="mt-2 flex w-full items-center justify-between gap-2 border-b border-t p-1 py-2">
+                        <span className="text-left text-xs font-bold">Subtotal</span>
+                        <span className="text-xs font-bold">
+                          {formatCurrency(summaryData?.data?.currency)}
+                          {formatDecimal(summaryData?.data?.subtotal)}
+                        </span>
+                      </div>
+                      <p className="mt-1 p-1 text-sm font-bold">Taxes</p>
+                    </>
+                  )}
+                  {summaryData?.data?.taxes?.map((item, index) => (
+                    <div key={index} className="flex w-full items-center justify-between gap-2 rounded-lg p-1">
+                      <div className="inline-flex gap-2">
+                        <span className="text-left text-xs font-medium">{item?.tax_abbreviation}</span>
+                      </div>
+                      <span className="text-xs">
+                        {formatCurrency(summaryData?.data?.currency)}
+                        {formatDecimal(item?.total_tax_price)}
+                      </span>
+                    </div>
+                  ))}
                 </div>
                 <Separator />
                 <div className="">
                   <div className="flex flex-row justify-between p-1">
                     <p className="text-sm font-bold">Total</p>
                     <div className="flex flex-col gap-2">
-                      <div className="flex justify-end gap-2 text-xs">
+                      <div className="flex justify-end gap-2 text-xs font-bold">
                         <span>{summaryData?.data?.currency}</span>
-                        <span className="font-medium">${formatDecimal(summaryData?.data?.total)}</span>
+                        <span className="font-bold">${formatDecimal(summaryData?.data?.total)}</span>
                       </div>
                       {summaryData?.data?.total_usd && summaryData?.data?.currency === "CAD" ? (
-                        <div className="flex justify-end gap-2 text-xs">
+                        <div className="flex justify-end gap-2 text-xs font-bold">
                           <span>USD</span>
-                          <span className="font-medium">${formatDecimal(summaryData?.data?.total_usd)}</span>
+                          <span className="font-bold">${formatDecimal(summaryData?.data?.total_usd)}</span>
                         </div>
                       ) : null}
                     </div>

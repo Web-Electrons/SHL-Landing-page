@@ -288,6 +288,27 @@ export default function Home() {
 
   const [loadingService, setLoadingService] = useState(false);
 
+  // BrokerageWeight API only provides warehouse_rates in lbs
+  const [palletWeightLbs, setPalletWeightLbs] = useState(60);
+
+  const lbsToKg = (lbs) => Number((lbs * 0.45359237).toFixed(2));
+
+  useEffect(() => {
+    const fetchBrokerageWeight = async () => {
+      try {
+        const response = await axios.post(`/api/Calculator/BrokerageWeight`);
+        const data = response.data.data;
+        const warehouseRates = Number(data?.warehouse_rates ?? data?.data?.warehouse_rates);
+        if (warehouseRates > 0) {
+          setPalletWeightLbs(warehouseRates);
+        }
+      } catch (error) {
+        console.error("Failed to fetch brokerage weight:", error);
+      }
+    };
+    fetchBrokerageWeight();
+  }, []);
+
   const currencyLabel = {
     USD: "US",
     CAD: "CA",
@@ -565,9 +586,10 @@ export default function Home() {
 
   const formWatch = form.watch();
 
+  const palletWeightThreshold = formWatch.dimension.weight_unit === "lbs" ? palletWeightLbs : lbsToKg(palletWeightLbs);
+
   const isPallet =
-    (selectedService === "cbf" || selectedService === "forward") &&
-    (formWatch.dimension.weight_unit === "lbs" ? formWatch.dimension.weight > 60 : formWatch.dimension.weight > 27.22);
+    (selectedService === "cbf" || selectedService === "forward") && formWatch.dimension.weight > palletWeightThreshold;
 
   const handleSave = async (formData) => {
     const addressTo = formData.shipped_to;
